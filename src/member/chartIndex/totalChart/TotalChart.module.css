@@ -1,0 +1,14 @@
+.contentBox {
+  flex: 1;
+  height: 100%;
+  border: 1px solid #f0d827;
+  border-radius: 22px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.contentHeader {
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}

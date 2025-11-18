@@ -412,3 +412,12 @@
     background-color: #F0D827;
     color:white;
 } 
+
+.borderRegex {
+    border: solid 1px #499ef8 !important;
+    /* background-color: #499ef8; */
+}
+
+.noCode {
+    background-color: #e0e0e0ab;
+}

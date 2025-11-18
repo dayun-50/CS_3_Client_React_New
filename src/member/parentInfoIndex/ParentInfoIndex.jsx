@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Mypage from './mypage/Mypage';
 import BabyController from '../../common/babySideNavi/babyController/BabyController';
-
+import styles from "./ParentInfoIndex.module.css";
 
 //부모마이페이지
 const ParentInfoIndex = ()=>{
 return(
-    <div>
+    <div className={styles.container}>
         {/*좌측 부모 정보부분*/}
         <Mypage />
 

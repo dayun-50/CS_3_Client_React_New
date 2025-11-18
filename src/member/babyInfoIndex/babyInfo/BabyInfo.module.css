@@ -1,0 +1,177 @@
+.rightcontainer {
+    width:50%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border:1px solid black; */
+}
+
+.babyinformation {
+    width:80%;
+    height:80%;
+    /* border:1px solid black; */
+}
+
+.bb {
+    width:100%;
+    height:65px;
+    display: flex;
+    align-items: center;
+}
+
+.bb h1 {
+    font-size: 22px;
+    color:#696B70;
+}
+/*----------------------------------------------------*/
+/*아기 정보 이름 부분*/
+.babyla {
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    /* border:1px solid black; */
+}
+.babyla label {
+    font-size: 18px;
+    color:#696B70;
+    margin-left: 10px;
+}
+
+.babyla input {
+  margin-top: 16px;
+  padding: 10px;
+}
+
+.babyname {
+    height:48px;
+    border-radius: 20px;
+    border:1px solid #696B70;
+}
+
+.babyname::placeholder {
+    font-size: 16px;
+}
+/*----------------------------------------------------*/
+/*아기 정보 출생일 부분*/
+.birthday {
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    /* border:1px solid black; */
+}
+.birthday label {
+    font-size: 18px;
+    color:#696B70;
+    margin-left: 10px;
+}
+
+.birthday input {
+  margin-top: 16px;
+  padding: 10px;
+}
+
+.babybirthday {
+    height:48px;
+    border-radius: 20px;
+    border:1px solid #696B70;
+    /* border:1px solid #696B70; */
+}
+
+.babybirthday::placeholder {
+    font-size: 16px;
+}
+/*----------------------------------------------------*/
+/*아기 정보 성별 부분*/
+
+.sextitle {
+    font-size: 18px;
+    color:#696B70;
+    text-indent: 10px;
+    margin-top: 16px;
+    /* border:1px solid black; */
+}
+
+.btns {
+    margin-top: 16px;
+    display: flex;     
+    gap: 13%; 
+    /* border:1px solid black; */
+}
+
+.btns button {
+    width:188px;
+    height:48px;
+    border-radius: 20px;
+}
+
+.quest {
+    border:none;
+    background-color: #ADB9E3;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+}
+
+.manb {
+    border:1px solid #8C8C8C;
+    font-size: 18px;
+    color:#8C8C8C;
+}
+
+.girlb {
+    border:1px solid #8C8C8C;
+    font-size: 18px;
+    font-weight: bold;
+    color:#8C8C8C;
+}
+
+/*----------------------------------------------------*/
+/*아기 몸무게 부분*/
+
+.kg {
+    margin-top: 16px;
+    /* border:1px solid black; */
+}
+
+.kg p {
+    font-size: 18px;
+    color:#696B70;
+    margin-left: 10px;
+}
+
+.kgdb {
+    margin-top: 16px;
+    font-size: 18px;
+    color:#696B70;
+    text-indent: 10px;
+    /* border:1px solid black; */
+}
+
+/*----------------------------------------------------*/
+/*수정버튼 부분*/
+
+.correct {
+    width: 100%;
+    height: 25%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    align-items: flex-end;     /* 아래쪽 정렬 */
+    padding: 10px;             /* 버튼 주변 여백 */
+}
+
+.corbt {
+    width:200px;
+    height:48px;
+    border-radius: 20px;
+    border:none;
+    background-color:#F0D827;
+    color:white;
+    font-size: 18px;
+    font-weight: bold;
+}

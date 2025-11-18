@@ -1,0 +1,320 @@
+.container {
+    display: flex;
+    gap: 30px;
+}
+/*------------------------------------------------------*/
+/*임산모 박스*/
+
+.babymomcheckbox {
+    width:590px;
+    height:670px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cute {
+    width:90%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    /* border:1px solid black; */
+}
+
+.cute h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color:#696B70;
+}
+
+.cute p {
+    font-size: 18px;
+    font-weight: bold;
+    color:#8C8C8C;
+}
+/*------------------------------------------------------*/
+/* 애기사진 >< */
+
+.babyImage {
+  width: 200px;
+  height: auto;
+  margin-top: 50px;
+}
+/*------------------------------------------------------*/
+/* 완료 버튼*/
+
+.bok {
+    margin-top: 50px;
+    width:90%;
+    height:48px;
+    background-color: #8C8C8C;
+    font-size: 18px;
+    color:white;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+}
+
+/*------------------------------------------------------*/
+/*육아 박스*/
+.babycheckbox {
+    width:590px;
+    height:670px;
+    background-color: white;
+    border:2px solid #F0D827;
+    border-radius: 20px;
+    box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cutetwo {
+    width:90%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    /* border:1px solid black; */
+}
+
+.cutetwo h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color:#F0D827;
+}
+
+.cutetwo p {
+    font-size: 18px;
+    font-weight: bold;
+    color:#8C8C8C;
+}
+
+.childrenImage {
+  width: 170px;
+  height: auto;
+  margin-top: 50px;
+}
+
+.bokk {
+    margin-top: 50px;
+    width:90%;
+    height:48px;
+    background-color: #F0D827;
+    font-size: 18px;
+    color:white;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+}
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*임산모 선택했을때*/
+
+/*제목*/
+.babymomclick {
+    width:70%;
+    height:auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:10px;
+    /* border:1px solid black; */
+}
+
+.clickplus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-height: 350px; /* 스크롤 높이 */
+    overflow-y: auto;
+    /* padding-right: 10px; */
+    /* border:1px solid black; */
+}
+
+.babymomclick h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #696B70;
+}
+
+.babymomclick p {
+    font-size: 18px;
+    color:#8C8C8C;
+    font-weight: bold;
+}
+
+/*버튼들*/
+.buttons {
+    width:100%;
+    /* border:1px solid black; */
+    display: flex;
+    gap:8%;
+    margin-top: 70px;
+}
+
+.why, .man, .girl {
+    width:115px;
+    height:48px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.why {
+    background-color: #ADB9E3;
+    color:white;
+    font-weight: bold;
+    border:none;
+}
+
+.man, .girl {
+    color:#8C8C8C;
+    border:1px solid #8C8C8C;
+}
+
+/*출생일*/
+.babyparty {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    margin-top: 16px;
+    /* border:1px solid black; */
+}
+
+.babyparty label {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: bold;
+    color:#8C8C8C;
+}
+
+.babyparty input {
+    height:48px;
+    border-radius: 20px;
+    border:1px solid #8C8C8C;
+    padding: 0 10px;
+    font-size: 16px;
+    color:#8C8C8C;
+}
+
+/*애기이름*/
+.babyname {
+    margin-top: 16px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    /* border:1px solid black; */
+}
+
+.babyname label {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: bold;
+    color:#8C8C8C;
+}
+
+.babyname input {
+    height:48px;
+    border-radius: 20px;
+    border:1px solid #8C8C8C;
+    padding: 0 10px;
+    font-size: 16px;
+    color:#8C8C8C;
+}
+
+/*쌍둥이 추가 부분*/
+
+.babyplus {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    gap:10px;
+    margin-top: 5px;
+}
+
+.babyplus p {
+    color:#8C8C8C;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/*버튼 위치*/
+.bbtt {
+    width:100%;
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10%;
+    /* border:1px solid black; */
+}
+
+.deb, .cb {
+    width:188px;
+    height:53px;
+    border-radius: 20px;
+}
+
+.deb {
+    background-color:#B9B9B9;
+    border: none;
+    color:white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cb {
+    background-color: #F0D827;
+    border:none;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+}
+
+/*------------------------------------------*/
+/*육아쪽 */
+
+.buttonss {
+    width:100%;
+    /* border:1px solid black; */
+    display: flex;
+    gap:8%;
+    margin-top: 70px;
+}
+
+.mantwo, .girltwo{
+    width:188px;
+    height:48px;
+    border-radius: 20px;
+}
+
+.mantwo {
+    background-color: white;
+    border:1px solid #8C8C8C;
+    font-size: 18px;
+    font-weight: bold;
+    color:#8C8C8C;
+}
+
+.girltwo {
+    border:none;
+    background-color: #ADB9E3;
+    font-size: 18px;
+    color:white;
+    font-weight: bold;
+}

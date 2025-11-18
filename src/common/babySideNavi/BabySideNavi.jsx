@@ -6,7 +6,7 @@ import BabyController from './babyController/BabyController';
 const BabySideNavi = ()=>{
 return(
     <div>
-        <div>
+        <div >
             {/*위측 아기용 버튼(산모수첩, 챗봇 등등으로 이동용)*/}
             여기다가 아기페이지 내에서 이동할 버튼 만들기
         </div>
