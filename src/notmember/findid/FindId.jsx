@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./FindId.module.css";
+import useFindId from "./UseFindId";
 
 const FindId = () => {
   const navigate = useNavigate();
 
   // 완료 버튼 클릭 여부 상태
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState("");
+
+  const {
+    data, handleChange, handleLoginKeyUp, emailAuthClick, handleComplete
+  } = useFindId(setIsCompleted);
 
   return (
     <div
@@ -32,18 +37,20 @@ const FindId = () => {
 
               <div className={styles.idmiddleone}>
                 <label htmlFor="ema">이메일</label>
-                <input type="text" id="ema" placeholder="이메일" />
-                <button className={styles.dlswmd}>인증요청</button>
+                <input type="text" id="email" placeholder="이메일" 
+                name="email" value={data.email} onChange={handleChange}/>
+                <button className={styles.dlswmd} onClick={emailAuthClick}>인증요청</button>
               </div>
 
               <div className={styles.idmiddletwo}>
                 <label htmlFor="ema">인증확인</label>
-                <input type="text" id="ema" placeholder="인증확인" />
+                <input type="text" id="code" placeholder="인증확인"
+                name="code" value={data.code} onChange={handleChange} onKeyUp={handleLoginKeyUp}/>
               </div>
 
               <div className={styles.idbottom}>
                 <button className={styles.idd} onClick={() => navigate(-1)}>취소</button>
-                <button className={styles.idok} onClick={() => setIsCompleted(true)}>완료</button>
+                <button className={styles.idok} onClick={handleComplete}>완료</button>
               </div>
             </>
           ) : (
@@ -58,7 +65,7 @@ const FindId = () => {
 
                     <div className={styles.idmiddlet}>
                         <p>아이디</p>
-                        <div className={styles.idvaluet}>여기에는 아이디DB에 있는거 보여주기</div>
+                        <div className={styles.idvaluet}>{isCompleted}</div>
                     </div>
 
                     <div className={styles.idbottomt}>

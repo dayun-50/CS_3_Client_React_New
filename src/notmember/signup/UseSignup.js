@@ -139,9 +139,16 @@ function useSignup(navigate) {
             .catch(err => console.log(err))
     }
 
+        // 엔터 클릭시
+    const handleLoginKeyUp = (e) => {
+        if (e.key === 'Enter') {
+            handleComplete();
+        }
+    }
+
     return {
         data, regexAuth, inputCount, isNoCode,
-        chackClick, emailAuthClick, handleComplete,
+        chackClick, emailAuthClick, handleComplete, handleLoginKeyUp,
         hendleChange, handleIntegerInput, handleCheckbox
     }
 

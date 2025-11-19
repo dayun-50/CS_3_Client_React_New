@@ -9,7 +9,7 @@ function Signup() {
 
     const {
         data, regexAuth, inputCount, isNoCode,
-        chackClick, emailAuthClick, handleComplete,
+        chackClick, emailAuthClick, handleComplete, handleLoginKeyUp,
         hendleChange, handleIntegerInput, handleCheckbox
     } = useSignup(navigate);
 
@@ -178,6 +178,7 @@ function Signup() {
                             maxLength={5}
                             className={`${styles.inputError} ${!regexAuth.code && inputCount.code > 0 ? styles.borderRegex : ""}
                             ${isNoCode ? styles.noCode : ""}`}
+                            onKeyUp={handleLoginKeyUp}
                             onChange={hendleChange}
                             disabled={isNoCode}
                         /> <br />

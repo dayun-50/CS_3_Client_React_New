@@ -22,7 +22,10 @@ function useLoginBox(setBabySeq) {
 
     // 로그인 버튼 클릭시
     const handleComplete = () => {
-        if (!data.id || !data.pw) return;
+        if (!data.id || !data.pw) {
+            alert("아이디와 비밀번호 모두 입력해주세요.");
+            return;
+        }
 
         caxios.post("/user/login", { user_id: data.id, password: data.pw })
             .then(resp => {
@@ -40,8 +43,15 @@ function useLoginBox(setBabySeq) {
             });
     }
 
+    // 엔터 클릭시
+    const handleLoginKeyUp = (e) => {
+        if (e.key === 'Enter') {
+            handleComplete();
+        }
+    }
+
     return {
-        data, authAlert, handleChange, handleComplete
+        data, authAlert, handleChange, handleComplete, handleLoginKeyUp
     }
 }
 export default useLoginBox;

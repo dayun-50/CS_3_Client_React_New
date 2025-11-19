@@ -8,7 +8,7 @@ import useLoginBox from "./UseLoginBox";
 function LoginBox({setBabySeq}) {
 
   const {
-    data, authAlert, handleChange, handleComplete
+    data, authAlert, handleChange, handleComplete, handleLoginKeyUp
   } = useLoginBox(setBabySeq);
 
   return (
@@ -39,7 +39,7 @@ function LoginBox({setBabySeq}) {
             <div className={`${styles.middletwo} ${!authAlert ? "" : styles.alert }`}>
               <label htmlFor="pw">비밀번호</label> 
               <input type="password" id="pw" name="pw" placeholder="비밀번호"
-              value={data.pw} onChange={handleChange}/>
+              value={data.pw} onChange={handleChange} onKeyUp={handleLoginKeyUp}/>
 
             </div>
           </div>
