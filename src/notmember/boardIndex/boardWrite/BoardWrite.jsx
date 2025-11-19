@@ -137,18 +137,8 @@ const BoardWrite = () => {
         </div>
       </div>
 
-      {/* 에디터 영역 */}
-      <div className={styles.editorArea}>
-        <div className={styles.editorHeader}>
-          <span className={styles.editorLabel}>글 작성 에디터</span>
-        </div>
-        <textarea
-          placeholder="글 내용을 입력하세요..."
-          className={styles.editorInput}
-        ></textarea>
-      </div>
 
-      {/* 파일 업로드 영역 추가 */}
+          {/* 파일 업로드 영역 추가 */}
       <div className={styles.fileUploadArea}>
         <label className={styles.formLabel}>파일 첨부</label>
         <div className={styles.uploadContainer}>
@@ -188,6 +178,20 @@ const BoardWrite = () => {
           )}
         </div>
       </div>
+
+
+      {/* 에디터 영역 */}
+      <div className={styles.editorArea}>
+        <div className={styles.editorHeader}>
+          <span className={styles.editorLabel}>글 작성 에디터</span>
+        </div>
+        <textarea
+          placeholder="글 내용을 입력하세요..."
+          className={styles.editorInput}
+        ></textarea>
+      </div>
+
+
 
       {/* 액션 버튼 */}
       <div className={styles.actionFooter}>
