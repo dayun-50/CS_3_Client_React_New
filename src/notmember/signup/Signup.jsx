@@ -145,14 +145,6 @@ function Signup() {
                             />
                         </div>
                     </div>
-                    <div className={styles.parent}>
-                        <label>
-                            <input type="radio" name="parentType" value="father" className={styles.papa} onChange={hendleChange} /> 아빠
-                        </label>
-                        <label>
-                            <input type="radio" name="parentType" value="mother" className={styles.papa} onChange={hendleChange} /> 엄마
-                        </label>
-                    </div>
 
                     <div className={styles.birthing}>
                         <label htmlFor="birthDate">생년월일</label>
@@ -183,12 +175,22 @@ function Signup() {
                         /> <br />
                     </div>
 
-                    <div className={styles.okcheck}>
-                        <label className={`${styles.checkboxLabel} ${styles.true}`}>
-                            <input id="checkbox" type="checkbox" 
-                            onClick={handleCheckbox}/> 
-                            가족 코드가 없을 경우 체크해 주세요
-                        </label>
+                    <div className={styles.checkAndParent}>
+                        <div className={styles.okcheck}>
+                            <label className={`${styles.checkboxLabel} ${styles.true}`}>
+                                <input id="checkbox" type="checkbox" onClick={handleCheckbox} />
+                                가족 코드가 없을 경우 체크해 주세요
+                            </label>
+                        </div>
+
+                        <div className={styles.parent}>
+                            <label>
+                                <input type="radio" name="parentType" value="father" className={styles.papa} onChange={hendleChange} /> 아빠
+                            </label>
+                            <label>
+                                <input type="radio" name="parentType" value="mother" className={styles.papa} onChange={hendleChange} /> 엄마
+                            </label>
+                        </div>
                     </div>
 
                     <div className={styles.buttonGroup}>

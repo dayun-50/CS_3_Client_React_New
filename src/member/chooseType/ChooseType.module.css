@@ -14,6 +14,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 2px solid transparent; /* 기본 border 공간 확보 */
+    /* transition: border 0.2s; */
+}
+
+/* 버튼 hover 시 적용될 border 클래스 */
+.hoverBorder {
+  border: 2px solid #F0D827;
+}
+
+.bok:hover {
+    background-color: #F0D827;
 }
 
 .cute {
@@ -31,6 +42,10 @@
     font-size: 32px;
     font-weight: bold;
     color:#696B70;
+}
+
+.cute h1.hoverTitle {
+  color: #F0D827;
 }
 
 .cute p {
@@ -67,7 +82,6 @@
     width:590px;
     height:670px;
     background-color: white;
-    border:2px solid #F0D827;
     border-radius: 20px;
     box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -89,13 +103,18 @@
 .cutetwo h1 {
     font-size: 32px;
     font-weight: bold;
-    color:#F0D827;
+    color:#696B70;
 }
 
 .cutetwo p {
     font-size: 18px;
     font-weight: bold;
     color:#8C8C8C;
+}
+
+/* 육아 제목 hover */
+.cutetwo h1.hoverTitleTwo {
+  color: #F0D827;
 }
 
 .childrenImage {
@@ -108,7 +127,7 @@
     margin-top: 50px;
     width:90%;
     height:48px;
-    background-color: #F0D827;
+    background-color: #8C8C8C;
     font-size: 18px;
     color:white;
     font-weight: bold;
@@ -116,10 +135,21 @@
     border: none;
 }
 
-
+.bokk:hover {
+  background-color: #F0D827;
+}
 /*--------------------------------------------------------------------------------------------------*/
 /*임산모 선택했을때*/
 
+/*아가4명중 하나*/
+
+.babys {
+    display: flex;
+    margin-top: 10px;
+}
+.oneImage, .twoImage, .threeImage, .fourImage {
+    width:70%;
+}
 /*제목*/
 .babymomclick {
     width:70%;
@@ -162,7 +192,7 @@
     /* border:1px solid black; */
     display: flex;
     gap:8%;
-    margin-top: 70px;
+    margin-top: 10px;
 }
 
 .why, .man, .girl {
@@ -173,17 +203,25 @@
 }
 
 .why {
-    background-color: #ADB9E3;
-    color:white;
-    font-weight: bold;
-    border:none;
+    /* background-color: #ADB9E3; */
+    color:#8C8C8C;
+    border:1px solid #8C8C8C;
+    /* font-weight: bold; */
+    background-color: white;
 }
 
 .man, .girl {
     color:#8C8C8C;
     border:1px solid #8C8C8C;
+    background-color: white;
 }
 
+/* 활성화 버튼 스타일 */
+.activeGender {
+    background-color: #ADB9E3;
+    color: white;
+    border: none;
+}
 /*출생일*/
 .babyparty {
     width:100%;
@@ -208,6 +246,7 @@
     padding: 0 10px;
     font-size: 16px;
     color:#8C8C8C;
+    outline: none;
 }
 
 /*애기이름*/
@@ -234,7 +273,17 @@
     padding: 0 10px;
     font-size: 16px;
     color:#8C8C8C;
+    outline: none;
 }
+
+.babyname input::placeholder {
+    color:#8C8C8C;
+}
+/* focus 시 border 색 변경 */
+/* .babyparty input:focus,
+.babyname input:focus {
+    border: 2px solid #F0D827; 원하는 색상
+} */
 
 /*쌍둥이 추가 부분*/
 
@@ -252,6 +301,7 @@
     font-size: 16px;
     font-weight: 400;
 }
+
 
 /*버튼 위치*/
 .bbtt {
@@ -279,12 +329,17 @@
 }
 
 .cb {
-    background-color: #F0D827;
+    background-color:#B9B9B9;
     border:none;
     font-size: 18px;
     font-weight: bold;
     color:white;
 }
+
+.deb:hover, .cb:hover {
+    background-color: #F0D827;
+}
+
 
 /*------------------------------------------*/
 /*육아쪽 */
@@ -294,7 +349,7 @@
     /* border:1px solid black; */
     display: flex;
     gap:8%;
-    margin-top: 70px;
+    margin-top: 10px;
 }
 
 .mantwo, .girltwo{
@@ -312,9 +367,18 @@
 }
 
 .girltwo {
-    border:none;
-    background-color: #ADB9E3;
+    border:1px solid #8C8C8C;
+    /* background-color: #ADB9E3; */
+    background-color: white;
     font-size: 18px;
-    color:white;
+    color:#8C8C8C;
     font-weight: bold;
 }
+
+/* 클릭 후 색상 변경 */
+.activeGender {
+  background-color: #ADB9E3; /* 원하는 색상 */
+  color: white;
+  border: none; /* 필요시 */
+}
+

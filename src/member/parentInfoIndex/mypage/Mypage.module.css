@@ -1,5 +1,5 @@
 .container {
-    width:60%;
+    width:50%;
     height:100%;
     background-color: #FFF4D6;
     display: flex;
@@ -9,8 +9,8 @@
 }
 
 .parentpage {
-    width:95%;
-    height:95%;
+    width:90%;
+    height:90%;
     /* border:1px solid black; */
 }
 
