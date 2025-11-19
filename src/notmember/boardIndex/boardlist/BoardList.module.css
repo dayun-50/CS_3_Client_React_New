@@ -1,0 +1,278 @@
+/* 전체 컨테이너 */
+.container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+}
+
+/* --- 상단 헤더 (카테고리 + 검색창) --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* 화면 작아지면 줄바꿈 */
+  gap: 20px;
+}
+
+.categoryList {
+  display: flex;
+  gap: 12px;
+}
+
+.categoryItem {
+  width: 120px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid #adb9e3;
+  background-color: white;
+  color: #696b70;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.categoryItem.active {
+  background-color: #adb9e3;
+  border: none;
+  font-weight: bold;
+  color: #fff;
+}
+
+.categoryItem:hover {
+  background-color: #adb9e3;
+  border: none;
+  color: #fff;
+}
+
+/* 검색창 */
+.searchBar {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 48px;
+  padding: 0 20px;
+  border: 1px solid #8c8c8c;
+  border-radius: 24px;
+  background-color: #fff;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.searchInput::placeholder {
+  color: #ccc;
+}
+
+.searchIcon {
+  color: #8c8c8c;
+  cursor: pointer;
+}
+
+/* --- 게시물 그리드 --- */
+.cardGrid {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.gridContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5개 강제 */
+  gap: 24px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* 카드 스타일*/
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 이미지 영역 높이 설정 */
+.cardHeader {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1);
+}
+
+/* 메뉴 버튼 */
+.menuBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; /* 이미지보다 위에 있어야 함 */
+  transition: background-color 0.2s;
+}
+
+.menuBtn:hover {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 텍스트 내용 */
+.content {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.categoryTag {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: #adb9e3; 
+  text-transform: uppercase;
+}
+
+/* 텍스트 그룹 */
+.textGroup {
+  margin-bottom: 16px;
+}
+
+.후기 {
+  background-color: #5bb27d;
+}
+.질문 {
+  background-color: #ff9900;
+}
+.무료나눔 {
+  background-color: #e56565;
+}
+
+/* 제목 */
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  color: #696b70;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8c8c8c;
+  margin: 0;
+  /* 2줄 말줄임 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 조회수, 댓글 영역 */
+.stats {
+  display: flex;
+  gap: 12px;
+  color: #8c8c8c;
+  font-size: 13px;
+  padding-top: 12px;
+  border-top: 1px solid #f5f5f5;
+}
+
+/* 개별 아이콘+숫자 */
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+
+/* --- 페이지네이션 --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 8px;
+}
+
+.pageBtn {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #696b70;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageBtn.activePage {
+  background-color: #adb9e3;
+  color: #fff;
+}
+
+.pageControl {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #696b70;
+  display: flex;
+  align-items: center;
+}

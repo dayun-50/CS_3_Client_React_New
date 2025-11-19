@@ -11,11 +11,15 @@ const ChartInput = ({ menuList, activeMenu }) => {
       {/* 입력 필드 */}
       <div className={styles.panelContent}>
         {/* '전체' 항목을 제외하고 매핑 */}
+
+        <label className={styles.label}>날짜</label>
+        {/* 날짜 입력은 모든 페이지에 적용 */}
+        <input className={styles.input} type="date" placeholder="날짜" />
+
         {menuList.slice(1).map((item) => (
           <div key={item} className={styles.inputGroup}>
             {/* 입력 라벨 */}
             <label className={styles.label}>{item}</label>
-
             {/* 몸무게만 단위 g 표시, 나머지는 일반 숫자 입력 */}
             {item === "몸무게" ? (
               <div className={styles.inputWithUnit}>
