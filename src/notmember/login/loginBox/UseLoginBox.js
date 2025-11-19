@@ -3,9 +3,9 @@ import { caxios } from "../../../config/config";
 import useAuthStore from "../../../store/useStore";
 import { useNavigate } from "react-router-dom";
 
-function useLoginBox(setBabySeq) {
+function useLoginBox() {
     // 로그인 준비
-    const login = useAuthStore((state) => state.login);
+    const {login, getbabySeq} = useAuthStore((state) => state);
     const navigate = useNavigate();
 
     // 값 받을 준비
@@ -29,10 +29,9 @@ function useLoginBox(setBabySeq) {
 
         caxios.post("/user/login", { user_id: data.id, password: data.pw })
             .then(resp => {
-                console.log(resp)
                 const babyseq = Number(resp.data.babySeq);
                 login(resp.data.token, data.id);
-                setBabySeq(babyseq);
+                getbabySeq(babyseq);
                 navigate("/");
             })
             .catch(err => {

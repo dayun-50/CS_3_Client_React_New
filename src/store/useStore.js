@@ -4,6 +4,14 @@ const useAuthStore = create((set) => ({
   token: "",
   id: "",
   isLogin: false,
+  babySeq : 0,
+
+  getbabySeq : (seq)=>{
+    set((state)=>{
+      sessionStorage.setItem("babySeq", seq);
+      return {babySeq : seq};
+    });
+  },
 
   login: (token, id) => {
     set((state) => {

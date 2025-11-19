@@ -81,6 +81,10 @@
     font-weight: bold;
 }
 
+.emailauth:hover {
+    background-color: #F0D827;
+}
+
 /*-----------------------------------------------------------*/
 /*회원가입 이메일 확인*/
 
@@ -146,6 +150,9 @@
     font-weight: bold;
 }
 
+.idauth:hover {
+    background-color: #F0D827;
+}
 /*-----------------------------------------------------------*/
 /*닉네임 적는 칸*/
 
@@ -184,6 +191,9 @@
     font-weight: bold;
 }
 
+.nicauth:hover {
+    background-color: #F0D827;
+}
 /*-----------------------------------------------------------*/
 /*비밀번호 적는 칸*/
 
@@ -414,9 +424,13 @@
     font-weight: 700;
     border: none;
     /* cursor: pointer; */
-    background-color: #F0D827;
+    background-color: #B9B9B9;
     color:white;
-} 
+}
+
+.backbutton:hover, .signinbutton:hover {
+    background-color: #F0D827;
+}
 
 .borderRegex {
     border: solid 1px #499ef8 !important;

@@ -15,8 +15,8 @@ import ChooseType from "../../member/chooseType/ChooseType";
 //메인 인덱스 페이지
 //여기서 로그인 여부에 따라서 보이고 안보이는게 다르게 만들어야함
 // "/"밑으로 들어가느 라우팅
-const MainIndex = ({babySeq}) => {
-  const isLogin = useAuthStore((state) => state.login);
+const MainIndex = () => {
+  const {isLogin, babySeq} = useAuthStore((state) => state);
   
   return (
     <div className={styles.container}>
@@ -31,7 +31,7 @@ const MainIndex = ({babySeq}) => {
         <Routes>
           <Route path="" element={!isLogin ?
             <Information /> 
-            : ( babySeq === 0 
+            : ( babySeq == 0 
                 ? <ChooseType />
                 : <BabyIndex />
             )} />{" "}

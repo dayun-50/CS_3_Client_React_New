@@ -160,9 +160,9 @@
     height: 25%;
     /* border: 1px solid black; */
     display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
+    /* js */
     align-items: flex-end;     /* 아래쪽 정렬 */
-    padding: 10px;             /* 버튼 주변 여백 */
+    /* padding: 10px;             버튼 주변 여백 */
 }
 
 .corbt {
