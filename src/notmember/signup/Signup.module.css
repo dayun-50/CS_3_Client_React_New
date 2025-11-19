@@ -263,32 +263,6 @@
 }
 
 /*-----------------------------------------------------------*/
-/*부모 선택 칸*/
-
-.parent {
-    /* height:40px; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-    /* border:1px solid black; */
-}
-
-.parent label {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    color: #8C8C8C;
-}
-
-.papa {
-    width: 20px;         /* 동그라미 가로 */
-    height: 20px;        /* 동그라미 세로 */
-    margin-right: 5px;
-}
-
-/*-----------------------------------------------------------*/
 /*생년월일 칸*/
 
 .birthing label {
@@ -374,6 +348,37 @@
 .checkboxLabel input[type="checkbox"]:checked {
     background-color: #499ef8;
     border-color: #499ef8;
+}
+/*-------------------------------------------------------------*/
+/*부모 선택 칸*/
+
+.checkAndParent {
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 50px;           /* 두 영역 사이 간격 */
+}
+
+.parent {
+    /* height:40px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    /* border:1px solid black; */
+}
+
+.parent label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8C8C8C;
+}
+
+.papa {
+    width: 20px;         /* 동그라미 가로 */
+    height: 20px;        /* 동그라미 세로 */
+    margin-right: 5px;
 }
 
 /*-----------------------------------------------------------*/

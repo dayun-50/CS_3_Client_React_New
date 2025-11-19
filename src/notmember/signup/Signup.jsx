@@ -54,7 +54,6 @@ function Signup() {
                     </div>
 
                     <div className={styles.emailing}>
-
                         <label htmlFor="emailAuth">인증번호</label>
                         <input
                             id="emailAuth"
@@ -146,7 +145,6 @@ function Signup() {
                             />
                         </div>
                     </div>
-
                     <div className={styles.parent}>
                         <label>
                             <input type="radio" name="parentType" value="father" className={styles.papa} onChange={hendleChange} /> 아빠

@@ -1,0 +1,63 @@
+/* 최상위 파일 박스 */
+.filebox {
+  border: 1px solid black;
+  width: 100%;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 중요 */
+  position: relative;
+}
+
+/* 스크롤 되는 파일 리스트 영역 */
+.fileListArea {
+  flex: 1; /* ← 이게 80% 역할 */
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* 파일관련 */
+.fileBtnArea {
+  flex: 0 0 40px; /* 또는 원하는 고정 높이 */
+}
+.hwp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #f3f3f3;
+  margin-bottom: 6px;
+  border-radius: 6px;
+}
+
+/* 삭제 버튼 */
+.fileBtn {
+  background: none;
+  border: none;
+  color: #ed4b4b;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+.fileBtn:hover {
+  color: #ff0000;
+}
+
+/* 파일 추가 버튼 (아래 고정) */
+.addFileLabel {
+  background-color: #e8f4ff;
+  color: #0090ff;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.hiddenFileInput {
+  display: none;
+}

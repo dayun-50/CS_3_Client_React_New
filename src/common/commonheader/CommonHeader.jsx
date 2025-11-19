@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import styles from "./CommonHeader.module.css";
-import { HelpCircle, Menu } from "lucide-react"; // 아이콘
+import { HelpCircle, Menu } from "lucide-react"; 
 
 //로그인 여부에 따라 헤더 보이는것 조절 필요
 const CommonHeader = () => {

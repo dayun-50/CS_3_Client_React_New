@@ -1,0 +1,328 @@
+.containerWrapper {
+  width: 100%;
+  height: 944px;
+  position: relative;
+  text-align: left;
+  font-size: 16px;
+  color: #696b70;
+  font-family: Inter;
+}
+
+/* --- 댓글 영역 (Comment Section) --- */
+.commentSection {
+  position: absolute;
+  top: 0px;
+  left: 1136px;
+  border-radius: 22px;
+  background-color: #fff4d6;
+  width: 548px;
+  height: 944px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.commentListWrapper {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start; /* 댓글 리스트 시작점 조정 */
+  justify-content: flex-start;
+  flex: 1; /* 남은 공간을 차지하도록 flex-grow 추가 */
+  overflow-y: auto; /* 댓글이 많아지면 스크롤 가능 */
+}
+
+.commentList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.parentComment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.commentUserHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 닉네임과 아이콘 간격 */
+  width: 100%;
+  padding-right: 10px; /* 아이콘과의 간격 조절 */
+}
+
+.nicknameGroup {
+  display: flex;
+  align-items: center;
+}
+
+.userNicknameBold,
+.commentText {
+  position: relative;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.commentTextWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 0px 0px 30px; /* 들여쓰기 */
+}
+
+.commentFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 0px 0px 30px; /* 들여쓰기 */
+  gap: 10px;
+  font-size: 12px;
+}
+
+.commentDate {
+  position: relative;
+  font-weight: 600;
+}
+
+.replyButton {
+  position: relative;
+  font-weight: 600;
+  color: #adb9e3;
+  cursor: pointer;
+}
+
+.replyCommentWrapper {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  padding: 0px 0px 0px 103px; /* 답글 깊이 들여쓰기 */
+}
+
+.replyComment {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* 댓글 입력창 */
+.commentInputArea {
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  font-family: Pretendard;
+  width: 100%; /* 부모(commentSection)에 맞춤 */
+}
+
+.commentInputBox {
+  width: 508px;
+  height: 48px;
+  border-radius: 22px;
+  background-color: #fff;
+  border: 1px solid #c5c5c5;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  gap: 20px;
+}
+
+.inputField {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0px 16px;
+}
+
+.placeholderText {
+  position: relative;
+  text-transform: uppercase;
+}
+
+.submitButton {
+  height: 40px;
+  width: 66px;
+  border-radius: 36px;
+  background-color: #f0d827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 19px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.messageIcon {
+  width: 32.8px;
+  position: relative;
+  max-height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* --- 게시글 내용 영역 (Post Content) --- */
+.postContentArea {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 22px;
+  border: 1px solid #f0d827;
+  box-sizing: border-box;
+  width: 1116px;
+  height: 944px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 24px;
+}
+
+.postHeader {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-bottom: 2px solid #c5c5c5;
+  padding: 0px 0px 20px;
+  gap: 12px;
+}
+
+.postTitleWrapper {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postTitle {
+  position: relative;
+  font-size: 24px;
+}
+
+.authorNicknameWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.userNickname {
+  position: relative;
+}
+
+.divider {
+  /* .child 역할을 대신. postBodyContainer에 배경색을 적용했으므로 사실상 불필요 */
+  /* 필요하다면 여기에 스타일을 추가할 수 있지만, 현재는 사용하지 않음 */
+}
+
+.postBodyContainer {
+  width: 100%; /* 게시글 영역 전체 폭 */
+  flex-grow: 1; /* 남은 공간 차지 */
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* 내용이 길면 스크롤 가능 */
+}
+
+.postBodyText {
+  border-radius: 22px;
+  background-color: #fff4d6;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.list {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  padding-left: 21px;
+}
+
+.listItem {
+  margin-bottom: 0px;
+}
+
+/* 페이지네이션 */
+.paginationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto; /* 중앙 정렬 */
+  padding-top: 10px; /* 내용과의 간격 */
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* 화살표 사이 간격 */
+}
+
+.collapseArrowIcon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.pageListContainer {
+  display: flex;
+  align-items: center;
+}
+
+.pageList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageNumberActive {
+  border-radius: 8px;
+  background-color: #adb9e3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+}
+
+.pageNumberInactive {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.pageNumber {
+  position: relative;
+  line-height: 100%;
+}
