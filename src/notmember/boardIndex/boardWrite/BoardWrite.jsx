@@ -1,36 +1,6 @@
 import React, { useState } from "react";
-import { ChevronDown, Users, Globe, UploadCloud, X } from "lucide-react"; 
+import { ChevronDown, UploadCloud, X } from "lucide-react";
 import styles from "./BoardWrite.module.css";
-
-const CheckedCircleIcon = ({ color = "#f0d827", size = 20 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={styles.checkedRadioIcon}
-  >
-    {/* 배경 원 (노란색) */}
-    <circle
-      cx="12"
-      cy="12"
-      r="11"
-      fill={color}
-      stroke="#ccb623"
-      strokeWidth="1.5"
-    />
-    {/* 체크 마크 (어두운 색) */}
-    <path
-      d="M7 12L10 15L17 8"
-      stroke="#333"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 
 const BoardWrite = () => {
   const handleBack = () => console.log("뒤로가기 버튼 클릭");
@@ -43,6 +13,16 @@ const BoardWrite = () => {
 
   const handleVisibilityChange = (option) => {
     setSelectedVisibility(option);
+  };
+
+  // 드롭다운 상태 관리
+  const options = ["후기", "질문", "무료나눔"]; // 드롭다운 옵션
+  const [selected, setSelected] = useState(options[0]); // 초기 선택값
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelect = (option) => {
+    setSelected(option);
+    setIsOpen(false);
   };
 
   // 파일 크기 포매터
@@ -90,12 +70,30 @@ const BoardWrite = () => {
       {/* 필터 및 공개 설정 그룹 */}
       <div className={styles.selectionGroup}>
         {/* 필터 선택 */}
-        <div className={styles.formGroup}>
+        <div className={styles.formGroup} style={{ position: "relative" }}>
           <label className={styles.formLabel}>필터 선택</label>
-          <div className={styles.selectField}>
-            <span className={styles.selectText}>메시지</span>
+          <div
+            className={styles.selectField}
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            <span className={styles.selectText}>{selected}</span>
             <ChevronDown size={24} className={styles.selectIcon} />
           </div>
+          
+          {/* 옵션 리스트 */}
+          {isOpen && (
+            <div className={styles.dropdownOptions}>
+              {options.map((option) => (
+                <div
+                  key={option}
+                  className={styles.dropdownOption}
+                  onClick={() => handleSelect(option)}
+                >
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* 공개 설정 */}
@@ -103,49 +101,44 @@ const BoardWrite = () => {
           <label className={styles.formLabel}>공개 설정</label>
           <div className={styles.radioGroup}>
             {/* 전체 옵션 */}
-            <div
+            <label
+              htmlFor="visibility-all"
               className={`${styles.radioOption} ${
                 selectedVisibility === "all" ? styles.activeRadio : ""
               }`}
-              onClick={() => handleVisibilityChange("all")}
             >
-              {/* 아이콘: 선택 상태에 따라 SVG 또는 Globe 아이콘 표시 */}
-              {selectedVisibility === "all" ? (
-                <CheckedCircleIcon />
-              ) : (
-                <Globe size={20} className={styles.radioIcon} />
-              )}
-              <span className={styles.radioText}>전체</span>
-            </div>
+              <input
+                type="radio"
+                id="visibility-all"
+                name="visibility"
+                value="all"
+                checked={selectedVisibility === "all"}
+                onChange={() => handleVisibilityChange("all")}
+                className={styles.hiddenRadio}
+              />
+              <span>전체</span>
+            </label>
 
             {/* 멤버 옵션 */}
-            <div
+            <label
+              htmlFor="visibility-member"
               className={`${styles.radioOption} ${
                 selectedVisibility === "member" ? styles.activeRadio : ""
               }`}
-              onClick={() => handleVisibilityChange("member")}
             >
-              {/* 아이콘: 선택 상태에 따라 SVG 또는 Users 아이콘 표시 */}
-              {selectedVisibility === "member" ? (
-                <CheckedCircleIcon />
-              ) : (
-                <Users size={20} className={styles.radioIcon} />
-              )}
-              <span className={styles.radioText}>맴버</span>
-            </div>
+              <input
+                type="radio"
+                id="visibility-member"
+                name="visibility"
+                value="member"
+                checked={selectedVisibility === "member"}
+                onChange={() => handleVisibilityChange("member")}
+                className={styles.hiddenRadio}
+              />
+              <span>멤버</span>
+            </label>
           </div>
         </div>
-      </div>
-
-      {/* 에디터 영역 */}
-      <div className={styles.editorArea}>
-        <div className={styles.editorHeader}>
-          <span className={styles.editorLabel}>글 작성 에디터</span>
-        </div>
-        <textarea
-          placeholder="글 내용을 입력하세요..."
-          className={styles.editorInput}
-        ></textarea>
       </div>
 
       {/* 파일 업로드 영역 추가 */}
@@ -187,6 +180,17 @@ const BoardWrite = () => {
             </ul>
           )}
         </div>
+      </div>
+
+      {/* 에디터 영역 */}
+      <div className={styles.editorArea}>
+        <div className={styles.editorHeader}>
+          <span className={styles.editorLabel}>글 작성 에디터</span>
+        </div>
+        <textarea
+          placeholder="글 내용을 입력하세요..."
+          className={styles.editorInput}
+        ></textarea>
       </div>
 
       {/* 액션 버튼 */}

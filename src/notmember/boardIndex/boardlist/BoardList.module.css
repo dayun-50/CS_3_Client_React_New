@@ -10,15 +10,22 @@
   box-sizing: border-box;
 }
 
-/* --- 상단 헤더 (카테고리 + 검색창) --- */
+/* --- 상단 헤더 (카테고리 + 글작성 + 검색창) --- */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* 화면 작아지면 줄바꿈 */
+  justify-content: space-between;
   gap: 20px;
+  width: 100%;
 }
 
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 카테고리 버튼 */
 .categoryList {
   display: flex;
   gap: 12px;
@@ -49,11 +56,36 @@
   color: #fff;
 }
 
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 글작성 버튼과 검색창 사이 간격 */
+}
+
+/* 글 작성 버튼 */
+.writeButton {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 24px;
+  border: 1px solid #adb9e3;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  color: #696b70;
+  transition: all 0.2s;
+}
+
+.writeButton:hover {
+  background-color: #adb9e3;
+  color: #fff;
+  border: none;
+}
+
 /* 검색창 */
 .searchBar {
   display: flex;
   align-items: center;
-  width: 300px;
+  width: 340px;
   height: 48px;
   padding: 0 20px;
   border: 1px solid #8c8c8c;
@@ -67,6 +99,7 @@
   outline: none;
   font-size: 14px;
   color: #333;
+  border-right: 2px solid #8c8c8c;
 }
 
 .searchInput::placeholder {
@@ -76,6 +109,7 @@
 .searchIcon {
   color: #8c8c8c;
   cursor: pointer;
+  margin-left: 12px;
 }
 
 /* --- 게시물 그리드 --- */
@@ -95,7 +129,7 @@
   list-style: none;
 }
 
-/* 카드 스타일*/
+/* 카드 스타일 */
 .card {
   position: relative;
   display: flex;
@@ -174,7 +208,7 @@
   font-weight: bold;
   text-align: center;
   color: #fff;
-  background-color: #adb9e3; 
+  background-color: #adb9e3;
   text-transform: uppercase;
 }
 
@@ -209,7 +243,6 @@
   line-height: 1.5;
   color: #8c8c8c;
   margin: 0;
-  /* 2줄 말줄임 */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

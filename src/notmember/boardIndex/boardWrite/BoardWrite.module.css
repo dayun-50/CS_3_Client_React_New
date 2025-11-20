@@ -1,6 +1,5 @@
-/* --- 메인 컨테이너 (BoardDetail) --- */
+/* 에디터 전체 컨테이너 */
 .editorContainer {
-  /* 유연한 폭 설정 */
   width: 100%;
   height: 100%;
   margin: 40px auto;
@@ -10,18 +9,19 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 25px; /* 간격 증가 */
+  gap: 25px;
   font-family: "Pretendard", sans-serif;
   color: #333;
 }
 
-/* --- Form Row Groupings --- */
+/* --- Form Row --- */
 .formGroup {
   display: flex;
   align-items: center;
   gap: 25px;
 }
 
+/* 레이블 */
 .formLabel {
   font-size: 18px;
   font-weight: bold;
@@ -31,7 +31,7 @@
   text-align: left;
 }
 
-/* 제목 입력 필드 */
+/* 텍스트 입력 필드 */
 .inputField {
   flex-grow: 1;
   border-radius: 12px;
@@ -61,7 +61,7 @@
   color: #aaa;
 }
 
-/* 필터 선택 및 공개 설정 그룹 */
+/* 필터/선택 그룹 */
 .selectionGroup {
   display: flex;
   flex-wrap: wrap;
@@ -73,7 +73,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 12px;
+  border-radius: 16px;
   background-color: #fff;
   border: 1px solid #ddd;
   height: 52px;
@@ -86,15 +86,40 @@
 .selectField:hover {
   border-color: #f0d827;
 }
-
 .selectText {
   font-size: 16px;
   color: #666;
-  font-weight: 500;
+  font-weight: bold;
 }
-
 .selectIcon {
   color: #888;
+}
+
+/* 드롭다운 옵션 */
+.dropdownOptions {
+  position: absolute;
+  top: 100%; /* selectField 바로 아래 */
+  left: 48%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  width: 100%; /* selectField 너비와 동일 */
+  max-width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+/* 각 옵션 */
+.dropdownOption {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #696b70;
+  border-radius: 16px;
+}
+.dropdownOption:hover {
+  background-color: #adb9e3;
+  color: white;
 }
 
 /* 라디오 버튼 그룹 */
@@ -102,8 +127,6 @@
   display: flex;
   gap: 12px;
 }
-
-/* 개별 라디오 버튼 옵션 */
 .radioOption {
   display: flex;
   align-items: center;
@@ -118,31 +141,36 @@
   font-weight: 500;
   transition: all 0.2s;
 }
-
-/* 선택된 라디오 옵션 스타일 강화 */
-.radioOption.activeRadio {
-  border-color: #f0d827;
-  background-color: #fffce3;
-  box-shadow: 0 0 8px rgba(240, 216, 39, 0.4);
-  color: #333;
-}
 .radioOption:hover {
   border-color: #f0d827;
 }
 
-/* 선택되지 않은 라디오 아이콘 */
-.radioIcon {
-  color: #b9b9b9;
+/* 숨겨진 radio input */
+.hiddenRadio {
+  /* display: none; 아예 숨김 */
 }
 
-/* 체크된 라디오 아이콘 스타일 */
-.checkedRadioIcon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+/* 선택된 상태 */
+.radioOption.activeRadio {
+  border-color: #f0d827;
+  background-color: #fffce3; /* 노란색 배경 */
+  box-shadow: 0 0 8px rgba(240, 216, 39, 0.4);
 }
 
-/* --- 에디터 영역 (글 작성) --- */
+/* 선택된 텍스트 */
+.radioOption.activeRadio span {
+  color: #f0d827; /* 노란색 텍스트 */
+  font-weight: 700;
+}
+.radioOption.activeRadio .radioIcon {
+  color: #696b70;
+}
+.radioOption.activeRadio span {
+  color: #696b70;
+  font-weight: 700;
+}
+
+/* 에디터 영역 */
 .editorArea {
   flex-grow: 1;
   border-radius: 12px;
@@ -153,7 +181,6 @@
   overflow: hidden;
   min-height: 350px;
 }
-
 .editorHeader {
   height: 54px;
   display: flex;
@@ -162,7 +189,6 @@
   border-bottom: 1px solid #eee;
   background-color: #fcfcfc;
 }
-
 .editorLabel {
   font-size: 16px;
   font-weight: 600;
@@ -170,7 +196,6 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
 .editorInput {
   flex-grow: 1;
   width: 100%;
@@ -186,25 +211,22 @@
   color: #ccc;
 }
 
-/* --- 파일 업로드 영역 추가 --- */
+/* 파일 업로드 영역 */
 .fileUploadArea {
   display: flex;
   align-items: flex-start;
   gap: 25px;
   padding: 10px 0;
 }
-
 .uploadContainer {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .fileInput {
   display: none;
 }
-
 .uploadButton {
   display: flex;
   align-items: center;
@@ -220,13 +242,10 @@
   transition: background-color 0.2s, border-color 0.2s;
   font-size: 16px;
 }
-
 .uploadButton:hover {
   background-color: #fff9d3;
   border-color: #e0c817;
 }
-
-/* 파일 목록 스타일 */
 .fileList {
   list-style: none;
   padding: 0;
@@ -235,7 +254,6 @@
   flex-wrap: wrap;
   gap: 8px;
 }
-
 .fileItem {
   display: flex;
   align-items: center;
@@ -247,7 +265,6 @@
   font-size: 14px;
   color: #555;
 }
-
 .fileName {
   max-width: 200px;
   overflow: hidden;
@@ -255,11 +272,9 @@
   white-space: nowrap;
   font-weight: 500;
 }
-
 .fileSize {
   color: #999;
 }
-
 .removeFileButton {
   background: none;
   border: none;
@@ -271,19 +286,17 @@
   align-items: center;
   transition: color 0.2s;
 }
-
 .removeFileButton:hover {
   color: #d9534f;
 }
 
-/* --- 액션 버튼 (Footer) --- */
+/* 액션 버튼 (Footer) */
 .actionFooter {
   display: flex;
   justify-content: flex-end;
-  gap: 16px; /* 간격 감소 */
+  gap: 16px;
   padding-top: 15px;
 }
-
 .backButton,
 .completeButton {
   height: 48px;
@@ -299,7 +312,6 @@
   font-weight: 700;
   transition: all 0.2s;
 }
-
 .backButton {
   background-color: #ccc;
   color: #444;
@@ -308,7 +320,6 @@
   background-color: #b9b9b9;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-
 .completeButton {
   background-color: #f0d827;
   color: #333;
@@ -317,7 +328,6 @@
   background-color: #e0c817;
   box-shadow: 0 6px 12px rgba(240, 216, 39, 0.6);
 }
-
 .buttonIcon {
   margin-right: -4px;
 }

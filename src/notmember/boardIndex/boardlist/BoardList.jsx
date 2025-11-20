@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MoreHorizontal,
   Eye,
@@ -8,6 +9,7 @@ import {
   ChevronRight,
   ChevronsRight,
   Search,
+  Navigation,
 } from "lucide-react"; // 아이콘 정리
 import styles from "./BoardList.module.css";
 
@@ -83,31 +85,48 @@ const BoardList = () => {
     console.log("메뉴 열기");
   };
 
+  const navigate = useNavigate();
+
+  // 글작성 버튼 클릭 시 이동 함수
+  const hoadlWrite = () => {
+    console.log("글작성 페이지로 이동!");
+    navigate("/board/write");
+  };
+
   return (
     <div className={styles.container}>
       {/* 상단 필터 및 검색 영역 */}
       <div className={styles.header}>
-        <div className={styles.categoryList}>
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              className={`${styles.categoryItem} ${
-                activeCategory === cat ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+        {/* 왼쪽 그룹: 카테고리 */}
+        <div className={styles.leftGroup}>
+          <div className={styles.categoryList}>
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                className={`${styles.categoryItem} ${
+                  activeCategory === cat ? styles.active : ""
+                }`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="제목을 입력하세요"
-            className={styles.searchInput}
-          />
-          <Search className={styles.searchIcon} size={24} />
+        {/* 오른쪽 그룹: 글작성 버튼 + 검색창 */}
+        <div className={styles.rightGroup}>
+          <button className={styles.writeButton} onClick={hoadlWrite}>
+            글 작성
+          </button>
+          <div className={styles.searchBar}>
+            <input
+              type="text"
+              placeholder="제목을 입력하세요"
+              className={styles.searchInput}
+            />
+            <Search className={styles.searchIcon} size={24} />
+          </div>
         </div>
       </div>
 
