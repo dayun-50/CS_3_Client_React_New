@@ -31,3 +31,17 @@
   align-items: flex-start;
   border: 1px solid #e0e0e0;
 }
+
+/* 전체 화면 덮는 긴급 상담 레이어 */
+.counselingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 어둡게 */
+  z-index: 1000; /* BabyIndex 위로 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

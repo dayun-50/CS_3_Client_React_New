@@ -5,12 +5,31 @@ import babyfaceImg from "./img/babyface.png";
 import babyImg from "./img/baby.png";
 import childrenImg from "./img/children.png";
 import { CgClose } from "react-icons/cg";
+import one from "./img/one.png";
+import two from "./img/two.png";
+import three from "./img/three.png";
+import four from "./img/four.png";
+
 import InputBaby from "../../../member/inputBaby/InputBaby";
+import useBabyController from "./useBabyController";
 
 const BabyController = () => {
   const [showModal, setShowModal] = useState(false); // 아기 추가 모달
   const [showInputBaby, setShowInputBaby] = useState(false); // InputBaby 모달
   const [babyType, setBabyType] = useState(""); // "mom" or "child"
+
+
+  const babyImages = {
+    "one": one,
+    "two": two,
+    "three": three,
+    "four" : four
+  };
+
+  const {
+    data, babySeq,
+    getKoreanOrder, changeBaby
+  } = useBabyController();
 
   return (
     <div className={styles.rightcontainer}>
@@ -19,21 +38,16 @@ const BabyController = () => {
       <div className={styles.full}>
         <div className={styles.one}>
           <div className={styles.babyclick}>
-            <button className={styles.ingbaby}>
-              <div className={styles.bbb}>
-                <img src={babyfaceImg} alt="babyface" className={styles.babyfaceImage} />
-                <div className={styles.babyname}>아기이름 DB</div>
-                <div className={styles.how}>첫째 DB</div>
-              </div>
-            </button>
-
-            <button className={styles.ing}>
-              <div className={styles.b}>
-                <div className={styles.faceImage}></div>
-                <div className={styles.name}>아기이름 DB</div>
-                <div className={styles.howtwo}>둘</div>
-              </div>
-            </button>
+            {data.map((baby, index) => (
+              <button key={index} className={`${babySeq == baby.baby_seq ? styles.ingbaby1: styles.ingbaby}`}
+                onClick={() => changeBaby(baby.baby_seq)}>
+                <div className={styles.bbb}>
+                  <img src={babyImages[baby.image_name]} alt="babyface" className={styles.babyfaceImage} />
+                  <div className={styles.babyname}>{baby.name}</div>
+                  <div className={styles.how}>{getKoreanOrder(index + 1)}</div>
+                </div>
+              </button>
+            ))}
 
             <button className={styles.plusbb} onClick={() => setShowModal(true)}>
               <img src={yellowImg} alt="yellow" className={styles.yellowImage} />

@@ -12,6 +12,7 @@
 .parentpage {
     width: 95%;
     height: 95%;
+    position: relative;
     /* border:1px solid black; */
 }
 
@@ -238,13 +239,13 @@
 }
 
 .btwo {
-    flex: 1;
     position: absolute;
+    /* 부모 기준으로 위치 */
     right: 0;
-    bottom: 1px;
+    bottom: 0;
+    /* 부모 하단 */
     display: flex;
     gap: 10px;
-    /* border:1px solid black; */
 }
 
 .delete {
@@ -311,4 +312,87 @@
     background-color: #FFF4D6;
     color: #696B70;
     font-size: 16px;
+}
+
+/*----------------------------------------------------------*/
+
+/* input + 버튼 래퍼 */
+.inputWithButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* input과 버튼 사이 간격 */
+}
+
+/* input 50% */
+.editableInputHalf {
+    flex: 1 1 60%;
+    height: 48px;
+    border-radius: 20px;
+    border: 1px solid #696B70;
+    padding: 0 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.emailtableInputHalf {
+    flex: 1 1 60%;
+    height: 48px;
+    border-radius: 20px;
+    border: 1px solid #696B70;
+    padding: 0 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* 중복확인 버튼 스타일 */
+.checkButton {
+    flex: 0 0 30%;
+    /* 나머지 공간 */
+    height: 48px;
+    border-radius: 20px;
+    border: none;
+    background-color: #B9B9B9;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.checkButton:hover {
+    background-color: #F0D827;
+}
+
+.duplicationButton {
+    flex: 0 0 30%;
+    /* 나머지 공간 */
+    height: 48px;
+    border-radius: 20px;
+    border: none;
+    background-color: #B9B9B9;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.duplicationButton:hover {
+    background-color: #F0D827;
+}
+
+.verificationInput {
+    width: 25%;
+    height: 48px;
+    border-radius: 20px;
+    border: 1px solid #696B70;
+    padding: 0 10px;
+    outline: none;
+    box-sizing: border-box;
+    margin-top: 8px;
+    /* input과 위 버튼/입력창 간 간격 */
+    text-align: center;
+}
+
+.auth {
+    border: solid 1px #499ef8 !important;
 }

@@ -36,11 +36,13 @@ const ChooseType = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        gap: "50px",
       }}
     >
       {/* ★ 1. 기본 선택 화면 */}
       {!showInputBaby && (
         <>
+          {/* 임산모 선택 박스 */}
           <div className={`${styles.babymomcheckbox} ${hover ? styles.hoverBorder : ""}`}>
             <div className={styles.cute}>
               <h1 className={hover ? styles.hoverTitle : ""}>임산모</h1>
@@ -60,6 +62,7 @@ const ChooseType = () => {
             </div>
           </div>
 
+          {/* 육아 선택 박스 */}
           <div className={`${styles.babycheckbox} ${hoverTwo ? styles.hoverBorder : ""}`}>
             <div className={styles.cutetwo}>
               <h1 className={hoverTwo ? styles.hoverTitleTwo : ""}>육아</h1>

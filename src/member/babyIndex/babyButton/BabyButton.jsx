@@ -1,7 +1,8 @@
 import styles from "./BabyButton.module.css";
 
-// isPrengant : 현재 사용자가 임산부 상태인지
-const BabyButton = ({ isPregnant = true }) => {
+// isPregnant : 현재 사용자가 임산부 상태인지
+// onEmergencyClick : 긴급 상담 클릭 시 부모에서 처리할 콜백
+const BabyButton = ({ isPregnant = true, onEmergencyClick }) => {
   // 버튼 항목 데이터
   const baseItems = [
     {
@@ -54,29 +55,49 @@ const BabyButton = ({ isPregnant = true }) => {
   if (isPregnant) {
     navItems = [...baseItems, ...pregnantItems];
   } else {
-    // 육아 상태일 때 산모수첩은 숨기고 육아일기 등을 표시할 수 있습니다.
     navItems = [...baseItems, ...parentingItems];
   }
 
   return (
     <div className={styles.navigationContainer}>
       <div className={styles.buttonList}>
-        {navItems.map((item, index) => (
-          <a key={index} href={item.path} className={`${styles.navButton}`}>
-            <div className={styles.iconLabelGroup}>
+        {navItems.map((item, index) => {
+          // "긴급 상담" 버튼만 클릭 이벤트 처리
+          if (item.label === "긴급 상담") {
+            return (
               <div
-                className={styles.iconCircle}
-                style={{
-                  backgroundColor: item.isActive ? "white" : item.iconColor,
-                }}
-              />
+                key={index}
+                className={styles.navButton}
+                onClick={onEmergencyClick} // 부모에서 오른쪽 섹션 변경
+                style={{ cursor: "pointer" }}
+              >
+                <div className={styles.iconLabelGroup}>
+                  <div
+                    className={styles.iconCircle}
+                    style={{ backgroundColor: item.iconColor }}
+                  />
+                  <div className={styles.labelText}>{item.label}</div>
+                </div>
+              </div>
+            );
+          }
 
-              <div className={styles.labelText}>{item.label}</div>
-            </div>
-          </a>
-        ))}
+          // 나머지 버튼은 기존 링크 그대로
+          return (
+            <a key={index} href={item.path} className={styles.navButton}>
+              <div className={styles.iconLabelGroup}>
+                <div
+                  className={styles.iconCircle}
+                  style={{ backgroundColor: item.iconColor }}
+                />
+                <div className={styles.labelText}>{item.label}</div>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   );
 };
+
 export default BabyButton;

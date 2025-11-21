@@ -1,20 +1,18 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import BabyInfoPic from './babyInfoPic/BabyInfoPic';
 import BabyInfo from './babyInfo/BabyInfo';
 import styles from "./BabyInfoIndex.module.css";
 
+const BabyInfoIndex = () => {
+  const location = useLocation();
+  const type = location.state?.type || "mom"; // ChooseType에서 넘어온 type
 
-//아기 마이페이지 : "/babymypage"
-const BabyInfoIndex = ()=>{
-
-
-return(
+  return (
     <div className={styles.container}>
-        <BabyInfoPic /> {/*아기 마이페이지 왼쪽 사진 넣는곳*/}
-        <BabyInfo /> {/*아기 마이페이지 오른쪽 정보 부분 넣는곳*/}
+      <BabyInfoPic type={type} />
+      <BabyInfo />
     </div>
-);
+  );
+};
 
-
-}
 export default BabyInfoIndex;

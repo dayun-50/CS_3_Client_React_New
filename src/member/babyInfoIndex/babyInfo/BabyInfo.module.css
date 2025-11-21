@@ -184,9 +184,54 @@
     height:48px;
     border-radius: 20px;
     border:none;
-    background-color:#F0D827;
+    background-color:#B9B9B9;
     color:white;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
 }
+
+.corbt:hover {
+    background-color: #F0D827;
+}
+
+.corbtd {
+    width:200px;
+    height:48px;
+    border-radius: 20px;
+    border:none;
+    background-color:#B9B9B9;
+    color:white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.corbtd:hover {
+    background-color: #F0D827;
+}
+
+.corbtc {
+    width:200px;
+    height:48px;
+    border-radius: 20px;
+    border:none;
+    background-color:#B9B9B9;
+    color:white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.corbtc:hover {
+    background-color: #F0D827;
+}
+
+/*---------------------------------------------------------*/
+/**/
+
+.auth{
+    border: solid 1px #499ef8 !important;    
+}
+
+
