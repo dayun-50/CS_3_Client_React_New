@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "./Mypage.module.css";
-
+import useMypage from "./useMypage";
 const Mypage = () => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // 수정 상태변수
+
+  const {data} =useMypage();
 
   return (
     <div className={styles.container}>
@@ -21,7 +23,6 @@ const Mypage = () => {
                 <input
                   type="text"
                   id="nic"
-                  placeholder="맘마미아"
                   className={styles.editableInput}
                 />
               ) : (
@@ -36,7 +37,6 @@ const Mypage = () => {
                 <input
                   type="email"
                   id="email"
-                  placeholder="mosquegmail.com"
                   className={styles.editableInput}
                 />
               ) : (
