@@ -5,17 +5,20 @@ import oneImg from "./img/one.png";
 import twoImg from "./img/two.png";
 import threeImg from "./img/three.png";
 import fourImg from "./img/four.png";
-import useInputBaby from "./useInputBaby";
+import useInputBaby from "./UseInputBaby";
 
 const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
   const [inputBlocks, setInputBlocks] = useState([
-    { name: "", gender: "", image_name: "", birth_date: "" }
-  ]); 
+    { name: "", gender: "", image_name: "", birth_date: "" },
+  ]);
   const clickplusRef = useRef(null);
 
   const handleAdd = () => {
     if (inputBlocks.length < 3) {
-      setInputBlocks((prev) => [...prev, { name: "", gender: "", image_name: "", birth_date: "" }]);
+      setInputBlocks((prev) => [
+        ...prev,
+        { name: "", gender: "", image_name: "", birth_date: "" },
+      ]);
     }
   };
 
@@ -46,13 +49,18 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
   };
 
   const {
-    auth, inputCount, todayString, yesterdayString,
-    handleChange, handleComplete, handleLoginKeyUp
+    auth,
+    inputCount,
+    todayString,
+    yesterdayString,
+    handleChange,
+    handleComplete,
+    handleLoginKeyUp,
   } = useInputBaby(inputBlocks, setInputBlocks);
 
   // 각 블록별 성별 선택
   const handleGenderClick = (index, gender) => {
-    setInputBlocks(prev => {
+    setInputBlocks((prev) => {
       const newBlocks = [...prev];
       newBlocks[index] = { ...newBlocks[index], gender };
       return newBlocks;
@@ -61,7 +69,7 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
 
   // 각 블록별 사진 선택
   const handleImageClick = (index, image_name) => {
-    setInputBlocks(prev => {
+    setInputBlocks((prev) => {
       const newBlocks = [...prev];
       newBlocks[index] = { ...newBlocks[index], image_name };
       return newBlocks;
@@ -103,9 +111,13 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                       />
                       <img
                         src={
-                          val === "one" ? oneImg :
-                          val === "two" ? twoImg :
-                          val === "three" ? threeImg : fourImg
+                          val === "one"
+                            ? oneImg
+                            : val === "two"
+                            ? twoImg
+                            : val === "three"
+                            ? threeImg
+                            : fourImg
                         }
                         alt={val}
                         className={styles[`${val}Image`]}
@@ -117,20 +129,26 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                 <div className={styles.buttons}>
                   {type === "mom" && (
                     <button
-                      className={`${styles.why} ${baby.gender === "미정" ? styles.activeGender : ""}`}
+                      className={`${styles.why} ${
+                        baby.gender === "미정" ? styles.activeGender : ""
+                      }`}
                       onClick={() => handleGenderClick(idx, "미정")}
                     >
                       미정?
                     </button>
                   )}
                   <button
-                    className={`${type === "mom" ? styles.man : styles.mantwo} ${baby.gender === "남자" ? styles.activeGender : ""}`}
+                    className={`${
+                      type === "mom" ? styles.man : styles.mantwo
+                    } ${baby.gender === "남자" ? styles.activeGender : ""}`}
                     onClick={() => handleGenderClick(idx, "남자")}
                   >
                     남자
                   </button>
                   <button
-                    className={`${type === "mom" ? styles.girl : styles.girltwo} ${baby.gender === "여자" ? styles.activeGender : ""}`}
+                    className={`${
+                      type === "mom" ? styles.girl : styles.girltwo
+                    } ${baby.gender === "여자" ? styles.activeGender : ""}`}
                     onClick={() => handleGenderClick(idx, "여자")}
                   >
                     여자
@@ -147,8 +165,12 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                     max={type === "mom" ? "" : todayString}
                     name="birth_date"
                     value={baby.birth_date || ""}
-                    onChange={e => handleChange(idx, e)}
-                    className={!auth[idx]?.birth_date && inputCount[idx]?.birth_date > 0 ? styles.invalid : ""}
+                    onChange={(e) => handleChange(idx, e)}
+                    className={
+                      !auth[idx]?.birth_date && inputCount[idx]?.birth_date > 0
+                        ? styles.invalid
+                        : ""
+                    }
                   />
                 </div>
 
@@ -160,9 +182,13 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                     placeholder="이름"
                     name="name"
                     value={baby.name || ""}
-                    onChange={e => handleChange(idx, e)}
+                    onChange={(e) => handleChange(idx, e)}
                     onKeyUp={handleLoginKeyUp}
-                    className={!auth[idx]?.name && inputCount[idx]?.name > 0 ? styles.invalid : ""}
+                    className={
+                      !auth[idx]?.name && inputCount[idx]?.name > 0
+                        ? styles.invalid
+                        : ""
+                    }
                   />
                 </div>
               </div>
@@ -177,7 +203,9 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                 className={styles.addImage}
                 onClick={handleAdd}
               />
-              <p className={styles.babyadd} onClick={handleAdd}>쌍둥이 추가</p>
+              <p className={styles.babyadd} onClick={handleAdd}>
+                쌍둥이 추가
+              </p>
             </div>
           )}
 
@@ -185,13 +213,17 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
             <button
               className={styles.deb}
               onClick={() => {
-                setInputBlocks([{ name: "", gender: "", image_name: "", birth_date: "" }]);
+                setInputBlocks([
+                  { name: "", gender: "", image_name: "", birth_date: "" },
+                ]);
                 onClose();
               }}
             >
               취소
             </button>
-            <button className={styles.cb} onClick={handleComplete}>완료</button>
+            <button className={styles.cb} onClick={handleComplete}>
+              완료
+            </button>
           </div>
         </div>
       </div>

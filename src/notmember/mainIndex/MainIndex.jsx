@@ -23,8 +23,8 @@ import ChooseType from "../../member/chooseType/ChooseType";
 //여기서 로그인 여부에 따라서 보이고 안보이는게 다르게 만들어야함
 // "/"밑으로 들어가느 라우팅
 const MainIndex = () => {
-  const {isLogin, babySeq} = useAuthStore((state) => state);
-  
+  const { isLogin, babySeq } = useAuthStore((state) => state);
+
   const location = useLocation(); //현재 URL 경로
 
   // 배경 전체가 노란색이 나와야하는 경로 목록
@@ -57,8 +57,9 @@ const MainIndex = () => {
         <Routes>
           <Route path="" element={!isLogin ? <Information /> : <BabyIndex />} />
           {/*로그인 안되어 있으면 ? 인포메이션 : 되면 베이비인덱스*/}
-          <Route path="board/*" element={<BoardIndex />} /> {/*커뮤니티*/}\
+          <Route path="board/*" element={<BoardIndex />} /> {/*커뮤니티*/}
           {/* 어떻게 만들어지는지 볼려고 만든거라 삭제 가능... 내가 보낼때 까먹으면 그냥 삭제해보려.. */}
+          <Route path="babyIndex/*" element={<BabyIndex />} />
           {/*-----------------------------------------------------------------------여기까지는 비회원도 접근 가능한 부분 아래는 불가하게 막아야함*/}
           <Route path="mypage" element={<ParentInfoIndex />} /> {/*회원가입*/}
           <Route path="babymypage" element={<BabyInfoIndex />} />

@@ -6,10 +6,6 @@ import ReactECharts from 'echarts-for-react';
 //디테일 차트 인덱스 "/chart/detail" 여기까지 라우팅
 const DetailChart = ({ menuList, activeMenu, currentWeek, standardData, actualData }) => {
 
-
-
-
-
   // 1.  Logic File을 호출하여 옵션을 생성합니다.
   const option = UseDetailChart(activeMenu, currentWeek, menuList, standardData,
     actualData);
@@ -31,11 +27,6 @@ const DetailChart = ({ menuList, activeMenu, currentWeek, standardData, actualDa
   );
 
 };
-
-
-
-
-
 
 //   if (isDetailChartActive) {
 //   return (
