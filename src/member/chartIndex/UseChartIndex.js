@@ -53,7 +53,15 @@
                     // 영유아 주차 계산
                     calculatedWeek = calculateInfantWeek(birthDateStr, todayStr);
                 }
-                    
+ console.log("🟢 DEBUG — Phase1 Week 계산 결과");                   
+console.log("status:", status);
+console.log("birthDate:", birthDateStr);
+console.log("calculatedWeek:", calculatedWeek);
+console.log('Loading Condition Result:', currentWeek === 0 || actualData === null || !currentStandardData);
+// UseChartIndex.js
+console.log(`4. actualData:`, actualData);
+console.log(`5. currentStandardData:`, currentStandardData);
+console.log(`6. Loading Condition Result:`, (currentWeek === 0 || actualData === null || !currentStandardData));
 
                     // 상태 업데이트
                     setBabyInfo({ babySeq: seq, status, birthDate: birthDateStr });
@@ -75,7 +83,9 @@
             if (currentWeek <= 0 || !babyInfo) return; 
 
             const fetchActualData = async () => {
-                
+
+                // 🟢 DEBUG 1: Phase 2 데이터 로딩 시작 알림
+        console.log("🟢 DEBUG — Phase 2: 실제 데이터 로딩 시작. currentWeek:", currentWeek);
                 try {
                 let startDate, endDate;
                 
@@ -105,7 +115,13 @@
                         endDate: endDate
                     }
                 });
-                setActualData(response.data || {}); 
+                // 🟢 DEBUG 2: API 응답 도착 및 setActualData 실행 직전
+            console.log("🟢 DEBUG — Phase 2: API 응답 도착. 데이터 내용:", response.data);
+
+            setActualData(response.data || {}); 
+            
+            // 🟢 DEBUG 3: setActualData 호출 완료 (다음 렌더링에 actualData가 채워짐)
+            console.log("🟢 DEBUG — Phase 2: setActualData 호출 완료");
 
             } catch (error) {
                 console.error("Actual Data 조회 실패:", error);
