@@ -1,398 +1,310 @@
+/* ==============================
+   전체 Mypage 컨테이너
+   ============================== */
 .container {
-    width: 40%;
-    height: 100%;
-    background-color: #FFF4D6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    /* border: 1px solid black; */
+  width: 100%;
+  height: 100%;
+  background-color: #fff4d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* ==============================
+   내부 전체 페이지 영역
+   - 회원정보 영역 + 버튼 영역
+   ============================== */
 .parentpage {
-    width: 95%;
-    height: 95%;
-    position: relative;
-    /* border:1px solid black; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* 세로 배치 */
+  justify-content: space-between; /* 위: 회원정보 / 아래: 버튼 */
+  position: relative;
 }
 
+/* ==============================
+   회원정보 영역 (작성글 영역)
+   - 내용 많으면 스크롤 가능
+   ============================== */
 .info {
-    width: 100%;
-    height: 73%;
-    /* border:1px solid black; */
+  flex: 1; /* 높이 자동 조절, 버튼 제외 전체 */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto; /* 내용 많을 때 스크롤 */
+  padding-bottom: 16px;
 }
 
-
-/*-------------------------------------------------*/
-/*회원 정보*/
+/* ==============================
+   회원정보 제목
+   ============================== */
 .title {
-    font-size: 22px;
-    color: #696B70;
-    font-weight: bold;
+  font-size: 22px;
+  color: #696b70;
+  font-weight: bold;
 }
 
-/*-------------------------------------------------*/
+/* ==============================
+   각 정보 항목 (아이디, 닉네임, 이메일 등)
+   ============================== */
 .main {
-    width: 100%;
-    height: auto;
-    margin-top: 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    /* border:1px solid black; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
+/* 아이디 */
 .id {
-    font-size: 18px;
-    color: #696B70;
-    margin-left: 10px;
-    font-weight: bold;
+  font-size: 18px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
 .dbid {
-    font-size: 16px;
-    color: #696B70;
-    margin-left: 10px;
+  font-size: 16px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
+/* 닉네임 */
 .nick {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .nick label {
-    font-size: 18px;
-    color: #696B70;
-    margin-left: 10px;
-    font-weight: bold;
+  font-size: 18px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
 .nick input {
-    border-radius: 20px;
-    height: 48px;
-    border: 1px solid #696B70;
-    padding: 0 10px;
-    outline: none;
+  border-radius: 20px;
+  height: 48px;
+  border: 1px solid #696b70;
+  padding: 0 10px;
+  outline: none;
 }
 
 .nick input::placeholder {
-    font-size: 16px;
+  font-size: 16px;
 }
 
+/* 이메일 */
 .email {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .email label {
-    font-size: 18px;
-    color: #696B70;
-    margin-left: 10px;
-    font-weight: bold;
+  font-size: 18px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
 .email input {
-    border-radius: 20px;
-    height: 48px;
-    border: 1px solid #696B70;
-    padding: 0 10px;
-    outline: none;
+  border-radius: 20px;
+  height: 48px;
+  border: 1px solid #696b70;
+  padding: 0 10px;
+  outline: none;
 }
 
 .email input::placeholder {
-    font-size: 16px;
+  font-size: 16px;
 }
 
+/* 생일 */
 .birthday {
-    font-size: 18px;
-    color: #696B70;
-    margin-left: 10px;
-    font-weight: bold;
+  font-size: 18px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
 .dbbirth {
-    font-size: 16px;
-    color: #696B70;
-    margin-left: 10px;
+  font-size: 16px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
-/*-----------------------------------------------------------*/
-/*연락처 적는 칸*/
-
+/* 연락처 */
 .phone label {
-    color: #696B70;
-    font-size: 16px;
-    font-weight: bold;
-    display: block;
-    /* label을 block으로 만들어 세로 배치 */
-    margin-bottom: 16px;
-    margin-left: 10px;
+  color: #696b70;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 16px;
+  margin-left: 10px;
 }
 
 .phoneWrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    /* input과 span 사이 간격 */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .prefix {
-    width: 100px;
-    /* "010 -" 고정 폭 */
-    height: 48px;
-    display: flex;
-    /* 추가 */
-    justify-content: center;
-    /* 가로 가운데 */
-    align-items: center;
-    /* 세로 가운데 */
-    text-align: center;
-    /* 글자 가운데 정렬 */
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 20px;
-    /* background-color: white; */
-    background-color: transparent;
-    color: #8C8C8C;
-    /* border:1px solid black; */
+  width: 100px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #8c8c8c;
 }
 
 .prefixActive {
-    width: 100px;
-    /* "010 -" 고정 폭 */
-    height: 48px;
-    display: flex;
-    /* 추가 */
-    justify-content: center;
-    /* 가로 가운데 */
-    align-items: center;
-    /* 세로 가운데 */
-    text-align: center;
-    /* 글자 가운데 정렬 */
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 20px;
-    background-color: white;
-    /* background-color: transparent; */
-    color: #8C8C8C;
+  width: 100px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 20px;
+  background-color: white;
+  color: #8c8c8c;
 }
 
-
 .dash {
-    width: 20px;
-    /* '-' 고정 폭 */
-    text-align: center;
-    /* 글자 가운데 정렬 */
-    font-weight: 400;
-    color: #8C8C8C;
-    flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  font-weight: 400;
+  color: #8c8c8c;
+  flex-shrink: 0;
 }
 
 .phoneWrapper input {
-    flex: 1 1 0;
-    min-width: 0;
-    height: 48px;
-    border-radius: 20px;
-    border: 1px solid #8C8C8C;
-    /* 조금 두껍게 */
-    padding: 0 10px;
-    box-sizing: border-box;
-    outline: none;
-    text-align: center;
-    background-color: white;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  border-radius: 20px;
+  border: 1px solid #8c8c8c;
+  padding: 0 10px;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+  background-color: white;
 }
 
 .phoneWrapper input::placeholder {
-    color: #8C8C8C;
-    font-size: 16px;
-
+  color: #8c8c8c;
+  font-size: 16px;
 }
 
-/*-------------------------------------------------------------------------*/
-/*위에까지가 회원정보입니다.*/
-/*여기부터가 이제 가족코드랑 버튼*/
-
+/* 가족코드 */
 .fabt {
-    width: 100%;
-    height: 27%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-    /* border:1px solid black; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .familycode {
-    /* margin-top: 16px; */
-    font-size: 18px;
-    color: #696B70;
-    margin-left: 10px;
-    font-weight: bold;
+  font-size: 18px;
+  color: #696b70;
+  margin-left: 10px;
 }
 
 .familywhy {
-    font-size: 18px;
-    color: #8C8C8C;
-    margin-left: 10px;
+  font-size: 18px;
+  color: #8c8c8c;
+  margin-left: 10px;
 }
 
+/* ==============================
+   버튼 영역 (수정/취소/완료)
+   ============================== */
 .btwo {
-    position: absolute;
-    /* 부모 기준으로 위치 */
-    right: 0;
-    bottom: 0;
-    /* 부모 하단 */
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
-.delete {
-    width: 200px;
-    height: 48px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 20px;
-    border: none;
-    background-color: #B9B9B9;
-    color: white;
-    cursor: pointer;
-}
-
-.delete:hover {
-    background-color: #F0D827;
-}
-
-.success {
-    width: 200px;
-    height: 48px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 20px;
-    border: none;
-    background-color: #B9B9B9;
-    color: white;
-    cursor: pointer;
-}
-
-.success:hover {
-    background-color: #F0D827;
-}
-
-/*수정버튼*/
+.delete,
+.success,
 .crbt {
-    width: 200px;
-    height: 48px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 20px;
-    border: none;
-    background-color: #F0D827;
-    color: white;
-    cursor: pointer;
+  width: 100%;
+  height: 48px;
+  font-size: 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
 }
 
-/* 기존 input 스타일 제거 */
-.editableInput {
-    border: 1px solid #696B70;
-    border-radius: 20px;
-    height: 48px;
-    padding: 0 10px;
-    outline: none;
+.delete,
+.success {
+  background-color: #b9b9b9;
+  color: white;
 }
 
-.dbValue {
-    height: 48px;
-    /* input과 동일 높이 유지 */
-    line-height: 48px;
-    /* 세로 가운데 정렬 */
-    padding: 0 10px;
-    border-radius: 20px;
-    background-color: #FFF4D6;
-    color: #696B70;
-    font-size: 16px;
+.delete:hover,
+.success:hover {
+  background-color: #f0d827;
 }
 
-/*----------------------------------------------------------*/
+.crbt {
+  background-color: #f0d827;
+  color: white;
+}
 
-/* input + 버튼 래퍼 */
+/* ==============================
+   input + 버튼 래퍼, 50% 입력창 스타일
+   ============================== */
 .inputWithButton {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    /* input과 버튼 사이 간격 */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* input 50% */
+.dbValue,
 .editableInputHalf {
-    flex: 1 1 60%;
-    height: 48px;
-    border-radius: 20px;
-    border: 1px solid #696B70;
-    padding: 0 10px;
-    outline: none;
-    box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 48px;
+  box-sizing: border-box;
 }
 
-.emailtableInputHalf {
-    flex: 1 1 60%;
-    height: 48px;
-    border-radius: 20px;
-    border: 1px solid #696B70;
-    padding: 0 10px;
-    outline: none;
-    box-sizing: border-box;
-}
-
-/* 중복확인 버튼 스타일 */
-.checkButton {
-    flex: 0 0 30%;
-    /* 나머지 공간 */
-    height: 48px;
-    border-radius: 20px;
-    border: none;
-    background-color: #B9B9B9;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.checkButton:hover {
-    background-color: #F0D827;
-}
-
+.checkButton,
 .duplicationButton {
-    flex: 0 0 30%;
-    /* 나머지 공간 */
-    height: 48px;
-    border-radius: 20px;
-    border: none;
-    background-color: #B9B9B9;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 18px;
+  flex: 0 0 30%;
+  height: 48px;
+  border-radius: 20px;
+  border: none;
+  background-color: #b9b9b9;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
 }
 
+.checkButton:hover,
 .duplicationButton:hover {
-    background-color: #F0D827;
+  background-color: #f0d827;
 }
 
 .verificationInput {
-    width: 25%;
-    height: 48px;
-    border-radius: 20px;
-    border: 1px solid #696B70;
-    padding: 0 10px;
-    outline: none;
-    box-sizing: border-box;
-    margin-top: 8px;
-    /* input과 위 버튼/입력창 간 간격 */
-    text-align: center;
+  height: 48px;
+  border-radius: 20px;
+  border: 1px solid #696b70;
+  padding: 0 10px;
+  outline: none;
+  box-sizing: border-box;
+  margin-top: 8px;
+  text-align: center;
 }
 
 .auth {
-    border: solid 1px #499ef8 !important;
+  border: solid 1px #499ef8 !important;
 }

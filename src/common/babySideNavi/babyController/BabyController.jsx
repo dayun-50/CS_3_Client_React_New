@@ -68,9 +68,6 @@ const BabyController = () => {
             </button>
           </div>
         </div>
-
-        <div className={styles.between}></div>
-        <div className={styles.two}></div>
       </div>
 
       {/* 아기 추가 모달 */}
@@ -139,6 +136,7 @@ const BabyController = () => {
                 <InputBaby
                   type={babyType}
                   onClose={() => setShowInputBaby(false)}
+                  fromChooseType={true} // 부모 크기에 맞춤
                 />
               )}
             </motion.div>

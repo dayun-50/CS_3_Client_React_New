@@ -1,410 +1,319 @@
+/* ==============================
+   전체 컨테이너
+   ============================== */
 .rightcontainer {
-    width: 60%;
-    height: 100%;
-    display: flex;
-    /* border:1px solid black; */
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 .margin {
-    width: 20px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    /* border:1px solid black; */
+  width: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .full {
-    width: 100%;
-    height: 100%;
-    /* 원하는 만큼 높이 */
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* 상단 BabyController / 하단 BabyCheckList 세로 정렬 */
 }
 
-/*--------------------------------------------------*/
-
+/* ==============================
+   아기 선택 박스 영역
+   ============================== */
 .one {
-    flex: 1;
-    border: 2px solid #F0D827;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  flex: 1;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.between {
-    height: 20px;
-
-}
-
-.two {
-    flex: 1;
-    border: 2px solid #F0D827;
-    border-radius: 30px;
-}
-
-/*--------------------------------------------------*/
-/*아기들*/
 .babyclick {
-    width: 97%;
-    height: 91%;
-    display: flex;
-    gap: 10px;
-    /* border:1px solid black; */
+  width: 97%;
+  height: 91%;
+  display: flex;
+  gap: 10px;
 }
 
+/* --------------------------------------------------
+   선택된 아기 버튼
+   -------------------------------------------------- */
 .ingbaby1 {
-    width: 22%; /* hover 때 커지던 크기 */
-    border: 2px solid #F0D827;
-    background-color: #FFF4D6;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease;
-    cursor: pointer;
+  width: 22%;
+  border: 1px solid #f0d827;
+  background-color: #fff4d6;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .ingbaby1 img,
 .ingbaby1 .babyname,
 .ingbaby1 .how {
-    transform: scale(1.1); /* 가로+세로 5% 확대 */
-    transition: transform 0.3s ease;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
-
+/* 일반 아기 버튼 */
 .ingbaby {
-    width: 20%;
-    border: 2px solid #F0D827;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease;
-    /* 전체 확대 */
-    cursor: pointer;
+  width: 20%;
+  border: 1px solid #f0d827;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .ingbaby:hover {
-    background-color: #FFF4D6;
-    width: 22%;
+  border: 2px solid #f0d827;
+  background-color: #fff4d6;
+  width: 22%;
 }
 
 .ingbaby:hover img,
 .ingbaby:hover .babyname,
 .ingbaby:hover .how {
-    transform: scale(1.1);
-    /* 가로+세로 5% 확대 */
-    transition: transform 0.3s ease;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
-/* .choiceBaby {
-    width: 22%;
-    border: 2px solid #F0D827;
-    background-color: #FFF4D6;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* 전체 확대 */
-    /* cursor: pointer; */
-/* } */ 
-
-
+/* 아기 버튼 내부 구조 */
 .bbb {
-    display: flex;
-    flex-direction: column;
-    /* 세로로 쌓기 */
-    justify-content: center;
-    /* 세로 가운데 */
-    align-items: center;
-    /* 가로 가운데 */
-    gap: 10px;
-    /* 이미지와 이름, 이름과 how 간격 설정 */
-    /* border:1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .babyname {
-    font-size: 20px;
-    font-weight: bold;
-    color: #696B70;
+  font-size: 20px;
+  font-weight: bold;
+  color: #696b70;
 }
-
 
 .how {
-    font-size: 16px;
-    color: #696B70;
-    font-weight: bold;
+  font-size: 16px;
+  color: #696b70;
+  font-weight: bold;
 }
-/*추가한 아기*/
-.babyfaceImage {
-    width:50%;
-    /* border:1px solid black; */
-}
-/*----------------------------------------------------------*/
 
+.babyfaceImage {
+  width: 50%;
+}
+
+/* --------------------------------------------------
+   아기 추가 버튼
+   -------------------------------------------------- */
 .plusbb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 20%;
-    border: 2px solid #F0D827;
-    border-radius: 30px;
-    background-color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    /* 전체 확대 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 20%;
+  border: 1px solid #f0d827;
+  border-radius: 30px;
+  background-color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .plusbb:hover {
-    background-color: #FFF4D6;
-    width: 22%;
+  border: 2px solid #f0d827;
+  background-color: #fff4d6;
+  width: 22%;
 }
 
 .plusbb:hover img,
-.plusbb:hover .babyname,
-.plusbb:hover .how {
-    transform: scale(1.1);
-    /* 가로+세로 5% 확대 */
-    transition: transform 0.3s ease;
+.plusbb:hover span {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 .plusbb span {
-    font-size: 18px;
-    font-weight: bold;
-    color: #696B70;
-    transition: transform 0.3s ease;
-    /* 텍스트 부드럽게 확대 */
+  font-size: 18px;
+  font-weight: bold;
+  color: #696b70;
 }
 
-.plusbb:hover span {
-    transform: scale(1.1);
-    /* 텍스트 20% 확대 */
-}
-
-/*-----------------------------------------------------------*/
-/*아기추가 클릭했을때*/
-
-.ppap {
-    position: relative;
-    background-color: white;
-    border-radius: 20px;
-    width: 80%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-}
-
+/* ==============================
+   모달 배경
+   ============================== */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    z-index: 1000;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+  z-index: 1000;
+  overflow-y: auto;
 }
 
-/*아기추가 클릭했을때 왼쪽*/
-.modalContentone {
-    width: 30%;
-    height: 70%;
-    background-color: white;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
+/* ==============================
+   모달 내부 컨테이너
+   ============================== */
+.ppap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 580px;
+  height: 660px;
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
 }
 
-.modalone {
-    width: 80%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    /* border:1px solid black; */
-}
-
-.sanmotitle {
-    font-size: 32px;
-    color: #696B70;
-    font-weight: bold;
-}
-
-.be {
-    font-size: 18px;
-    color: #8C8C8C;
-    font-weight: bold;
-}
-
-.babyImg {
-    margin-top: 60px;
-}
-
-.babysun {
-    margin-top: 60px;
-    width: 100%;
-    height: 48px;
-    border-radius: 20px;
-    border: none;
-    background-color: #8C8C8C;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.modalContentone {
-    border-radius: 20px;
-    background-color: white;
-}
-
-.modalContentone:hover {
-    border: 3px solid #F0D827
-}
-
-/*아기추가 클릭했을때 오른쪽*/
+/* ==============================
+   모달 내부 버튼 스타일
+   ============================== */
+.modalContentone,
 .modalContenttwo {
-    width: 30%;
-    height: 70%;
-    background-color: white;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
+  flex: 1; /* 부모 대비 균등 분배 */
+  height: 100%; /* 부모 높이에 맞춤 */
+  background-color: white;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column; /* 버튼 내부는 세로 */
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #8c8c8c;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.modaltwo {
-    width: 80%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    /* border:1px solid black; */
-}
-
+.modalContentone:hover,
 .modalContenttwo:hover {
-    border: 3px solid #F0D827;
+  transform: translateY(0px) scale(1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid #f0d827;
+  background-color: #fff4d6;
 }
 
+.modalone,
+.modaltwo {
+  display: flex;
+  flex-direction: column; /* 버튼 내부 내용은 세로 */
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.sanmotitle,
 .babtitle {
-    font-size: 32px;
-    color: #696B70;
-    font-weight: bold;
+  font-size: 28px;
+  font-weight: bold;
+  color: #696b70;
 }
 
+.be,
 .bee {
-    font-size: 18px;
-    color: #8C8C8C;
-    font-weight: bold;
+  font-size: 16px;
+  color: #8c8c8c;
+  margin: 0; /* 아래 마진 제거 */
 }
 
+.babyImg,
 .childrenImg {
-    margin-top: 60px;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
 }
 
-.bbbbb {
-    margin-top: 60px;
-    width: 100%;
-    height: 48px;
-    border-radius: 20px;
-    border: none;
-    background-color: #8C8C8C;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+.modalContentone:hover .babyImg,
+.modalContenttwo:hover .childrenImg {
+  transform: scale(1.1); /* 조금만 확대 */
+  transition: transform 0.3s ease;
 }
 
-/*--------------------------------------------*/
-/*취소 버튼*/
+.modalContentone:hover .sanmotitle,
+.modalContenttwo:hover .babtitle {
+  color: #f0d827;
+}
+
+/* --------------------------------------------------
+   모달 닫기 버튼
+   -------------------------------------------------- */
 .back {
-    position: absolute;
-    /* ppap 기준 절대 위치 */
-    top: 20px;
-    right: 20px;
-    padding: 8px 16px;
-    font-size: 30px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    z-index: 10;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .back:hover {
-    color: #d9b600;
+  color: #d9b600;
+  border: 2px solid #d9b600;
 }
 
-
-
-/*-------------------------------------------------------------*/
+/* ==============================
+   기존 잉여 스타일 (참고용)
+   ============================== */
 .ing {
-    width: 20%;
-    border: 2px solid #F0D827;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease;
-    /* 전체 확대 */
-    cursor: pointer;
+  width: 20%;
+  border: 2px solid #f0d827;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .ing:hover {
-    background-color: #FFF4D6;
-    width: 22%;
+  background-color: #fff4d6;
+  width: 22%;
 }
 
 .ing:hover img,
-.ing:hover .babyname,
-.ing:hover .how {
-    transform: scale(1.1);
-    /* 가로+세로 5% 확대 */
-    transition: transform 0.3s ease;
+.ing:hover .name,
+.ing:hover .howtwo {
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
-
 .b {
-    display: flex;
-    flex-direction: column;
-    /* 세로로 쌓기 */
-    justify-content: center;
-    /* 세로 가운데 */
-    align-items: center;
-    /* 가로 가운데 */
-    gap: 10px;
-    /* 이미지와 이름, 이름과 how 간격 설정 */
-    /* border:1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .name {
-    font-size: 20px;
-    font-weight: bold;
-    color: #696B70;
+  font-size: 20px;
+  font-weight: bold;
+  color: #696b70;
 }
 
-
 .howtwo {
-    font-size: 16px;
-    color: #696B70;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
+  color: #696b70;
 }

@@ -7,8 +7,6 @@ import styles from "./ChartIndex.module.css";
 import { FETAL_STANDARDS } from "./FetalStandardData";
 import { caxios } from "../../config/config";
 
-import { motion } from "framer-motion";
-
 const ChartIndex = () => {
   // 상단 메뉴 버튼: 임산모
   const fetalMenuList = [
