@@ -11,6 +11,8 @@ import { caxios } from "config/config";
  * Custom hook for managing multiple file uploads with progress tracking and cancellation
  */
 function useFileUpload(options) {
+  const { uploadType } = options
+  console.log('업로드 타입', uploadType)
 
 
   //파일 배열 담기
@@ -45,10 +47,12 @@ function useFileUpload(options) {
     })
 
     try {
+
+
       // 여기서 GCS 업로드 + URL 받기
       const formData = new FormData()
       formData.append("file", file)
-      formData.append("target_type", "board")
+      formData.append("target_type", uploadType)
 
       const resp = await caxios.post("/file/tempupload", formData, {
         signal: abortController.signal,
@@ -450,6 +454,8 @@ export const ImageUploadNode = (props) => {
   const inputRef = useRef(null)
   const extension = props.extension
 
+  const uploadType = extension.options.uploadType
+
   const uploadOptions = {
     maxSize,
     limit,
@@ -457,7 +463,8 @@ export const ImageUploadNode = (props) => {
     upload: extension.options.upload,
     onSuccess: extension.options.onSuccess,
     onError: extension.options.onError,
-    setInEditorUploadFiles: extension.options.setInEditorUploadFiles
+    setInEditorUploadFiles: extension.options.setInEditorUploadFiles,
+    uploadType
   }
 
   const { fileItems, uploadFiles, removeFileItem, clearAllFiles } =

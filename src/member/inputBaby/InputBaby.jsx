@@ -5,7 +5,7 @@ import oneImg from "./img/one.png";
 import twoImg from "./img/two.png";
 import threeImg from "./img/three.png";
 import fourImg from "./img/four.png";
-import useInputBaby from "./UseInputBaby";
+import useInputBaby from "./useInputBaby";
 
 const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
   const [inputBlocks, setInputBlocks] = useState([
@@ -114,10 +114,10 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                           val === "one"
                             ? oneImg
                             : val === "two"
-                            ? twoImg
-                            : val === "three"
-                            ? threeImg
-                            : fourImg
+                              ? twoImg
+                              : val === "three"
+                                ? threeImg
+                                : fourImg
                         }
                         alt={val}
                         className={styles[`${val}Image`]}
@@ -129,26 +129,23 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                 <div className={styles.buttons}>
                   {type === "mom" && (
                     <button
-                      className={`${styles.why} ${
-                        baby.gender === "미정" ? styles.activeGender : ""
-                      }`}
+                      className={`${styles.why} ${baby.gender === "미정" ? styles.activeGender : ""
+                        }`}
                       onClick={() => handleGenderClick(idx, "미정")}
                     >
                       미정?
                     </button>
                   )}
                   <button
-                    className={`${
-                      type === "mom" ? styles.man : styles.mantwo
-                    } ${baby.gender === "남자" ? styles.activeGender : ""}`}
+                    className={`${type === "mom" ? styles.man : styles.mantwo
+                      } ${baby.gender === "남자" ? styles.activeGender : ""}`}
                     onClick={() => handleGenderClick(idx, "남자")}
                   >
                     남자
                   </button>
                   <button
-                    className={`${
-                      type === "mom" ? styles.girl : styles.girltwo
-                    } ${baby.gender === "여자" ? styles.activeGender : ""}`}
+                    className={`${type === "mom" ? styles.girl : styles.girltwo
+                      } ${baby.gender === "여자" ? styles.activeGender : ""}`}
                     onClick={() => handleGenderClick(idx, "여자")}
                   >
                     여자

@@ -35,6 +35,9 @@ function useBabyController() {
                 getbabySeq(seq);
                 navigate("/babymypage");
             })
+            .then(resp => {
+                caxios.get()
+            })
             .catch(err => console.log(err));
     }
 

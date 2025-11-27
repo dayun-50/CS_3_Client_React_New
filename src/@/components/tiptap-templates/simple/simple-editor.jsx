@@ -210,6 +210,7 @@ export function SimpleEditor({ setInEditorUploadFiles, setEditorInstance, upload
         upload: handleImageUpload,
         onError: (error) => console.error("Upload failed:", error),
         setInEditorUploadFiles: setInEditorUploadFiles,
+        uploadType: uploadType
       }),
     ],
     content: "",
