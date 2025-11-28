@@ -2,11 +2,14 @@ import { useState } from "react";
 import { caxios } from "../../../config/config";
 import useAuthStore from "../../../store/useStore";
 import { useNavigate } from "react-router-dom";
+import { connectWebSocket } from "common/webSocket/connectWebSocket";
 
 function useLoginBox() {
     // 로그인 준비
-    const { login, getbabySeq } = useAuthStore((state) => state);
+    const { login, getbabySeq, setBabyDueDate } = useAuthStore((state) => state);
     const navigate = useNavigate();
+
+    const [alerts, setAlerts] = useState([]);
 
     // 값 받을 준비
     const [data, setData] = useState({ id: "", pw: "" });
@@ -29,13 +32,20 @@ function useLoginBox() {
 
         caxios.post("/user/login", { user_id: data.id, password: data.pw })
             .then(resp => {
+                console.log(resp.data);
                 const babyseq = Number(resp.data.babySeq);
                 login(resp.data.token, data.id);
                 getbabySeq(babyseq);
+                connectWebSocket(resp.data.token, (alert) => {
+                    console.log('알람 수신:', alert);
+                    setAlerts(prev => [...prev, alert]);
+                });
+                setBabyDueDate(resp.data.babyDueDate);
                 if (babyseq == 0) {
                     navigate("/chooseType");
                 } else {
                     navigate("/");
+
                 }
             })
             .catch(err => {

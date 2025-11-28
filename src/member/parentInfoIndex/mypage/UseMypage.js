@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import useAuthStore from "../../../store/useStore";
 import { caxios } from "../../../config/config";
+import useAuthStore from "../../../store/useStore";
 
 function useMypage(isEditing, setIsEditing) {
     const { getbabySeq, id } = useAuthStore((state) => state);

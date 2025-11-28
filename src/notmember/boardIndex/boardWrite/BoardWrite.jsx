@@ -1,57 +1,36 @@
 import React, { useState } from "react";
 import { ChevronDown, UploadCloud, X } from "lucide-react";
 import styles from "./BoardWrite.module.css";
+import { UseBoardWrite } from "./UseBoardWrite";
+import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
+
+
 
 const BoardWrite = () => {
-  const handleBack = () => console.log("뒤로가기 버튼 클릭");
-  const handleComplete = () => console.log("완료 버튼 클릭");
+  const {
+    handleBack,
+    handleComplete,
+    handleVisibilityChange,
+    handleSelect,
+    setIsOpen,
+    setUploadedFiles,
+    formatFileSize,
+    handleFileSelect,
+    handleFileRemove,
+    setInEditorUploadFiles,
 
-  // 'all' 또는 'member' 두 가지 값 중 하나를 가집니다. 기본값은 'all'
-  const [selectedVisibility, setSelectedVisibility] = useState("all");
-  // 파일 상태 추가
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+    setEditorInstance,
+    titleRef,
+    editorRef,
+    uploadedFiles,
+    options,
+    isOpen,
+    selected,
+    selectedVisibility,
+  } = UseBoardWrite();
 
-  const handleVisibilityChange = (option) => {
-    setSelectedVisibility(option);
-  };
 
-  // 드롭다운 상태 관리
-  const options = ["후기", "질문", "무료나눔"]; // 드롭다운 옵션
-  const [selected, setSelected] = useState(options[0]); // 초기 선택값
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleSelect = (option) => {
-    setSelected(option);
-    setIsOpen(false);
-  };
-
-  // 파일 크기 포매터
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    // 숫자를 소수점 두 자리까지 표시하고 단위와 함께 반환
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-  };
-
-  // 파일 선택 핸들러
-  const handleFileSelect = (event) => {
-    // FileList 객체를 배열로 변환
-    const files = Array.from(event.target.files);
-    // 기존 파일 목록에 새 파일을 추가
-    setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
-    // 파일 선택 입력 필드를 초기화하여 동일한 파일을 다시 선택할 수 있도록 함
-    event.target.value = null;
-  };
-
-  // 파일 삭제 핸들러
-  const handleFileRemove = (indexToRemove) => {
-    // 인덱스를 사용하여 해당 파일만 제외하고 새 배열 생성
-    setUploadedFiles((prevFiles) =>
-      prevFiles.filter((_, index) => index !== indexToRemove)
-    );
-  };
 
   return (
     <div className={styles.editorContainer}>
@@ -63,6 +42,7 @@ const BoardWrite = () => {
             type="text"
             placeholder="제목을 입력하세요"
             className={styles.inputElement}
+            ref={titleRef}
           />
         </div>
       </div>
@@ -103,9 +83,8 @@ const BoardWrite = () => {
             {/* 전체 옵션 */}
             <label
               htmlFor="visibility-all"
-              className={`${styles.radioOption} ${
-                selectedVisibility === "all" ? styles.activeRadio : ""
-              }`}
+              className={`${styles.radioOption} ${selectedVisibility === "all" ? styles.activeRadio : ""
+                }`}
             >
               <input
                 type="radio"
@@ -122,9 +101,8 @@ const BoardWrite = () => {
             {/* 멤버 옵션 */}
             <label
               htmlFor="visibility-member"
-              className={`${styles.radioOption} ${
-                selectedVisibility === "member" ? styles.activeRadio : ""
-              }`}
+              className={`${styles.radioOption} ${selectedVisibility === "member" ? styles.activeRadio : ""
+                }`}
             >
               <input
                 type="radio"
@@ -186,13 +164,7 @@ const BoardWrite = () => {
 
       {/* 에디터 영역 */}
       <div className={styles.editorArea}>
-        <div className={styles.editorHeader}>
-          <span className={styles.editorLabel}>글 작성 에디터</span>
-        </div>
-        <textarea
-          placeholder="글 내용을 입력하세요..."
-          className={styles.editorInput}
-        ></textarea>
+        <SimpleEditor ref={editorRef} setInEditorUploadFiles={setInEditorUploadFiles} setEditorInstance={setEditorInstance} uploadType="board" />
       </div>
 
       {/* 액션 버튼 */}

@@ -27,7 +27,7 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
 
     // 어제 날짜
     const yesterdayDate = new Date(today); // 오늘 날짜 복사
-    yesterdayDate.setDate(today.getDate() + 1); 
+    yesterdayDate.setDate(today.getDate() + 1);
 
     const yYear = yesterdayDate.getFullYear();
     const yMonth = String(yesterdayDate.getMonth() + 1).padStart(2, '0');
@@ -124,7 +124,7 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
     return {
         data, auth, inputCount, todayString, yesterdayString,
         handleChange, handleComplete,
-        syncGenderAndImage, handleLoginKeyUp 
+        syncGenderAndImage, handleLoginKeyUp
     }
 }
 export default useInputBaby;

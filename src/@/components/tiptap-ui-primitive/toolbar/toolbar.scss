@@ -1,0 +1,141 @@
+:root {
+  --tt-toolbar-height: 2.75rem;
+  --tt-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --tt-toolbar-bg-color: var(--white);
+  --tt-toolbar-border-color: var(--tt-gray-light-a-100);
+}
+
+.dark {
+  --tt-toolbar-bg-color: var(--black);
+  --tt-toolbar-border-color: var(--tt-gray-dark-a-50);
+}
+
+.tiptap-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 0 0 auto !important; /* ✅ Spacer 등으로 인한 확장 방지 */
+
+  &-group {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+
+    &:empty {
+      display: none;
+    }
+
+    &:empty + .tiptap-separator,
+    .tiptap-separator + &:empty {
+      display: none;
+    }
+  }
+
+  &[data-variant="fixed"] {
+    position: sticky;
+    top: 0;
+    z-index: 999; /* ✅ 항상 최상단 */
+    width: 100%;
+    min-height: var(--tt-toolbar-height);
+    background: var(--tt-toolbar-bg-color);
+    border-bottom: 1px solid var(--tt-toolbar-border-color);
+    padding: 0 0.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ✅ 모바일에서도 위에 고정되게 강제 */
+    @media (max-width: 480px) {
+      position: sticky;
+      top: 0;
+      height: var(--tt-toolbar-height);
+      border-bottom: 1px solid var(--tt-toolbar-border-color);
+      border-top: none;
+      padding: 0 0.5rem;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+
+  &[data-variant="floating"] {
+    --tt-toolbar-padding: 0.125rem;
+    --tt-toolbar-border-width: 1px;
+
+    padding: 0.188rem;
+    border-radius: calc(
+      var(--tt-toolbar-padding) + var(--tt-radius-lg) +
+        var(--tt-toolbar-border-width)
+    );
+    border: var(--tt-toolbar-border-width) solid var(--tt-toolbar-border-color);
+    background-color: var(--tt-toolbar-bg-color);
+    box-shadow: var(--tt-shadow-elevated-md);
+    outline: none;
+    overflow: hidden;
+
+    &[data-plain="true"] {
+      padding: 0;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 100%;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* ✅ Spacer 및 내부 flex 확장 억제 */
+.tiptap-toolbar-group {
+  flex: 0 0 auto !important;
+  width: auto !important;
+}
+
+.tiptap-separator {
+  flex: 0 0 auto !important;
+}
+
+
+@media (max-width: 980px) {
+  .tiptap-toolbar button {
+    padding: 3px 5px !important;
+    font-size: 0.85rem !important;
+    min-width: auto !important;
+    min-height: auto !important;
+  }
+
+  .tiptap-toolbar button svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* 🔴 670px 이하 - 2단계 */
+@media (max-width: 670px) {
+  .tiptap-toolbar button {
+    padding: 1px 3px !important;
+    font-size: 0.75rem !important;
+    min-width: auto !important;
+    min-height: auto !important;
+  }
+
+  .tiptap-toolbar button svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  /* 텍스트 버튼은 아이콘만 남김 */
+  .tiptap-toolbar button span {
+    display: none !important;
+  }
+}

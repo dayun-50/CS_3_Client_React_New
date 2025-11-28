@@ -110,6 +110,7 @@
 
 .babyfaceImage {
   width: 50%;
+  height: 100%;
 }
 
 /* --------------------------------------------------
@@ -173,7 +174,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  gap: 30px;
   width: 580px;
   height: 660px;
   background-color: white;
@@ -195,7 +195,7 @@
   justify-content: center;
   align-items: center;
   gap: 15px;
-  border: 1px solid #8c8c8c;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -228,7 +228,7 @@
 .bee {
   font-size: 16px;
   color: #8c8c8c;
-  margin: 0; /* 아래 마진 제거 */
+  margin-bottom: 24px;
 }
 
 .babyImg,
@@ -316,4 +316,76 @@
   font-size: 16px;
   font-weight: bold;
   color: #696b70;
+}
+
+/* ==============================
+   사이드바 전용 스타일 (세로 레이아웃)
+   ============================== */
+.sidebarContainer {
+  flex-direction: column;
+}
+
+/* 아기 선택 박스 영역 */
+.sidebarContainer .sidebarOne {
+  flex: 1;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* 아기 버튼 리스트 */
+.sidebarContainer .sidebarBabyClick {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  gap: 15px;
+
+  /* 세로 스크롤 설정 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+/* 세로 모드 버튼 크기 조정 */
+.sidebarContainer .ingbaby1 {
+  width: 100%;
+  height: 80px;
+}
+
+/* 일반 아기 버튼*/
+.sidebarContainer .ingbaby {
+  width: 100%;
+}
+
+/* + 버튼 */
+.sidebarContainer .plusbb {
+  width: 100%;
+  height: 48px;
+  gap: 10px;
+}
+
+/* 호버 효과 조정 */
+.sidebarContainer .ingbaby:hover {
+  width: 100%;
+  border: 2px solid #f0d827;
+  background-color: #fff4d6;
+}
+
+.sidebarContainer .plusbb:hover {
+  width: 100%;
+  border: 2px solid #f0d827;
+  background-color: #fff4d6;
+}
+
+.sidebarContainer .modal {
+  position: fixed; /* <-- 이 속성이 핵심입니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 전체 화면을 덮는 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 모달 내용을 화면 중앙에 배치 */
+  /* ... */
+  z-index: 1000; /* 사이드바 (z-index: 999) 보다 위에 표시 */
 }

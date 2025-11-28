@@ -31,7 +31,8 @@ export const calculateFetalWeek = (dueDateStr, measureDateStr) => {
 
     const dueDate = parseDate(dueDateStr);
     const measureDate = parseDate(measureDateStr);
-    // 임신 시작일 (Conception Start) = dueDate - 40주
+    // 임신 시작일 (
+    // Conception Start) = dueDate - 40주
     const conceptionStart = new Date(dueDate.getTime() - (TOTAL_FETAL_DAYS * MS_PER_DAY));
 
 

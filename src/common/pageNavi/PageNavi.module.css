@@ -1,0 +1,144 @@
+.pageNaviContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* 페이징네비바 */
+.paginationParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
+.paginationList {
+  display: flex;
+  gap: 8px;
+}
+
+.paginationPage,
+.paginationPageActive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.paginationPage {
+  color: var(--color-font-color2);
+}
+
+.paginationPage:hover {
+  background-color: var(--color-sud-color1);
+}
+
+.paginationPageActive {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+.pageNumber {
+  pointer-events: none;
+  /* 내부 숫자 클릭 시 이벤트 막기 */
+}
+
+img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------- */
+
+/* 페이징네비바 반응형 */
+/* 데스크탑 */
+@media (min-width: 768px) {
+  .paginationParent {
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .paginationPage,
+  .paginationPageActive {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .paginationList {
+    gap: 8px;
+  }
+
+  .pagination img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* 테블릿 */
+@media (min-width: 481px) and (max-width: 767px) {
+  .paginationParent {
+    gap: 10px;
+    padding: 16px 0 0;
+  }
+
+  .paginationPage,
+  .paginationPageActive {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .paginationList {
+    gap: 7px;
+  }
+
+  .pagination img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .paginationParent {
+    gap: 8px;
+  }
+
+  .paginationPage,
+  .paginationPageActive {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .paginationList {
+    gap: 6px;
+  }
+
+  .pagination img {
+    width: 20px;
+    height: 20px;
+  }
+}

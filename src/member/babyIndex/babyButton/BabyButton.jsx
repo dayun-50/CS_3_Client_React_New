@@ -1,4 +1,5 @@
 import styles from "./BabyButton.module.css";
+import { useLocation } from "react-router-dom";
 
 // isPregnant : 현재 사용자가 임산부 상태인지
 // onEmergencyClick : 긴급 상담 클릭 시 부모에서 처리할 콜백
@@ -8,6 +9,8 @@ const BabyButton = ({
   onEmergencyClick,
   isVertical = false,
 }) => {
+  const location = useLocation(); // 현재 URL 가져오기
+
   // 카테고리 메뉴
   const baseItems = [
     { label: "아기 정보", path: "/babymypage", iconColor: "#f0d827" },
@@ -28,12 +31,17 @@ const BabyButton = ({
   ];
 
   // 메뉴 목록 결정
-  let navItems = [...baseItems];
-  if (isPregnant) {
-    navItems = [...baseItems, ...pregnantItems];
-  } else {
-    navItems = [...baseItems, ...parentingItems];
-  }
+  // let navItems = [...baseItems];
+  // if (isPregnant) {
+  //   navItems = [...baseItems, ...pregnantItems];
+  // } else {
+  //   navItems = [...baseItems, ...parentingItems];
+  // }
+
+  const navItems = [
+    ...baseItems,
+    ...(isPregnant ? pregnantItems : parentingItems),
+  ];
 
   return (
     <div
@@ -43,13 +51,17 @@ const BabyButton = ({
     >
       <div className={styles.buttonList}>
         {navItems.map((item, index) => {
+          const isActive = location.pathname.startsWith(item.path);
+          // 현재 URL과 비교 - item.path => /diary 이고 /diary/write → startsWith로 true 처리
+
           if (item.label === "긴급 상담") {
             return (
               <div
                 key={index}
-                className={styles.navButton}
+                className={`${styles.navButton} ${
+                  isActive ? styles.activeButton : ""
+                }`}
                 onClick={onEmergencyClick}
-                style={{ cursor: "pointer" }}
               >
                 <div className={styles.iconLabelGroup}>
                   <div
@@ -63,7 +75,13 @@ const BabyButton = ({
           }
 
           return (
-            <a key={index} href={item.path} className={styles.navButton}>
+            <a
+              key={index}
+              href={item.path}
+              className={`${styles.navButton} ${
+                isActive ? styles.activeButton : ""
+              }`}
+            >
               <div className={styles.iconLabelGroup}>
                 <div
                   className={styles.iconCircle}

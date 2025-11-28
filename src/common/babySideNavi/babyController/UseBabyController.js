@@ -4,18 +4,18 @@ import useAuthStore from "../../../store/useStore";
 import { useNavigate } from "react-router-dom";
 
 function useBabyController() {
-    const { babySeq, getbabySeq, id } = useAuthStore((state) => state);
+    const { babySeq, getbabySeq, id, setBabyDueDate } = useAuthStore((state) => state);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         caxios.get("/user/babyListByMypage")
-        .then(resp=>{
-            console.log(resp.data);
-            setData(resp.data);
-        })
-        .catch(err=>console.log(err))
-    },[babySeq, id])
+            .then(resp => {
+                console.log(resp.data);
+                setData(resp.data);
+            })
+            .catch(err => console.log(err))
+    }, [babySeq, id])
 
     // 몇째인지 띄우는...네..
     function getKoreanOrder(num) {
@@ -29,13 +29,14 @@ function useBabyController() {
     }
 
     // 애기 선택시 페이지 이동
-    const changeBaby=(seq)=>{
-        caxios.post("/user/changeBaby", {last_baby : babySeq})
-        .then(resp=>{
-            getbabySeq(seq);
-            navigate("/babymypage");
-        })
-        .catch(err=>console.log(err));
+    const changeBaby = (seq, date) => {
+        caxios.post("/user/changeBaby", { last_baby: babySeq })
+            .then(resp => {
+                getbabySeq(seq);
+                navigate("/babymypage");
+                setBabyDueDate(date);
+            })
+            .catch(err => console.log(err));
     }
 
     return {

@@ -35,6 +35,8 @@
 
 /* 배경 이미지 */
 .backgrondImage {
+  width: 90%;
+  height: 90%;
   position: absolute;
   object-fit: contain;
   top: 50%;
@@ -44,6 +46,7 @@
 
 /* 위에 겹치는 캐릭터 이미지 */
 .placeholderImage {
+  width: 30%;
   position: absolute;
   height: auto;
   object-fit: contain;

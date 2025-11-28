@@ -1,5 +1,9 @@
 import axios from "axios";
 
+
+export const FILE_SERVER = "http://192.168.0.6";//파일서버 주소
+
+
 export const caxios = axios.create({
   baseURL: `http://10.5.5.5/`
 });
