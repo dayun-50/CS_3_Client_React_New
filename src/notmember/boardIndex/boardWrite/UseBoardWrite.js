@@ -171,10 +171,17 @@ export function UseBoardWrite() {
 
         // tiptap 에디터 텍스트 추출
         const editorText = editorInstance?.getText().replace(/\s/g, "");
+        const contentJSON = editorInstance.getJSON(); //컨텐츠
+        const imageSysList = extractImages(contentJSON); //이미지의 시스네임 리스트
 
         // 제목이 비었거나, 에디터가 비었거나, 엔터/공백만 있을 때
-        if (!title.trim() || !editorText) {
-            alert("제목과 내용을 입력하세요");
+        if (!title.trim()) {
+            alert("제목을 입력하세요");
+            return;
+        }
+
+        if (!editorText && imageSysList.length === 0) {
+            alert("내용을 입력하거나 이미지를 추가하세요");
             return;
         }
 
@@ -187,9 +194,7 @@ export function UseBoardWrite() {
         });
 
         // 2) 에디터 JSON 담기
-        const contentJSON = editorInstance.getJSON(); //컨텐츠
         form.append("content", JSON.stringify(contentJSON));
-        const imageSysList = extractImages(contentJSON); //이미지의 시스네임 리스트
         form.append("imageSysList", JSON.stringify(imageSysList));
 
 

@@ -80,7 +80,7 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
           <div className={styles.searchBar}>
             <input
               type="text"
-              placeholder="제목을 입력하세요"
+              placeholder="제목이나 내용을 입력하세요"
               className={styles.searchInput}
               value={findTarget}
               onChange={handleFindTarget}

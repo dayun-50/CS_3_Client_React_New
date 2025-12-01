@@ -32,7 +32,7 @@ function useLoginBox() {
 
         caxios.post("/user/login", { user_id: data.id, password: data.pw })
             .then(resp => {
-                console.log(resp.data);
+                console.log(resp.data, "로그인 성공");
                 const babyseq = Number(resp.data.babySeq);
                 login(resp.data.token, data.id);
                 getbabySeq(babyseq);

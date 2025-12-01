@@ -5,9 +5,9 @@ import { useLocation } from "react-router-dom";
 // onEmergencyClick : 긴급 상담 클릭 시 부모에서 처리할 콜백
 // isVertical - 사이드 네비바가 아닌경우 가로 사이드 네비바면 true로 변경해서 세로로 css 적용
 const BabyButton = ({
-  isPregnant = true,
   onEmergencyClick,
   isVertical = false,
+  isBorn
 }) => {
   const location = useLocation(); // 현재 URL 가져오기
 
@@ -30,24 +30,16 @@ const BabyButton = ({
     { label: "긴급 상담", path: "/counseling", iconColor: "#f0d827" },
   ];
 
-  // 메뉴 목록 결정
-  // let navItems = [...baseItems];
-  // if (isPregnant) {
-  //   navItems = [...baseItems, ...pregnantItems];
-  // } else {
-  //   navItems = [...baseItems, ...parentingItems];
-  // }
 
   const navItems = [
     ...baseItems,
-    ...(isPregnant ? pregnantItems : parentingItems),
+    ...(isBorn ? parentingItems : pregnantItems),
   ];
 
   return (
     <div
-      className={`${styles.navigationContainer} ${
-        isVertical ? styles.verticalList : ""
-      } `}
+      className={`${styles.navigationContainer} ${isVertical ? styles.verticalList : ""
+        } `}
     >
       <div className={styles.buttonList}>
         {navItems.map((item, index) => {
@@ -58,9 +50,8 @@ const BabyButton = ({
             return (
               <div
                 key={index}
-                className={`${styles.navButton} ${
-                  isActive ? styles.activeButton : ""
-                }`}
+                className={`${styles.navButton} ${isActive ? styles.activeButton : ""
+                  }`}
                 onClick={onEmergencyClick}
               >
                 <div className={styles.iconLabelGroup}>
@@ -78,9 +69,8 @@ const BabyButton = ({
             <a
               key={index}
               href={item.path}
-              className={`${styles.navButton} ${
-                isActive ? styles.activeButton : ""
-              }`}
+              className={`${styles.navButton} ${isActive ? styles.activeButton : ""
+                }`}
             >
               <div className={styles.iconLabelGroup}>
                 <div

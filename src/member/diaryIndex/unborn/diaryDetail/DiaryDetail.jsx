@@ -1,37 +1,47 @@
 import React from "react";
 import styles from "./DiaryDetail.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { UseDiaryDetail } from "./UseDiaryDetail";
+import { EditorContent } from "@tiptap/react";
+
 
 // 산모수첩 상세 보기
-const DiaryDetail = ({ selectedWeek }) => {
-  const navigate = useNavigate();
+const DiaryDetail = ({ selectedWeek, handleAddDiary, setSelectedDiaryId, getTargetWeekDiary }) => {
 
-  // 선택된 주차에 일기가 존재하는지 여부 (임시 로직)
-  const diaryExistsForSelectedWeek =
-    selectedWeek !== null && selectedWeek !== "1"; // 예: 1주차는 데이터 없음
-  const diaryContent = `${selectedWeek}`; // 임시 내용
+  const {
+    seq,
+    navigate,
+    targetDiaryContent,
+    editor,
+    id,
+    handleDeleteDiary
+  } = UseDiaryDetail({ selectedWeek, setSelectedDiaryId, getTargetWeekDiary });
 
-  /* 선택된 주차가 없을 때 */
-  if (selectedWeek === null) {
+
+
+
+
+  /* 선택된 주차도 없고 시퀀스도 없을 때 */
+  if (!selectedWeek && !seq) {
     return (
       <div className={styles.emptyStateContainer}>
         <div className={styles.emptyStateMessage}>
-          주차를 선택하여 일기를 작성해주세요
+          일기를 선택 또는 작성해주세요
         </div>
       </div>
     );
   }
 
-  /* 선택된 주차는 있으나 데이터가 없을 때 */
-  if (!diaryExistsForSelectedWeek) {
+  /* 선택된 주차는 있으나 일기를 선택하지 않앗을 경우 */
+  if (selectedWeek && !seq) {
     return (
       <div className={styles.emptyStateContainer}>
         <div className={styles.emptyStateMessage}>
-          '{selectedWeek} 주차'의 일기를 작성해주세요
+          '{selectedWeek} 주차'의 일기를 선택또는 작성해주세요
         </div>
-        <Link to="write" className={styles.writeLink}>
+        <div onClick={(e) => { handleAddDiary(e, selectedWeek) }} className={styles.writeLink}>
           새 기록 남기기
-        </Link>
+        </div>
       </div>
     );
   }
@@ -42,28 +52,33 @@ const DiaryDetail = ({ selectedWeek }) => {
       {/* 제목/작성자 */}
       <div className={styles.header}>
         <h2 className={styles.title}>
-          [{selectedWeek}주차] 여기 제목이 들어갈 거예요
+          [{selectedWeek}주차] {targetDiaryContent.title}
         </h2>
-        <span className={styles.writer}>작성자: 사용자 닉네임</span>
+        <span className={styles.writer}>작성자: {targetDiaryContent.nickname}</span>
       </div>
 
       {/* 내용 */}
-      <div
-        className={styles.contentBox}
-        dangerouslySetInnerHTML={{ __html: diaryContent }}
-      />
+      <div className={styles.contentBox} >
+        {editor && <EditorContent editor={editor} />}
+      </div>
+
 
       {/* 수정/삭제 버튼 */}
       <div className={styles.actionButtons}>
-        <button
-          className={styles.deleteButton}
-          onClick={() => alert("삭제 기능 구현 예정")}
-        >
-          삭제
-        </button>
-        <button className={styles.editButton} onClick={() => navigate("write")}>
-          수정
-        </button>
+        {id == targetDiaryContent.user_id && //자기가 써야지만 볼 수 있음
+          (<>
+            <button
+              className={styles.deleteButton}
+              onClick={() => handleDeleteDiary(targetDiaryContent.journal_seq)}>
+              삭제
+            </button>
+            <button className={styles.editButton} onClick={() => navigate("write")}>
+              수정
+            </button>
+          </>
+          )}
+
+
       </div>
     </div>
   );

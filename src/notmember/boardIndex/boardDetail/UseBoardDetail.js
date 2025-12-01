@@ -90,7 +90,7 @@ export function UseBoardDetail({ initialComments, handleDeleteBoard, handleEditB
     //-----------------------버튼 모음
     //수정, 삭제 버튼 index에서 생성후 list와 detail로 props전달함 : seq번호만 전달하면 됨
     const handleNavigateBack = () => { //뒤로가기
-        navigate(-1);
+        navigate("/board");
     }
     const handlePostMenuToggle = (e) => { // 게시글 옵션 메뉴 토글 핸들러
         e.stopPropagation();

@@ -1,7 +1,7 @@
 // useBoardList.js
 import { useEffect, useState } from "react";
 import { caxios } from "../../../config/config";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CATEGORY_MAP = {
     "전체": "all",
@@ -28,6 +28,7 @@ async function getThumbUrl(sysname) {
 
 export function UseBoardList({ handleDeleteBoard, handleEditBoard }) {
     const navigate = useNavigate();
+    const location = useLocation();
 
     // ----------- 필터 버튼 상태변수-----------
     const [typeBtn, setTypeBtn] = useState("all");
@@ -80,28 +81,33 @@ export function UseBoardList({ handleDeleteBoard, handleEditBoard }) {
         return text;
     };
 
-    // ----------- 데이터 서버에서 받아오기 -----------
-    useEffect(() => {
-
-
-        Object.values(thumbsUrlMap).forEach(url => URL.revokeObjectURL(url));
-        async function load() {
-            let resp;
-            //검색중일 경우에는 검색 api 호출
-            if (isSearching && findTarget) {
-                resp = await caxios.get("/board", {
-                    params: { target: findTarget, board_type: typeBtn, page: page }
-                });
-
-                //아니면 기본 목록
-            } else {
-                resp = await caxios.get("/board", {
-                    params: { board_type: typeBtn, page: page }
-                });
-                console.log("파일리스트 오는지", resp);
-            }
-            await processBoardData(resp.data);
+    //재로딩 함수
+    async function load() {
+        let resp;
+        if (isSearching && findTarget) {
+            resp = await caxios.get("/board", {
+                params: { target: findTarget, board_type: typeBtn, page: page }
+            });
+        } else {
+            resp = await caxios.get("/board", {
+                params: { board_type: typeBtn, page: page }
+            });
         }
+
+        await processBoardData(resp.data);
+    }
+
+    // ----------- 데이터 서버에서 받아오기 -----------
+    // 1) 삭제 후 refresh 신호 받으면 reload
+    useEffect(() => {
+        if (location.state?.refresh) {
+            load();
+        }
+    }, [location.state]);
+
+    // 2) 기본 목록이나 검색 변경 시 reload
+    useEffect(() => {
+        Object.values(thumbsUrlMap).forEach(url => URL.revokeObjectURL(url));
         load();
     }, [typeBtn, page, findTarget]);
 

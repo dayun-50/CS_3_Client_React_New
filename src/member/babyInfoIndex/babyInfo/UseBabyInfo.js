@@ -4,7 +4,7 @@ import useAuthStore from "../../../store/useStore";
 
 function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing) {
     const babySeq = sessionStorage.getItem("babySeq");
-    const id = useAuthStore((state)=>state.id);
+    const { id, setBabyDueDate } = useAuthStore((state) => state.id);
     const [data, setData] = useState({});
     const [regex, setRegex] = useState({
         name: true, birth_date: true
@@ -41,7 +41,7 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
             .catch(err => {
                 console.log(err);
             })
-    }, [id, isEditing]);
+    }, [id, isEditing, babySeq]);
 
     // 핸들러
     const handleChange = (e) => {
@@ -57,9 +57,9 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
 
     // 수정 완료버튼
     const handleSave = () => {
-        console.log("이얍!",data);
-        console.log("으아ㅣㅇ",regex);
-        if(!isEditing)return;
+        console.log("이얍!", data);
+        console.log("으아ㅣㅇ", regex);
+        if (!isEditing) return;
 
         const isAllValid = Object.values(regex).every(value => value === true);
         if (!isAllValid) { alert("올바른 입력값을 입력해주세요."); return; }
@@ -74,6 +74,8 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
         caxios.post("/baby/babypageUpdate", BabyDTO)
             .then(resp => {
                 setIsEditing(false);
+                sessionStorage.setItem("babyDueDate", data.birth_date);
+                setBabyDueDate(data.birth_date);
             })
             .catch(err => console.log(err));
     }

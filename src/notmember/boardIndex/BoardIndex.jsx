@@ -16,7 +16,7 @@ const BoardIndex = () => {
     })
       .then(resp => {
         alert("삭제되었습니다");
-        window.history.back(); //삭제 후 이전 페이지로 이동
+        navigate("/board", { state: { refresh: true } });//보드 리스트로 이동
       })
       .catch(err => { console.log(err); alert("삭제에 실패했습니다 다시 시도해주세요"); });
   }
