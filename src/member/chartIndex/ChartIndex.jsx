@@ -58,6 +58,7 @@ const ChartIndex = () => {
   console.log("DEBUG — currentWeek:", currentWeek);
   console.log("DEBUG — currentStandardData:", currentStandardData);
   console.log("DEBUG — actualData:", actualData);
+
   const {
     babySeq,
     babyInfo,

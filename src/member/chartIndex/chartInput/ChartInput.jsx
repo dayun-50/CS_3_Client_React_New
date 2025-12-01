@@ -6,7 +6,7 @@ import { FETAL_STANDARDS } from "../FetalStandardData";
 import { fetalWeekStartEnd } from "member/utils/pregnancyUtils";
 const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, setInputs, actualData, setActualData, fetchActualData, measureTypes }) => {
   const activeItem = menuList[activeMenu];
-  const { id, babySeq, babyDueDate } = useAuthStore();
+  const { id, babySeq, babyDueDate } = useAuthStore(state => state);
   const [isEditing, setIsEditing] = useState(false);
   const [date, setDate] = useState("");
   const hasData = actualData && Object.keys(actualData).length > 0;
@@ -83,42 +83,76 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
 
   const handleEdit = () => setIsEditing(true);
 
-  const handleCancelOrUpdate = () => setIsEditing(false);
+  const handleCancelOrUpdate = async (action) => {
+    if (action === "cancel") {
+      const restoredInputs = {};
+      Object.entries(actualData).forEach(([type, value]) => {
+        const key = map[type];
+        if (!key) return;
+        restoredInputs[key] = type === "EFW" ? String(value / 1000) : String(value);
+      });
+      setInputs(restoredInputs);
+      setIsEditing(false);
+      return;
+    }
+    else if (action === "update") {
+      // 수정 완료 → 서버 전송
+      const invalidInput = REQUIRED_KEYS.some((key) => {
+        const value = inputs[key];
+        return value === undefined || value === null || value === "" || isNaN(Number(value)) || Number(value) <= 0;
+      });
+
+      if (invalidInput) {
+        alert("모든 필수 항목을 올바르게 입력해주세요.");
+        return;
+      }
+
+      await submitChartData({ inputs, date, babySeq, id, measureTypes });
+      setIsEditing(false);
+      await fetchActualData();
+    }
+
+
+
+  }
 
   useEffect(() => {
-    console.log("Store babyDueDate 업데이트:", babyDueDate);
-    if (babyDueDate && babyDueDate !== 0) {
-      const [start, end] = fetalWeekStartEnd(babyDueDate, currentWeek);
-
-      setWeekStart(start);
-      setWeekEnd(end);
-    }
-  }, [babyDueDate, currentWeek]);
-
-
-  useEffect(() => {
-    if (!actualData || Object.keys(actualData).length === 0) return;
-
-    // 날짜 설정
-    if (actualData.measure_date) {
-      const formattedDate = new Date(actualData.measure_date)
-        .toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
-
-      setDate(formattedDate);
+    if (!babyDueDate || babyDueDate === 0) {
+      console.log("babyDueDate 아직 없음:", babyDueDate);
+      return;
     }
 
 
-    const updatedInputs = {};
-    Object.entries(actualData).forEach(([type, value]) => {
-      const key = map[type];
-      if (!key) return;
+    const [start, end] = fetalWeekStartEnd(babyDueDate, currentWeek);
+    setWeekStart(start);
+    setWeekEnd(end);
+    console.log("weekStart / weekEnd:", start, end);
 
-      updatedInputs[key] = type === "EFW" ? String(value / 1000) : String(value);
-    });
-    setInputs(updatedInputs);
+    // 2️⃣ actualData가 있으면 입력값 업데이트
+    if (actualData && Object.keys(actualData).length > 0) {
+      console.log("Actual Data:", actualData);
 
-    setIsEditing(false); // 완료 후 자동으로 수정 버튼 활성화
-  }, [actualData]);
+      // measure_date 처리
+      if (actualData.measure_date) {
+        const formattedDate = new Date(actualData.measure_date)
+          .toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
+        setDate(formattedDate);
+      }
+
+      // 입력값 매핑
+      const updatedInputs = {};
+      Object.entries(actualData).forEach(([type, value]) => {
+        const key = map[type];
+        if (!key) return;
+
+        updatedInputs[key] = type === "EFW" ? String(value / 1000) : String(value);
+      });
+      setInputs(updatedInputs);
+
+      setIsEditing(false); // 완료 후 자동으로 수정 버튼 활성화
+    }
+  }, [babyDueDate, currentWeek, actualData]);
+
 
 
   const shouldRenderSingleInput = activeItem !== "성장";
@@ -220,21 +254,24 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
         )}
         {hasData && isEditing && (
           <>
-            <button className={styles.cancelBtn} onClick={handleCancelOrUpdate}>
+            <button className={styles.cancelBtn} onClick={() => handleCancelOrUpdate("cancel")}>
               취소
             </button>
-            <button className={styles.submitBtn} onClick={handleCancelOrUpdate}>
+            <button className={styles.submitBtn} onClick={() => handleCancelOrUpdate("update")}>
               수정완료
             </button>
           </>
-        )}
-        {hasData && !isEditing && (
-          <button className={styles.submitBtn} onClick={handleEdit}>
-            수정
-          </button>
-        )}
-      </div>
-    </div>
+        )
+        }
+        {
+          hasData && !isEditing && (
+            <button className={styles.submitBtn} onClick={handleEdit}>
+              수정
+            </button>
+          )
+        }
+      </div >
+    </div >
   );
 };
 
