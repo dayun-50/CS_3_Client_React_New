@@ -351,3 +351,63 @@
 .submitButton:active {
   background-color: #f0d827;
 }
+
+/*--------------------------------------------------*/
+.reportOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.reportBox {
+  width: 20%;
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  text-align: start;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
+.reportOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 22px;
+}
+
+/* 버튼 영역 */
+.reportBtnArea {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* 취소 */
+.reportCancelBtn {
+  padding: 8px 16px;
+  background-color: #ccc;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 신고 완료 */
+.reportSubmitBtn {
+  padding: 8px 16px;
+  background-color: #f0d827;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}

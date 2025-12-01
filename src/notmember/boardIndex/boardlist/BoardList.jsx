@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MoreHorizontal,
   Eye,
@@ -43,7 +43,7 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
     isMine
   } = UseBoardList({ handleDeleteBoard, handleEditBoard });
 
-
+  const [reportOpen, setReportOpen] = useState(false);
 
 
 
@@ -168,9 +168,10 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
                       ) : (
                         <button
                           className={styles.menuItem}
-                          onClick={(e) =>
-                            handleMenuItemClick(e, "report", item.board.board_seq)
-                          }
+                          onClick={(e) => {
+                            handleMenuItemClick(e, "report", item.board.board_seq);
+                            setReportOpen(true);
+                          }}
                         >
                           신고
                         </button>
@@ -211,6 +212,28 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
       <div className={styles.pagination}>
         <PageNaviBar page={page} setPage={setPage} count={count} totalCount={totalCount} typeBtn={typeBtn} />
       </div>
+
+      {reportOpen && (
+        <div className={styles.reportOverlay} onClick={()=>setReportOpen(false)}>
+          <div className={styles.reportBox} onClick={(e)=>e.stopPropagation()}>
+            
+            {/* 🔥 신고 사유 4개 선택 */}
+            <div className={styles.reportOptions}>
+              <label><input type="radio" name="reason" /> 욕설 및 부적절한 표현</label>
+              <label><input type="radio" name="reason" /> 광고성 게시물</label>
+              <label><input type="radio" name="reason" /> 태교와 관련 없는 글</label>
+              <label><input type="radio" name="reason" /> 불법 복제 · 저작권 침해 글</label>
+            </div>
+      
+            {/* 버튼 영역 */}
+            <div className={styles.reportBtnArea}>
+              <button className={styles.reportCancelBtn} onClick={()=>setReportOpen(false)}>취소</button>
+              <button className={styles.reportSubmitBtn}>신고 완료</button>
+            </div>
+      
+          </div>
+        </div>
+      )}
     </div>
   );
 };

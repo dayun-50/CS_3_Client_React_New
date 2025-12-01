@@ -3,7 +3,7 @@ import styles from "../BoardDetail.module.css";
 import { caxios } from "config/config";
 import { useNavigate } from "react-router-dom";
 import { UseComment } from "./UseComment";
-
+import { useState } from "react";
 
 
 // --- 댓글 아이템 컴포넌트 ---
@@ -22,7 +22,7 @@ const CommentItem =
         } = UseComment({ comment, commentMenuOpenId, closePostMenu, setCommentMenuOpenId, reloadComments, setCommentContent, setIsEdit, setEditCommentId, setIsReply, setParentCommentId, setPostMenuOpen });
 
 
-
+        const [reportOpen, setReportOpen] = useState(false);
 
         return (
             <div className={wrapperClass} >
@@ -56,7 +56,13 @@ const CommentItem =
                                             </>
                                         ) : (
                                             // 남이 작성한 댓글
-                                            <button className={styles.menuItem} onClick={(e) => handleCommentMenuItemClick(e, "신고", comment.comment_seq, comment.comment_content)}>
+                                            <button
+                                                className={styles.menuItem}
+                                                onClick={(e) => {
+                                                    handleCommentMenuItemClick(e, "신고", comment.comment_seq, comment.comment_content);
+                                                    setReportOpen(true);  // 🔥 신고 overlay 열기
+                                                }}
+                                            >
                                                 신고
                                             </button>
                                         )}
@@ -114,6 +120,29 @@ const CommentItem =
                             setCommentContent={setCommentContent}
                         />
                     ))}
+
+                    {reportOpen && (
+                      <div className={styles.reportOverlay} onClick={()=>setReportOpen(false)}>
+                        <div className={styles.reportBox} onClick={(e)=>e.stopPropagation()}>
+                          
+                          {/* 🔥 신고 사유 4개 선택 */}
+                          <div className={styles.reportOptions}>
+                            <label><input type="radio" name="reason" /> 욕설 및 부적절한 표현</label>
+                            <label><input type="radio" name="reason" /> 광고성 게시물</label>
+                            <label><input type="radio" name="reason" /> 태교와 관련 없는 글</label>
+                            <label><input type="radio" name="reason" /> 불법 복제 · 저작권 침해 글</label>
+                          </div>
+                    
+                          {/* 버튼 영역 */}
+                          <div className={styles.reportBtnArea}>
+                            <button className={styles.reportCancelBtn} onClick={()=>setReportOpen(false)}>취소</button>
+                            <button className={styles.reportSubmitBtn}>신고 완료</button>
+                          </div>
+                    
+                        </div>
+                      </div>
+                    )}
+                    
             </div>
         );
     };
