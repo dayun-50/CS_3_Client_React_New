@@ -35,8 +35,15 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
         })
             .then(resp => {
                 console.log(resp.data);
-                setData(resp.data);
-                setSelectedGender(resp.data.gender);
+
+                // family_code 계산
+                const processedData = {
+                    ...resp.data,
+                    family_code: resp.data.family_code / 1000
+                };
+
+                setData(processedData);
+                setSelectedGender(processedData.gender);
             })
             .catch(err => {
                 console.log(err);

@@ -30,9 +30,8 @@ const BabyController = ({ isSidebar }) => {
 
   return (
     <div
-      className={`${styles.rightcontainer} ${
-        isSidebar ? styles.sidebarContainer : ""
-      }`}
+      className={`${styles.rightcontainer} ${isSidebar ? styles.sidebarContainer : ""
+        }`}
     >
       <div className={styles.full}>
         <div className={styles.one}>

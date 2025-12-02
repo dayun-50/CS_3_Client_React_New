@@ -96,10 +96,11 @@ export const fetalWeekStartEnd = (dueDateStr, week) => {
 
     // Week Start MS = Conception Start MS + (week - 1) full weeks
     const startMs = conceptionStartMs + ((week - 1) * 7 * MS_PER_DAY);
-    const start = new Date(startMs); // 주차 시작일 Date 객체
+    const endMs = startMs + (6 * MS_PER_DAY);
+
 
     // Week End MS = Week Start MS + 6일
-    const endMs = startMs + (6 * MS_PER_DAY);
+    const start = new Date(startMs); // 주차 시작일 Date 객체
     const end = new Date(endMs); // 주차 종료일 Date 객체
 
     //  Critical Fix 2: 최종 생성된 Date 객체가 유효한지 확인
@@ -109,7 +110,7 @@ export const fetalWeekStartEnd = (dueDateStr, week) => {
     }
 
     // YYYY-MM-DD 포맷으로 변환 (toISOString은 UTC 기반)
-    const formatDate = (date) => date.toISOString().split('T')[0];
+    const formatDate = (date) => date.toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
 
     return [formatDate(start), formatDate(end)];
 };
@@ -143,7 +144,7 @@ export const infantWeekStartEnd = (birthDateStr, week) => {
     }
 
     // YYYY-MM-DD 포맷으로 변환 (toISOString은 UTC 기반)
-    const formatDate = (date) => date.toISOString().split('T')[0];
+    const formatDate = (date) => date.toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
 
     return [formatDate(start), formatDate(end)];
 };

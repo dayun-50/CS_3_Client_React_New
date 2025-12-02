@@ -8,7 +8,21 @@ import { FETAL_STANDARDS } from "./FetalStandardData";
 import { caxios } from "../../config/config";
 import Loading from "common/loading/Loading";
 
+import useAuthStore from "../../store/useStore";
+import { useChartIndex } from "./UseChartIndex";
+import { fetalWeekStartEnd, infantWeekStartEnd } from "../utils/pregnancyUtils";
 const ChartIndex = () => {
+  const [inputs, setInputs] = useState({});
+  const [actualData, setActualData] = useState({}); // 실제 입력 데이터 (API 응답)
+  const measureTypes = {
+    EFW: inputs["몸무게"],
+    OFD: inputs["머리직경"],
+    HC: inputs["머리둘레"],
+    AC: inputs["복부둘레"],
+    FL: inputs["허벅지 길이"],
+  };
+
+
   // 상단 메뉴 버튼: 임산모
   const fetalMenuList = [
     "성장",
@@ -18,17 +32,16 @@ const ChartIndex = () => {
     "복부둘레",
     "허벅지 길이",
   ];
-
   // 상단 메뉴 버튼: 육아
   const babyMenuList = ["성장", "몸무게", "키"];
 
   // true: 임산모/태아, false: 육아
   const [isFetalMode, setIsFetalMode] = useState(true);
 
-  const [currentWeek, setCurrentWeek] = useState(14); // 현재 주차 상태
+  const [currentWeek, setCurrentWeek] = useState(0); // 현재 주차 상태
   const [activeMenu, setActiveMenu] = useState(0); // 활성 메뉴 인덱스
 
-  const [actualData, setActualData] = useState(null); // 실제 입력 데이터 (API 응답)
+
 
   // 현재 모드에 따라 사용될 메뉴 리스트를 동적으로 결정
   const currentMenuList = isFetalMode ? fetalMenuList : babyMenuList;
@@ -40,51 +53,76 @@ const ChartIndex = () => {
     if (isFetalMode) {
       return FETAL_STANDARDS[currentWeek];
     }
-    return null; // 육아 모드일 때는 태아 표준 데이터는 사용하지 않음
+    return null; // 육아 모드일 때는 태아 표준 데이터 는 사용하지 않음
   }, [currentWeek, isFetalMode]); // isFetalMode가 바뀔 때 useMemo 재계산
 
-  console.log(activeMenu);
+  console.log("메뉴 : " + activeMenu);
+  console.log("DEBUG — currentWeek:", currentWeek);
+  console.log("DEBUG — currentStandardData:", currentStandardData);
+  console.log("DEBUG — actualData:", actualData);
 
-  // 데이터 조회 비동기 로직 (caxios 사용)
-  //육아 모드 시 API 엔드포인트와 파라미터(week 대신 month 등)가 달짐
-  useEffect(() => {
-    // 육아 모드일 때는 다른 API를 호출하거나 이 효과 건너뜀
+  const {
+    babySeq,
+    babyInfo,
+    menuList,
+  } = useChartIndex(currentWeek, setCurrentWeek);
+
+
+
+  const fetchActualData = async () => {
     if (!isFetalMode) {
-      setActualData({}); // 육아 데이터는 다른 곳에서 가져온다고 가정
+      setActualData({}); // 육아 모드는 빈 객체
       return;
     }
 
-    const fetchCurrentData = async () => {
-      setActualData(null); // 데이터 로딩 시작
+    setActualData(null); // 로딩 시작
 
-      try {
-        const response = await caxios.get(`/api/fetal/measurement/current`, {
-          params: {
-            babyId: 1, // 실제 아기 ID로 대체
-            week: currentWeek,
-          },
-        });
+    try {
+      const { babySeq, status, birthDate } = babyInfo;
+      const week = currentWeek;
 
-        const data = response.data;
-
-        if (!data || Object.keys(data).length === 0) {
-          setActualData({});
-          return;
-        }
-
-        setActualData(data);
-      } catch (error) {
-        if (error.response && error.response.status === 404) {
-          setActualData({});
-        } else {
-          console.error("데이터 조회 오류:", error);
-          setActualData({});
-        }
+      let startDate, endDate;
+      if (status.toLowerCase() === "fetus") {
+        [startDate, endDate] = fetalWeekStartEnd(birthDate, week);
+      } else {
+        [startDate, endDate] = infantWeekStartEnd(birthDate, week);
       }
-    };
 
-    fetchCurrentData();
-  }, [currentWeek, isFetalMode]); // currentWeek 또는 isFetalMode가 바뀔 때 실행
+      const response = await caxios.get(`/chart/total`, {
+        params: { babyId: babySeq, week, startDate, endDate },
+      });
+
+      setActualData(response.data || {});
+      console.log("🟢 Actual Data 로딩 완료:", response.data);
+
+    } catch (error) {
+      console.error("Actual Data 조회 실패:", error);
+      setActualData({});
+    }
+  };
+  useEffect(() => {
+    if (babyInfo) fetchActualData();
+  }, [babyInfo, currentWeek, isFetalMode]);
+
+
+
+
+
+  useEffect(() => {
+    if (actualData && Object.keys(actualData).length > 0) {
+      // actualData의 key를 inputs key로 매핑
+      const mappedInputs = {
+        "몸무게": actualData.EFW ?? "",
+        "머리직경": actualData.OFD ?? "",
+        "머리둘레": actualData.HC ?? "",
+        "복부둘레": actualData.AC ?? "",
+        "허벅지 길이": actualData.FL ?? "",
+      };
+      setInputs(mappedInputs);
+      console.log(" inputs 세팅 완료:", mappedInputs);
+    }
+  }, [actualData]);
+
 
   // 로딩 상태 처리
   // 임산모 모드에서만 standardData의 유효성을 검사
@@ -116,9 +154,8 @@ const ChartIndex = () => {
         ))}
       </div>
 
-      {/* 메인 컨텐츠 영역 */}
       <div className={styles.contentWrapper}>
-        <div className={styles.chartRouteArea}>
+        <div className={styles.chartRouteArea} >
           <Routes>
             <Route
               path="/"
@@ -131,7 +168,9 @@ const ChartIndex = () => {
                     currentWeek={currentWeek}
                     standardData={currentStandardData}
                     actualData={actualData}
+                    setActualData={setActualData}
                     isFetalMode={isFetalMode} // 모드 전달
+                    inputs={inputs}
                   />
                 ) : (
                   // activeMenu가 1 이상일 때 DetailChart가 렌더
@@ -141,7 +180,10 @@ const ChartIndex = () => {
                     currentWeek={currentWeek}
                     standardData={currentStandardData}
                     actualData={actualData}
+                    setActualData={setActualData}
                     isFetalMode={isFetalMode} // 모드 전달
+                    babyInfo={babyInfo}
+
                   />
                 )
               }
@@ -150,83 +192,23 @@ const ChartIndex = () => {
         </div>
 
         {/* 입력폼 */}
-        <ChartInput
-          menuList={currentMenuList}
-          activeMenu={activeMenu}
-          isFetalMode={isFetalMode}
-        />
+        {actualData && (
+          <ChartInput
+            menuList={currentMenuList}
+            activeMenu={activeMenu}
+            currentWeek={currentWeek}
+            isFetalMode={isFetalMode}
+            inputs={inputs}
+            setInputs={setInputs}
+            actualData={actualData}
+            setActualData={setActualData}
+            fetchActualData={fetchActualData}
+            measureTypes={measureTypes}
+          />
+        )}
       </div>
     </div>
   );
 };
 export default ChartIndex;
 
-// const ChartIndex = () => {
-//   // 2.  Hook을 호출하여 모든 상태와 데이터를 가져옵니다.
-//   const {
-//     menuList,
-//     currentWeek,
-//     activeMenu,
-//     setActiveMenu,
-//     currentStandardData,
-//     currentActualData: actualData,
-//   } = useChartIndex();
-
-//   // 3.  로딩 상태 처리
-//   if (currentWeek === 0 || actualData === null || !currentStandardData) {
-//     return <div className={styles.loading}>데이터를 계산하고 로딩 중입니다...</div>;
-//   }
-
-//   return (
-//     <div className={styles.body}>
-//       {/* 상단 버튼 영역 */}
-//       <div className={styles.menuSection}>
-//         {menuList.map((item, idx) => (
-//           <button
-//             key={idx}
-//             className={
-//               idx === activeMenu ? styles.menuActive : styles.menuButton
-//             }
-//             onClick={() => setActiveMenu(idx)} // 클릭 이벤트 추가
-//           >
-//             {item}
-//           </button>
-//         ))}
-//       </div>
-
-//       {/* 메인 컨텐츠 영역 */}
-//       <div className={styles.contentWrapper}>
-//         <div className={styles.chartRouteArea}>
-//           <Routes>
-//             {/* TotalChart와 DetailChart에 필요한 데이터를 props로 전달 */}
-//             <Route
-//               path="/" // URL은 고정됩니다.
-//               element={
-//                 //  activeMenu 값에 따라 TotalChart와 DetailChart 중 하나만 렌더링됩니다.
-//                 activeMenu === 0 ? (
-//                   <TotalChart
-//                     menuList={menuList} activeMenu={activeMenu}
-//                     currentWeek={currentWeek}
-//                     standardData={currentStandardData}
-//                     actualData={actualData}
-//                   />
-//                 ) : (
-//                   // activeMenu가 1 이상일 때 DetailChart가 렌더링됩니다.
-//                   <DetailChart menuList={menuList} activeMenu={activeMenu}
-//                     currentWeek={currentWeek}
-//                     standardData={currentStandardData}
-//                     actualData={actualData}
-//                   />
-//                 )
-//               }
-//             />
-//           </Routes>
-//         </div>
-
-//         {/* 입력폼 */}
-//         <ChartInput menuList={menuList} activeMenu={activeMenu} />
-//       </div>
-//     </div>
-//   );
-// };
-// export default ChartIndex;

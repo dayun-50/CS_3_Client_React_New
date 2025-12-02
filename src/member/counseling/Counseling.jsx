@@ -25,7 +25,7 @@ const Counseling = ({ onClose }) => {
         sender: "other",
         time: formatTime,
         senderName: "챗봇",
-        buttons: ["test1", "test2", "test3", "AI 상담"]
+        buttons: ["입덧이 심해요.", "아이가 열이 나요.", "아이가 토를 해요.", "AI 상담"]
       }
     ]);
   }, []);

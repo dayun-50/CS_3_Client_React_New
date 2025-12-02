@@ -23,6 +23,8 @@ function UseBabyCheckList() {
                     const createdDate = new Date(item.created_at);
                     const todayDate = new Date();
                     todayDate.setHours(0, 0, 0, 0);
+                    const diffTime = createdDate - todayDate;
+                    const diffDays = Math.ceil(Math.abs(diffTime) / (1000 * 60 * 60 * 24));
 
                     return {
                         ...item,
@@ -30,7 +32,7 @@ function UseBabyCheckList() {
                         buttonText: createdDate <= todayDate ? "완료" : "예약취소",
                         text: findTitleByTestCode(item.test_code), // test_code에 맞는 title
                         date: item.created_at,
-                        badge: "검사" // 필요에 따라 수정 가능
+                        badge: createdDate <= todayDate ? `D + ${diffDays}` : `D - ${diffDays}` // 필요에 따라 수정 가능
                     };
                 });
 

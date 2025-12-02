@@ -61,7 +61,12 @@ function App() {
           message
         };
 
-        setAlerts(prev => [processedAlert, ...prev]);
+        setAlerts(prev => {
+          // 같은 alarm_seq가 이미 존재하는지 확인
+          const exists = prev.some(a => a.alarm_seq === alert.alarm_seq);
+          if (exists) return prev; // 이미 있으면 그대로
+          return [processedAlert, ...prev]; // 없으면 추가
+        });
       });
     }
   }, []);

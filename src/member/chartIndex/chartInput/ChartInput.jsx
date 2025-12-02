@@ -1,82 +1,222 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ChartInput.module.css";
-import { useState } from "react";
-
-// ChartInput 컴포넌트: 선택된 메뉴에 따라 입력 필드를 렌더링
-const ChartInput = ({ menuList, activeMenu }) => {
+import { submitChartData, updateChartData } from "./UseChartInput"; // JS 분
+import useAuthStore from "../../../store/useStore";
+import { FETAL_STANDARDS } from "../FetalStandardData";
+import { fetalWeekStartEnd } from "member/utils/pregnancyUtils";
+const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, setInputs, actualData, setActualData, fetchActualData, measureTypes }) => {
   const activeItem = menuList[activeMenu];
-
-  // 수정버튼 상리관리 - isEditing : true - 취소 / 수정완료 || false - 수정
+  const { id, babySeq, babyDueDate } = useAuthStore(state => state);
   const [isEditing, setIsEditing] = useState(false);
-  const [hasData, setHasData] = useState(false); // 여기서는 완료 버튼을 눌렀을 때 데이터가 있다고 가정하고 상태를 전환
+  const [date, setDate] = useState("");
+  const hasData = actualData && Object.keys(actualData).length > 0;
+  const isDisabled = hasData && !isEditing;
+  const [weekStart, setWeekStart] = useState(null);
+  const [weekEnd, setWeekEnd] = useState(null);
 
-  // '완료' 버튼 클릭 핸들러: 데이터가 저장되고 '수정' 버튼이 보이도록 상태 변경
-  const handleSubmit = () => {
-    // 실제로는 여기에 데이터 저장(Submit) 로직이 들어갑니다.
-    console.log("데이터 저장(완료) 처리...");
-    setHasData(true); // 데이터 저장 완료 후, '수정' 버튼이 보이도록 전환
-    setIsEditing(false);
+  // 입력값 업데이트
+  const map = {
+    EFW: "몸무게",
+    OFD: "머리직경",
+    HC: "머리둘레",
+    AC: "복부둘레",
+    FL: "허벅지 길이",
   };
 
-  // '수정' 버튼 클릭
-  const handleEdit = () => {
-    setIsEditing(true); // 수정 모드 시작
+
+  const handleChange = (key, value) => {
+    const type = Object.keys(map).find(t => map[t] === key); // EFW, HC 등
+    const maxForWeek = FETAL_STANDARDS[currentWeek]?.[type]?.max;
+
+    if (maxForWeek && Number(value) > maxForWeek) {
+      alert(`${key}는 최대 ${maxForWeek}${FETAL_STANDARDS[currentWeek][type].unit}를 초과할 수 없습니다.`);
+      return;
+    }
+    setInputs((prev) => ({ ...prev, [key]: value }));
   };
 
-  // '취소' 또는 '수정완료' 버튼 클릭
-  const handleCancelOrUpdate = () => {
-    // '수정완료'의 경우: 데이터 업데이트 로직 || '취소'의 경우: 입력 상태 초기화 로직
-    console.log("수정 취소 또는 수정 완료 처리 후, 수정 버튼으로 전환");
-    setIsEditing(false); // 수정 모드 종료
-    // setHasData는 유지되어야 '수정' 버튼이 보입니다.
-  };
+  const REQUIRED_KEYS = [
+    "몸무게",
+    "머리직경",
+    "머리둘레",
+    "복부둘레",
+    "허벅지 길이"
+  ];
 
-  // 단일 입력 필드를 렌더링할지 여부 판단 ('성장'가 아니면 true)
+
+
+
+  const handleSubmit = async () => {
+
+
+    //날짜 검사
+    if (!date || date.trim() === "") {
+      alert("날짜를 입력해주세요.");
+      return;
+    }
+    const invalidInput = REQUIRED_KEYS.some((key) => {
+      const value = inputs[key];
+      // 필수 키가 inputs에 없거나 (undefined), 값이 없거나, 숫자가 아니거나, 0 이하인 경우
+      return (
+        value === undefined ||             // 👈 inputs에 키 자체가 없는 경우 (허벅지 둘레 미입력 시)
+        value === null ||
+        value === "" ||
+        isNaN(Number(value)) ||
+        Number(value) <= 0
+      );
+    });
+
+    if (invalidInput) {
+      alert("모든 필수 항목(" + REQUIRED_KEYS.join(', ') + ")을 올바르게 입력해주세요.");
+      return;
+    }
+
+
+    //서버 전송
+    await submitChartData({ inputs, date, babySeq, id, measureTypes });
+    setIsEditing(false); // 입력 잠금, 수정 버튼 활성화
+    await fetchActualData(); // 그래프 업데이트용
+
+  }
+
+
+  const handleEdit = () => setIsEditing(true);
+
+  const handleCancelOrUpdate = async (action) => {
+    if (action === "cancel") {
+      const restoredInputs = {};
+      Object.entries(actualData).forEach(([type, value]) => {
+        const key = map[type];
+        if (!key) return;
+        restoredInputs[key] = type === "EFW" ? String(value / 1000) : String(value);
+      });
+      setInputs(restoredInputs);
+      setIsEditing(false);
+      return;
+    }
+    else if (action === "update") {
+      // 수정 완료 → 서버 전송
+      const invalidInput = REQUIRED_KEYS.some((key) => {
+        const value = inputs[key];
+        return value === undefined || value === null || value === "" || isNaN(Number(value)) || Number(value) <= 0;
+      });
+
+      if (invalidInput) {
+        alert("모든 필수 항목을 올바르게 입력해주세요.");
+        return;
+      }
+
+
+
+      await updateChartData({ inputs, date, babySeq, id, actualData });
+      setIsEditing(false);
+      await fetchActualData();
+    }
+
+
+
+  }
+
+  useEffect(() => {
+    if (!babyDueDate || babyDueDate === 0) {
+      console.log("babyDueDate 아직 없음:", babyDueDate);
+      return;
+    }
+
+
+    const [start, end] = fetalWeekStartEnd(babyDueDate, currentWeek);
+    setWeekStart(start);
+    setWeekEnd(end);
+    console.log("weekStart / weekEnd:", start, end);
+
+    //  actualData가 있으면 입력값 업데이트
+    if (actualData && Object.keys(actualData).length > 0) {
+      console.log("Actual Data:", actualData);
+
+      // measure_date 처리
+      if (actualData.measure_date) {
+        const formattedDate = new Date(actualData.measure_date)
+          .toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
+        setDate(formattedDate);
+      } else {
+        setDate(prev => prev || weekStart || "");
+      }
+
+      // 입력값 매핑
+      const updatedInputs = {};
+      Object.entries(actualData).forEach(([type, value]) => {
+        const key = map[type];
+        if (!key) return;
+
+        updatedInputs[key] = type === "EFW" ? String(value / 1000) : String(value);
+      });
+      setInputs(updatedInputs);
+
+      setIsEditing(false); // 완료 후 자동으로 수정 버튼 활성화
+    }
+  }, [babyDueDate, currentWeek, actualData]);
+
+
+
   const shouldRenderSingleInput = activeItem !== "성장";
-
-  // 입력 항목이 '몸무게'인지 확인 (단위 g 표시용)
   const isWeightInput = activeItem === "몸무게";
+
+
 
   return (
     <div className={styles.sidePanel}>
-      {/* 패널 상단 제목 */}
       <div className={styles.panelHeader}>{activeItem}</div>
 
-      {/* 입력 필드 영역 */}
       <div className={styles.panelContent}>
-        {/* 날짜 입력: 공통 필드 */}
         <label className={styles.label}>날짜</label>
-        <input className={styles.input} type="date" placeholder="날짜" />
+        <input
+          className={styles.input}
+          type="date"
+          placeholder="날짜"
+          value={date}
+          min={weekStart ?? undefined}
+          max={weekEnd ?? undefined}
+          disabled={isDisabled}
+          onChange={(e) => setDate(e.target.value)}
+        />
 
-        {/*'성장' 메뉴 선택 시: 모든 항목 입력 필드 렌더링 */}
         {activeItem === "성장" && (
           <div className={styles.allInputGroup}>
             {menuList.slice(1).map((item) => (
               <div key={item} className={styles.inputGroup}>
                 <label className={styles.label}>{item}</label>
-                {/* 몸무게는 단위 g 표시 */}
                 {item === "몸무게" ? (
                   <div className={styles.inputWithUnit}>
                     <input
                       className={styles.input}
                       type="number"
+                      // value={actualData[item] ?? ""}
+                      value={inputs[item] ?? ""}
+                      disabled={isDisabled}
+                      onChange={(e) => handleChange(item, e.target.value)}
                       placeholder={item}
                     />
-                    <span className={styles.unit}>g</span>
-                  </div>
+                    <span className={styles.unit}>kg</span>
+                  </div>// 잠시 kg -> g으로 바꿔서 사용 >> 나중에 다바꿔야해서 편의상 g 사용해야할거같음
                 ) : (
-                  <input
-                    className={styles.input}
-                    type="number"
-                    placeholder={item}
-                  />
+                  <div className={styles.inputWithUnit}>
+                    <input
+                      className={styles.input}
+                      type="number"
+                      // value={actualData[item] ?? ""}
+                      value={inputs[item] ?? ""}
+                      disabled={isDisabled}
+                      onChange={(e) => handleChange(item, e.target.value)}
+                      placeholder={item}
+                    />
+                    <span className={styles.unit}>mm</span>
+                  </div>
                 )}
               </div>
             ))}
           </div>
         )}
 
-        {/* 단일 메뉴 선택 시: 해당 항목만 입력 필드 렌더링 */}
         {shouldRenderSingleInput && activeItem !== "성장" && (
           <div className={styles.inputGroup}>
             <label className={styles.label}>{activeItem}</label>
@@ -85,50 +225,56 @@ const ChartInput = ({ menuList, activeMenu }) => {
                 <input
                   className={styles.input}
                   type="number"
+                  value={inputs[activeItem] ?? ""}
+                  disabled={isDisabled}
+                  onChange={(e) => handleChange(activeItem, e.target.value)}
                   placeholder={activeItem}
                 />
-                <span className={styles.unit}>g</span>
+                <span className={styles.unit}>kg</span>
               </div>
             ) : (
-              <input
-                className={styles.input}
-                type="number"
-                placeholder={activeItem}
-              />
+              <div className={styles.inputWithUnit}>
+                <input
+                  className={styles.input}
+                  type="number"
+                  value={inputs[activeItem] ?? ""}
+                  disabled={isDisabled}
+                  onChange={(e) => handleChange(activeItem, e.target.value)}
+                  placeholder={activeItem}
+                />
+                <span className={styles.unit}>mm</span>
+              </div>
             )}
           </div>
         )}
       </div>
 
-      {/* 버튼 영역 */}
       <div className={styles.buttonRow}>
-        {/* 1. 처음에 데이터가 없을 때 (hasData: false) */}
         {!hasData && (
           <button className={styles.submitBtn} onClick={handleSubmit}>
             완료
           </button>
         )}
-
-        {/* 2. 데이터가 있고 수정 모드일 때 (hasData: true, isEditing: true) */}
         {hasData && isEditing && (
           <>
-            <button className={styles.cancelBtn} onClick={handleCancelOrUpdate}>
+            <button className={styles.cancelBtn} onClick={() => handleCancelOrUpdate("cancel")}>
               취소
             </button>
-            <button className={styles.submitBtn} onClick={handleCancelOrUpdate}>
+            <button className={styles.submitBtn} onClick={() => handleCancelOrUpdate("update")}>
               수정완료
             </button>
           </>
-        )}
-
-        {/* 3. 데이터가 있고 완료 상태일 때 (hasData: true, isEditing: false) */}
-        {hasData && !isEditing && (
-          <button className={styles.submitBtn} onClick={handleEdit}>
-            수정
-          </button>
-        )}
-      </div>
-    </div>
+        )
+        }
+        {
+          hasData && !isEditing && (
+            <button className={styles.submitBtn} onClick={handleEdit}>
+              수정
+            </button>
+          )
+        }
+      </div >
+    </div >
   );
 };
 
