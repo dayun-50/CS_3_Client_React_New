@@ -20,6 +20,7 @@ import useAuthStore from "../../store/useStore";
 import ChooseType from "../../member/chooseType/ChooseType";
 import Loading from "common/loading/Loading";
 import { useEffect, useState } from "react";
+import { caxios } from "config/config";
 
 //메인 인덱스 페이지
 //여기서 로그인 여부에 따라서 보이고 안보이는게 다르게 만들어야함
@@ -38,6 +39,18 @@ const MainIndex = ({ alerts, setAlerts, newAlerts, setNewAlerts }) => {
     }, 500); // 예시로 0.5초 후 로딩 종료
     return () => clearTimeout(timer);
   }, []);
+
+  // 경로 변화 감지
+  useEffect(() => {
+    if (!isLogin) return;
+    const paths = ["/board", "/mypage", "/babymypage", "/checklist", "/chart", "/diary"];
+    console.log("현재 path:", location.pathname);
+    if (paths.some(path => location.pathname.startsWith(path))) {
+      caxios.post("/dashCart", { path: location.pathname })
+        .catch(err => console.log(err));
+    }
+  }, [location, isLogin]);
+
 
   // 로딩 중이면 화면 전체 로딩 표시
   if (isLoading) {
@@ -82,7 +95,7 @@ const MainIndex = ({ alerts, setAlerts, newAlerts, setNewAlerts }) => {
           {/*로그인 안되어 있으면 ? 인포메이션 : 되면 베이비인덱스*/}
           <Route path="board/*" element={<BoardIndex />} /> {/*커뮤니티*/}
           {/*-----------------------------------------------------------------------여기까지는 비회원도 접근 가능한 부분 아래는 불가하게 막아야함*/}
-          <Route path="mypage" element={<ParentInfoIndex />} /> {/*회원가입*/}
+          <Route path="mypage" element={<ParentInfoIndex />} />
           <Route path="babymypage" element={<BabyInfoIndex />} />
           {/*아기 마이페이지*/}
           <Route path="checklist" element={<CheckListIndex />} />
