@@ -72,8 +72,8 @@ const BabyInfo = () => {
             {
             // 영유아
             ...(data.status == "infant"
-              ? { min: todayString }
-              : { min: birthMinus7String })
+              ? { min: birthMinus7String }
+              : { min: todayString })
             }
             style={{
               border: isEditing ? "1px solid #696B70" : "none",
