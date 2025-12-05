@@ -55,7 +55,6 @@
   border: none;
   color: var(--color-white);
   transform: scale(0.98);
-
   font-weight: bold;
 }
 
@@ -119,32 +118,28 @@
 
 /* --- 게시물 그리드 --- */
 .cardGrid {
-  /* width: 100%; */
+  gap: 20px;
   flex: 1;
-  overflow-y: auto;
 }
 
+/* 반응형 컬럼 */
 .gridContainer {
   width: 100%;
-  height: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5개 강제 */
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
 }
 
 /* 카드 스타일 */
 .card {
-  flex: 0.6px;
-  position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 250px;
   background-color: var(--color-white);
   border-radius: var(--border-radius-main);
   overflow: hidden;
-  box-shadow: 2px 1px 2px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -154,15 +149,14 @@
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* 이미지 영역 높이 설정 */
+/* 이미지 영역 */
 .cardHeader {
-  flex: 0.4px;
-  height: 180px;
+  width: 100%;
+  height: 166px;
   position: relative;
   background-color: var(--color-white);
 }
 
-/* 이미지 없을 때 배경색 */
 .cardHeader.noImage {
   background-color: var(--color-sud-color1);
   display: flex;
@@ -205,7 +199,17 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* 드롭다운 메뉴 스타일 */
+/* 게시글이 없을 때 메시지 스타일 */
+.emptyMessage {
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
+  color: var(--color-font-color2);
+  font-size: 18px;
+  min-height: 250px;
+}
+
+/* 드롭다운 메뉴 */
 .dropdownMenu {
   position: absolute;
   top: 40px;
@@ -234,13 +238,15 @@
 .menuItem:hover {
   background-color: #f0f0f0;
 }
+
 /* 텍스트 내용 */
 .content {
-  padding: 16px 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .categoryTag {
@@ -256,22 +262,16 @@
   text-transform: uppercase;
 }
 
-/* 텍스트 그룹 */
-.textGroup {
-  margin-bottom: 16px;
-}
-
 .후기 {
-  background-color: #7adf80;
+  background-color: #5bb27d;
 }
 .질문 {
-  background-color: #ffb84d;
+  background-color: #ff9900;
 }
 .무료나눔 {
-  background-color: #ff7a7a;
+  background-color: #e56565;
 }
 
-/* 제목 */
 .title {
   font-weight: bold;
   font-size: 18px;
@@ -288,7 +288,7 @@
   color: var(--color-font-color2);
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -312,42 +312,213 @@
   color: var(--color-font-color2);
 }
 
+/* ----- 게시글 없을 때 감성 UI ----- */
+.emptyMessage {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  padding: 60px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-font-color2);
+  font-size: 16px;
+
+  border-radius: 16px;
+  background: var(--color-white);
+
+  gap: 14px;
+  text-align: center;
+}
+
+/* 아이콘 크게 보이도록 */
+.emptyMessage svg {
+  width: 52px;
+  height: 52px;
+  stroke-width: 1.3;
+  color: var(--color-font-color2);
+}
+
+/* 서브 텍스트 */
+.emptySubText {
+  font-size: 14px;
+  color: var(--color-font-color2);
+  opacity: 0.7;
+}
+
 /* --- 페이지네이션 --- */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-white);
 }
 
-.pageNumbers {
-  display: flex;
-  gap: 8px;
+/* --- 반응형 --- */
+/* 1440px 이하: 4컬럼 */
+@media (max-width: 1440px) {
+  .container {
+    padding: 20px 0;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-.pageBtn {
-  min-width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: none;
-  background: transparent;
-  color: var(--color-font-color1);
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* 1024px 이하: 3컬럼 */
+@media (max-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .leftGroup {
+    width: 100%;
+  }
+
+  .categoryList {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .categoryItem {
+    width: calc((100% - 36px) / 4);
+    min-width: 80px;
+    height: 44px;
+    text-align: center;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .rightGroup {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .writeButton {
+    width: 24%;
+  }
+
+  .searchBar {
+    width: 76%;
+  }
 }
 
-.pageBtn.activePage {
-  background-color: var(--color-main);
-  color: var(--color-white);
+/* 768px 이하: 2컬럼 */
+@media (max-width: 768px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .leftGroup {
+    width: 100%;
+  }
+
+  /* 카테고리 버튼 */
+  .categoryList {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .categoryItem {
+    width: calc((100% - 36px) / 4);
+    min-width: 80px;
+    height: 44px;
+    text-align: center;
+  }
+
+  /* 글작성 버튼 + 검색창 */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .rightGroup {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .writeButton {
+    width: 100%;
+  }
+
+  .searchBar {
+    width: 100%;
+  }
 }
 
-.pageControl {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-font-color1);
-  display: flex;
-  align-items: center;
+/* 480px 이하: 1컬럼 */
+@media (max-width: 480px) {
+  .gridContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .categoryList {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .categoryItem {
+    width: 100%;
+    height: 44px;
+    text-align: center;
+  }
+
+  .header {
+    width: 100%;
+    gap: 12px;
+  }
+
+  /* 게시글이 없을 경우 */
+  .emptyMessage {
+    min-height: 240px;
+    padding: 40px 16px;
+    gap: 10px;
+  }
+
+  .emptyMessage svg {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* 360px 이하: 더 작게 */
+@media (max-width: 360px) {
+  .categoryItem {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .writeButton {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .searchBar {
+    height: 42px;
+  }
 }

@@ -22,6 +22,7 @@
   --font-size-base: 16px;
   --border-radius-main: 22px;
   --border-radius-body: 16px;
+  transform: scale(0.98);
 }
 
 /* => 스타일 예시 이렇게 작성
@@ -32,3 +33,11 @@ body {
   line-height: var(--line-height-base);
   background-color: var(--color-gray-100);
 } */
+
+/* 
+  formula: { title: "분유", total: "450ml", icon: Milk, color: "#ff8cb3" },
+  poop: { title: "배변", total: "3회", icon: Droplets, color: "#ffb84d" },
+  babyfood: { title: "이유식", total: "180ml", icon: Soup, color: "#7adf80" },
+  sleep: { title: "수면", total: "7시간", icon: Moon, color: "#7abaff" },
+  temp: { title: "체온", total: "36.5°C", icon: Thermometer, color: "#ff7a7a" }, 
+ */

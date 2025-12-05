@@ -5,9 +5,9 @@ import oneImg from "./img/one.png";
 import twoImg from "./img/two.png";
 import threeImg from "./img/three.png";
 import fourImg from "./img/four.png";
-import useInputBaby from "./UseInputBaby";
+import useInputBaby from "./useInputBaby";
 
-const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
+const InputBaby = ({ type, onClose, fromChooseType = false }) => {
   const [inputBlocks, setInputBlocks] = useState([
     { name: "", gender: "", image_name: "", birth_date: "" },
   ]);
@@ -28,7 +28,7 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
     }
   }, [inputBlocks.length]);
 
-  const title = type === "mom" ? "임산모" : "육아";
+  const title = type === "mom" ? "임산부" : "육아";
   const subtitle =
     type === "mom"
       ? "출산 예정일과 태명을 입력해 주세요"
@@ -114,10 +114,10 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                           val === "one"
                             ? oneImg
                             : val === "two"
-                            ? twoImg
-                            : val === "three"
-                            ? threeImg
-                            : fourImg
+                              ? twoImg
+                              : val === "three"
+                                ? threeImg
+                                : fourImg
                         }
                         alt={val}
                         className={styles[`${val}Image`]}
@@ -129,26 +129,23 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                 <div className={styles.buttons}>
                   {type === "mom" && (
                     <button
-                      className={`${styles.why} ${
-                        baby.gender === "미정" ? styles.activeGender : ""
-                      }`}
+                      className={`${styles.why} ${baby.gender === "미정" ? styles.activeGender : ""
+                        }`}
                       onClick={() => handleGenderClick(idx, "미정")}
                     >
-                      미정?
+                      아직몰라요
                     </button>
                   )}
                   <button
-                    className={`${
-                      type === "mom" ? styles.man : styles.mantwo
-                    } ${baby.gender === "남자" ? styles.activeGender : ""}`}
+                    className={`${type === "mom" ? styles.man : styles.mantwo
+                      } ${baby.gender === "남자" ? styles.activeGender : ""}`}
                     onClick={() => handleGenderClick(idx, "남자")}
                   >
                     남자
                   </button>
                   <button
-                    className={`${
-                      type === "mom" ? styles.girl : styles.girltwo
-                    } ${baby.gender === "여자" ? styles.activeGender : ""}`}
+                    className={`${type === "mom" ? styles.girl : styles.girltwo
+                      } ${baby.gender === "여자" ? styles.activeGender : ""}`}
                     onClick={() => handleGenderClick(idx, "여자")}
                   >
                     여자
@@ -156,11 +153,11 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                 </div>
 
                 <div className={styles.babyparty}>
-                  <label htmlFor={`bp-${idx}`}>출생일</label>
+                  <label htmlFor={`bp-${idx}`}>{`${type === "mom" ? "출산예정일" : "생년월일"}`}</label>
                   <input
                     type="date"
                     id={`bp-${idx}`}
-                    placeholder="출생일"
+                    placeholder={`${type === "mom" ? "출산예정일" : "생년월일"}`}
                     min={type === "mom" ? yesterdayString : ""}
                     max={type === "mom" ? "" : todayString}
                     name="birth_date"
@@ -175,11 +172,11 @@ const InputBaby = ({ type = "mom", onClose, fromChooseType = false }) => {
                 </div>
 
                 <div className={styles.babyname}>
-                  <label htmlFor={`bn-${idx}`}>이름</label>
+                  <label htmlFor={`bn-${idx}`}>{`${type === "mom" ? "태명" : "이름"}`}</label>
                   <input
                     type="text"
                     id={`bn-${idx}`}
-                    placeholder="이름"
+                    placeholder={`${type === "mom" ? "태명" : "이름"}`}
                     name="name"
                     value={baby.name || ""}
                     onChange={(e) => handleChange(idx, e)}

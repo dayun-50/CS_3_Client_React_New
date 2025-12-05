@@ -8,6 +8,7 @@ import {
   ChevronRight,
   ChevronsRight,
   Search,
+  Inbox,
   X,
 } from "lucide-react";
 
@@ -105,7 +106,11 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
       {/* 리스트 */}
       <div className={styles.cardGrid}>
         {mergedList.length === 0 ? (
-          <div className={styles.emptyMessage}>게시글이 존재하지 않습니다</div>
+          <div className={styles.emptyMessage}>
+            <Inbox />
+            <div>게시글이 존재하지 않습니다</div>
+            <p className={styles.emptySubText}>첫 게시글을 작성해보세요</p>
+          </div>
         ) : (
           <ul className={styles.gridContainer}>
             {mergedList.map((item) => (

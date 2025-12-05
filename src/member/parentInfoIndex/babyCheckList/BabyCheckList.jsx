@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./BabyCheckList.module.css";
 import UseBabyCheckList from "./UseBabyCheckList";
+import {
+  Inbox,
+} from "lucide-react";
+
 
 const BabyCheckList = () => {
   const {
@@ -38,7 +42,11 @@ const BabyCheckList = () => {
             </div>
           ))
         ) : (
-          <div>일정이 없습니다.</div>
+          <div className={styles.emptyMessage}>
+  <Inbox />  {/* 아이콘 */}
+  <div>일정이 존재하지 않습니다</div>  {/* 텍스트 */}
+  <p className={styles.emptySubText}>건강기록을 작성해보세요</p>  {/* 서브 텍스트 */}
+</div>
         )}
       </div>
   );

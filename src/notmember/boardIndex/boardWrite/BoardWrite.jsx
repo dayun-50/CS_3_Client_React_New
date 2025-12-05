@@ -4,8 +4,6 @@ import styles from "./BoardWrite.module.css";
 import { UseBoardWrite } from "./UseBoardWrite";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 
-
-
 const BoardWrite = () => {
   const {
     handleBack,
@@ -28,9 +26,6 @@ const BoardWrite = () => {
     selected,
     selectedVisibility,
   } = UseBoardWrite();
-
-
-
 
   return (
     <div className={styles.editorContainer}>
@@ -83,8 +78,9 @@ const BoardWrite = () => {
             {/* 전체 옵션 */}
             <label
               htmlFor="visibility-all"
-              className={`${styles.radioOption} ${selectedVisibility === "all" ? styles.activeRadio : ""
-                }`}
+              className={`${styles.radioOption} ${
+                selectedVisibility === "all" ? styles.activeRadio : ""
+              }`}
             >
               <input
                 type="radio"
@@ -101,8 +97,9 @@ const BoardWrite = () => {
             {/* 멤버 옵션 */}
             <label
               htmlFor="visibility-member"
-              className={`${styles.radioOption} ${selectedVisibility === "member" ? styles.activeRadio : ""
-                }`}
+              className={`${styles.radioOption} ${
+                selectedVisibility === "member" ? styles.activeRadio : ""
+              }`}
             >
               <input
                 type="radio"
@@ -123,7 +120,7 @@ const BoardWrite = () => {
       <div className={styles.fileUploadArea}>
         <label className={styles.formLabel}>파일 첨부</label>
         <div className={styles.uploadContainer}>
-          {/* 실제 파일 입력 필드 (숨김) */}
+          {/* 실제 파일 입력 필드 */}
           <input
             type="file"
             id="file-upload"
@@ -152,7 +149,7 @@ const BoardWrite = () => {
                       className={styles.removeFileButton}
                       aria-label={`${file.name} 파일 삭제`}
                     >
-                      <X size={16} />
+                      <X size={20} />
                     </button>
                   </li>
                 ))}
@@ -164,7 +161,12 @@ const BoardWrite = () => {
 
       {/* 에디터 영역 */}
       <div className={styles.editorArea}>
-        <SimpleEditor ref={editorRef} setInEditorUploadFiles={setInEditorUploadFiles} setEditorInstance={setEditorInstance} uploadType="board" />
+        <SimpleEditor
+          ref={editorRef}
+          setInEditorUploadFiles={setInEditorUploadFiles}
+          setEditorInstance={setEditorInstance}
+          uploadType="board"
+        />
       </div>
 
       {/* 액션 버튼 */}

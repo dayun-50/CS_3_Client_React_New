@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom"; // Portal 사용
 import styles from "./Counseling.module.css"; // CSS 모듈 import
 import pointImg from "./img/point.png"; // 전송 버튼 이미지 import
 import useCounseling from "./useCounseling";
@@ -17,17 +18,25 @@ const Counseling = ({ onClose }) => {
   const now = new Date();
   const formatTime = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-  // 컴포넌트가 처음 렌더링될 때 챗봇이 먼저 인사 메시지 전송
+  // 컴포넌트가 처음 렌더링될 때 챗봇이 먼저 인사 메시지 전송 및 버튼 메시지 추가
   useEffect(() => {
-    setMessages([
-      {
-        text: "긴급 챗봇입니다. 무엇을 도와드릴까요?",
-        sender: "other",
-        time: formatTime,
-        senderName: "챗봇",
-        buttons: ["입덧이 심해요.", "아이가 열이 나요.", "아이가 토를 해요.", "AI 상담"]
-      }
-    ]);
+    const firstMsg = {
+      text: "혜빈이는 긴급하다옹",
+      sender: "other",
+      time: formatTime,
+      senderName: "챗봇"
+    };
+
+    const buttons = ["입덧이 심해요.", "아이가 열이 나요.", "아이가 토를 해요.", "AI 상담"];
+    const buttonMessages = buttons.map(btnText => ({
+      sender: "other",
+      time: formatTime,
+      senderName: "챗봇",
+      isButton: true,
+      btnText // 버튼에 표시할 텍스트
+    }));
+
+    setMessages([firstMsg, ...buttonMessages]);
   }, []);
 
   // 메시지 전송 함수
@@ -39,7 +48,6 @@ const Counseling = ({ onClose }) => {
       { text: inputText, sender: "me", time: formatTime, senderName: "나" }
     ]);
 
-    // 로딩 메시지 잠깐 늦게 켜기
     setTimeout(() => {
       setIsLoading(true);
     }, 500);
@@ -73,16 +81,23 @@ const Counseling = ({ onClose }) => {
     }
   }, [messages, isLoading]);
 
-  return (
-    <div className={styles.container}>
+  // Portal로 body 최상위에 렌더링
+  return ReactDOM.createPortal(
+    <div className={styles.container} style={{ zIndex: 10000, position: "fixed", top: 0, left: 0, width: "100%", height: "100%" }}>
+      {/* 왼쪽 클릭 시 모달 닫기 */}
       <div className={styles.left} onClick={onClose}></div>
-      <div className={styles.right}>
+
+      {/* 오른쪽 채팅창 */}
+      <div className={styles.right} onClick={(e) => e.stopPropagation()}>
+        {/* 상단 헤더 */}
         <div className={styles.up}>
           <div className={styles.oneonenine}>긴급 상담</div>
+          {/* 오른쪽 X 버튼 */}
+          <button className={styles.closeBtn} onClick={onClose}>✕</button>
         </div>
 
+        {/* 채팅 메시지 영역 */}
         <div className={styles.down}>
-          {/* 메시지 표시 영역 */}
           <div className={styles.chatbody} ref={messageEndRef}>
             <div className={styles.mes}>
               {messages.map((msg, idx) => {
@@ -121,7 +136,7 @@ const Counseling = ({ onClose }) => {
                       <div
                         style={{
                           maxWidth: "70%",
-                          backgroundColor: isMe ? "#FFF4D6" : "#D6F0FF",
+                          backgroundColor: isMe ? "#adb9e3" : "#FFF4D6",
                           padding: "10px 14px",
                           borderRadius: "15px",
                           fontSize: "14px",
@@ -134,30 +149,32 @@ const Counseling = ({ onClose }) => {
                           boxSizing: "border-box"
                         }}
                       >
-                        <span>{msg.text}</span>
+                        {/* 버튼 메시지면 span 생략 */}
+                        {!msg.isButton && <span>{msg.text}</span>}
 
-                        {!isMe && msg.buttons && (
-                          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                            {msg.buttons.map((btnText, i) => (
-                              <button
-                                key={i}
-                                onClick={selectBtn}
-                                style={{
-                                  padding: "5px 10px",
-                                  borderRadius: "5px",
-                                  border: "1px solid #808080",
-                                  background: "#fff",
-                                  cursor: "pointer",
-                                  fontSize: "12px",
-                                  wordWrap: "break-word",
-                                  overflowWrap: "break-word",
-                                  whiteSpace: "normal"
-                                }}
-                              >
-                                {btnText}
-                              </button>
-                            ))}
-                          </div>
+                        {/* 버튼은 항상 표시 */}
+                        {!isMe && msg.isButton && (
+                          <button
+                            onClick={selectBtn} 
+                            style={{
+                              marginTop: "5px",
+                              padding: "5px 10px",
+                              borderRadius: "20px",
+                              border: "none",
+                              backgroundColor:"#F0D827",
+                              cursor: "pointer",
+                              fontSize: "14px",
+                              color:"#ffffff",
+                              fontWeight:"bold",
+                              wordWrap: "break-word",
+                              overflowWrap: "break-word",
+                              whiteSpace: "normal"
+                            }}
+                            onMouseOver={e => e.currentTarget.style.background = "#e0c817"}
+                            onMouseOut={e => e.currentTarget.style.background = "#F0D827"}
+                          >
+                            {msg.btnText} {/* 버튼 안 글씨 */}
+                          </button>
                         )}
                       </div>
 
@@ -176,7 +193,7 @@ const Counseling = ({ onClose }) => {
                   <div
                     style={{
                       maxWidth: "70%",
-                      backgroundColor: "#D6F0FF",
+                      backgroundColor: "#FFF4D6",
                       padding: "10px 14px",
                       borderRadius: "15px",
                       fontSize: "14px",
@@ -211,7 +228,8 @@ const Counseling = ({ onClose }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

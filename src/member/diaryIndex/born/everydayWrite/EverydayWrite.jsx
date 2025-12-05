@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./EverydayWrite.module.css";
+import { UseEverydayWrite } from "./UseEverydayWrite";
 
 // 모션
 const modalVariants = {
@@ -14,82 +15,35 @@ const containerVariants = {
 };
 
 // 분류
-const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => {
-  const [time, setTime] = useState("");
-  const [amount, setAmount] = useState({});
+const EverydayWrite = ({ activeType, closeModal, isOpen, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData }) => {
+  const {
+    getLogDetails,
+    handleAdd,
+    time,
+    setTime,
+    pooType,
+    setPooType,
+    amountValue,
+    setAmountValue,
+    setSleepStart,
+    setSleepEnd,
+    sleepStart,
+    sleepEnd,
+    startMin,
+    startMax,
+    endMin,
+    endMax
+  } = UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData, activeType });
 
-  const getLogDetails = (logType) => {
-    switch (logType) {
-      case "분유":
-      case "이유식":
-        return { unit: "ml", inputType: "number", label: "용량" };
-      case "배변":
-        return {
-          inputType: "group",
-          label: "배변 기록",
-          options: {
-            type: ["소변", "대변"],
-          },
-          unit: "회",
-        };
-      case "수면":
-        return { inputType: "timeSplit", label: "총 시간", unit: "시간" };
-      case "체온":
-        return { unit: "°C", inputType: "number", label: "체온" };
-      default:
-        return { unit: "", inputType: "text", label: "내용" };
-    }
-  };
+  // activeType에 따른 UI 정보 가져오기
+  const { unit, inputType, label, options } = getLogDetails(activeType);
 
-  const { unit, inputType, label, options } = getLogDetails(type);
+  // const handleAmountChange = (e, key) => {// 단일 입력일 경우 'value' 키를 사용하도록 처리 (분유, 체온 등)
+  //   const updateKey =
+  //     inputType === "number" || inputType === "text" ? "value" : key;
+  // };
 
-  const handleAmountChange = (e, key) => {
-    // 단일 입력일 경우 'value' 키를 사용하도록 처리 (분유, 체온 등)
-    const updateKey =
-      inputType === "number" || inputType === "text" ? "value" : key;
-    setAmount({ ...amount, [updateKey]: e.target.value });
-  };
 
-  const handleAdd = () => {
-    const amountValue = amount.value;
-
-    // 필수 입력값 확인
-    if (!time) {
-      alert("시간을 입력해주세요.");
-      return;
-    }
-
-    if (type === "배변") {
-      // 횟수(count)와 종류(type) 모두 확인
-      if (!amount.count || !amount.type) {
-        alert("횟수와 종류를 모두 입력/선택해주세요.");
-        return;
-      }
-    } else if (type === "수면") {
-      if (amount.hour === undefined && amount.minute === undefined) {
-        alert("수면 시간을 입력해주세요.");
-        return;
-      }
-    } else if (["number", "text"].includes(inputType)) {
-      if (!amountValue) {
-        alert(`${label}을 입력해주세요.`);
-        return;
-      }
-    }
-
-    const newLog = { time, type };
-    if (type === "배변")
-      // 횟수와 종류 모두 저장
-      newLog.amount = `${amount.count}${unit} (${amount.type})`;
-    else if (type === "수면")
-      newLog.amount = `${amount.hour || 0}시간 ${amount.minute || 0}분`;
-    else newLog.amount = `${amountValue}${unit || ""}`;
-
-    setLogs && setLogs([...logs, newLog]);
-    setTime("");
-    setAmount({});
-    onCancel && onCancel();
-  };
 
   return (
     <AnimatePresence>
@@ -101,7 +55,7 @@ const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => 
             initial="hidden"
             animate="visible"
             exit="hidden"
-            onClick={onCancel}
+            onClick={closeModal}
           />
 
           <motion.div
@@ -112,44 +66,49 @@ const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => 
             exit="exit"
             onClick={(e) => e.stopPropagation()}
           >
+
+
+            {/* 모달창 시작 */}
             <div className={styles.contentWrapper}>
               <div className={styles.categoryTitleWrapper}>
-                <div className={styles.categoryTitle}>{type} 기록</div>
+                <div className={styles.categoryTitle}>{activeType} 기록</div>
               </div>
 
               <div className={styles.inputGroup}>
-                {/* 시간 입력 */}
+
+
+                {/* 1번째 입력창*/}
                 <div className={styles.inputBox}>
-                  <div className={styles.inputLabel}>시간</div>
-                  <input
-                    type="time"
-                    className={styles.timeInput}
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                  />
+                  {/* 만약 수면이라면 */}
+                  {activeType === "수면" ? (
+                    <>
+                      <div className={styles.inputLabel}>시간</div>
+                      <input
+                        type="datetime-local"
+                        className={styles.timeInput}
+                        value={sleepStart}
+                        min={startMin}
+                        max={startMax}
+                        onChange={(e) => { setSleepStart(e.target.value); console.log(e.target.value) }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.inputLabel}>시간</div>
+                      <input
+                        type="time"
+                        className={styles.timeInput}
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                      />
+                    </>
+                  )}
                 </div>
 
-                {/* 배변 입력 (횟수 number + 종류 radio) */}
+                {/* 2번째 입력창 */}
+                {/* 1) 배변일 때 */}
                 {inputType === "group" && (
                   <>
-                    {/* 횟수 입력: number 타입 */}
-                    <div className={styles.inputBox}>
-                      <div className={styles.inputLabel}>횟수</div>
-                      <div className={styles.amountInputWrapper}>
-                        <input
-                          type="number"
-                          min={1}
-                          placeholder="횟수"
-                          className={styles.amountInput}
-                          value={amount.count || ""}
-                          onChange={(e) => handleAmountChange(e, "count")}
-                        />
-                        <div className={styles.unitBox}>
-                          <div className={styles.unitText}>{unit}</div>
-                        </div>
-                      </div>
-                    </div>
-
                     {/* 종류 선택: radio 버튼 */}
                     <div className={styles.inputBox}>
                       <div className={styles.inputLabel}>종류</div>
@@ -160,8 +119,8 @@ const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => 
                               type="radio"
                               name="pooType"
                               value={t}
-                              checked={amount.type === t}
-                              onChange={(e) => handleAmountChange(e, "type")}
+                              checked={pooType === t}
+                              onChange={() => setPooType(t)}
                             />
                             {t}
                           </label>
@@ -171,33 +130,23 @@ const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => 
                   </>
                 )}
 
-                {/* 수면 입력: 시간/분 같은 라인 */}
-                {inputType === "timeSplit" && (
+                {/* 2) 수면일 때 */}
+                {activeType === "수면" && (
                   <div className={styles.inputBox}>
-                    <div className={styles.inputLabel}>{label}</div>
-                    <div className={styles.sleepInputWrapper}>
-                      <input
-                        type="number"
-                        min={0}
-                        placeholder="시"
-                        className={styles.sleepInput}
-                        value={amount.hour || ""}
-                        onChange={(e) => handleAmountChange(e, "hour")}
-                      />
-                      <input
-                        type="number"
-                        min={0}
-                        max={59}
-                        placeholder="분"
-                        className={styles.sleepInput}
-                        value={amount.minute || ""}
-                        onChange={(e) => handleAmountChange(e, "minute")}
-                      />
-                    </div>
+                    <div className={styles.inputLabel}>시간</div>
+                    <input
+                      type="datetime-local"
+                      className={styles.timeInput}
+                      value={sleepEnd}
+                      min={endMin}
+                      max={endMax}
+                      onChange={(e) => setSleepEnd(e.target.value)}
+                    />
                   </div>
+
                 )}
 
-                {/* 일반 입력 (분유, 체온 등) */}
+                {/* 3) 일반 입력일 때 */}
                 {["number", "text"].includes(inputType) && (
                   <div className={styles.inputBox}>
                     <div className={styles.inputLabel}>{label}</div>
@@ -206,9 +155,10 @@ const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => 
                         type={inputType}
                         placeholder={`${label}을 입력하세요`}
                         className={styles.amountInput}
-                        value={amount.value || ""}
-                        onChange={(e) => handleAmountChange(e, "value")}
+                        value={amountValue}
+                        onChange={(e) => setAmountValue(e.target.value)}
                       />
+
                       {unit && (
                         <div className={styles.unitBox}>
                           <div className={styles.unitText}>{unit}</div>
@@ -219,19 +169,19 @@ const EverydayWrite = ({ type = "분유", logs, setLogs, onCancel, isOpen }) => 
                 )}
               </div>
 
+
+
               {/* 버튼 */}
               <div className={styles.actionButtonsWrapper}>
                 <div className={styles.actionButtonsContainer}>
                   <button
                     className={`${styles.actionButton} ${styles.backButton}`}
-                    onClick={onCancel}
-                  >
+                    onClick={closeModal}>
                     <div className={styles.buttonText}>뒤로가기</div>
                   </button>
                   <button
                     className={`${styles.actionButton} ${styles.completeButton}`}
-                    onClick={handleAdd}
-                  >
+                    onClick={() => handleAdd(activeType)}>
                     <div className={styles.buttonTextBold}>완료</div>
                   </button>
                 </div>

@@ -124,7 +124,7 @@ const Mypage = () => {
                       name="phone1"
                       onChange={hendleChange}
                       maxLength={4}
-                      className={`${styles.editableInputHalf}
+                      className={`${styles.phone123}
                      ${!regexAuth.phone1 && inputCount.phone1 > 0
                           ? styles.auth
                           : ""
@@ -138,7 +138,7 @@ const Mypage = () => {
                       onChange={hendleChange}
                       maxLength={4}
                       value={data.phone2}
-                      className={`${styles.editableInputHalf}
+                      className={`${styles.phone456}
                      ${!regexAuth.phone2 && inputCount.phone2 > 0
                           ? styles.auth
                           : ""
@@ -147,19 +147,9 @@ const Mypage = () => {
                   </>
                 ) : (
                   <>
-                    <div
-                      className={styles.dbValue}
-                      style={{ height: "48px", lineHeight: "48px" }}
-                    >
-                      {data.phone1}
-                    </div>
+                    <div className={styles.dbPhone}>{data.phone1}</div>
                     <span className={styles.dash}>-</span>
-                    <div
-                      className={styles.dbValue}
-                      style={{ height: "48px", lineHeight: "48px" }}
-                    >
-                      {data.phone2}
-                    </div>
+                    <div className={styles.dbPhone}>{data.phone2}</div>
                   </>
                 )}
               </div>

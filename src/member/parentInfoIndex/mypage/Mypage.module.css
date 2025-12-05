@@ -3,7 +3,9 @@
    ============================== */
 .container {
   width: 100%;
+  max-width: 600px;
   height: 100%;
+  max-height: 90vh;
   background-color: #fff4d6;
   display: flex;
   justify-content: center;
@@ -11,6 +13,7 @@
   border-radius: 22px;
   padding: 20px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* ==============================
@@ -21,8 +24,8 @@
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column; /* 세로 배치 */
-  justify-content: space-between; /* 위: 회원정보 / 아래: 버튼 */
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
 }
 
@@ -31,12 +34,14 @@
    - 내용 많으면 스크롤 가능
    ============================== */
 .info {
-  flex: 1; /* 높이 자동 조절, 버튼 제외 전체 */
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow-y: auto; /* 내용 많을 때 스크롤 */
+  overflow-y: auto;
   padding-bottom: 16px;
+  max-height: calc(100% - 70px); /* 버튼 영역 공간 확보 */
+  box-sizing: border-box;
 }
 
 /* ==============================
@@ -63,6 +68,7 @@
   font-size: 18px;
   color: #696b70;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .dbid {
@@ -82,6 +88,7 @@
   font-size: 18px;
   color: #696b70;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .nick input {
@@ -108,6 +115,7 @@
   font-size: 18px;
   color: #696b70;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .email input {
@@ -127,6 +135,7 @@
   font-size: 18px;
   color: #696b70;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .dbbirth {
@@ -135,45 +144,16 @@
   margin-left: 10px;
 }
 
-/* 연락처 */
+/* ==============================
+   연락처
+   ============================== */
 .phone label {
   color: #696b70;
-  font-size: 16px;
+  font-size: 18px;
   display: block;
   margin-bottom: 16px;
   margin-left: 10px;
-}
-
-.phoneWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.prefix {
-  width: 100px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 400;
-  border-radius: 20px;
-  background-color: transparent;
-  color: #8c8c8c;
-}
-
-.prefixActive {
-  width: 100px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 400;
-  border-radius: 20px;
-  background-color: white;
-  color: #8c8c8c;
+  font-weight: bold;
 }
 
 .dash {
@@ -184,25 +164,132 @@
   flex-shrink: 0;
 }
 
+.phoneWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: 10px;
+}
+
+/* 조회 모드 */
+.phoneWrapper .prefix {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: start;
+}
+
+/* 수정 모드 */
+.phoneWrapper .prefixActive {
+  width: 100px !important;
+  height: 48px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  /* border: 1px solid #8c8c8c; */
+}
+
+
+/* ==============================
+   input + 버튼 래퍼
+   ============================== */
+.inputWithButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* input 항상 70% */
+.dbValue,
+.editableInputHalf,
 .phoneWrapper input {
-  flex: 1 1 0;
-  min-width: 0;
+  width: 70%;
   height: 48px;
   border-radius: 20px;
-  border: 1px solid #8c8c8c;
+  /* border: 1px solid #696b70; */
   padding: 0 10px;
   box-sizing: border-box;
   outline: none;
+  text-align: start;
+}
+
+/* 버튼 숨김: 기본 안보이게 */
+.checkButton,
+.duplicationButton {
+  flex: 0 0 30%;
+  height: 48px;
+  border-radius: 20px;
+  border: none;
+  background-color: #b9b9b9;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+}
+
+/* 수정 모드에서 버튼 표시 */
+.inputWithButton .checkButton,
+.inputWithButton .duplicationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* hover 효과 */
+.checkButton:hover,
+.duplicationButton:hover {
+  transform: scale(0.98);
+  background-color: #f0d827;
+}
+
+/* 이메일 인증 입력 */
+.verificationInput {
+  width: 100% !important;
+  height: 48px;
+  border-radius: 20px;
+  border: 1px solid #696b70;
+  padding: 0 10px;
+  outline: none;
+  box-sizing: border-box;
+  margin-top: 8px;
   text-align: center;
-  background-color: white;
 }
 
-.phoneWrapper input::placeholder {
-  color: #8c8c8c;
-  font-size: 16px;
+/* 인증 실패 표시 */
+.auth {
+  border: solid 1px #499ef8 !important;
 }
 
-/* 가족코드 */
+/* ==============================
+   조회 모드용 배경
+   ============================== */
+.dbPhone {
+  width: 80px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  background-color: #fff4d6;
+  box-sizing: border-box;
+}
+
+.phone123,
+.phone456 {
+  border: 1px solid #696b70;
+  width: 60px; /* 원하는 너비 */
+  height: 48px; /* input 높이 */
+  border-radius: 20px;
+  text-align: center !important; /* 텍스트 가운데 */
+  padding: 0; /* 필요 시 */
+  box-sizing: border-box;
+  font-size: 16px; /* 글씨 크기 */
+}
+/* ==============================
+   가족코드
+   ============================== */
 .fabt {
   width: 100%;
   display: flex;
@@ -214,6 +301,7 @@
   font-size: 18px;
   color: #696b70;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .familywhy {
@@ -229,28 +317,46 @@
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-}
-
-.delete,
-.success,
-.crbt {
-  width: 100%;
-  height: 48px;
-  font-size: 18px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .delete,
 .success {
+  width: 100%;
+  height: 48px;
+  font-size: 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.crbt {
+  width: 100%;
+  height: 48px;
+  font-size: 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete {
   background-color: #b9b9b9;
   color: white;
 }
 
-.delete:hover,
-.success:hover {
+.success {
   background-color: #f0d827;
+  color: #ffffff;
+}
+
+.success:hover {
+  transform: scale(0.98);
+  background-color: #e0c817;
+}
+
+.delete:hover {
+  transform: scale(0.98);
+  background-color: #b0b0b0;
 }
 
 .crbt {
@@ -258,53 +364,71 @@
   color: white;
 }
 
+.crbt:hover {
+  transform: scale(0.98);
+  background-color: #e0c817;
+}
+
 /* ==============================
-   input + 버튼 래퍼, 50% 입력창 스타일
+   반응형 (작은 화면용)
    ============================== */
-.inputWithButton {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+@media screen and (max-width: 374px) {
+  .container { padding: 7px; border-radius: 13px; }
+  .title { font-size: 17px; }
+  .id, .nick label, .email label, .birthday, .familycode, .phone label { font-size: 13px; }
+  .dbid, .dbbirth, .familywhy, .dbPhone { font-size: 12px; }
+  .phoneWrapper .prefix, .phoneWrapper .prefixActive { width: 33px; height: 33px; font-size: 12px; }
+  .phoneWrapper input { width: 70%; height: 33px; font-size: 12px; }
+  .editableInputHalf, .dbValue { height: 33px; font-size: 12px; padding: 0 5px; }
+  .checkButton, .duplicationButton, .delete, .success, .crbt { height: 33px; font-size: 13px; border-radius: 13px; }
+  .verificationInput { height: 33px; width: 101px; font-size: 12px; }
+  .btwo { gap: 5px; }
 }
-
-.dbValue,
-.editableInputHalf {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  height: 48px;
-  box-sizing: border-box;
+@media screen and (min-width: 375px) and (max-width: 413px) {
+  .container { padding: 10px; border-radius: 14px; }
+  .title { font-size: 17px; }
+  .id, .nick label, .email label, .birthday, .familycode, .phone label { font-size: 14px; }
+  .dbid, .dbbirth, .familywhy, .dbPhone { font-size: 12px; }
+  .phoneWrapper .prefix, .phoneWrapper .prefixActive { width: 36px; height: 36px; font-size: 12px; }
+  .phoneWrapper input { width: 70%; height: 36px; font-size: 12px; }
+  .editableInputHalf, .dbValue { height: 36px; font-size: 12px; padding: 0 6px; }
+  .checkButton, .duplicationButton, .delete, .success, .crbt { height: 36px; font-size: 14px; border-radius: 14px; }
+  .verificationInput { height: 36px; width: 120px; font-size: 12px; }
+  .btwo { gap: 5px; }
 }
-
-.checkButton,
-.duplicationButton {
-  flex: 0 0 30%;
-  height: 48px;
-  border-radius: 20px;
-  border: none;
-  background-color: #b9b9b9;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
+@media screen and (min-width: 414px) and (max-width: 479px) {
+  .container { padding: 11px; border-radius: 17px; }
+  .title { font-size: 19px; }
+  .id, .nick label, .email label, .birthday, .familycode, .phone label { font-size: 16px; }
+  .dbid, .dbbirth, .familywhy, .dbPhone { font-size: 14px; }
+  .phoneWrapper .prefix, .phoneWrapper .prefixActive { width: 41px; height: 41px; font-size: 14px; }
+  .phoneWrapper input { width: 70%; height: 41px; font-size: 14px; }
+  .editableInputHalf, .dbValue { height: 41px; font-size: 14px; padding: 0 7px; }
+  .checkButton, .duplicationButton, .delete, .success, .crbt { height: 41px; font-size: 16px; border-radius: 17px; }
+  .verificationInput { height: 41px; width: 141px; font-size: 14px; }
+  .btwo { gap: 7px; }
 }
-
-.checkButton:hover,
-.duplicationButton:hover {
-  background-color: #f0d827;
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .container { padding: 12px; border-radius: 18px; }
+  .title { font-size: 19px; }
+  .id, .nick label, .email label, .birthday, .familycode, .phone label { font-size: 16px; }
+  .dbid, .dbbirth, .familywhy, .dbPhone { font-size: 14px; }
+  .phoneWrapper .prefix, .phoneWrapper .prefixActive { width: 45px; height: 45px; font-size: 14px; }
+  .phoneWrapper input { width: 70%; height: 45px; font-size: 14px; }
+  .editableInputHalf, .dbValue { height: 45px; font-size: 14px; padding: 0 8px; }
+  .checkButton, .duplicationButton, .delete, .success, .crbt { height: 45px; font-size: 16px; border-radius: 18px; }
+  .verificationInput { height: 45px; width: 150px; font-size: 14px; }
+  .btwo { gap: 7px; }
 }
-
-.verificationInput {
-  height: 48px;
-  border-radius: 20px;
-  border: 1px solid #696b70;
-  padding: 0 10px;
-  outline: none;
-  box-sizing: border-box;
-  margin-top: 8px;
-  text-align: center;
-}
-
-.auth {
-  border: solid 1px #499ef8 !important;
+@media screen and (min-width: 768px) {
+  .container { padding: 20px; border-radius: 22px; }
+  .title { font-size: 22px; }
+  .id, .nick label, .email label, .birthday, .familycode, .phone label { font-size: 18px; }
+  .dbid, .dbbirth, .familywhy, .dbPhone { font-size: 16px; }
+  .phoneWrapper .prefix, .phoneWrapper .prefixActive { width: 50px; height: 48px; font-size: 16px; }
+  .phoneWrapper input { width: 70%; height: 48px; font-size: 16px; }
+  .editableInputHalf, .dbValue { height: 48px; font-size: 16px; padding: 0 10px; }
+  .checkButton, .duplicationButton, .delete, .success, .crbt { height: 48px; font-size: 18px; border-radius: 20px; }
+  .verificationInput { height: 48px; width: 200px; font-size: 16px; }
+  .btwo { gap: 10px; }
 }

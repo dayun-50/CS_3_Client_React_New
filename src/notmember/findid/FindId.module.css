@@ -97,6 +97,11 @@
 
 .dlswmd:hover {
     background-color: #F0D827;
+    transform: scale(0.98);
+}
+
+.dlswmd:active {
+    transform: scale(0.98);
 }
 
 .idmiddletwo {
@@ -148,6 +153,11 @@
     cursor: pointer;
 }
 
+.idd:hover,.idd:active {
+    transform: scale(0.98);
+}
+
+
 .idok {
     width: 187px;
     height: 48px;
@@ -160,8 +170,13 @@
     cursor: pointer;
 }
 
+.idok:hover,.idok:active {
+    transform: scale(0.98);
+    background-color: #e0c817;;
+}
+
 .idd:hover {
-    background-color: #F0D827; 
+    background-color: #b0b0b0;
 }
 
 /*---------------------------------------------------------------------*/
@@ -270,9 +285,97 @@
 }
 
 .iddt:hover {
-    background-color: #F0D827;
+    transform: scale(0.98);
+    background-color: #b0b0b0;
+}
+
+.idokt:hover {
+    transform: scale(0.98);
+    background-color: #e0c817;
 }
 
 .auth {
     border: solid 1px #499ef8 !important;
+}
+
+/* ------------------ 반응형 ------------------ */
+@media screen and (max-width: 768px) {
+    .idcheckbox {
+        width: 90%;
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .title, .titletwo {
+        font-size: 28px;
+    }
+
+    .nn, .nnt {
+        font-size: 16px;
+    }
+
+    .idmiddleone label,
+    .idmiddletwo label {
+        font-size: 16px;
+    }
+
+    .idmiddleone input,
+    .idmiddletwo input,
+    .dlswmd {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .idd, .idok, .iddt, .idokt {
+        height: 44px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .idcheckbox {
+        width: 95%;
+        height: auto;
+        padding: 20px 15px;
+    }
+
+    .title, .titletwo {
+        font-size: 24px;
+    }
+
+    .nn, .nnt {
+        font-size: 14px;
+    }
+
+    .idmiddleone label,
+    .idmiddletwo label {
+        font-size: 14px;
+    }
+
+    .idmiddleone input,
+    .idmiddletwo input,
+    .dlswmd {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .idd, .idok, .iddt, .idokt {
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* iPhone SE / Galaxy S8+ 대응 */
+@media screen and (max-width: 375px) {
+    .idmiddleone {
+        display: flex;
+        flex-direction: column; /* label은 위에, input+버튼는 밑으로 */
+    }
+
+    .idmiddleone > input,
+    .idmiddleone > .dlswmd {
+        width: 100%;          /* 좁은 화면에 맞춤 */
+        margin: 5px 0;        /* input과 버튼 사이 간격 */
+        box-sizing: border-box;
+    }
 }

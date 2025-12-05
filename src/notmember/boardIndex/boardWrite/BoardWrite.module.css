@@ -4,14 +4,14 @@
   min-height: 100%;
   max-height: 95vh;
   padding: 20px;
-  border-radius: 24px;
-  background-color: #fff4d6;
+  border-radius: var(--border-radius-main);
+  background-color: var(--color-sud-color1);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  font-family: "Pretendard", sans-serif;
-  color: #333;
+  gap: 20px;
+  font-family: var(--font-family);
+  color: var(--color-font-color1);
 
   overflow: hidden;
 }
@@ -26,7 +26,7 @@
 .formLabel {
   font-size: 18px;
   font-weight: bold;
-  color: #555;
+  color: var(--color-font-color1);
   flex-shrink: 0;
   min-width: 100px;
   text-align: left;
@@ -35,9 +35,9 @@
 /* 텍스트 입력 필드 */
 .inputField {
   flex-grow: 1;
-  border-radius: 12px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  border-radius: var(--border-radius-body);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-color2);
   height: 52px;
   padding: 0 24px;
   display: flex;
@@ -47,7 +47,7 @@
 }
 
 .inputField:focus-within {
-  border-color: #f0d827;
+  border-color: var(--color-primary);
   box-shadow: 0 0 5px rgba(240, 216, 39, 0.4);
 }
 
@@ -56,12 +56,12 @@
   border: none;
   outline: none;
   font-size: 17px;
-  color: #333;
+  color: var(--color-font-color1);
   background: none;
 }
 
 .inputElement::placeholder {
-  color: #aaa;
+  color: var(--color-font-color2);
 }
 
 /* 필터/선택 그룹 */
@@ -76,9 +76,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 16px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  border-radius: var(--border-radius-body);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-color2);
   height: 52px;
   padding: 0 20px;
   cursor: pointer;
@@ -88,17 +88,17 @@
 }
 
 .selectField:hover {
-  border-color: #f0d827;
+  border-color: var(--color-primary);
 }
 
 .selectText {
   font-size: 16px;
-  color: #666;
+  color: var(--color-font-color1);
   font-weight: bold;
 }
 
 .selectIcon {
-  color: #888;
+  color: var(--color-font-color1);
 }
 
 /* 드롭다운 옵션 */
@@ -106,13 +106,13 @@
   position: absolute;
   top: 100%;
   left: 48%;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 16px;
+  background: var(--color-white);
+  border: 1px solid var(--color-font-color2);
+  border-radius: var(--border-radius-body);
   width: 100%;
   max-width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+  z-index: 1000;
 }
 
 /* 각 옵션 */
@@ -120,13 +120,14 @@
   padding: 10px 16px;
   cursor: pointer;
   font-size: 16px;
-  color: #696b70;
-  border-radius: 16px;
+  color: var(--color-font-color1);
+  border-radius: var(--border-radius-body);
 }
 
 .dropdownOption:hover {
-  background-color: #adb9e3;
-  color: white;
+  background-color: var(--color-main);
+  color: var(--color-white);
+  transform: scale(0.98);
 }
 
 /* 라디오 버튼 그룹 */
@@ -139,9 +140,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border-radius: 12px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  border-radius: var(--border-radius-body);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-color2);
   height: 52px;
   padding: 0 20px;
   cursor: pointer;
@@ -151,52 +152,50 @@
 }
 
 .radioOption:hover {
-  border-color: #f0d827;
+  border-color: var(--color-primary);
 }
 
 /* 숨겨진 radio input */
 .hiddenRadio {
-  border-color: #f0d827;
-  background-color: #fffce3;
+  border-color: var(--color-primary);
+  background-color: var(--color-sud-color1);
   box-shadow: 0 0 8px rgba(240, 216, 39, 0.4);
 }
 
 /* 선택된 상태 */
 .radioOption.activeRadio {
-  border-color: #f0d827;
-  background-color: #fffce3;
+  border-color: var(--color-primary);
+  background-color: var(--color-white);
   box-shadow: 0 0 8px rgba(240, 216, 39, 0.4);
 }
 
 /* 선택된 텍스트 */
 .radioOption.activeRadio span {
-  color: #f0d827;
-  font-weight: 700;
+  color: var(--color-primary);
+  font-weight: bold;
 }
 
 .radioOption.activeRadio .radioIcon {
-  color: #696b70;
+  color: var(--color-font-color1);
 }
 
 .radioOption.activeRadio span {
-  color: #696b70;
-  font-weight: 700;
+  color: var(--color-primary);
+  font-weight: bold;
 }
 
 /* 에디터 영역 */
 .editorArea {
   flex-grow: 1;
   height: 0;
-  border-radius: 12px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  border-radius: var(--border-radius-body);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-back);
   display: flex;
   flex-direction: column;
 
   overflow: hidden;
   min-height: 200px;
-
-  /* 최소 높이는 유지 */
 }
 
 .editorHeader {
@@ -204,14 +203,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #eee;
-  background-color: #fcfcfc;
+  border-bottom: 1px solid var(--color-font-back);
+  background-color: var(--color-white);
 }
 
 .editorLabel {
   font-size: 16px;
-  font-weight: 600;
-  color: #777;
+  font-weight: bold;
+  color: var(--color-font-color1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -231,13 +230,13 @@
 }
 
 .editorInput::placeholder {
-  color: #ccc;
+  color: var(--color-font-color1);
 }
 
 /* 파일 업로드 영역 */
 .fileUploadArea {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   padding: 10px 0;
 }
 
@@ -268,27 +267,28 @@
   justify-content: center;
   gap: 10px;
   height: 52px;
-  border-radius: 12px;
-  border: 2px dashed #f0d827;
-  background-color: #fffce3;
-  color: #555;
-  font-weight: 600;
+  border-radius: var(--border-radius-body);
+  border: 2px dashed var(--color-primary);
+  background-color: var(--color-sud-color1);
+  color: var(--color-font-color1);
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
   font-size: 16px;
 }
 
 .uploadButton:hover {
-  background-color: #fff9d3;
-  border-color: #e0c817;
+  background-color: var(--color-sud-color1);
+  border-color: var(--color-primary);
+  font-weight: bold;
+  transform: scale(0.98);
 }
 
 .list {
-  background-color: white;
-  border: 1px solid #ddd;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-back);
   overflow-y: auto;
   max-height: 100px;
-  border-radius: 12px;
+  border-radius: var(--border-radius-body);
   padding: 10px;
 }
 
@@ -305,12 +305,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-back);
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 14px;
-  color: #555;
+  color: var(--color-font-color1);
 }
 
 .fileName {
@@ -318,17 +318,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 500;
 }
 
 .fileSize {
-  color: #999;
+  color: var(--color-font-color1);
 }
 
 .removeFileButton {
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--color-font-color1);
   cursor: pointer;
   padding: 0;
   margin-left: 4px;
@@ -338,7 +337,7 @@
 }
 
 .removeFileButton:hover {
-  color: #d9534f;
+  color: #ff7a7a;
 }
 
 /* 액션 버튼 (Footer) */
@@ -360,42 +359,142 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 16px;
   transition: all 0.2s;
 }
 
 .backButton {
-  background-color: #ccc;
-  color: #444;
+  background-color: var(--color-font-back);
+  color: var(--color-font-color1);
 }
 
 .backButton:hover {
-  background-color: #b9b9b9;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-back-hover);
+  font-weight: bold;
+  transform: scale(0.98);
 }
 
-/*지원이 만짐 --------------*/
+/*------- 완료버튼 -------*/
 .completeButton {
-  background-color: #f0d827;
-  color: #333;
+  background-color: var(--color-primary);
+  color: var(--color-font-color1);
   position: relative;
-  z-index: 999999 !important;
 }
 
 .actionFooter {
   position: relative;
-  z-index: 9999;
 }
 
 /*-----------------------------*/
 
-
 .completeButton:hover {
-  background-color: #e0c817;
-  box-shadow: 0 6px 12px rgba(240, 216, 39, 0.6);
+  background-color: var(--color-hover);
+  font-weight: bold;
+  transform: scale(0.98);
 }
 
 .buttonIcon {
   margin-right: -4px;
+}
+
+/* -------------------------------------- */
+/*               반응형 430px 이하         */
+/* -------------------------------------- */
+
+@media (max-width: 430px) {
+  .editorContainer {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .formGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .formLabel {
+    font-size: 15px;
+    min-width: auto;
+  }
+
+  .inputField {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+  }
+
+  .inputElement {
+    font-size: 15px;
+  }
+
+  /* 선택 그룹 */
+  .selectionGroup {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .selectField {
+    height: 46px;
+    padding: 0 14px;
+  }
+
+  .selectText {
+    font-size: 14px;
+  }
+
+  .dropdownOptions {
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  /* 공개 설정 radio */
+  .radioGroup {
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .radioOption {
+    height: 46px;
+    flex: 1;
+    justify-content: center;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  /* 파일 업로드 */
+  .fileUploadArea {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .uploadButton {
+    height: 46px;
+    font-size: 14px;
+  }
+
+  .fileItem {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  /* 에디터 */
+  .editorArea {
+    min-height: 140px;
+  }
+
+  /* 액션 버튼 */
+  .actionFooter {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .backButton,
+  .completeButton {
+    width: 100%;
+    height: 46px;
+    font-size: 16px;
+  }
 }

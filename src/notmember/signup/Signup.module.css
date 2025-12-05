@@ -1,41 +1,54 @@
+/*-----------------------------------------------------------*/
+/* 기본 회원가입 UI */
+/* 기본 데스크탑 - 중앙 정렬 */
 .membershipbox {
-    width:580px;
-    height:900px;
+    width: 580px;
+    max-height: 900px;
+    height: auto;
     border-radius: 20px;
     background-color: white;
     box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
-    display: flex;            
-    justify-content: center; 
-    align-items: center;
-    /* border:1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 데스크탑 중앙 */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .mbsinbox {
-    width:90%;
-    height:auto;
-    display: flex;           /* 가로 정렬 */
-    flex-direction: column;  /* 세로 배치 */
-    gap:16px;
-    /* border:1px solid black; */
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
-/*-----------------------------------------------------------*/
-/*회원가입 제목*/
 
-/* .h1h1 {
-    border:1px solid black;
-} */
-
+/* 회원가입 제목 */
 .newusertitle {
     font-size: 32px;
     font-weight: bold;
-    color:#696B70;
+    color: #696B70;
     display: flex;
     justify-content: center;
 }
 
-/*-----------------------------------------------------------*/
-/*회원가입 이메일*/
+.container {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #FFF4D6;
+    display: flex;
+    justify-content: center;
+    /* align-items 제거 또는 flex-start로 변경 */
+    align-items: flex-start; /* 상단 정렬 */
+    padding: 20px 0; /* 상하 여백 */
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
 
+/*-----------------------------------------------------------*/
+/* 이메일 */
 .newemail {
     margin-top: 30px;
 }
@@ -44,14 +57,14 @@
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .newemail input {
-    width:300px;
-    height:40px;
+    width: 300px;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -65,42 +78,45 @@
 }
 
 .inputButtonWrapper {
-    display: flex;          /* 가로 정렬 */
-    gap: 16px;              /* input과 버튼 사이 간격 */
-    align-items: center; /* 세로 중앙 정렬 */
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
 .emailauth {
-    width:210px;
-    height:40px;
+    width: 210px;
+    height: 40px;
     border-radius: 20px;
     border: none;
-    background-color:#B9B9B9;
-    color:white;
+    background-color: #B9B9B9;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .emailauth:hover {
+    transform: scale(0.98);
     background-color: #F0D827;
 }
 
-/*-----------------------------------------------------------*/
-/*회원가입 이메일 확인*/
+.emailauth:active {
+    transform: scale(0.98);
+}
 
+/* 이메일 확인 */
 .emailing label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .emailing input {
-    width:100%;
-    height:40px;
+    width: 100%;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -113,21 +129,19 @@
     font-size: 16px;
 }
 
-/*-----------------------------------------------------------*/
-/*아이디 적는 칸*/
-
+/* 아이디 */
 .newid label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .newid input {
-    width:300px;
-    height:40px;
+    width: 300px;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -141,35 +155,39 @@
 }
 
 .idauth {
-    width:210px;
-    height:40px;
+    width: 210px;
+    height: 40px;
     border-radius: 20px;
     border: none;
-    background-color:#B9B9B9;
-    color:white;
+    background-color: #B9B9B9;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .idauth:hover {
+    transform: scale(0.98);
     background-color: #F0D827;
 }
-/*-----------------------------------------------------------*/
-/*닉네임 적는 칸*/
 
+.idauth:active {
+    transform: scale(0.98);
+}
+
+/* 닉네임 */
 .newnic label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .newnic input {
-    width:300px;
-    height:40px;
+    width: 300px;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -183,35 +201,39 @@
 }
 
 .nicauth {
-    width:210px;
-    height:40px;
+    width: 210px;
+    height: 40px;
     border-radius: 20px;
     border: none;
-    background-color:#B9B9B9;
-    color:white;
+    background-color: #B9B9B9;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .nicauth:hover {
+    transform: scale(0.98);
     background-color: #F0D827;
 }
-/*-----------------------------------------------------------*/
-/*비밀번호 적는 칸*/
 
+.nicauth:active {
+    transform: scale(0.98);
+}
+
+/* 비밀번호 */
 .pwing label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .pwing input {
-    width:100%;
-    height:40px;
+    width: 100%;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -224,14 +246,12 @@
     font-size: 16px;
 }
 
-/*-----------------------------------------------------------*/
-/*연락처 적는 칸*/
-
+/* 연락처 */
 .phone label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
@@ -239,32 +259,32 @@
 .phoneWrapper {
     display: flex;
     align-items: center;
-    gap: 8px;            /* input과 span 사이 간격 */
+    gap: 8px;
 }
 
 .prefix {
-    width: 50px;          /* "010 -" 고정 폭 */
-    text-align: center;    /* 글자 가운데 정렬 */
+    width: 50px;
+    text-align: center;
     font-size: 16px;
     font-weight: 400;
     color: #8C8C8C;
-    flex-shrink: 0; /* 줄어들지 않게 */
+    flex-shrink: 0;
 }
 
 .dash {
-    width: 20px;           /* '-' 고정 폭 */
-    text-align: center;    /* 글자 가운데 정렬 */
+    width: 20px;
+    text-align: center;
     font-weight: 400;
     color: #8C8C8C;
     flex-shrink: 0;
 }
 
 .phoneWrapper input {
-    flex: 1 1 0;                /* 두 input이 동일 비율로 한 줄에 */
+    flex: 1 1 0;
     min-width: 0;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;  /* 조금 두껍게 */
+    border: 1px solid #8C8C8C;
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -275,21 +295,19 @@
     font-size: 16px;
 }
 
-/*-----------------------------------------------------------*/
-/*생년월일 칸*/
-
+/* 생년월일 */
 .birthing label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .birthing input {
-    width:100%;
-    height:40px;
+    width: 100%;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -302,25 +320,19 @@
     font-size: 16px;
 }
 
-/*-----------------------------------------------------------*/
-/*가족코드 칸*/
-
-.familying {
-    /* border:1px solid black; */
-}
-
+/* 가족코드 */
 .familying label {
     color: #8C8C8C;
     font-size: 16px;
     font-weight: bold;
-    display: block;       /* label을 block으로 만들어 세로 배치 */
+    display: block;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
 .familying input {
-    width:100%;
-    height:40px;
+    width: 100%;
+    height: 40px;
     border-radius: 20px;
     border: 1px solid #8C8C8C;
     padding: 0 12px;
@@ -332,63 +344,54 @@
     color: #8C8C8C;
     font-size: 16px;
 }
-/*-----------------------------------------------------------*/
-/*가족코드 가 없을경우 칸*/
 
+/* 체크박스 */
 .okcheck {
     display: flex;
-    align-items: center;  /* 체크박스와 텍스트 세로 중앙 */
+    align-items: center;
 }
 
 .checkboxLabel {
-    display: flex;         /* 체크박스와 텍스트 가로 배치 */
-    align-items: center;   /* 체크박스와 글씨 세로 중앙 */
-    gap: 8px;              /* 체크박스와 글씨 사이 간격 */
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: #8C8C8C;
     cursor: pointer;
-    /* font-weight: 700; */
 }
 
 .checkboxLabel input[type="checkbox"] {
     width: 20px;
     height: 20px;
     border: 1px solid #8C8C8C;
-    border-radius: 15px;    /* 체크박스 둥글기 */
-    appearance: none;      /* 기본 체크박스 제거 */
+    border-radius: 15px;
+    appearance: none;
     -webkit-appearance: none;
     cursor: pointer;
-    margin: 0;             /* 텍스트와 정렬 위해 */
+    margin: 0;
     position: relative;
 }
 
-/* 체크 시 표시 */
 .checkboxLabel input[type="checkbox"]:checked {
     background-color: #499ef8;
     border-color: #499ef8;
 }
-/*-------------------------------------------------------------*/
-/*가족코드랑 엄마아빠 칸*/
 
+/* 가족코드 + 부모 선택 */
 .checkAndParent {
     display: flex;
-    gap: 20px;           /* 두 영역 사이 간격 */
-    /* border:1px solid black; */
-    
+    gap: 20px;
 }
 
 .parent {
-    /* height:40px; */
     display: flex;
-    align-items: center;
-    flex-direction: column; /* 세로 배치 */
+    flex-direction: column;
     gap: 15px;
     align-items: flex-start;
-    /* border:1px solid black; */
 }
 
 .parentLabels {
-    display: flex; /* 라디오 버튼들을 가로로 배치 */
-    gap: 16px; /* 버튼 사이 간격 */
+    display: flex;
+    gap: 16px;
 }
 
 .parent label {
@@ -400,75 +403,179 @@
 }
 
 .papa {
-    width: 20px;         /* 동그라미 가로 */
-    height: 20px;        /* 동그라미 세로 */
+    width: 20px;
+    height: 20px;
     margin-right: 5px;
 }
 
 .familying {
-    flex: 1; /* 남는 공간 모두 차지 */
+    flex: 1;
 }
 
 .familying input {
-    width: 100%; /* 부모 .familying 기준 100% */
+    width: 100%;
 }
 
 .me {
-    /* align-items: flex-start; */
     font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
-    /* border:1px solid black; */
 }
-/*-----------------------------------------------------------*/
-/*취소 완료 버튼*/
 
+/* 버튼 */
 .buttonGroup {
     display: flex;
     justify-content: center; 
-    gap: 25px;                  /* 버튼 사이 간격 */
-    /* margin-top: 24px; */
+    gap: 25px;
 }
 
 .backbutton {
-    width:250px;
+    width: 250px;
     height: 50px;
     padding: 0 24px;
     border-radius: 20px;
     font-size: 18px;
     font-weight: 700;
     border: none;
-    /* cursor: pointer; */
     color: white;
     background-color: #B9B9B9;
-    /* transition: all 0.3s ease; */
     cursor: pointer;
 }
 
 .signinbutton {
-    width:250px;
+    width: 250px;
     height: 50px;
     padding: 0 24px;
     border-radius: 20px;
     font-size: 18px;
     font-weight: 700;
     border: none;
-    /* cursor: pointer; */
     background-color: #F0D827;
-    color:white;
+    color: white;
     cursor: pointer;
 }
 
+.signinbutton:hover, .signinbutton:active {
+    transform: scale(0.98);
+    background-color: #e0c817;
+}
+
 .backbutton:hover {
-    background-color: #F0D827;
+    transform: scale(0.98);
+    background-color: #b0b0b0;;
+}
+
+.backbutton:active {
+    transform: scale(0.98);
 }
 
 .borderRegex {
     border: solid 1px #499ef8 !important;
-    /* background-color: #499ef8; */
 }
 
 .noCode {
     background-color: #e0e0e0ab;
 }
 
+/*-----------------------------------------------------------*/
+/* ============================= */
+/* 📱 모바일 - 480px 이하 */
+/* ============================= */
+/* 모바일 */
+@media (max-width: 480px) {
+    .phoneWrapper {
+        flex-direction: row; /* 가로 유지 */
+        gap: 5px; /* 간격 조금 줄임 */
+    }
+
+    .prefix {
+        width: 40px;
+        font-size: 14px;
+    }
+
+    .dash {
+        width: 15px;
+        font-size: 14px;
+    }
+
+    .phoneWrapper input {
+        flex: 1 1 0;
+        height: 36px;
+        font-size: 14px;
+        min-width: 0;
+    }
+}
+
+
+
+/* ============================= */
+/* 📲 태블릿 - 481px~768px */
+/* ============================= */
+/* 모바일 - 화면보다 길면 상단 정렬 */
+@media (max-width: 768px) {
+    .membershipbox {
+        width: 90%;
+        max-height: 100vh; /* 화면 대비 최대 높이 */
+        height: auto;
+        align-items: flex-start; /* 모바일 상단 정렬 */
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .membershipbox {
+        width: 95%;
+        padding: 20px 15px;
+    }
+}
+
+/* ============================= */
+/* Nest Hub (약 1024px 이하) */
+/* ============================= */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .membershipbox {
+        width: 80%;           /* 화면 비율에 맞춤 */
+        max-height: 80vh;     /* 화면 대비 최대 높이 */
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .mbsinbox {
+        gap: 12px;            /* 조금 좁게 */
+    }
+
+    /* 버튼, input 비율 맞추기 */
+    .emailauth,
+    .idauth,
+    .nicauth,
+    .backbutton,
+    .signinbutton {
+        width: 90%;
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .newemail input,
+    .newid input,
+    .newnic input,
+    .pwing input,
+    .phoneWrapper input,
+    .birthing input,
+    .familying input,
+    .emailing input {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1280px) and (min-width: 1025px) {
+    .membershipbox {
+        width: 500px;
+        max-height: 85vh;
+        height: auto;             /* 내용에 맞게 */
+        padding: 20px;
+        align-items: flex-start;  /* 상단 정렬 */
+        overflow-y: auto;         /* 내용 넘치면 스크롤 */
+    }
+}

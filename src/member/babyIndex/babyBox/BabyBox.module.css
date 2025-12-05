@@ -15,21 +15,21 @@
 .babyName {
   font-size: 30px;
   font-weight: bold;
-  color: #696b70;
+  color: var(--color-font-color1);
 }
 
 .dueDate {
   font-size: 22px;
   font-weight: bold;
-  color: #f0d827;
+  color: var(--color-primary);
 }
 
 /* 아래 흰색 컨텐츠 영역 */
 .mainContentArea {
   flex: 1;
   position: relative;
-  border-radius: 22px;
-  background-color: #fff;
+  border-radius: var(--border-radius-main);
+  background-color: var(--color-white);
   overflow: hidden;
 }
 
@@ -47,12 +47,11 @@
 
 /* 위에 겹치는 캐릭터 이미지 */
 .placeholderImage {
-  width: 30%;
+  width: 28%;
   position: absolute;
   height: auto;
   object-fit: contain;
   transform: translate(-50%, -55%);
-
   top: 16%;
   left: 33%;
 }
@@ -66,4 +65,143 @@
 
   top: 10%;
   left: 36%;
+}
+
+/* ====================================================== */
+/*                 반응형 이미지 조정                     */
+/* ====================================================== */
+
+@media (max-width: 1440px) and (min-width: 1026px) {
+  .placeholderImage {
+    width: 46%;
+    top: 6%;
+    left: 30%;
+  }
+
+  .parentingImage {
+    width: 39%;
+    top: 8%;
+    left: 31%;
+  }
+}
+
+/* ====================================================== */
+/*                 1200px ~ 1025px (Large Tablet)         */
+/* ====================================================== */
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .babyName {
+    font-size: 26px;
+  }
+
+  .dueDate {
+    font-size: 20px;
+  }
+
+  .placeholderImage {
+    width: 34%;
+    top: 4%;
+    left: 30%;
+  }
+
+  .parentingImage {
+    width: 28%;
+    top: 8%;
+    left: 36%;
+  }
+}
+
+/* ====================================================== */
+/*                 1024px ~ 769px (Tablet)                */
+/* ====================================================== */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .babyName {
+    font-size: 24px;
+  }
+
+  .dueDate {
+    font-size: 18px;
+  }
+
+  .backgrondImage {
+    width: 95%;
+    height: 95%;
+  }
+
+  .mainContentArea {
+    border-radius: 20px;
+  }
+
+  .placeholderImage {
+    width: 42%;
+    top: 14%;
+    left: 32%;
+  }
+
+  .parentingImage {
+    width: 34%;
+    top: 6%;
+    left: 32%;
+  }
+}
+
+/* ====================================================== */
+/*                 768px ~ 481px (Mobile L)               */
+/* ====================================================== */
+@media (max-width: 768px) and (min-width: 481px) {
+  .container {
+    width: 100%;
+  }
+
+  .babyName {
+    font-size: 22px;
+  }
+
+  .dueDate {
+    font-size: 17px;
+  }
+
+  .mainContentArea {
+    border-radius: 18px;
+  }
+
+  .placeholderImage {
+    width: 45%;
+    top: 22%;
+    left: 30%;
+  }
+
+  .parentingImage {
+    width: 40%;
+    top: 10%;
+    left: 30%;
+  }
+}
+
+/* ====================================================== */
+/*                 480px 이하 (Mobile S)                  */
+/* ====================================================== */
+@media (max-width: 480px) {
+  .babyName {
+    font-size: 20px;
+  }
+
+  .dueDate {
+    font-size: 16px;
+  }
+
+  .mainContentArea {
+    border-radius: 16px;
+  }
+
+  .placeholderImage {
+    width: 50%;
+    top: 20%;
+    left: 26%;
+  }
+
+  .parentingImage {
+    width: 44%;
+    top: 16%;
+    left: 28%;
+  }
 }

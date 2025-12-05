@@ -46,7 +46,6 @@ const WeekSection = ({ data, onToggle, isSpecialWeek }) => {
   return (
     <motion.div
       className={styles.section}
-      // Framer Motion: 섹션 로드 시 아래에서 부드럽게 나타나는 애니메이션
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9 }}
@@ -205,7 +204,7 @@ const PrenatalList = ({ babyData }) => {
                     <input
                       type="date"
                       name="date"
-                      value={data.created_at}
+                      value={data.created_at} 
                       onChange={handelChange}
                       min={
                         checkClicked

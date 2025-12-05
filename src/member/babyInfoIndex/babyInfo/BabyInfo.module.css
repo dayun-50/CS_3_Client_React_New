@@ -4,14 +4,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-family: var(--font-family);
   /* border:1px solid black; */
 }
 
 .babyinformation {
   width: 80%;
   height: 80%;
+  flex-direction: column;
   /* border:1px solid black; */
 }
+
+.babyinformation label,
+.babyinformation h1,
+.babyinformation p {
+  font-weight: bold;
+}
+
 
 .bb {
   width: 100%;
@@ -22,8 +32,10 @@
 
 .bb h1 {
   font-size: 22px;
+  font-weight: bold;
   color: #696b70;
 }
+
 /*----------------------------------------------------*/
 /*아기 정보 이름 부분*/
 .babyla {
@@ -31,18 +43,20 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
+  font-weight: bold;
   /* border:1px solid black; */
 }
+
 .babyla label {
   font-size: 18px;
   color: #696b70;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .babyla input {
-  margin-top: 16px;
   padding: 10px;
+  font-size: 16px;
 }
 
 .babyname {
@@ -55,6 +69,7 @@
 .babyname::placeholder {
   font-size: 16px;
 }
+
 /*----------------------------------------------------*/
 /*아기 정보 출생일 부분*/
 .birthday {
@@ -65,6 +80,7 @@
   margin-top: 16px;
   /* border:1px solid black; */
 }
+
 .birthday label {
   font-size: 18px;
   color: #696b70;
@@ -72,8 +88,8 @@
 }
 
 .birthday input {
-  margin-top: 16px;
   padding: 10px;
+  font-size: 16px;
 }
 
 .babybirthday {
@@ -87,9 +103,9 @@
 .babybirthday::placeholder {
   font-size: 16px;
 }
+
 /*----------------------------------------------------*/
 /*아기 정보 성별 부분*/
-
 .sextitle {
   font-size: 18px;
   color: #696b70;
@@ -99,16 +115,23 @@
 }
 
 .btns {
-  margin-top: 16px;
+  width: 100%;
   display: flex;
-  gap: 13%;
+  gap: 20px;
   /* border:1px solid black; */
 }
 
+/* 공통 버튼 기본 스타일 */
 .btns button {
-  width: 188px;
+  width: 100%;
   height: 48px;
   border-radius: 20px;
+  font-size: 18px;
+  color: #8c8c8c;
+  background-color: white;
+  border: 1px solid #8c8c8c;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .quest {
@@ -116,7 +139,7 @@
   /* background-color: #ADB9E3; */
   background-color: white;
   font-size: 18px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #8c8c8c;
   cursor: pointer;
 }
@@ -124,7 +147,7 @@
 .manb {
   background-color: white;
   border: 1px solid #8c8c8c;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 18px;
   color: #8c8c8c;
   cursor: pointer;
@@ -134,14 +157,26 @@
   background-color: white;
   border: 1px solid #8c8c8c;
   font-size: 18px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #8c8c8c;
   cursor: pointer;
 }
 
+/* hover 시 */
+.btns button:hover {
+  background-color: #adb9e3 !important;
+  ;
+  border: none !important;
+  ;
+}
+
+/* active(선택된 상태) */
 .active {
-  background-color: #adb9e3; /* 선택된 버튼 색상 */
+  /* background-color: #adb9e3; */
   border: none;
+  font-weight: bold;
+  color: white !important;
+  /* 선택 상태에서 글씨는 흰색 */
 }
 
 /*----------------------------------------------------*/
@@ -159,7 +194,7 @@
 }
 
 .kgdb {
-  margin-top: 16px;
+  padding: 10px 0;
   font-size: 18px;
   color: #696b70;
   text-indent: 10px;
@@ -171,12 +206,14 @@
 
 .correct {
   width: 100%;
-  height: 25%;
+  height: 33%;
   /* border: 1px solid black; */
   display: flex;
   /* js */
-  align-items: flex-end; /* 아래쪽 정렬 */
+  align-items: flex-end;
+  /* 아래쪽 정렬 */
   /* padding: 10px;             버튼 주변 여백 */
+  /* border:1px solid black; */
 }
 
 .corbt {
@@ -184,7 +221,7 @@
   height: 48px;
   border-radius: 20px;
   border: none;
-  background-color: #b9b9b9;
+  background-color: #f0d827;
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -192,7 +229,8 @@
 }
 
 .corbt:hover {
-  background-color: #f0d827;
+  transform: scale(0.98);
+  background-color: #e0c817;
 }
 
 .corbtd {
@@ -208,7 +246,8 @@
 }
 
 .corbtd:hover {
-  background-color: #f0d827;
+  transform: scale(0.98);
+  background-color: #b0b0b0;
 }
 
 .corbtc {
@@ -216,7 +255,7 @@
   height: 48px;
   border-radius: 20px;
   border: none;
-  background-color: #b9b9b9;
+  background-color: #f0d827;
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -224,7 +263,8 @@
 }
 
 .corbtc:hover {
-  background-color: #f0d827;
+  transform: scale(0.98);
+  background-color: #e0c817;
 }
 
 /*---------------------------------------------------------*/
@@ -232,4 +272,65 @@
 
 .auth {
   border: solid 1px #499ef8 !important;
+}
+
+/* 반응형 */
+
+/* 소형 모바일 (<= 375px) */
+@media (max-width: 375px) {
+  .babyinformation {
+    width: 100%;
+    height: auto;
+    gap:5px; /* 내부 요소 간격 줄임 */
+  }
+
+  .bb h1 { font-size: 16px; margin-bottom: 4px; }
+  .babyla label, .birthday label, .sextitle, .kg p {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .babyla input, .birthday input {
+    font-size: 12px;
+    height: 32px;
+    padding: 4px 8px;
+  }
+
+  .btns {
+    gap: 8px; /* 버튼 간격 줄임 */
+  }
+
+  .btns button {
+    font-size: 12px;
+    height: 32px;
+  }
+
+  .corbt, .corbtd, .corbtc {
+    width: 130px;
+    height: 32px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+}
+
+/* 일반 모바일 (376px ~ 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
+  .babyinformation { gap: 5px; }
+  .bb h1 { font-size: 17px; margin-bottom: 5px; }
+  .babyla label, .birthday label, .sextitle, .kg p { font-size: 13px; margin-bottom: 5px; }
+  .babyla input, .birthday input { font-size: 13px; height: 34px; padding: 5px 8px; }
+  .btns { gap: 10px; }
+  .btns button { font-size: 13px; height: 34px; }
+  .corbt, .corbtd, .corbtc { width: 140px; height: 34px; font-size: 13px; }
+}
+
+/* 큰 모바일 / 작은 태블릿 (481px ~ 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .babyinformation { gap: 12px; }
+  .bb h1 { font-size: 18px; }
+  .babyla label, .birthday label, .sextitle, .kg p { font-size: 14px; }
+  .babyla input, .birthday input { font-size: 14px; height: 36px; padding: 6px 10px; }
+  .btns { gap: 12px; }
+  .btns button { font-size: 14px; height: 36px; }
+  .corbt, .corbtd, .corbtc { width: 150px; height: 36px; font-size: 14px; }
 }

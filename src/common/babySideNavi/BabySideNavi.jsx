@@ -1,33 +1,34 @@
 import styles from "./BabySideNavi.module.css";
-import { X, LogOut } from "lucide-react";
+import { X, LogOut, UserX } from "lucide-react";
 import BabyController from "./babyController/BabyController";
 import BabyButton from "../../member/babyIndex/babyButton/BabyButton";
 import useAuthStore from "store/useStore";
 import { useNavigate } from "react-router-dom";
 import { caxios } from "config/config";
 
-
 const BabySideNavi = ({ onClose }) => {
-  const logout = useAuthStore(state => state.logout);
+  const logout = useAuthStore((state) => state.logout);
   const navi = useNavigate();
   const bornDueDate = sessionStorage.getItem("babyDueDate");
-  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" });
+  const today = new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Seoul",
+  });
 
   // 태어났는지 여부 계산
   const isBorn = bornDueDate <= today;
 
   const onclickSecession = () => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(`정말 회원탈퇴를 하시겠습니까?\n이 작업 완료 후 데이터는 되돌릴 수 없습니다.`)) {
-      caxios.post("/user/secession")
-      .then(resp=>{
+    if (
+      window.confirm(
+        `정말 회원탈퇴를 하시겠습니까?\n이 작업 완료 후 데이터는 되돌릴 수 없습니다.`
+      )
+    ) {
+      caxios.delete("/user/secession").then((resp) => {
         alert("탈퇴가 완료되었습니다.\n그동안 이용해주셔서 감사합니다.");
-        logout();
-        navi("/");
-      })
+      });
     }
-  }
-
+  };
 
   return (
     <>
@@ -50,13 +51,10 @@ const BabySideNavi = ({ onClose }) => {
           {/* isSidebar={true} - 가로 바 형태의 디자인 적용 */}
           <BabyController isSidebar={true} />
         </div>
-        {/* 로그아웃 버튼 */}
-        <div className={styles.logoutContainer}>
-          <button className={styles.logoutButton} onClick={onclickSecession}>
-            <LogOut /> 회원탈퇴
-          </button>
-          <button className={styles.logoutButton} onClick={() => { logout(); navi("/"); }}>
-            <LogOut /> 로그아웃
+        {/* 회원탈퇴 버튼 */}
+        <div className={styles.exitContainer}>
+          <button className={styles.exit} onClick={onclickSecession}>
+            <UserX /> 회원탈퇴
           </button>
         </div>
       </div>

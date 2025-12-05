@@ -1,20 +1,12 @@
 import { useState } from "react";
 import styles from "./BoardDetail.module.css";
-import {
-  MoreHorizontal,
-  ChevronsLeft,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsRight,
-  Send,
-} from "lucide-react";
+import { MoreHorizontal, MessageCircle, Send } from "lucide-react";
 import Comment from "./comment/Comment";
 import { UseBoardDetail } from "./UseBoardDetail";
 import { EditorContent } from "@tiptap/react";
 import CommentItem from "./comment/Comment";
 import { FILE_SERVER } from "config/config";
 import BoardOver from "../boardOver/BoardOver";
-
 
 // --- 메인 컴포넌트 ---
 const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
@@ -47,20 +39,28 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
     setCommentContent,
     isEdit,
     setIsEdit,
-    setEditCommentId
+    setEditCommentId,
   } = UseBoardDetail({ handleDeleteBoard, handleEditBoard });
 
   const [reportOpen, setReportOpen] = useState(false);
   const [reportTargetSeq, setReportTargetSeq] = useState(null);
 
-
+  // 상태에 따라 동적 클래스 생성 - css를 위해 추가한 사항 확인
+  const commentAreaClasses = [
+    styles.commentInputArea,
+    isEdit ? styles.editMode : "",
+    isReply ? styles.replyMode : "",
+  ].join(" "); // 클래스 문자열 결합
 
   return (
     <div className={styles.parent} onClick={clearReplyMode}>
       {/* 상단 뒤로가기 버튼 영역 */}
       <div className={styles.topBar}>
         <div className={styles.backButtonWrapper}>
-          <button className={styles.backButtonText} onClick={handleNavigateBack}>
+          <button
+            className={styles.backButtonText}
+            onClick={handleNavigateBack}
+          >
             뒤로가기
           </button>
         </div>
@@ -72,8 +72,6 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
           {/* 게시글 제목 및 작성자 정보 */}
           <div className={styles.postHeader}>
             <div className={styles.postTitleWrapper}>
-
-
               <b className={styles.postTitle}>{targetBoard.title}</b>
               {/* 게시글 옵션 아이콘 및 드롭다운 메뉴 */}
               <div className={styles.menuContainer}>
@@ -89,13 +87,25 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
                       <>
                         <button
                           className={styles.menuItem}
-                          onClick={(e) => handlePostMenuItemClick(e, "수정", targetBoard.board_seq)}
+                          onClick={(e) =>
+                            handlePostMenuItemClick(
+                              e,
+                              "수정",
+                              targetBoard.board_seq
+                            )
+                          }
                         >
                           수정
                         </button>
                         <button
                           className={styles.menuItem}
-                          onClick={(e) => handlePostMenuItemClick(e, "삭제", targetBoard.board_seq)}
+                          onClick={(e) =>
+                            handlePostMenuItemClick(
+                              e,
+                              "삭제",
+                              targetBoard.board_seq
+                            )
+                          }
                         >
                           삭제
                         </button>
@@ -105,7 +115,11 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
                       <button
                         className={styles.menuItem}
                         onClick={(e) => {
-                          handlePostMenuItemClick(e, "신고", targetBoard.board_seq);
+                          handlePostMenuItemClick(
+                            e,
+                            "신고",
+                            targetBoard.board_seq
+                          );
                           setReportOpen(true);
                           setReportTargetSeq(targetBoard.board_seq);
                         }}
@@ -124,62 +138,68 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
 
           {/* 게시글 본문 */}
           <div className={styles.postBodyContainer}>
+            {/* 1. 게시글 본문 텍스트 */}
             <div className={styles.postBodyText}>
               {editor && <EditorContent editor={editor} />}
+            </div>
 
-
-              {/* 영서씨 여기에 첨부파일용 박스도 하나만 만들어 주세요*/}
-              {/*아래 있는 내용은 css만 손봐주세요: 맵으로 불러오는 방식임*/}
-
-              {targetBoardFile?.length > 0 ? (
-                targetBoardFile.map(file => (
+            {/* 2. 첨부 파일 목록 (새로운 섹션) */}
+            {targetBoardFile?.length > 0 && (
+              <div className={styles.fileListContainer}>
+                {targetBoardFile.map((file) => (
                   <a
                     key={file.file_seq}
-                    href={`${FILE_SERVER}/file/download?sysname=${encodeURIComponent(file.sysname)}&file_type=board/file/`}
+                    href={`${FILE_SERVER}/file/download?sysname=${encodeURIComponent(
+                      file.sysname
+                    )}&file_type=board/file/`}
                     download
-                    style={{ display: "block", marginBottom: "6px" }}
+                    className={styles.fileItem}
                   >
                     {file.oriname}
                   </a>
-                ))
-              ) : (
-                <div>첨부파일 없음</div>
-              )}
-
-
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
         {/* 댓글 영역 */}
-        <div className={styles.commentSection} >
+        <div className={styles.commentSection}>
           {/* 댓글 목록 */}
           <div className={styles.commentListWrapper}>
-            <div className={styles.commentList} >
-
+            <div className={styles.commentList}>
               {/* 배열 데이터를 맵핑하여 댓글 렌더링 */}
-              {comments.map((comment) => (
-                <CommentItem
-                  key={comment.comment_seq}
-                  comment={comment}
-                  commentMenuOpenId={commentMenuOpenId}
-                  setCommentMenuOpenId={setCommentMenuOpenId}
-                  menuRef={menuRef}
-                  closePostMenu={() => setPostMenuOpen(false)}
-                  setPostMenuOpen={setPostMenuOpen}
-                  setIsReply={setIsReply}
-                  setParentCommentId={setParentCommentId}
-                  reloadComments={reloadComments}
-                  commentContent={commentContent}
-                  setIsEdit={setIsEdit}
-                  setEditCommentId={setEditCommentId}
-                  setCommentContent={setCommentContent}
-                />
-              ))}
-
+              {comments && comments.length > 0 ? (
+                comments.map((comment) => (
+                  <CommentItem
+                    key={comment.comment_seq}
+                    comment={comment}
+                    commentMenuOpenId={commentMenuOpenId}
+                    setCommentMenuOpenId={setCommentMenuOpenId}
+                    menuRef={menuRef}
+                    closePostMenu={() => setPostMenuOpen(false)}
+                    setPostMenuOpen={setPostMenuOpen}
+                    setIsReply={setIsReply}
+                    setParentCommentId={setParentCommentId}
+                    reloadComments={reloadComments}
+                    commentContent={commentContent}
+                    setIsEdit={setIsEdit}
+                    setEditCommentId={setEditCommentId}
+                    setCommentContent={setCommentContent}
+                  />
+                ))
+              ) : (
+                <div
+                  className={styles.emptyComments}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <MessageCircle size={36} />
+                  <p className={styles.emptyCommentsText}>댓글이 없습니다</p>
+                  <p className={styles.emptySubText}>첫 댓글을 작성해보세요</p>
+                </div>
+              )}
             </div>
           </div>
-
 
           {/* 페이지네이션 영역 
           <div className={styles.paginationWrapper}>
@@ -188,7 +208,7 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
             */}
 
           {/* 댓글 입력창 */}
-          <div className={styles.commentInputArea}>
+          <div className={commentAreaClasses}>
             <div className={styles.commentInputBox}>
               <div className={styles.inputField}>
                 <input
@@ -200,8 +220,8 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
                     isEdit
                       ? "댓글을 수정하세요"
                       : isReply
-                        ? "대댓글을 입력하세요"
-                        : "메시지를 입력하세요"
+                      ? "대댓글을 입력하세요"
+                      : "메시지를 입력하세요"
                   }
                   className={styles.inputElement}
                 />
@@ -212,9 +232,6 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
             </div>
           </div>
         </div>
-
-
-
       </div>
 
       <BoardOver
@@ -222,9 +239,7 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
         onClose={() => setReportOpen(false)}
         boardSeq={reportTargetSeq}
       />
-    </div >
-
-
+    </div>
   );
 };
 

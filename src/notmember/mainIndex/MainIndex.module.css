@@ -6,6 +6,8 @@
   height: 100vh; /* 전체 화면 */
   overflow-x: hidden;
   overflow-y: visible;
+
+  font-family: var(--font-family);
 }
 
 /* 상단 네비 영역 */
@@ -13,7 +15,7 @@
   flex: 0 0 auto;
   width: 100%;
 
-  z-index: 9999; /* 드롭다운이 포함된 컨텍스트를 가장 위로 */
+  z-index: 9999;
 }
 
 /* 메인 내용 */
@@ -26,7 +28,7 @@
   justify-content: center;
   align-items: flex-start;
 
-  background-color: #ffffff;
+  background-color: var(--color-white);
 }
 
 .layoutMainYellow {
@@ -38,7 +40,7 @@
   justify-content: center;
   align-items: flex-start;
 
-  background-color: #fff4d6 !important;
+  background-color: var(--color-sud-color1) !important;
 }
 
 /* 반응형 */
@@ -46,5 +48,12 @@
   .layoutMain,
   .layoutMainYellow {
     padding: 0 20px;
+  }
+}
+
+@media (max-width: 430px) {
+  .layoutMain,
+  .layoutMainYellow {
+    padding: 0 10px;
   }
 }

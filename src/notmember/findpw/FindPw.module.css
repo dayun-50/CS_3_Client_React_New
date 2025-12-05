@@ -97,6 +97,11 @@
 
 .dlswmd:hover {
     background-color: #F0D827;
+     transform: scale(0.98);
+}
+
+.dlswmd:active {
+     transform: scale(0.98);
 }
 
 .idmiddletwo {
@@ -162,9 +167,18 @@
 }
 
 .idd:hover {
-    background-color: #F0D827;
+     transform: scale(0.98);
+    background-color: #b0b0b0;
 }
 
+.idd:active {
+     transform: scale(0.98);
+}
+
+.idok:hover,.idok:active {
+    background-color: #e0c817;;
+     transform: scale(0.98);
+}
 /*---------------------------------------------------------------------*/
 /* 완료 누르면 나오는 비밀번호 재설정 창 */
 /* .idcheckboxt {
@@ -281,5 +295,92 @@
 }
 
 .iddt:hover {
-    background-color: #F0D827;
+    transform: scale(0.98);
+    background-color: #b0b0b0;
+}
+
+.idokt:hover {
+    transform: scale(0.98);
+    background-color: #e0c817;;
+}
+/* ------------------ 반응형 ------------------ */
+@media screen and (max-width: 768px) {
+    .idcheckbox {
+        width: 90%;
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .title, .titlet {
+        font-size: 28px;
+    }
+
+    .nn, .nnt {
+        font-size: 16px;
+    }
+
+    .idmiddleone label,
+    .idmiddletwo label {
+        font-size: 16px;
+    }
+
+    .idmiddleone input,
+    .idmiddletwo input,
+    .dlswmd {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .idd, .idok, .iddt, .idokt {
+        height: 44px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .idcheckbox {
+        width: 95%;
+        height: auto;
+        padding: 20px 15px;
+    }
+
+    .title, .titlet {
+        font-size: 24px;
+    }
+
+    .nn, .nnt {
+        font-size: 14px;
+    }
+
+    .idmiddleone label,
+    .idmiddletwo label {
+        font-size: 14px;
+    }
+
+    .idmiddleone input,
+    .idmiddletwo input,
+    .dlswmd {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .idd, .idok, .iddt, .idokt {
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* iPhone SE / Galaxy S8+ 대응 */
+@media screen and (max-width: 375px) {
+    .idmiddleone {
+        display: flex;
+        flex-direction: column; /* label 위, input+버튼 밑 */
+    }
+
+    .idmiddleone > input,
+    .idmiddleone > .dlswmd {
+        width: 100%;      /* 좁은 화면에 맞춤 */
+        margin: 5px 0;    /* input과 버튼 사이 간격 */
+        box-sizing: border-box;
+    }
 }

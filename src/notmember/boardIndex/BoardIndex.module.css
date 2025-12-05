@@ -5,3 +5,19 @@
   justify-content: center;
   align-items: center;
 }
+
+/* 반응형 - 태블릿 이하에서는 좌우 1:1 대신 전체 세로 배치 */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}
+
+/* 모바일에서는 오른쪽 패널 숨기기 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}

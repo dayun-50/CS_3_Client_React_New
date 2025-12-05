@@ -162,6 +162,23 @@ export function UseBoardWrite() {
         });
     };
 
+    //에디터 용량 제한
+    const utf8Length = (str) => {
+        let bytes = 0;
+        for (let i = 0; i < str.length; i++) {
+            const code = str.charCodeAt(i);
+            if (code <= 0x7F) bytes += 1;
+            else if (code <= 0x7FF) bytes += 2;
+            else if (code <= 0xFFFF) bytes += 3;
+            else bytes += 4;
+        }
+        return bytes;
+    };
+    const getContentBytes = (contentJSON) => {
+        const json = JSON.stringify(contentJSON);
+        return utf8Length(json);
+    };
+
 
     //작성완료
     const handleComplete = async () => {
@@ -184,6 +201,14 @@ export function UseBoardWrite() {
             alert("내용을 입력하거나 이미지를 추가하세요");
             return;
         }
+
+        const contentBytes = getContentBytes(contentJSON);
+        const MAX_CONTENT_BYTES = 14 * 1024 * 1024; // 14MB
+        if (contentBytes > MAX_CONTENT_BYTES) {
+            alert(`본문 용량이 너무 큽니다. 현재 ${contentBytes} bytes / 제한 ${MAX_CONTENT_BYTES} bytes`);
+            return;
+        }
+
 
         const form = new FormData();
         // 1) 파일 담기

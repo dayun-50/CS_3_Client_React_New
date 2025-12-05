@@ -4,7 +4,7 @@ import infants from "./imgs/Infants.svg";
 import backgrond2 from "./imgs/Background2.svg";
 import toddlers from "./imgs/Toddlers.svg";
 import { motion } from "framer-motion";
-import { useBabyBox } from "./UseBabyBox";
+import { useBabyBox } from "./useBabyBox";
 
 const imageVariantsPregnant = {
   initial: { opacity: 0, rotate: 0 },
@@ -88,9 +88,8 @@ const BabyBox = ({ setIsBorn }) => {
         <div>
           <motion.img
             src={mainImage}
-            className={`${styles.placeholderImage} ${
-              isParenting ? styles.parentingImage : styles.placeholderImage
-            }`}
+            className={`${styles.placeholderImage} ${isParenting ? styles.parentingImage : styles.placeholderImage
+              }`}
             alt={isParenting ? "육아" : "아기"}
             initial="initial"
             animate="animate"

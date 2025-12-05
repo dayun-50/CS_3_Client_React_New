@@ -29,9 +29,8 @@ const overlayVariants = {
 
 const BabyIndex = () => {
   const [showCounseling, setShowCounseling] = useState(false);
-  const [isBorn, setIsBorn] = useState(false); //최상위에서 공유용으로 만드는 상태변수, 임신 or 육아 상태 구별용
-
-
+  const [isBorn, setIsBorn] = useState(false);
+  //최상위에서 공유용으로 만드는 상태변수, 임신 or 육아 상태 구별용
 
   return (
     // 최상위 컨테이너에 motion.div 적용
@@ -48,7 +47,10 @@ const BabyIndex = () => {
         </div>
         <div className={styles.babyButtonWrapper}>
           {/* 긴급 상담 클릭 시 showCounseling true */}
-          <BabyButton onEmergencyClick={() => setShowCounseling(true)} isBorn={isBorn} />
+          <BabyButton
+            onEmergencyClick={() => setShowCounseling(true)}
+            isBorn={isBorn}
+          />
         </div>
       </motion.div>
       {/* 오른쪽 섹션 */}

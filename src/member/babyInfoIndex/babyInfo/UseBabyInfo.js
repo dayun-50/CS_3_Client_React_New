@@ -64,8 +64,6 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
 
     // 수정 완료버튼
     const handleSave = () => {
-        console.log("이얍!", data);
-        console.log("으아ㅣㅇ", regex);
         if (!isEditing) return;
 
         const isAllValid = Object.values(regex).every(value => value === true);

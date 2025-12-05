@@ -41,7 +41,6 @@ const ChartIndex = () => {
     "복부둘레",
     "허벅지 길이",
   ];
-  // 상단 메뉴 버튼: 육아
   const infantMenuList = ["성장", "몸무게", "머리둘레", "신장"];
 
   // 현재 모드에 따라 사용될 메뉴 리스트를 동적으로 결정
@@ -70,13 +69,10 @@ const ChartIndex = () => {
   console.log("DEBUG — currentStandardData:", currentStandardData);
   console.log("DEBUG — actualData:", actualData);
 
-  const {
-    babySeq,
-    babyInfo,
-    menuList,
-  } = useChartIndex(currentWeek, setCurrentWeek);
-
-
+  const { babySeq, babyInfo, menuList } = useChartIndex(
+    currentWeek,
+    setCurrentWeek
+  );
 
   const fetchActualData = async () => {
 
@@ -110,10 +106,6 @@ const ChartIndex = () => {
     if (babyInfo) fetchActualData();
   }, [babyInfo, currentWeek, isFetalMode]);
 
-
-
-
-
   useEffect(() => {
     if (actualData && Object.keys(actualData).length > 0) {
       // actualData의 key를 inputs key로 매핑
@@ -134,7 +126,6 @@ const ChartIndex = () => {
       console.log(" inputs 세팅 완료:", mappedInputs);
     }
   }, [actualData]);
-
 
   // 로딩 상태 처리
 
@@ -216,4 +207,3 @@ const ChartIndex = () => {
   );
 };
 export default ChartIndex;
-

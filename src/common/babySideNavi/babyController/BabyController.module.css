@@ -32,21 +32,72 @@
   justify-content: center;
 }
 
+/* 사이드바 모드일 때 */
+.sidebarContainer .one {
+  align-items: flex-start;  /* 상단 정렬 */
+  justify-content: flex-start; 
+  padding-top: 8px;        /* 약간의 간격 추가 */
+}
+
+/* 🔥 아기추가 + 아기리스트 전체 */
 .babyclick {
-  width: 97%;
-  height: 91%;
   display: flex;
-  flex-direction: row; /* 기본 가로 정렬 유지 */
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  height: 91%;
+}
+
+/* 🔥 아기추가 버튼 고정 영역 */
+.babyAdd {
+  flex: 0 0 17%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-radius: 30px;
+}
+
+/* 🔥 아기 리스트만 스크롤 */
+.babyList {
+  display: flex;
+  flex-direction: row;
   gap: 10px;
   overflow-x: auto;
   overflow-y: hidden;
+  flex-wrap: nowrap;
+  flex: 1;
+  width: calc(140px * 4 + 10px * 3);
+
+  /* 스크롤바 스타일 */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-primary) transparent;
+  padding-left: 5px; /* 왼쪽 여백 */
+}
+
+/* Webkit 계열 브라우저 */
+.babyList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.babyList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.babyList::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+}
+
+.babyList::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-hover);
 }
 
 /* --------------------------------------------------
    선택된 아기 버튼
    -------------------------------------------------- */
 .ingbaby1 {
-  width: 22%;
   border: 1px solid #f0d827;
   background-color: #fff4d6;
   border-radius: 30px;
@@ -55,6 +106,7 @@
   align-items: center;
   transition: transform 0.3s ease;
   cursor: pointer;
+  flex: 0 0 190px;
 }
 
 .ingbaby1 img,
@@ -66,27 +118,20 @@
 
 /* 일반 아기 버튼 */
 .ingbaby {
-  width: 20%;
   border: 1px solid #f0d827;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
   cursor: pointer;
+  flex: 0 0 132px;
 }
 
 .ingbaby:hover {
-  border: 2px solid #f0d827;
   background-color: #fff4d6;
-  width: 22%;
-}
-
-.ingbaby:hover img,
-.ingbaby:hover .babyname,
-.ingbaby:hover .how {
-  transform: scale(1.1);
+  transform: scaleX(1.05);
   transition: transform 0.3s ease;
 }
 
@@ -111,9 +156,12 @@
   font-weight: bold;
 }
 
+/* 아기 이미지 수정 */
 .babyfaceImage {
   width: 50%;
-  height: 100%;
+  height: auto;
+  max-height: 60%;
+  object-fit: contain;
 }
 
 /* --------------------------------------------------
@@ -124,23 +172,12 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 20%;
+  width: 100%;
+  height: 100%;
   border: 1px solid #f0d827;
   border-radius: 30px;
-  background-color: white;
+  background-color: #ffffff;
   cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.plusbb:hover {
-  border: 2px solid #f0d827;
-  background-color: #fff4d6;
-  width: 22%;
-}
-
-.plusbb:hover img,
-.plusbb:hover span {
-  transform: scale(1.1);
   transition: transform 0.3s ease;
 }
 
@@ -148,6 +185,12 @@
   font-size: 18px;
   font-weight: bold;
   color: #696b70;
+}
+
+.plusbb:hover {
+  background-color: #fff4d6;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
 /* ==============================
@@ -179,7 +222,7 @@
   align-items: flex-start;
   width: 580px;
   height: 660px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 20px;
   position: relative;
 }
@@ -191,7 +234,7 @@
 .modalContenttwo {
   flex: 1;
   height: 100%;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 22px;
   display: flex;
   flex-direction: column;
@@ -264,7 +307,7 @@
   font-weight: bold;
   border: none;
   border-radius: 8px;
-  background-color: white;
+  background-color: #ffffff;
   cursor: pointer;
   z-index: 10;
 }
@@ -275,103 +318,176 @@
 }
 
 /* ==============================
-   사이드바 전용 스타일 (세로 레이아웃)
+   사이드바 전용 컨테이너
    ============================== */
 .sidebarContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* 스크롤 스타일 */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-primary) transparent;
+  /* border: 1px solid black; */
 }
 
-/* 리스트 전체 */
+.sidebarContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebarContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebarContainer::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+}
+
+.sidebarContainer::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-hover);
+}
+
+/* ==============================
+   아기 클릭 영역
+   ============================== */
 .sidebarContainer .babyclick {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 8px 0;
+  gap: 8px;        /* 간격 줄임 */
+  padding: 4px 0;  /* 패딩 줄임 */
+  height: auto;    
+  overflow: visible;
 }
 
-/* 기본/선택된 아기 카드 공통 스타일 */
-.sidebarContainer .ingbaby,
-.sidebarContainer .ingbaby1 {
+/* 아기 리스트 */
+.sidebarContainer .babyList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;       /* 간격 줄임 */
+  width: 99%;
+  height: auto;  
+  overflow: visible;
+}
+
+/* ==============================
+   아기 버튼
+   ============================== */
+.sidebarContainer .ingbaby {
+  height: 65px;       /* 일반 버튼 높이 */
+  flex: 0 0 auto;     /* flex stretch 방지 */
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  background: var(--color-white);
-  border-radius: 12px;
-  border: 1px solid var(--color-font-back);
-  width: 100%;
-  height: 70px;
+  gap: 8px;           /* 내부 요소 간격 축소 */
+  padding: 0 8px;     /* 좌우 패딩 줄임 */
   cursor: pointer;
-  transition: 0.2s ease;
-  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
-/* 선택된 아기 강조 */
+/* 선택된 버튼 */
 .sidebarContainer .ingbaby1 {
-  border: 2px solid var(--color-primary);
-  background: var(--color-sud-color1);
-  height: 90px;
+  height: 90px;       /* 일반 버튼보다 크게 */
+  flex: 0 0 auto;
+  border: 1px solid #f0d827;
+  border-radius: 20px;
+  background-color: #fff4d6;
+  display: flex;
+  align-items: center;
+  gap: 10px;          /* 내부 요소 간격 살짝 늘림 */
+  padding: 0 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* 사이드바일 때 내부 bbb 구조도 가로로 전환 */
+/* 내부 구조 */
 .sidebarContainer .bbb {
   display: flex;
   flex-direction: row !important;
   align-items: center;
-  gap: 16px;
+  gap: 8px;      /* 일반 버튼 */
 }
 
-/* 아기 이미지 */
+.sidebarContainer .ingbaby1 .bbb {
+  gap: 10px;     /* 선택된 버튼은 내부 요소 간격 조금 넓게 */
+}
+
 .sidebarContainer .bbb img {
-  width: 55px;
-  height: 55px;
+  width: 50px;   /* 일반 버튼 이미지 */
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-/* 이름/텍스트 박스 */
+.sidebarContainer .ingbaby1 .bbb img {
+  width: 60px;   /* 선택된 버튼 이미지 조금 크게 */
+  height: 60px;
+}
+
 .sidebarContainer .bbb > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* 이름 텍스트 */
 .sidebarContainer .babyname {
-  font-size: 16px;
+  font-size: 16px; /* 일반 버튼 텍스트 */
   color: #333;
 }
 
-/* 'how' 텍스트 숨김 */
+.sidebarContainer .ingbaby1 .babyname {
+  font-size: 18px; /* 선택된 버튼 텍스트 조금 크게 */
+}
+
 .sidebarContainer .how {
-  font-size: 14px;
+  font-size: 14px; /* 일반 버튼 */
   font-weight: 500;
   color: #333;
 }
 
-/* hover */
+.sidebarContainer .ingbaby1 .how {
+  font-size: 14px; /* 선택된 버튼 조금 크게 */
+}
+
+/* ==============================
+   아기 추가 버튼
+   ============================== */
+.sidebarContainer .plusbb {
+  height: 44px;       /* 버튼 높이 축소 */
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #f0d827;
+  border-radius: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: all 0.3s ease;
+}
+
+.sidebarContainer .plusbb span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #696b70;
+}
+
+/* ==============================
+   사이드바 hover 시
+   ============================== */
 .sidebarContainer .ingbaby:hover,
+.sidebarContainer .ingbaby1:hover,
 .sidebarContainer .plusbb:hover {
   border: 2px solid var(--color-primary);
   background-color: var(--color-sud-color1);
-  transform: scaleY(1.08); /* 세로 5% 확대 */
+  transform: scaleY(1.05);
+  transform-origin: center;
   transition: transform 0.3s ease;
-}
-
-/* 모달 동일 유지 */
-.sidebarContainer .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
 }

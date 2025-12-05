@@ -1,10 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap");
 
 
 * { 
+    font-family: "Noto Sans KR", sans-serif;
     font-weight: 400;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
 }
 
 .container {
@@ -24,7 +27,7 @@
     display: flex;            
     justify-content: center; 
     align-items: center;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .logininbox {
@@ -92,10 +95,19 @@
     border-radius: 20px;
     border:none;
     background-color: #F0D827;
-    color:white;
+    color:#ffffff;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.logbut:hover {
+    transform: scale(0.98);
+    background-color: #e0c817;
+}
+
+.logbut:active {
+    transform: scale(0.98);
 }
 /* -------------------------------------------------- */
 /*버튼 아래 나머지*/
@@ -111,6 +123,10 @@
     margin-left: 10px;
     text-decoration: none;
     color:#ADB9E3;
+}
+
+.signup a:hover {
+    color: #94a4d6;
 }
 
 .changelog {
@@ -134,4 +150,71 @@
 
 .alert input{
     border: solid 1px #499ef8 !important;
+}
+
+/*반응형*/
+
+/* ------------------ 반응형 ------------------ */
+@media screen and (max-width: 768px) {
+    .loginbox {
+        width: 90%;
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .toptitle {
+        font-size: 28px;
+    }
+
+    .loginmiddle label {
+        font-size: 16px;
+    }
+
+    .loginmiddle input {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .logbut {
+        height: 44px;
+        font-size: 16px;
+    }
+
+    .signup {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .loginbox {
+        width: 95%;
+        height: auto;
+        padding: 20px 15px;
+    }
+
+    .toptitle {
+        font-size: 24px;
+    }
+
+    .loginmiddle label {
+        font-size: 14px;
+    }
+
+    .loginmiddle input {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .logbut {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .signup {
+        font-size: 12px;
+    }
+
+    .changelog, .changepw {
+        font-size: 12px;
+    }
 }

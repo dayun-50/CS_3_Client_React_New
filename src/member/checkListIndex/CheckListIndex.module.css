@@ -1,3 +1,6 @@
+/* ============================= */
+/* 기본 데스크탑 - 좌우 배치 */
+/* ============================= */
 .CheckContainer {
   width: 100%;
   height: 100%;
@@ -6,21 +9,33 @@
   box-sizing: border-box;
 }
 
+.left,
+.rigth {
+  flex: 1;
+  min-width: 45%;
+  border: 1px solid #f0d827;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
 .CheckContainer h2 {
-  color: #696b70;
+  color: var(--color-font-color1);
   font-size: 18px;
   font-weight: bold;
   padding-bottom: 20px;
-  border-bottom: 1px solid #f0d827;
+  border-bottom: 1px solid var(--color-primary);
   margin-bottom: 20px;
 }
+
 
 /* 각 영역 공통 */
 .left,
 .rigth {
   flex: 1;
   min-width: 45%;
-  border: 1px solid #f0d827;
+  border: 1px solid var(--color-primary);
   border-radius: 12px;
   padding: 15px;
 
@@ -32,4 +47,76 @@
 .listWrapper {
   flex: 1;
   overflow-y: auto;
+}
+
+/* 반응형 */
+@media (max-width: 1440px) {
+  .CheckContainer {
+    padding: 20px 0;
+  }
+}
+
+/* =========================== */
+/* 1200px 이하 (작은 데스크탑) */
+/* =========================== */
+@media (max-width: 1200px) {
+  .CheckContainer {
+    gap: 16px;
+    overflow-y: auto;
+  }
+
+  .CheckContainer h2 {
+    font-size: 17px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .left,
+  .rigth {
+    min-width: 48%;
+    padding: 12px;
+  }
+}
+
+/* =========================== */
+/* 768px 이하 (태블릿)         */
+/* =========================== */
+@media (max-width: 768px) {
+  .CheckContainer {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .left,
+  .rigth {
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .CheckContainer h2 {
+    font-size: 16px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+  }
+}
+
+/* =========================== */
+/* 480px 이하 (모바일)         */
+/* =========================== */
+@media (max-width: 480px) {
+  .CheckContainer {
+    gap: 12px;
+  }
+
+  .left,
+  .rigth {
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .CheckContainer h2 {
+    font-size: 15px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
 }

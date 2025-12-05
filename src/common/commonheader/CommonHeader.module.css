@@ -1,17 +1,17 @@
 .topbar {
   width: 100%;
   height: 70px;
-  background-color: #fff;
-  border-bottom: 1px solid #b9b9b9;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-font-back);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   box-sizing: border-box;
-  font-size: 16px;
-  color: #696b70;
-  font-family: "Noto Sans KR", sans-serif;
+  font-size: var(--font-size-base);
+  color: var(--color-font-color1);
+  font-family: var(--font-family);
 
   z-index: 9999; /* 드롭다운이 포함된 컨텍스트를 가장 위로 */
 }
@@ -65,23 +65,24 @@
   text-decoration: none;
   background: none;
   border: none;
-  font-size: 16px;
-  color: #696b70;
+  font-size: var(--font-size-base);
+  color: var(--color-font-color1);
 }
 
 .menuItem:hover {
   font-weight: bold;
-  color: #f0d827;
+  color: var(--color-hover);
+  transform: scale(0.98);
 }
 
 .menuItem:active {
   font-weight: bold;
-  color: #f0d827;
+  color: var(--color-primary);
 }
 
 .menuActive .menuItem {
   font-weight: bold;
-  color: #f0d827;
+  color: var(--color-primary);
 }
 
 /* 밑줄 기본 */
@@ -93,7 +94,7 @@
   left: 0;
   width: 0%;
   height: 3px;
-  background-color: #f0d827;
+  background-color: var(--color-primary);
   transition: width 0.3s ease;
 }
 
@@ -122,15 +123,42 @@
   height: 30px;
 }
 
-/* 알람표시! 혜빈 야매추가~ */
-.bellIconAlert
-{
-  background-color: #f0d827;
+/* 알람표시*/
+.alertBadge {
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+  z-index: 1002;
 }
 
-.helpIcon {
-  width: 32px;
-  height: 32px;
+/* 로그아웃 */
+.logoutIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-font-back);
+  color: var(--color-white);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translate(-50%, -5px);
 }
 
 .menuIcon {
@@ -139,6 +167,7 @@
 }
 
 .iconButton {
+  position: relative;
   background: none;
   border: none;
   cursor: pointer;
@@ -148,12 +177,18 @@
   justify-content: center;
   color: inherit;
 
-  color: #696b70;
+  color: var(--color-font-color1);
   transition: color 0.2s;
 }
 
+/* 아이콘 클릭 시 */
 .iconButton:hover {
   color: #333;
+}
+
+.iconButton:hover .tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 /* 알림 버튼과 드롭다운을 묶는 컨테이너 */
@@ -166,21 +201,18 @@
 
 .bellDropdown {
   position: fixed;
-  /* absolute → fixed */
-  top: 70px;
-  /* 헤더 바로 아래 레이어 */
-  right: 118px;
-  /* 너희 header padding 기준 */
+  top: 50px;
+  right: 200px;
   margin-top: 10px;
   width: 320px;
-  background-color: #fff;
+  background-color: var(--color-white);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid #eee;
+  border: 1px solid var(--color-font-back);
   padding: 10px 0;
 
   z-index: 1000;
-  color: #333;
+  color: var(--color-font-color1);
   font-size: 14px;
 
   max-height: 300px;
@@ -190,28 +222,56 @@
 /* 드롭다운 헤더 */
 .dropdownHeader {
   padding: 8px 15px;
-  font-size: 16px;
+  font-size: var(--font-size-base);
   font-weight: bold;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-font-back);
   margin-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.newAlert {
-  background-color: #f0d827;
-  color: #333;
-  font-size: 12px;
+/* 알람이 없을 때 메시지 */
+.noAlert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-font-color2);
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+/* BellOff 아이콘 스타일 */
+.noAlertIcon {
+  width: 36px;
+  height: 36px;
+  color: var(--color-font-color2);
+  animation: alertBounce 1s infinite alternate;
+}
+
+/* 메시지 텍스트 */
+.noAlert span {
+  font-size: 14px;
+  color: var(--color-font-color1);
+}
+
+/* hover 효과: 아이콘과 텍스트 강조 */
+.noAlert:hover .noAlertIcon {
+  border-color: #f0d827;
+}
+.noAlert:hover span {
+  color: #666;
   font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 4px;
 }
 
 /* 각 알림 항목 */
 .alertItem {
   padding: 10px 15px;
-  border-bottom: 1px solid #f9f9f9;
+  border-bottom: 1px solid var(--color-font-back);
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -241,8 +301,8 @@
   width: 150px;
   height: 40px;
   padding: 10px 18px;
-  border-radius: 22px;
-  color: #fff;
+  border-radius: var(--border-radius-main);
+  color: var(--color-white);
   text-decoration: none;
   font-size: 16px;
   font-family: Pretendard;
@@ -253,23 +313,188 @@
 }
 
 .signUpBtn {
-  background-color: #adb9e3;
+  background-color: var(--color-main);
 }
 
 .signUpBtn:hover {
-  background-color: #adb9e3;
+  background-color: var(--color-main-hover);
   font-weight: bold;
   transform: scale(0.98);
-  /* 0.92 대신 0.98로 변경하여 자연스러운 축소 효과 */
 }
 
 .loginBtn {
-  background-color: #f0d827;
-  font-weight: bold;
+  background-color: var(--color-primary);
 }
 
 .loginBtn:hover {
-  background-color: #f0d827;
+  background-color: var(--color-hover);
   transform: scale(0.98);
-  /* 0.92 대신 0.98로 변경하여 자연스러운 축소 효과 */
+  font-weight: bold;
+}
+
+/* -------------------------------------
+      반응형
+---------------------------------------*/
+@media (max-width: 1400px) {
+  .headerContentWrapper {
+    padding: 0 20px;
+  }
+}
+
+/* 태블릿 대응 (768px 이하) */
+@media (max-width: 768px) {
+  .headerContentWrapper {
+    padding: 0 20px;
+  }
+
+  .menuItems {
+    gap: 16px;
+  }
+
+  .leftSection {
+    gap: 20px;
+  }
+
+  .rightSection {
+    gap: 12px;
+  }
+
+  .bellDropdown {
+    width: 280px;
+    right: 20px;
+  }
+
+  .signUpBtn,
+  .loginBtn {
+    width: 140px;
+    font-size: 14px;
+    padding: 10px;
+    height: 36px;
+  }
+}
+
+/* 모바일 대응 (430px 이하) */
+@media (max-width: 480px) {
+  .headerContentWrapper {
+    padding: 0 16px;
+  }
+
+  .leftSection,
+  .rightSection {
+    gap: 8px;
+  }
+
+  .menuItems {
+    display: flex;
+    gap: 12px;
+  }
+
+  .menuItem {
+    font-size: 12px;
+  }
+
+  .bellDropdown {
+    width: 90%;
+    right: 5%;
+  }
+
+  .logoIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .bellIcon,
+  .menuIcon,
+  .logoutIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .authButtons {
+    gap: 8px;
+  }
+
+  .signUpBtn,
+  .loginBtn {
+    width: 100px;
+    font-size: 14px;
+    padding: 10px;
+    height: 36px;
+  }
+
+  /* 알람 */
+  .alertBadge {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/*--------------------------------------------------------------------*/
+
+/* ============================= */
+/* 태블릿 (1025px ~ 1280px) */
+/* ============================= */
+@media (max-width: 1280px) and (min-width: 1025px) {
+  .headerContentWrapper {
+    padding: 0 60px; /* 데스크탑 118px → 태블릿 60px */
+  }
+
+  .logoIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .menuItems {
+    gap: 16px;
+  }
+
+  .iconButton {
+    padding: 0 4px;
+  }
+
+  .signUpBtn,
+  .loginBtn {
+    width: 120px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .bellDropdown {
+    right: 60px;
+    width: 280px;
+  }
+}
+
+/* ============================= */
+/* 모바일 (768px 이하) */
+/* ============================= */
+@media (max-width: 768px) {
+  .headerContentWrapper {
+    padding: 0 20px;
+  }
+
+  .logoIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .menuItems {
+    gap: 8px;
+  }
+
+  .signUpBtn,
+  .loginBtn {
+    width: 90px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .rightSection {
+    gap: 8px;
+  }
+
+  .bellDropdown {
+    right: 20px;
+    width: 220px;
+  }
 }

@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./CommonHeader.module.css";
-import { HelpCircle, Menu, Bell } from "lucide-react";
+import { LogOut, Menu, Bell, BellOff } from "lucide-react";
 import log from "./imgs/log.svg";
 import BabySideNavi from "../babySideNavi/BabySideNavi";
 import UseCommonHeader from "./UseCommonHeader";
 import useAuthStore from "store/useStore";
 
-const CommonHeader = ({ isLogin, alerts, setAlerts, newAlerts, setNewAlerts}) => {
-  const { id } = useAuthStore(state => state);
+const CommonHeader = ({
+  isLogin,
+  alerts,
+  setAlerts
+}) => {
+  const { id } = useAuthStore((state) => state);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isBellOpen, setIsBellOpen] = useState(false); // 알림 드롭다운 상태 추가
 
   const location = useLocation();
-  const {clickAlarm} = UseCommonHeader(setAlerts, setNewAlerts);
+  const { clickAlarm, newAlerts, setNewAlerts } = UseCommonHeader();
 
   const toggleSideNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -22,7 +26,7 @@ const CommonHeader = ({ isLogin, alerts, setAlerts, newAlerts, setNewAlerts}) =>
   const closeSideNav = () => setIsNavOpen(false);
 
   const toggleBellDropdown = () => {
-    setIsBellOpen(prev => {
+    setIsBellOpen((prev) => {
       const newState = !prev;
       if (newState === false) {
         // 드롭다운을 닫을 때 newAlerts false로
@@ -34,6 +38,10 @@ const CommonHeader = ({ isLogin, alerts, setAlerts, newAlerts, setNewAlerts}) =>
   };
 
   const isPathActive = (path) => location.pathname === path;
+
+  // 로그아웃
+  const { logout } = useAuthStore((state) => state);
+  const navi = useNavigate();
 
   return (
     <div>
@@ -50,8 +58,9 @@ const CommonHeader = ({ isLogin, alerts, setAlerts, newAlerts, setNewAlerts}) =>
             <div className={styles.menuItems}>
               {/* 커뮤니티 메뉴 (항상 보임) */}
               <div
-                className={`${styles.menuItemBox} ${isPathActive("/board") ? styles.menuActive : ""
-                  }`}
+                className={`${styles.menuItemBox} ${
+                  isPathActive("/board") ? styles.menuActive : ""
+                }`}
               >
                 <Link to="/board" className={styles.menuItem}>
                   커뮤니티
@@ -61,8 +70,9 @@ const CommonHeader = ({ isLogin, alerts, setAlerts, newAlerts, setNewAlerts}) =>
               {/* 로그인한 경우만 마이페이지 표시 */}
               {isLogin && (
                 <div
-                  className={`${styles.menuItemBox} ${isPathActive("/mypage") ? styles.menuActive : ""
-                    }`}
+                  className={`${styles.menuItemBox} ${
+                    isPathActive("/mypage") ? styles.menuActive : ""
+                  }`}
                 >
                   <Link to="/mypage" className={styles.menuItem}>
                     마이페이지
@@ -83,33 +93,50 @@ const CommonHeader = ({ isLogin, alerts, setAlerts, newAlerts, setNewAlerts}) =>
                     onClick={toggleBellDropdown}
                     className={styles.iconButton}
                   >
-                    <Bell
-                      className={`${styles.bellIcon} ${newAlerts ? styles.bellIconAlert : ""}`}
-                    />
+                    <Bell className={styles.bellIcon} onClick={()=>{setNewAlerts(false)}}/>
+                    {newAlerts && <span className={styles.alertBadge} />}
                   </button>
 
                   {isBellOpen && (
                     <div className={styles.bellDropdown}>
                       <div className={styles.dropdownHeader}>
                         알림
-                        {newAlerts && <span className={styles.newAlert}>New</span>}
+                        {newAlerts && (
+                          <span className={styles.newAlert}>New</span>
+                        )}
                       </div>
 
                       {alerts.length > 0 ? (
                         alerts.map((alert, idx) => (
-                          <div key={idx} className={styles.alertItem} onClick={() => clickAlarm(alert)}>
-                            <p className={styles.alertContent}>{alert.message}</p>
+                          <div
+                            key={idx}
+                            className={styles.alertItem}
+                            onClick={() => clickAlarm(alert , setAlerts)}
+                          >
+                            <p className={styles.alertContent}>
+                              {alert.message}
+                            </p>
                           </div>
                         ))
                       ) : (
-                        <div>알람이 없습니다.</div>
+                        <div className={styles.noAlert}>
+                          <BellOff className={styles.noAlertIcon} />
+                          <span>알림이 없습니다</span>
+                        </div>
                       )}
                     </div>
                   )}
                 </div>
 
-                <button className={styles.iconButton}>
-                  <HelpCircle className={styles.helpIcon} />
+                <button
+                  className={styles.iconButton}
+                  onClick={() => {
+                    logout();
+                    navi("/");
+                  }}
+                >
+                  <LogOut className={styles.logoutIcon} />
+                  <span className={styles.tooltip}>로그아웃</span>
                 </button>
                 <button onClick={toggleSideNav} className={styles.iconButton}>
                   <Menu className={styles.menuIcon} />
