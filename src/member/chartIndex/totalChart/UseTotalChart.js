@@ -15,7 +15,7 @@ export const UseTotalChart = (currentWeek, standardData, actualData, inputs, isF
     } : { BW: "몸무게", HT: "신장", HC: "머리둘레" };
     const safeInputs = inputs && typeof inputs === "object" ? inputs : {};
 
-    // 데이터 변환 및 옵션 설정 로직
+
     const indicators = Object.keys(standardData).map(key => ({
 
         name: standardData[key].name,
@@ -26,7 +26,7 @@ export const UseTotalChart = (currentWeek, standardData, actualData, inputs, isF
     const averageValues = Object.keys(standardData).map(key => standardData[key].avg);
 
     const actualValues = Object.keys(standardData).map(key => {
-        // actualData가 없으면 inputs로 fallback
+
         if (actualData && actualData[key] !== undefined) {
             return key === "EFW" ? (actualData[key] ?? 0) : actualData[key] ?? 0;
         } else {

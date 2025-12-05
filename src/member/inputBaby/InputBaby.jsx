@@ -5,7 +5,7 @@ import oneImg from "./img/one.png";
 import twoImg from "./img/two.png";
 import threeImg from "./img/three.png";
 import fourImg from "./img/four.png";
-import useInputBaby from "./useInputBaby";
+import useInputBaby from "./UseInputBaby";
 
 const InputBaby = ({ type, onClose, fromChooseType = false }) => {
   const [inputBlocks, setInputBlocks] = useState([

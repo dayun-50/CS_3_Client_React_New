@@ -9,7 +9,7 @@ export const UseDetailChart = (activeMenu, currentWeek, menuList, standardData, 
 
     return caxios.get(`/chart/detail?babySeq=${babySeq}`)
         .then(res => {
-            console.log("API res.data:", res.data);
+
             const selectedMetricName = menuList[activeMenu];
             const metricKeyMap = isFetalMode
                 ? { "몸무게": "EFW", "머리둘레": "HC", "머리직경": "OFD", "복부둘레": "AC", "허벅지 길이": "FL" }
@@ -20,13 +20,13 @@ export const UseDetailChart = (activeMenu, currentWeek, menuList, standardData, 
             const actual = {};
             const metricKeys = Object.values(metricKeyMap);
 
-            // 실제 데이터 -> 주차/개월 인덱스로 매핑
+
             records.forEach(r => {
                 let idx;
                 if (isFetalMode) {
                     idx = calculateFetalWeek(babyDueDate, r.measure_date);
                 } else {
-                    idx = Math.floor(calculateInfantWeek(babyDueDate, r.measure_date) / 4) + 1;
+                    idx = Math.ceil(calculateInfantWeek(babyDueDate, r.measure_date) / 4);
                 }
                 if (!actual[idx]) actual[idx] = {};
                 metricKeys.forEach(key => {

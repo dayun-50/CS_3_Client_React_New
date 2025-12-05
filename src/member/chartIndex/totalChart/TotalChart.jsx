@@ -3,20 +3,20 @@ import styles from "./TotalChart.module.css";
 import { UseTotalChart } from "./UseTotalChart";
 import ReactECharts from "echarts-for-react";
 
-// TotalChart는 ChartIndex로부터 메뉴 리스트와 활성 상태를 props로 받음
-const TotalChart = ({ currentWeek, standardData, actualData, setActualData, isFetalMode, inputs }) => {
-  // 2. [Default] activeMenu가 0일 경우, ECharts 옵션 생성 및 차트 렌더링을 진행합니다.
 
-  //  로직 파일에서 옵션을 가져옵니다.
+const TotalChart = ({ currentWeek, standardData, actualData, setActualData, isFetalMode, inputs }) => {
+
+
+
   const option = UseTotalChart(currentWeek, standardData, actualData, inputs || {}, isFetalMode);
-  console.log("주차 불러오기", currentWeek);
+
 
   const [reset, setReset] = useState(true);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth); // 반응형을 위한 로직
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     setReset(false);
-    const timer = setTimeout(() => setReset(true), 0);  // 바로 리마운트
+    const timer = setTimeout(() => setReset(true), 0);
     return () => clearTimeout(timer);
   }, [actualData]);
 
@@ -27,7 +27,7 @@ const TotalChart = ({ currentWeek, standardData, actualData, setActualData, isFe
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 화면 너비에 따른 폰트/선 굵기 설정
+
   let fontSize = 16;
   let lineWidth = 3;
 

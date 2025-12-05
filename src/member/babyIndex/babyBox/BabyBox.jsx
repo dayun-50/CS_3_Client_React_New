@@ -4,7 +4,7 @@ import infants from "./imgs/Infants.svg";
 import backgrond2 from "./imgs/Background2.svg";
 import toddlers from "./imgs/Toddlers.svg";
 import { motion } from "framer-motion";
-import { useBabyBox } from "./useBabyBox";
+import { useBabyBox } from "./UseBabyBox";
 
 const imageVariantsPregnant = {
   initial: { opacity: 0, rotate: 0 },

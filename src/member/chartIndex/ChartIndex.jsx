@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import TotalChart from "./totalChart/TotalChart";
 import DetailChart from "./detailChart/DetailChart";
-import ChartInput from "./chartInput/ChartInput"; // 오른쪽 입력 폼 컴포넌트
+import ChartInput from "./chartInput/ChartInput";
 import styles from "./ChartIndex.module.css";
 import { FETAL_STANDARDS } from "./FetalStandardData";
 import { caxios } from "../../config/config";
@@ -14,12 +14,13 @@ import { fetalWeekStartEnd, infantMonthStartEnd, } from "../utils/pregnancyUtils
 import { INFANT_STANDARDS } from "./InfantStandardData";
 const ChartIndex = () => {
   const [inputs, setInputs] = useState({});
-  const [actualData, setActualData] = useState({}); // 실제 입력 데이터 (API 응답)
-  const [currentWeek, setCurrentWeek] = useState(0); // 현재 주차 상태
-  const [activeMenu, setActiveMenu] = useState(0); // 활성 메뉴 인덱스
+  const [actualData, setActualData] = useState({});
+  const [currentWeek, setCurrentWeek] = useState(0);
+  const [activeMenu, setActiveMenu] = useState(0);
   const { babyDueDate } = useAuthStore((state) => state);
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
   const isFetalMode = babyDueDate > today;
+
   const measureTypes = isFetalMode ? {
     EFW: inputs["몸무게"],
     OFD: inputs["머리직경"],
@@ -42,32 +43,19 @@ const ChartIndex = () => {
     "허벅지 길이",
   ];
   const infantMenuList = ["성장", "몸무게", "머리둘레", "신장"];
-
-  // 현재 모드에 따라 사용될 메뉴 리스트를 동적으로 결정
   const currentMenuList = isFetalMode ? fetalMenuList : infantMenuList;
-
-  // 정적 표준 데이터 계산
   const currentStandardData = useMemo(() => {
-    // 임산모 모드일 때만 FETAL_STANDARDS를 사용하고, 육아 모드일 때는 다른 표준을 사용하거나 (추가 로직 필요) undefined를 반환할 수 있습니다.
-    // 여기서는 기존 로직대로 임산모 모드의 데이터만 유지합니다.
     if (currentWeek <= 0) return null;
-    console.log("신생아 데이터", FETAL_STANDARDS[currentWeek]);
-    console.log("영유아 데이터", INFANT_STANDARDS[Math.floor(currentWeek / 4)]);
-    console.log("currentWeek", currentWeek);
-    console.log("currentMonth", Math.floor(currentWeek / 4));
-    console.log("isFetalMode : ", isFetalMode);
+
     if (isFetalMode) {
 
       return FETAL_STANDARDS[currentWeek];
     }
-    return INFANT_STANDARDS[Math.floor(currentWeek / 4)];
+    return INFANT_STANDARDS[Math.ceil(currentWeek / 4)];
 
-  }, [currentWeek, isFetalMode]); // isFetalMode가 바뀔 때 useMemo 재계산
+  }, [currentWeek, isFetalMode]);
 
-  console.log("메뉴 : " + activeMenu);
-  console.log("DEBUG — currentWeek:", currentWeek);
-  console.log("DEBUG — currentStandardData:", currentStandardData);
-  console.log("DEBUG — actualData:", actualData);
+
 
   const { babySeq, babyInfo, menuList } = useChartIndex(
     currentWeek,
@@ -76,13 +64,13 @@ const ChartIndex = () => {
 
   const fetchActualData = async () => {
 
-    setActualData(null); // 로딩 시작
+    setActualData(null);
 
 
     try {
       const { babySeq, status, birthDate } = babyInfo;
       const week = currentWeek;
-      const month = Math.floor(currentWeek / 4);
+      const month = Math.ceil(currentWeek / 4);
       let startDate, endDate;
       if (status.toLowerCase() === "fetus") {
         [startDate, endDate] = fetalWeekStartEnd(birthDate, week);
@@ -95,7 +83,7 @@ const ChartIndex = () => {
       });
 
       setActualData(response.data || {});
-      console.log(" Actual Data 로딩 완료:", response.data);
+
 
     } catch (error) {
       console.error("Actual Data 조회 실패:", error);
@@ -108,9 +96,9 @@ const ChartIndex = () => {
 
   useEffect(() => {
     if (actualData && Object.keys(actualData).length > 0) {
-      // actualData의 key를 inputs key로 매핑
+
       const mappedInputs = isFetalMode ? {
-        "몸무게": actualData.EFW ?? "",
+        "몸무게": actualData.EFW ? String(actualData.EFW / 1000) : "",
         "머리직경": actualData.OFD ?? "",
         "머리둘레": actualData.HC ?? "",
         "복부둘레": actualData.AC ?? "",
@@ -123,11 +111,10 @@ const ChartIndex = () => {
         };
 
       setInputs(mappedInputs);
-      console.log(" inputs 세팅 완료:", mappedInputs);
+
     }
   }, [actualData]);
 
-  // 로딩 상태 처리
 
   const isLoading = actualData === null || currentStandardData === undefined;
 
@@ -137,18 +124,18 @@ const ChartIndex = () => {
 
   return (
     <div className={styles.body}>
-      {/* 상단 버튼 영역: currentMenuList를 사용하도록 수정 */}
+
       <div className={styles.menuSection}>
         {currentMenuList.map((item, idx) => (
           <button
             key={idx}
             className={
-              // 활성 메뉴 인덱스를 currentMenuList의 길이를 벗어나지 않도록 조정 필요
+
               idx === activeMenu ? styles.menuActive : styles.menuButton
             }
             onClick={() => {
-              setActiveMenu(idx); // 클릭 이벤트 추가
-              // 메뉴가 전환되면 activeMenu를 0으로 리셋하는 로직을 isFetalMode 변경 시 추가
+              setActiveMenu(idx);
+
             }}
           >
             {item}
@@ -165,20 +152,19 @@ const ChartIndex = () => {
                 standardData={currentStandardData}
                 actualData={actualData}
                 setActualData={setActualData}
-                isFetalMode={isFetalMode} // 모드 전달
+                isFetalMode={isFetalMode}
                 inputs={inputs}
 
               />
             ) : (
-              // activeMenu가 1 이상일 때 DetailChart가 렌더
+
               <DetailChart
-                menuList={currentMenuList} // 수정된 리스트 전달
+                menuList={currentMenuList}
                 activeMenu={activeMenu}
                 currentWeek={currentWeek}
                 actualData={actualData}
                 standardData={currentStandardData}
-                isFetalMode={isFetalMode} // 모드 전달
-              //babyInfo={babyInfo}
+                isFetalMode={isFetalMode}
 
               />
             )
@@ -187,7 +173,7 @@ const ChartIndex = () => {
 
         </div>
 
-        {/* 입력폼 */}
+
         {actualData && (
           <ChartInput
             menuList={currentMenuList}

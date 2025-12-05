@@ -4,18 +4,12 @@ import { FETAL_STANDARDS } from "./FetalStandardData";
 import { calculateFetalWeek, calculateInfantWeek } from "../utils/pregnancyUtils";
 import useAuthStore from "../../store/useStore";
 import { INFANT_STANDARDS } from "./InfantStandardData";
-
 export const useChartIndex = (currentWeek, setCurrentWeek) => {
   const { babySeq } = useAuthStore((state) => state);
   const [isFetalMode, setIsFetalMode] = useState(true);
   const [babyInfo, setBabyInfo] = useState(null);
   const [activeMenu, setActiveMenu] = useState(0);
 
-  // const menuList = [
-  //   "전체", "몸무게", "머리직경", "머리둘레", "복부둘레", "허벅지 길이",
-  // ];
-
-  // Baby 정보 조회 + currentWeek 계산만 처리
   useEffect(() => {
     if (!babySeq) return;
 
@@ -24,12 +18,12 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
         const babyResponse = await caxios.get(`/chart/${babySeq}`);
         const { status, birth_date, baby_seq: seq } = babyResponse.data;
 
-        const todayStr = new Date().toISOString().split("T")[0];
+        const todayStr = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
         const week =
           status.toLowerCase() === "fetus"
             ? calculateFetalWeek(birth_date, todayStr)
             : calculateInfantWeek(birth_date, todayStr);
-        console.log("상태 : " + status, "생일 : " + birth_date, "아기 시퀀스 : " + seq, "해당주차 : " + week, "오늘날짜 : " + todayStr);
+
         setBabyInfo({ babySeq: seq, status, birthDate: birth_date });
         setCurrentWeek(week);
         setIsFetalMode(status.toLowerCase() === "fetus");
@@ -51,7 +45,7 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
     if (isFetalMode) {
       return FETAL_STANDARDS[currentWeek];
     } else {
-      // 영유아 모드: currentWeek → monthIndex 변환
+
       const monthIndex = Math.min(Math.floor(currentWeek / 4), INFANT_STANDARDS.length - 1);
       return INFANT_STANDARDS[monthIndex];
     }
@@ -61,7 +55,6 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
     babySeq,
     isFetalMode,
     babyInfo,
-    //menuList,
     currentWeek,
     activeMenu,
     setActiveMenu,

@@ -1,6 +1,6 @@
 import { caxios } from "../../../config/config";
 
-// 전송 로직 분리
+
 export const submitChartData = async ({ date, babySeq, id, measureTypes, actualData }) => {
 
   const payload = Object.entries(measureTypes)

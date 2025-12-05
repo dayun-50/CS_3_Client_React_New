@@ -16,7 +16,6 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
   const [weekEnd, setWeekEnd] = useState(null);
   const [render, setRender] = useState(false);
 
-  // 입력값 업데이트
   const map = isFetalMode ? {
     EFW: "몸무게",
     OFD: "머리직경",
@@ -32,7 +31,7 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
 
   const handleChange = (key, value) => {
     const type = Object.keys(map).find(t => map[t] === key); // EFW, HC 등
-    const standard = isFetalMode ? FETAL_STANDARDS[currentWeek]?.[type] : INFANT_STANDARDS[Math.floor(currentWeek / 4)]?.[type];
+    const standard = isFetalMode ? FETAL_STANDARDS[currentWeek]?.[type] : INFANT_STANDARDS[Math.ceil(currentWeek / 4)]?.[type];
     if (!standard) {
       setInputs(prev => ({ ...prev, [key]: value }));
       return;
@@ -44,7 +43,6 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
     const unitForAlert = type === "EFW" ? "kg" : standard.unit;
 
     if (compareValue > max * (1.05)) {
-      //alert(`${key}는 최대 ${maxForAlert}${unitForAlert}를 초과할 수 없습니다.`);
       alert(`${key}는 최대 ${weirdForAlert}${unitForAlert}를 초과할 수 없습니다.`);
       return;
     }
@@ -87,9 +85,9 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
 
     const invalidInput = REQUIRED_KEYS.some((key) => {
       const value = inputs[key];
-      // 필수 키가 inputs에 없거나 (undefined), 값이 없거나, 숫자가 아니거나, 0 이하인 경우
+
       return (
-        value === undefined ||             // 👈 inputs에 키 자체가 없는 경우 (허벅지 둘레 미입력 시)
+        value === undefined ||
         value === null ||
         value === "" ||
         isNaN(Number(value)) ||
@@ -103,10 +101,10 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
     }
 
 
-    //서버 전송
+
     await submitChartData({ inputs, date, babySeq, id, measureTypes, actualData });
-    setIsEditing(false); // 입력 잠금, 수정 버튼 활성화
-    await fetchActualData(); // 그래프 업데이트용
+    setIsEditing(false);
+    await fetchActualData();
 
   }
 
@@ -117,11 +115,11 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
       const formatted = new Date(actualData.measure_date)
         .toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
 
-      setDate(formatted); // ✅ 무조건 "YYYY-MM-DD"
+      setDate(formatted);
     } else {
       setDate("");
     }
-    // setDate(actualData.measure_date);
+
     setIsEditing(true);
   };
 
@@ -129,7 +127,7 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
     if (action === "cancel") {
       setIsEditing(false);
       setRender(prev => !prev);
-      // setInputs(prev => ({ ...prev, [prev["몸무게"]]: actualData["몸무게"] }));
+
       return;
     }
     else if (action === "update") {
@@ -153,10 +151,7 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
 
 
 
-      console.log("새 날짜 (date):", date);
 
-      console.log("측정 데이터 (measureTypes):", measureTypes); // inputs 기반으로 구성된 객체
-      console.log("-----------------------------------------");
 
       await updateChartData({ date, babySeq, id, measureTypes, actualData });
       setIsEditing(false);
@@ -171,7 +166,7 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
 
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
-      // 한글 입력 조합 중이면 무시 (중요!!)
+
       if (e.isComposing) return;
 
       if (e.key !== "Enter") return;
@@ -196,22 +191,26 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
     };
   }, [hasData, isEditing, inputs, date]);
 
+
+
   useEffect(() => {
     if (!babyDueDate || babyDueDate === 0) {
-      console.log("babyDueDate 아직 없음:", babyDueDate);
+
       return;
     }
 
-    const [start, end] = isFetalMode ? fetalWeekStartEnd(babyDueDate, currentWeek) : infantMonthStartEnd(babyDueDate, Math.floor(currentWeek / 4));
+    const [start, end] = isFetalMode ? fetalWeekStartEnd(babyDueDate, currentWeek) : infantMonthStartEnd(babyDueDate, Math.ceil(currentWeek / 4));
     setWeekStart(start);
     setWeekEnd(end);
-    console.log("weekStart / weekEnd:", start, end);
 
-    //  actualData가 있으면 입력값 업데이트
+
+    if (isEditing) return;
+
+
     if (actualData && Object.keys(actualData).length > 0) {
-      console.log("Actual Data:", actualData);
 
-      // measure_date 처리
+
+
       if (actualData?.measure_date) {
         const formattedDate = new Date(actualData.measure_date)
           .toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
@@ -222,24 +221,28 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
 
       }
 
-      // 입력값 매핑
+
       const updatedInputs = {};
       Object.entries(actualData).forEach(([type, value]) => {
         const key = map[type];
         if (!key) return;
 
-        // ✅ 태아 모드 + EFW 만 무조건 kg 변환
+
         if (isFetalMode && type === "EFW") {
           updatedInputs[key] = String(value / 1000);
+
         } else {
           updatedInputs[key] = String(value);
         }
+
+
+
       });
       setInputs(updatedInputs);
 
-      setIsEditing(false); // 완료 후 자동으로 수정 버튼 활성화 
+      setIsEditing(false);
     }
-  }, [babyDueDate, currentWeek, actualData, render]);
+  }, [babyDueDate, currentWeek, actualData, render, isEditing]);
 
 
 
@@ -275,7 +278,7 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
                     <input
                       className={styles.input}
                       type="number"
-                      // value={actualData[item] ?? ""}
+
                       value={inputs[item] ?? ""}
                       disabled={isDisabled}
 
@@ -289,7 +292,7 @@ const ChartInput = ({ menuList, activeMenu, currentWeek, isFetalMode, inputs, se
                     <input
                       className={styles.input}
                       type="number"
-                      // value={actualData[item] ?? ""}
+
                       value={inputs[item] ?? ""}
                       disabled={isDisabled}
 
