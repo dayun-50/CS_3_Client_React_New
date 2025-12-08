@@ -1,173 +1,483 @@
-/* ==============================
-   전체 컨테이너
-   ============================== */
 .container {
   width: 100%;
-  height: 100vh; /* 화면 전체 고정 */
+  height: 100vh;
   display: flex;
-  position: fixed; /* 화면 위에 고정 */
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000; /* CommonHeader(9999) 위로 표시 */
+  z-index: 10000;
+  color: var(--color-font-color1);
 }
 
 .left {
   width: 60%;
   height: 100%;
+<<<<<<< HEAD
   position: relative; /* z-index 적용 가능하게 */
   z-index: 10001;     /* 오른쪽보다 낮게 설정하면 뒤에 깔림 */
   background-color: rgba(140, 140, 140, 0.5); /* 투명 어둡게 overlay 느낌 */
+=======
+  background-color: var(--modal-overlay);
+>>>>>>> 5824c0c51cdbc13507716cc6c6a05221048c78c9
 }
 
 .right {
   width: 40%;
   height: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   display: flex;
   flex-direction: column;
-  position: relative; /* z-index 적용 가능 */
-  z-index: 10002;     /* 왼쪽보다 위에 표시 */
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  box-shadow: -6px 0 20px rgba(0, 0, 0, 0.15);
 }
 
 /* ==============================
-   상단 X 버튼
-   ============================== */
-.closeBtn {
-  width:40px;
-  height:40px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #696B70;
-  font-weight: bold;
-  transition: all 0.1s ease;
+  헤더 + 안내문 sticky wrapper
+============================== */
+.stickyTop {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
 }
 
-.closeBtn:hover {
-  border:1px solid #f0d827;
-  color: #f0d827;
-  border-radius: 5px;
-  transform: scale(1.2); /* 살짝 커지게 */
-}
-
-/* .up 수정 필요: 좌측 타이틀, 우측 X 버튼 배치 */
+/* 상단 헤더 */
 .up {
-  width: 100%;
   height: 70px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 좌측 타이틀, 우측 X 버튼 */
-  position: sticky; /* 스크롤 시에도 상단 고정 */
-  top: 0; /* 상단 위치 */
-  background-color: #ffffff; /* 배경 덮어쓰기 */
-  z-index: 10; /* 오른쪽 영역 내부에서 타이틀 위로 */
-  border-bottom: 1px solid #808080; /* 구분선 */
-  padding: 0 15px; /* 좌우 여백 */
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--color-font-back);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .oneonenine {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  color: #696B70;
-  height: 100%;
+  color: var(--color-font-color1);
 }
 
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background-color: var(--color-white);
+  color: var(--color-font-color2);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.closeBtn:hover {
+  color: #333;
+  transform: scale(0.95);
+}
+
+/* 안내문 */
+.infoText {
+  font-size: 14px;
+  color: var(--color-font-color1);
+  padding: 12px 20px;
+  margin: 5px 10px 10px 10px;
+  border-radius: 12px;
+  background-color: #f6f6f6;
+  border: 1px solid var(--color-font-back);
+  line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+/* ==============================
+  하단 채팅 영역
+============================== */
 .down {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #808080;
-  position: relative;
-  min-height: 0; /* 중요: flex 자식 스크롤 가능하게 */
+  overflow: hidden;
+  background-color: #fcfcfc;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.down::-webkit-scrollbar {
+  display: none;
 }
 
 .chatbody {
-  flex: 1; /* 메시지 영역만 늘어나고 스크롤 발생 */
-  overflow-y: auto;
-  padding: 10px;
-  min-height: 0; /* 중요: 부모 flex 내부 스크롤 제한 */
-  margin-top: 0; /* sticky 헤더와 겹치지 않게 */
-}
-
-.mes {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 15px;
 }
 
-.chatmessage {
-  flex-shrink: 0; /* 메시지 많아도 항상 하단 고정 */
+/* 이하 기존 메시지 스타일 그대로 유지 */
+
+/* ==============================
+  메시지 공통 스타일
+============================== */
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   width: 100%;
-  height: 80px;
+}
+
+.senderName {
+  font-size: 13px;
+  color: #808080;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* 말풍선 + 시간 한 줄 래퍼 */
+.bubbleRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 100%;
+}
+
+/* 내 메시지 오른쪽 정렬 */
+.myMessage {
+  align-items: flex-end;
+}
+.myMessage .bubbleRow {
+  flex-direction: row-reverse;
+}
+.myMessage .senderName {
+  display: none;
+}
+
+/* 상대방 메시지 왼쪽 정렬 */
+.otherMessage {
+  align-items: flex-start;
+}
+
+/* 시스템 메시지 */
+.systemMessage {
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-font-color1);
+}
+.systemMessage .bubble {
+  background: none;
+  box-shadow: none;
+  font-style: italic;
+  padding: 5px 0;
+}
+
+/* 말풍선 */
+.bubble {
+  background-color: var(--color-sud-color1);
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 75%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* 내 말풍선 스타일 */
+.myMessage .bubble {
+  background-color: var(--color-my-bubble);
+  color: var(--color-white);
+  border-bottom-right-radius: 2px;
+}
+
+/* 상대방 말풍선 스타일 */
+.otherMessage .bubble {
+  border-bottom-left-radius: 2px;
+}
+
+/* 시간 */
+.messageTime {
+  font-size: 11px;
+  color: var(--color-font-color1);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ==============================
+  카드 메시지
+============================== */
+.cardMessageWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.cardRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.cardContainer {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-font-back);
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 80%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cardText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-font-color1);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.cardButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardButton {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-font-color1);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cardButton:hover {
+  background-color: var(--color-hover);
+  transform: scale(0.99);
+}
+
+.cardTime {
+  font-size: 11px;
+  color: var(--color-font-color1);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ==============================
+  로딩 메시지
+============================== */
+.loadingMessage {
+  align-items: flex-start;
+}
+
+.loadingBubble {
+  background-color: var(--color-sud-color1);
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
 }
 
-.chme {
-  position: relative;
-  width: 95%;
-  height: 48px;
+.dotFlashing {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #666;
+  animation: dotFlashing 1s infinite alternate;
+}
+.dotFlashing:nth-child(1) {
+  animation-delay: 0s;
+}
+.dotFlashing:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dotFlashing:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
-.chme input {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  border:1px solid var(--color-font-back);
-  padding-left: 10px;
-  padding-right: 80px; /* 버튼 공간 확보 */
-  box-sizing: border-box;
-  outline: none;
+@keyframes dotFlashing {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.chme input:focus {
-  border:1px solid var(--color-font-back);
-  box-shadow: none;
-}
-
-.send {
-  position: absolute;
-  right: 3px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10%;
-  height: 40px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  background-color: #f0d827;
-  transition: transform 0.1s ease;
-}
-
-.send:hover {
-  transform: translateY(-50%) scale(0.98);
-  background-color: #e0c817;
-}
-
-.send img {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  object-fit: cover;
-}
-
-/* 혜빈 추가 */
-.loadingMessage {
+/* ==============================
+  입력 영역
+============================== */
+.commentInputBox {
+  flex-shrink: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 10px;
-  gap: 2px;
-  width: 100%;
-  pointer-events: none; /* 클릭 방지 */
+  align-items: center;
+  height: 55px;
+  border-top: 2px solid var(--color-font-back);
+  background-color: var(--color-white);
+  padding: 8px 15px;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+  gap: 8px;
 }
 
-.loadingMessage.show {
-  opacity: 1;
-  transform: translateY(0);
+.inputField {
+  flex: 1;
+}
+
+.inputElement {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--color-font-back);
+  border-radius: 25px;
+  padding: 10px 15px;
+  outline: none;
+  background: var(--color-white);
+  font-size: 15px;
+  color: var(--color-font-color1);
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.inputElement:focus {
+  border-color: var(--color-primary);
+}
+
+.inputElement:disabled {
+  background-color: var(--color-white);
+  cursor: not-allowed;
+}
+
+.submitButton {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: var(--color-hover);
+  transform: scale(0.98);
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+.submitButton svg {
+  color: var(--color-white);
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .left {
+    display: none; /* 모바일에서는 overlay 없이 오른쪽 창만 보이게 */
+  }
+  .right {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .up {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .oneonenine {
+    font-size: 16px;
+  }
+
+  .infoText {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+
+  .bubble {
+    font-size: 13px;
+    padding: 8px 12px;
+    max-width: 80%;
+  }
+
+  .cardContainer {
+    padding: 10px 14px;
+    max-width: 90%;
+  }
+
+  .cardButton {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .submitButton {
+    height: 36px;
+    width: 36px;
+  }
+
+  .inputElement {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .up {
+    height: 55px;
+    padding: 0 10px;
+  }
+
+  .oneonenine {
+    font-size: 15px;
+  }
+
+  .infoText {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .bubble {
+    font-size: 12px;
+    padding: 6px 10px;
+    max-width: 85%;
+  }
+
+  .cardContainer {
+    padding: 8px 12px;
+  }
+
+  .cardButton {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .submitButton {
+    height: 32px;
+    width: 32px;
+  }
+
+  .inputElement {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
 }

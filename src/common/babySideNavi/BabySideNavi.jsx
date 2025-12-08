@@ -17,6 +17,12 @@ const BabySideNavi = ({ onClose }) => {
   // 태어났는지 여부 계산
   const isBorn = bornDueDate <= today;
 
+  // 이거 추가됨 사이드바 세로형을때는 긴급상담으로 이동이 되지 않아서
+  const handleEmergencyClick = () => {
+    navi("/counseling");
+    onClose();
+  };
+
   const onclickSecession = () => {
     // eslint-disable-next-line no-restricted-globals
     if (
@@ -34,26 +40,27 @@ const BabySideNavi = ({ onClose }) => {
 
   return (
     <>
-      {/* 배경 오버레이 */}
       <div className={styles.overlay} onClick={onClose}></div>
-
-      {/* 사이드바 패널 */}
       <div className={styles.sidContanier}>
-        {/* 닫기 버튼 */}
         <div className={styles.del}>
           <X className={styles.helpIcon} onClick={onClose} />
         </div>
+
         {/* 카테고리 (세로 모드) */}
         <div className={styles.sidnavi}>
           {/* isVertical={true} - 세로 형태의 디자인 적용 */}
-          <BabyButton isVertical={true} isBorn={isBorn} />
+          <BabyButton
+            isVertical={true}
+            isBorn={isBorn}
+            onEmergencyClick={handleEmergencyClick}
+          />
         </div>
-        {/* 아기 리스트 (사이드바 모드 + 스크롤) */}
+
         <div className={styles.sidController}>
           {/* isSidebar={true} - 가로 바 형태의 디자인 적용 */}
           <BabyController isSidebar={true} />
         </div>
-        {/* 회원탈퇴 버튼 */}
+
         <div className={styles.exitContainer}>
           <button className={styles.exit} onClick={onclickSecession}>
             <UserX /> 회원탈퇴

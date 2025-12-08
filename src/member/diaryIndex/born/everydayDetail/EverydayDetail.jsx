@@ -287,10 +287,12 @@ const EverydayDetail = ({
           {targetDayData.length === 0 && (
             <div className={styles.emptyMessage}>
               <Inbox className={styles.emptyIcon} />
-              <div>현재 {activeType} 기록이 없습니다</div>
-              <p className={styles.emptySubText}>
-                상단의 '기록 추가' 버튼을 눌러주세요
-              </p>
+              <div>
+                현재 {activeType} 기록이 없습니다
+                <p className={styles.emptySubText}>
+                  상단의 '기록 추가' 버튼을 눌러 새로운 기록을 추가해보세요
+                </p>
+              </div>
             </div>
           )}
         </motion.div>

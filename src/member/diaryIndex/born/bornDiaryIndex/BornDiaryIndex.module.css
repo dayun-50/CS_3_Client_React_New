@@ -49,8 +49,70 @@
   flex: 1;
 }
 
-
 /* 오른쪽 기록 */
 .rightContent {
   flex: 3;
+}
+
+/* 반응형 */
+@media (max-width: 1440px) {
+  .diaryIndexWrapper {
+    padding: 20px 0;
+    overflow-y: auto;
+  }
+}
+@media (max-width: 768px) {
+  .diaryIndexWrapper {
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .diaryIndexWrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contentLayout {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .leftPanel {
+    width: 100%;
+    flex: none;
+  }
+
+  .rightContent {
+    width: 100%;
+    flex: none;
+  }
+
+  .topBar {
+    padding-bottom: 15px;
+  }
+
+  .backButton {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 430px) {
+  .contentLayout {
+    gap: 10px;
+  }
+
+  .backButton {
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .leftPanel {
+    display: none;
+  }
+
+  .rightContent {
+    width: 100%;
+  }
 }

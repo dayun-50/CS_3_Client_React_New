@@ -1,179 +1,319 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import styles from "./Information.module.css";
-import { Heart, Activity, BookOpen, UserCog, TrendingUp } from "lucide-react";
+import img1 from "./imgs/index.png"; // PC 이미지
+import img2 from "./imgs/768img.png"; // 태블릿 이미지
+import img3 from "./imgs/480img.png"; // 모바일 이미지
 
-const sections = [
-  {
-    id: "hero",
-    title: "완벽한 육아 파트너",
-    subtitle: "우리 아이의 소중한 성장을 기록하고, 커뮤니티의 지혜를 더하세요.",
-    bgColor: "white",
-    imgPosition: "none",
-    icon: null,
+// ---------------- 모션 Variants ----------------
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+const rotateInLeft = {
+  hidden: { opacity: 0, x: -100, rotate: 5, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    filter: "blur(0px)",
+    transition: { type: "spring", stiffness: 50, duration: 1 },
   },
-  {
-    id: "baby-info",
-    title: "직관적인 아기 정보",
-    subtitle:
-      "수유, 수면, 배변 등의 핵심 일과를 타임라인 형태로 기록하고 아이 상태를 한눈에 파악하세요.",
-    bgColor: "#FCD34D",
-    imgPosition: "left",
-    icon: Heart,
+};
+const rotateInRight = {
+  hidden: { opacity: 0, x: 100, rotate: -5, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    filter: "blur(0px)",
+    transition: { type: "spring", stiffness: 50, duration: 1 },
   },
-  {
-    id: "health-record",
-    title: "필수 건강 기록",
-    subtitle:
-      "예방 접종, 투약 알림 및 체온 변화 등 건강 정보를 체계적으로 관리합니다.",
-    bgColor: "#93C5FD",
-    imgPosition: "right",
-    icon: Activity,
+};
+const bounceIn = {
+  hidden: { opacity: 0, y: 100, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 60, damping: 10, duration: 0.8 },
   },
-  {
-    id: "growth-chart",
-    title: "성장 차트",
-    subtitle:
-      "WHO 표준 기반 성장 곡선 차트로 아이의 성장 속도를 파악할 수 있습니다.",
-    bgColor: "#4ade80",
-    imgPosition: "none",
-    icon: TrendingUp,
-  },
-  {
-    id: "journal-emergency",
-    title: "산모수첩 & 긴급 상담",
-    subtitle: "중요 기록과 응급 연결을 쉽고 빠르게 관리하세요.",
-    bgColor: "#FFF4D6",
-    imgPosition: "grid",
-    icon: BookOpen,
-  },
-  {
-    id: "community-mypage",
-    title: "마이페이지 & 커뮤니티",
-    subtitle: "나를 위한 공간과 함께하는 지혜를 경험하세요.",
-    bgColor: "#ffffff",
-    imgPosition: "grid",
-    icon: UserCog,
-  },
-];
+};
+const scaleUp = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
+};
+const staggerChildren = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+const galleryItemScaleUp = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
 
 const Information = () => {
-  const [currentSection, setCurrentSection] = useState(0);
-  const [hoverIndex, setHoverIndex] = useState(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionsRef = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const totalSections = 5;
+  const isManualScrolling = useRef(false);
 
-  const sectionRefs = useRef([]);
+  if (sectionsRef.current.length !== totalSections) {
+    sectionsRef.current = Array(totalSections)
+      .fill(null)
+      .map((_, i) => sectionsRef.current[i] || null);
+  }
 
-  const handleScroll = () => {
-    const scrollPos = window.scrollY + window.innerHeight / 2;
-
-    sectionRefs.current.forEach((sec, idx) => {
-      if (
-        sec.offsetTop <= scrollPos &&
-        sec.offsetTop + sec.offsetHeight > scrollPos
-      ) {
-        setCurrentSection(idx);
-      }
-    });
-
-    // 진행 바 퍼센트 계산
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / maxScroll) * 100;
-    setScrollProgress(progress);
-  };
-
-  const scrollToSection = (idx) => {
-    window.scrollTo({
-      top: sectionRefs.current[idx].offsetTop,
-      behavior: "smooth",
-    });
+  const scrollTo = (index) => {
+    const target = sectionsRef.current[index];
+    if (!target) return;
+    isManualScrolling.current = true;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => {
+      isManualScrolling.current = false;
+      setActiveIndex(index);
+    }, 800);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isManualScrolling.current) return;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = sectionsRef.current.indexOf(entry.target);
+            if (idx !== -1) setActiveIndex(idx);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    sectionsRef.current.forEach((sec) => sec && observer.observe(sec));
+    return () => observer.disconnect();
   }, []);
+
+  const galleryImgs = [
+    "/images/gallery1.png",
+    "/images/gallery2.png",
+    "/images/gallery3.png",
+    "/images/gallery4.png",
+    "/images/gallery5.png",
+    "/images/gallery6.png",
+  ];
+
+  const navigate = useNavigate();
+
+  const healdLogin = () => {
+    navigate("/login");
+  };
 
   return (
     <div className={styles.container}>
-      {/* Dot Navigation (Fade In/Out + 모바일 좌측 이동 + ProgressBar 포함) */}
-      <motion.div
-        className={styles.dotNav}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+      {/* HERO */}
+      <section
+        className={styles.hero}
+        ref={(el) => (sectionsRef.current[0] = el)}
       >
-        {/* 점 네비 */}
-        {sections.map((_, idx) => (
-          <div
-            key={idx}
-            className={`${styles.dot} ${
-              currentSection === idx ? styles.activeDot : ""
-            }`}
-            onMouseEnter={() => setHoverIndex(idx)}
-            onMouseLeave={() => setHoverIndex(null)}
-            onClick={() => scrollToSection(idx)}
-          />
-        ))}
-
-        {/* dotIndicator → hover / active 이동 */}
-        <div
-          className={styles.dotIndicator}
-          style={{
-            transform: `translateY(${
-              (hoverIndex !== null ? hoverIndex : currentSection) * 32
-            }px)`,
-          }}
-        />
-
-        {/* Progress Bar (스크롤 퍼센트) */}
-        <div className={styles.progressBar}>
-          <div
-            className={styles.progressFill}
-            style={{ height: `${scrollProgress}%` }}
-          />
-        </div>
-      </motion.div>
-
-      {/* 각 Section */}
-      {sections.map((sec, idx) => (
-        <motion.section
-          key={sec.id}
-          ref={(el) => (sectionRefs.current[idx] = el)}
-          className={styles.section}
-          style={{ backgroundColor: sec.bgColor }}
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 50 }}
+        <motion.div
+          className={styles.heroInner}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={scaleUp}
         >
-          <div className={styles.contentWrapper}>
-            {sec.icon && <sec.icon size={48} className={styles.sectionIcon} />}
+          <motion.h1 variants={fadeUp} className={styles.heroTitle}>
+            완벽한 육아 파트너
+          </motion.h1>
+          <motion.p variants={fadeUp} className={styles.heroText}>
+            우리 아이의 소중한 성장을 기록하고, 커뮤니티의 지혜를 더하세요.
+          </motion.p>
+          <motion.button
+            variants={fadeUp}
+            className={styles.btnStart}
+            onClick={healdLogin}
+          >
+            지금 바로 시작하기
+          </motion.button>
+        </motion.div>
+      </section>
 
-            <div className={styles.textBlock}>
-              <h2 className={styles.title}>{sec.title}</h2>
-              <p className={styles.subtitle}>{sec.subtitle}</p>
-            </div>
+      {/* SECTION 1 – rotateInLeft */}
+      <section
+        className={styles.section}
+        ref={(el) => (sectionsRef.current[1] = el)}
+      >
+        <motion.div
+          className={styles.sectionInner}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={rotateInLeft}
+        >
+          <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
+            홈 페이지
+          </motion.h2>
+          <motion.p variants={fadeUp} className={styles.sectionDesc}>
+            아기의 정보와 실시간 반영되는 정책들을 한눈에 볼 수 있어요.
+          </motion.p>
+          <motion.img
+            variants={fadeUp}
+            className={styles.sectionImg}
+            src={img1}
+            alt=""
+          />
+        </motion.div>
+      </section>
 
-            {sec.imgPosition !== "none" && (
+      {/* SECTION 2 – rotateInRight */}
+      <section
+        className={styles.section}
+        ref={(el) => (sectionsRef.current[2] = el)}
+      >
+        <motion.div
+          className={styles.sectionInnerRow}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={rotateInRight}
+        >
+          <motion.img
+            variants={fadeUp}
+            className={styles.sectionImg}
+            src={img1}
+            alt=""
+          />
+          <motion.div
+            className={styles.sectionTextGroupLeft}
+            variants={staggerChildren}
+          >
+            <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
+              필수 건강 기록
+            </motion.h2>
+            <motion.p variants={fadeUp} className={styles.sectionDesc}>
+              예방 접종, 주차별 검진 및 증상 정보를 확인하고
+              <br />
+              예약 일정도 간편하게 기록할 수 있어요.
+            </motion.p>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* SECTION 3 – 여러 기기 */}
+      <section
+        className={styles.section}
+        ref={(el) => (sectionsRef.current[3] = el)}
+      >
+        <motion.div
+          className={styles.sectionInnerRow}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={bounceIn}
+        >
+          <motion.div
+            className={styles.sectionTextGroup}
+            variants={staggerChildren}
+          >
+            <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
+              여러 기기에서 간편하게
+            </motion.h2>
+            <motion.p variants={fadeUp} className={styles.sectionDesc}>
+              PC, 태블릿, 모바일 반응형을 적용하여
+              <br />
+              언제 어디서든 기록하고 확인할 수 있어요.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            className={styles.multiDeviceWrap}
+            variants={staggerChildren}
+          >
+            <motion.img
+              variants={fadeUp}
+              className={styles.deviceLarge}
+              src={img1}
+              alt="PC Mockup"
+            />
+            <motion.img
+              variants={fadeUp}
+              className={styles.deviceMid}
+              src={img2}
+              alt="Tablet Mockup"
+            />
+            <motion.img
+              variants={fadeUp}
+              className={styles.deviceSmall}
+              src={img3}
+              alt="Mobile Mockup"
+            />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* SECTION 4 – 갤러리 */}
+      <section
+        className={styles.gallerySection}
+        ref={(el) => (sectionsRef.current[4] = el)}
+      >
+        <motion.div
+          className={styles.galleryInner}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerChildren}
+        >
+          <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
+            성장 기록 갤러리
+          </motion.h2>
+          <motion.p variants={fadeUp} className={styles.sectionDesc}>
+            아기의 소중한 순간들을 갤러리 형태로 모아보세요.
+          </motion.p>
+
+          <div className={`${styles.galleryRow} ${styles.rowR2L}`}>
+            {[...galleryImgs, ...galleryImgs].map((src, i) => (
               <motion.div
-                className={styles.imagePlaceholder}
-                initial={{
-                  x: sec.imgPosition === "left" ? -200 : 200,
-                  opacity: 0,
-                }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, type: "spring", stiffness: 70 }}
+                className={styles.slideItem}
+                key={`top-${i}`}
+                variants={galleryItemScaleUp}
               >
-                이미지 영역
+                <img src={src} alt="" className={styles.galleryImg} />
+                <div className={styles.galleryHover}>
+                  <span>{i % 2 === 0 ? "수유 기록" : "수면 기록"}</span>
+                </div>
               </motion.div>
-            )}
+            ))}
           </div>
 
-          {idx < sections.length - 1 && <div className={styles.gradientLine} />}
-        </motion.section>
-      ))}
+          <div className={`${styles.galleryRow} ${styles.rowL2R}`}>
+            {[...galleryImgs, ...galleryImgs].map((src, i) => (
+              <motion.div
+                className={styles.slideItem}
+                key={`bottom-${i}`}
+                variants={galleryItemScaleUp}
+              >
+                <img src={src} alt="" className={styles.galleryImg} />
+                <div className={styles.galleryHover}>
+                  <span>{i % 2 === 0 ? "발달 기록" : "건강 기록"}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* DOT NAV */}
+      <div className={styles.dotNavWrap}>
+        {Array.from({ length: totalSections }, (_, i) => (
+          <div
+            key={i}
+            className={`${styles.dot} ${
+              activeIndex === i ? styles.activeDot : ""
+            }`}
+            onClick={() => scrollTo(i)}
+          />
+        ))}
+      </div>
     </div>
   );
 };

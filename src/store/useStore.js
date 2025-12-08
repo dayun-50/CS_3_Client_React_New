@@ -7,9 +7,9 @@ const useAuthStore = create((set) => ({
   isLogin: false,
   babySeq: 0,
   babyDueDate: 0, //임신한 아기이면 출산 예정일, 태어난 아기이면 생일
-  newAlerts : false,
+  newAlerts: false,
 
-  setNewAlerts: (resp) => set({ newAlerts: resp }) , 
+  setNewAlerts: (resp) => set({ newAlerts: resp }),
   getbabySeq: (seq) => {
     set((state) => {
       sessionStorage.setItem("babySeq", seq);

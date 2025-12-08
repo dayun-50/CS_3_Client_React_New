@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./CommonHeader.module.css";
 import { LogOut, Menu, Bell, BellOff } from "lucide-react";
@@ -7,17 +7,35 @@ import BabySideNavi from "../babySideNavi/BabySideNavi";
 import UseCommonHeader from "./UseCommonHeader";
 import useAuthStore from "store/useStore";
 
-const CommonHeader = ({
-  isLogin,
-  alerts,
-  setAlerts
-}) => {
+const CommonHeader = ({ isLogin, alerts, setAlerts }) => {
   const { id } = useAuthStore((state) => state);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isBellOpen, setIsBellOpen] = useState(false); // 알림 드롭다운 상태 추가
 
+  const { clickAlarm, newAlerts, setNewAlerts } = UseCommonHeader(); // 이거 위치 위로 올림 이것도 확인 바람
+
+  // 드롭다운 바탕화면 클릭시 들어가도록 하는 상태 로직 -------------------------------------------
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (
+        isBellOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setIsBellOpen(false);
+        setNewAlerts(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isBellOpen]);
+
+  // ---------------------------------------------------------------------------------------------
+
   const location = useLocation();
-  const { clickAlarm, newAlerts, setNewAlerts } = UseCommonHeader();
 
   const toggleSideNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -93,12 +111,17 @@ const CommonHeader = ({
                     onClick={toggleBellDropdown}
                     className={styles.iconButton}
                   >
-                    <Bell className={styles.bellIcon} onClick={()=>{setNewAlerts(false)}}/>
+                    <Bell
+                      className={styles.bellIcon}
+                      onClick={() => {
+                        setNewAlerts(false);
+                      }}
+                    />
                     {newAlerts && <span className={styles.alertBadge} />}
                   </button>
 
                   {isBellOpen && (
-                    <div className={styles.bellDropdown}>
+                    <div className={styles.bellDropdown} ref={dropdownRef}>
                       <div className={styles.dropdownHeader}>
                         알림
                         {newAlerts && (
@@ -111,7 +134,7 @@ const CommonHeader = ({
                           <div
                             key={idx}
                             className={styles.alertItem}
-                            onClick={() => clickAlarm(alert , setAlerts)}
+                            onClick={() => clickAlarm(alert, setAlerts)}
                           >
                             <p className={styles.alertContent}>
                               {alert.message}

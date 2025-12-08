@@ -7,5 +7,12 @@
 @media (max-width: 1440px) {
   .container {
     overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .container::-webkit-scrollbar {
+    display: none;
   }
 }

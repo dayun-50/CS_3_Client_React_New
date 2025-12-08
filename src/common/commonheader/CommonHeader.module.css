@@ -13,7 +13,7 @@
   color: var(--color-font-color1);
   font-family: var(--font-family);
 
-  z-index: 9999; /* 드롭다운이 포함된 컨텍스트를 가장 위로 */
+  z-index: 9999;
 }
 
 /* 콘텐츠 래퍼 */
@@ -27,9 +27,7 @@
   margin: 0 auto;
 }
 
-/* ==============================
-   좌측 섹션 (로고 + 메뉴)
-   ============================== */
+/* 좌측 섹션 */
 .leftSection {
   height: 100%;
   display: flex;
@@ -108,9 +106,7 @@
   width: 100%;
 }
 
-/* ==============================
-   우측 섹션 (아이콘 및 드롭다운)
-   ============================== */
+/* 우측 섹션  */
 .rightSection {
   display: flex;
   align-items: center;
@@ -332,113 +328,14 @@
   font-weight: bold;
 }
 
-/* -------------------------------------
-      반응형
----------------------------------------*/
+/* 반응형 */
 @media (max-width: 1400px) {
   .headerContentWrapper {
     padding: 0 20px;
   }
 }
 
-/* 태블릿 대응 (768px 이하) */
-@media (max-width: 768px) {
-  .headerContentWrapper {
-    padding: 0 20px;
-  }
-
-  .menuItems {
-    gap: 16px;
-  }
-
-  .leftSection {
-    gap: 20px;
-  }
-
-  .rightSection {
-    gap: 12px;
-  }
-
-  .bellDropdown {
-    width: 280px;
-    right: 20px;
-  }
-
-  .signUpBtn,
-  .loginBtn {
-    width: 140px;
-    font-size: 14px;
-    padding: 10px;
-    height: 36px;
-  }
-}
-
-/* 모바일 대응 (430px 이하) */
-@media (max-width: 480px) {
-  .headerContentWrapper {
-    padding: 0 16px;
-  }
-
-  .leftSection,
-  .rightSection {
-    gap: 8px;
-  }
-
-  .menuItems {
-    display: flex;
-    gap: 12px;
-  }
-
-  .menuItem {
-    font-size: 12px;
-  }
-
-  .bellDropdown {
-    width: 90%;
-    right: 5%;
-  }
-
-  .logoIcon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .bellIcon,
-  .menuIcon,
-  .logoutIcon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .authButtons {
-    gap: 8px;
-  }
-
-  .signUpBtn,
-  .loginBtn {
-    width: 100px;
-    font-size: 14px;
-    padding: 10px;
-    height: 36px;
-  }
-
-  /* 알람 */
-  .alertBadge {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-/*--------------------------------------------------------------------*/
-
-/* ============================= */
-/* 태블릿 (1025px ~ 1280px) */
-/* ============================= */
 @media (max-width: 1280px) and (min-width: 1025px) {
-  .headerContentWrapper {
-    padding: 0 60px; /* 데스크탑 118px → 태블릿 60px */
-  }
-
   .logoIcon {
     width: 36px;
     height: 36px;
@@ -465,36 +362,73 @@
   }
 }
 
-/* ============================= */
-/* 모바일 (768px 이하) */
-/* ============================= */
-@media (max-width: 768px) {
-  .headerContentWrapper {
-    padding: 0 20px;
-  }
-
+@media (max-width: 1024px) {
   .logoIcon {
     width: 32px;
     height: 32px;
   }
 
   .menuItems {
+    gap: 16px;
+  }
+
+  .signUpBtn,
+  .loginBtn {
+    width: 120px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .rightSection {
+    gap: 12px;
+  }
+
+  .bellDropdown {
+    right: 20px;
+    width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leftSection,
+  .rightSection {
+    gap: 8px;
+  }
+
+  .menuItems {
+    gap: 12px;
+  }
+
+  .menuItem {
+    font-size: 12px;
+  }
+
+  .bellDropdown {
+    width: 90%;
+    right: 5%;
+  }
+
+  .logoIcon,
+  .bellIcon,
+  .menuIcon,
+  .logoutIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .authButtons {
     gap: 8px;
   }
 
   .signUpBtn,
   .loginBtn {
-    width: 90px;
+    width: 100px;
     height: 32px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
-  .rightSection {
-    gap: 8px;
-  }
-
-  .bellDropdown {
-    right: 20px;
-    width: 220px;
+  .alertBadge {
+    width: 10px;
+    height: 10px;
   }
 }

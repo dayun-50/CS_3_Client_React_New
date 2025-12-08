@@ -13,7 +13,7 @@
   font-family: var(--font-family);
 
   overflow-y: auto;
-  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* -------------------- 헤더 -------------------- */
@@ -137,7 +137,8 @@
 
 /* -------------------- 로그 리스트 -------------------- */
 .logListWrapper {
-  flex: none;
+  flex: 1;
+  width: 100%;
   height: 550px;
   overflow-y: auto;
 
@@ -228,7 +229,6 @@
 }
 
 /* 드롭다운 */
-/* 드롭다운 트리거 아이콘 감싸는 영역 */
 .actionButtonWrapper {
   position: relative;
   display: flex;
@@ -237,7 +237,6 @@
   cursor: pointer;
 }
 
-/* 점 3개 아이콘 */
 .actionIcon {
   cursor: pointer;
   color: var(--color-font-color1);
@@ -279,36 +278,43 @@
   transform: scale(0.98);
 }
 
-/* ----- 정보 없을 시 ----- */
-.emptyMessageWrapper {
+/* ----- 기록이 없을 시 ----- */
+.emptyMessage {
   flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   background: var(--color-white);
   border-radius: 16px;
-
-  gap: 12px;
-  text-align: center;
   padding: 40px 20px;
+  gap: 16px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-/* 아이콘 크게 */
 .emptyIcon {
-  width: 52px;
-  height: 52px;
-  stroke-width: 1.4;
+  width: 60px;
+  height: 60px;
+  stroke-width: 1.5;
   color: var(--color-font-color2);
 }
 
-/* 서브 텍스트 */
+.emptyMessage div {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-font-color1);
+}
+
 .emptySubText {
   font-size: 14px;
   color: var(--color-font-color2);
-  opacity: 0.7;
+  opacity: 0.8;
+  margin-top: 4px;
 }
 
 /* -------------------- 모달 -------------------- */
@@ -364,4 +370,135 @@
   color: var(--color-font-color1);
   font-weight: 500;
   line-height: 1.5;
+}
+
+/* 반응형 */
+/* ==================== 반응형 (태블릿) ==================== */
+@media (max-width: 768px) {
+  .contentLayout {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .leftPanel {
+    width: 100%;
+    flex: none;
+  }
+  .rightContent {
+    width: 100%;
+    flex: none;
+  }
+
+  .headerSection,
+  .topBar {
+    gap: 15px;
+    padding-bottom: 15px;
+  }
+
+  .dateNavigation {
+    gap: 60px;
+  }
+  .arrowIcon {
+    width: 22px;
+    height: 22px;
+  }
+  .currentDate {
+    font-size: 14px;
+  }
+
+  .filterButton {
+    padding: 4px 10px;
+    min-height: 28px;
+    font-size: 12px;
+  }
+
+  .addButton {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .logListWrapper {
+    max-height: 400px;
+    gap: 10px;
+  }
+
+  .logEntry {
+    height: 70px;
+    padding: 0 15px;
+  }
+
+  .logIconSvg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ==================== 반응형 (모바일) ==================== */
+@media (max-width: 480px) {
+  .contentLayout {
+    gap: 10px;
+  }
+  .leftPanel {
+    display: none;
+  }
+  .rightContent {
+    width: 100%;
+  }
+
+  .headerSection,
+  .topBar {
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .dateNavigation {
+    gap: 40px;
+  }
+  .arrowIcon {
+    width: 18px;
+    height: 18px;
+  }
+  .currentDate {
+    font-size: 13px;
+  }
+
+  .categoryFilters {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    justify-items: center;
+  }
+
+  .filterButton {
+    width: 100%;
+    padding: 4px 6px;
+    font-size: 11px;
+    min-height: 28px;
+  }
+  .addButton {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .logListWrapper {
+    max-height: 300px;
+    gap: 8px;
+  }
+
+  .logEntry {
+    height: 60px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .logIconSvg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dropdownMenu {
+    top: 25px;
+    min-width: 90px;
+    font-size: 12px;
+  }
 }

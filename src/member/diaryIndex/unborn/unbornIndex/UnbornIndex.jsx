@@ -49,7 +49,6 @@ const UnBornDiaryIndex = () => {
       </div>
 
       <div className={styles.rigth}>
-        {/* AnimatePresence: route change 시 exit + enter animation */}
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route

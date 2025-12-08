@@ -1,245 +1,217 @@
 import React, { useState, useRef, useEffect } from "react";
-import ReactDOM from "react-dom"; // Portal 사용
-import styles from "./Counseling.module.css"; // CSS 모듈 import
-import pointImg from "./img/point.png"; // 전송 버튼 이미지 import
+import ReactDOM from "react-dom";
+import styles from "./Counseling.module.css";
+import { Send } from "lucide-react";
 import useCounseling from "./useCounseling";
 import { caxios } from "../../config/config";
 
-// Counseling 컴포넌트: 긴급 상담 채팅창
 const Counseling = ({ onClose }) => {
-  const messageEndRef = useRef(null); // 메시지 + 로딩 포함 스크롤 참조
-  const [inputText, setInputText] = useState(""); // 입력창 상태
-  const [messages, setMessages] = useState([]); // 채팅 메시지 배열 상태
-  const [inputDisabled, setInputDisabled] = useState(true); // 인풋 AI상담 누를시에만 작성가능
-  const [isLoading, setIsLoading] = useState(false);  // 로딩 상황
+  const messageEndRef = useRef(null);
+  const [inputText, setInputText] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [inputDisabled, setInputDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { selectBtn } = useCounseling(setInputText, setMessages, setInputDisabled);
+  const { selectBtn } = useCounseling(
+    setInputText,
+    setMessages,
+    setInputDisabled
+  );
 
-  const now = new Date();
-  const formatTime = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  const formatTime = new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
-  // 컴포넌트가 처음 렌더링될 때 챗봇이 먼저 인사 메시지 전송 및 버튼 메시지 추가
+  // 초기 카드 메시지
   useEffect(() => {
-    const firstMsg = {
-      text: "혜빈이는 긴급하다옹",
-      sender: "other",
-      time: formatTime,
-      senderName: "챗봇"
-    };
-
-    const buttons = ["입덧이 심해요.", "아이가 열이 나요.", "아이가 토를 해요.", "AI 상담"];
-    const buttonMessages = buttons.map(btnText => ({
-      sender: "other",
-      time: formatTime,
-      senderName: "챗봇",
-      isButton: true,
-      btnText // 버튼에 표시할 텍스트
-    }));
-
-    setMessages([firstMsg, ...buttonMessages]);
+    setMessages([
+      {
+        sender: "other",
+        type: "card",
+        senderName: "CS",
+        text: "지금 아기가 어떤 상황인가요? 상세한 정보를 제공해 주시면 맞춤형 긴급 상담을 시작할 수 있습니다.",
+        buttons: [
+          "입덧이 심해요.",
+          "아이가 열이 나요.",
+          "아이가 토를 해요.",
+          "AI 상담",
+        ],
+        time: formatTime,
+      },
+    ]);
   }, []);
 
-  // 메시지 전송 함수
   const sendMessage = () => {
-    if (inputText.trim() === "" || isLoading) return;
+    if (!inputText.trim() || isLoading) return;
 
-    setMessages(prev => [
-      ...prev,
-      { text: inputText, sender: "me", time: formatTime, senderName: "나" }
+    setMessages((prev) => [
+      ...prev.filter((msg) => msg.type !== "card"),
+      {
+        sender: "me",
+        text: inputText,
+        senderName: "나",
+        time: formatTime,
+      },
     ]);
 
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 500);
+    setIsLoading(true);
 
-    caxios.post("/chatBoot/aiAnswer", { question: inputText })
-      .then(resp => {
+    caxios
+      .post("/chatBoot/aiAnswer", { question: inputText })
+      .then((resp) => {
         const aiAnswer = resp.data;
-        setMessages(prev => [
+        setMessages((prev) => [
           ...prev,
-          { text: aiAnswer, sender: "other", time: formatTime, senderName: "챗봇" }
+          {
+            sender: "other",
+            text: aiAnswer,
+            senderName: "긴급상담",
+            time: formatTime,
+          },
         ]);
       })
-      .catch(err => {
-        console.log(err);
-        setMessages(prev => [
+      .catch(() => {
+        setMessages((prev) => [
           ...prev,
-          { text: "응답을 가져오는 데 실패했습니다. 다시 시도해 주세요.", sender: "system", time: formatTime, senderName: "시스템" }
+          {
+            sender: "system",
+            text: "응답 실패. 다시 시도해주세요.",
+            senderName: "시스템",
+            time: formatTime,
+          },
         ]);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => setIsLoading(false));
 
-    setInputText(""); // 입력창 초기화
+    setInputText("");
   };
 
-  // 메시지 + 로딩 메시지가 바뀔 때 스크롤 자동 이동
+  // 스크롤 자동
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollTop = messageEndRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
 
-  // handleClose 함수: 모달 상태를 즉시 false로 바꿔서 모달 닫기
- const [isClosed, setIsClosed] = useState(false);
 
-const handleClose = () => {
-  setIsClosed(true); // 모달 닫힘 상태 표시
-  setInputText("");
-  setMessages([]);
-  setInputDisabled(true);
-  setIsLoading(false);
-  onClose(); // 부모 상태 false
-};
+  const MessageItem = ({ msg }) => {
+    if (msg.type === "card") {
+      return (
+        <div className={styles.cardMessageWrapper}>
+          <div className={styles.cardRow}>
+            <div className={styles.cardContainer}>
+              <span className={styles.senderName}>{msg.senderName}</span>
+              <div className={styles.cardText}>{msg.text}</div>
+              <div className={styles.cardButtons}>
+                {msg.buttons.map((btn, idx) => (
+                  <button
+                    key={idx}
+                    className={styles.cardButton}
+                    onClick={() => selectBtn(btn)}
+                  >
+                    {btn}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <span className={styles.cardTime}>{msg.time}</span>
+          </div>
+        </div>
+      );
+    }
 
-// sendMessage 함수 안에서
-if (isClosed) return; // 모달이 닫히면 더 이상 상태 업데이트 하지 않음
+    const isMe = msg.sender === "me";
+    const isSystem = msg.sender === "system";
 
-  // Portal로 body 최상위에 렌더링
+    return (
+      <div
+        className={`${styles.messageContainer} ${
+          isMe
+            ? styles.myMessage
+            : isSystem
+            ? styles.systemMessage
+            : styles.otherMessage
+        }`}
+      >
+        {!isMe && !isSystem && (
+          <span className={styles.senderName}>{msg.senderName}</span>
+        )}
+        <div className={styles.bubbleRow}>
+          <div className={styles.bubble}>{msg.text}</div>
+          <span className={styles.messageTime}>{msg.time}</span>
+        </div>
+      </div>
+    );
+  };
+
   return ReactDOM.createPortal(
-    <div className={styles.container} style={{ zIndex: 10000, position: "fixed", top: 0, left: 0, width: "100%", height: "100%" }}>
-      {/* 왼쪽 클릭 시 모달 닫기 */}
-      <div className={styles.left} onClick={handleClose}></div>
-
-      {/* 오른쪽 채팅창 */}
+    <div className={styles.container}>
+      <div className={styles.left} onClick={onClose}></div>
       <div className={styles.right} onClick={(e) => e.stopPropagation()}>
-        {/* 상단 헤더 */}
-        <div className={styles.up}>
-          <div className={styles.oneonenine}>긴급 상담</div>
-          {/* 오른쪽 X 버튼 */}
-          <button className={styles.closeBtn} onClick={handleClose}>✕</button>
+
+        {/* 상단 헤더 + 안내문 sticky */}
+        <div className={styles.stickyTop}>
+          <div className={styles.up}>
+            <div className={styles.oneonenine}>긴급 상담</div>
+            <button className={styles.closeBtn} onClick={onClose}>
+              ✕
+            </button>
+          </div>
+          <div className={styles.infoText}>
+            긴급 상황에서 AI 상담을 받을 수 있는 공간입니다.
+            <br />
+            아기의 상태나 증상을 선택하거나 입력하여 맞춤형 상담을 시작하세요.
+          </div>
         </div>
 
-        {/* 채팅 메시지 영역 */}
+        {/* 메시지 영역 */}
         <div className={styles.down}>
           <div className={styles.chatbody} ref={messageEndRef}>
-            <div className={styles.mes}>
-              {messages.map((msg, idx) => {
-                const isMe = msg.sender === "me";
+            {messages.map((msg, idx) => (
+              <MessageItem key={idx} msg={msg} />
+            ))}
 
-                return (
-                  <div
-                    key={idx}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: isMe ? "flex-end" : "flex-start",
-                      marginBottom: "10px",
-                      gap: "2px",
-                      width: "100%"
-                    }}
-                  >
-                    {msg.senderName && (
-                      <span style={{ fontSize: "16px", fontWeight: "bold", color: "#808080" }}>
-                        {msg.senderName}
-                      </span>
-                    )}
-
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-end",
-                        justifyContent: isMe ? "flex-end" : "flex-start",
-                        gap: "5px",
-                        width: "100%",
-                        flexWrap: "wrap"
-                      }}
-                    >
-                      {isMe && <span style={{ fontSize: "12px", color: "#888" }}>{msg.time}</span>}
-
-                      <div
-                        style={{
-                          maxWidth: "70%",
-                          backgroundColor: isMe ? "#adb9e3" : "#FFF4D6",
-                          padding: "10px 14px",
-                          borderRadius: "15px",
-                          fontSize: "14px",
-                          wordWrap: "break-word",
-                          overflowWrap: "break-word",
-                          whiteSpace: "pre-wrap",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "5px",
-                          boxSizing: "border-box"
-                        }}
-                      >
-                        {/* 버튼 메시지면 span 생략 */}
-                        {!msg.isButton && <span>{msg.text}</span>}
-
-                        {/* 버튼은 항상 표시 */}
-                        {!isMe && msg.isButton && (
-                          <button
-                            onClick={selectBtn} 
-                            style={{
-                              marginTop: "5px",
-                              padding: "5px 10px",
-                              borderRadius: "20px",
-                              border: "none",
-                              backgroundColor:"#F0D827",
-                              cursor: "pointer",
-                              fontSize: "14px",
-                              color:"#ffffff",
-                              fontWeight:"bold",
-                              wordWrap: "break-word",
-                              overflowWrap: "break-word",
-                              whiteSpace: "normal"
-                            }}
-                            onMouseOver={e => e.currentTarget.style.background = "#e0c817"}
-                            onMouseOut={e => e.currentTarget.style.background = "#F0D827"}
-                          >
-                            {msg.btnText} {/* 버튼 안 글씨 */}
-                          </button>
-                        )}
-                      </div>
-
-                      {!isMe && <span style={{ fontSize: "12px", color: "#888" }}>{msg.time}</span>}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* 로딩 메시지 */}
-              {isLoading && (
-                <div className={styles.loadingMessage}>
-                  <span style={{ fontSize: "16px", fontWeight: "bold", color: "#808080" }}>
-                    챗봇
-                  </span>
-                  <div
-                    style={{
-                      maxWidth: "70%",
-                      backgroundColor: "#FFF4D6",
-                      padding: "10px 14px",
-                      borderRadius: "15px",
-                      fontSize: "14px",
-                      color: "#333",
-                      fontStyle: "italic"
-                    }}
-                  >
-                    <span>답변 대기 중입니다...</span>
+            {isLoading && (
+              <div
+                className={`${styles.messageContainer} ${styles.loadingMessage}`}
+              >
+                <span className={styles.senderName}>긴급상담</span>
+                <div className={styles.bubbleRow}>
+                  <div className={styles.loadingBubble}>
+                    <div className={styles.dotFlashing}></div>
+                    <div className={styles.dotFlashing}></div>
+                    <div className={styles.dotFlashing}></div>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
-          {/* 메시지 입력 영역 */}
-          <div className={styles.chatmessage}>
-            <div className={styles.chme}>
+          {/* 입력 영역 */}
+          <div className={styles.commentInputBox}>
+            <div className={styles.inputField}>
               <input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="메시지를 입력하세요"
-                disabled={inputDisabled}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") sendMessage();
-                }}
+                placeholder={
+                  inputDisabled
+                    ? "AI 상담을 시작하면 활성화됩니다."
+                    : "메시지를 입력하세요"
+                }
+                className={styles.inputElement}
+                disabled={inputDisabled || isLoading}
+                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               />
-              <button className={styles.send} onClick={sendMessage}>
-                <img src={pointImg} alt="send" />
-              </button>
             </div>
+            <button
+              className={styles.submitButton}
+              onClick={sendMessage}
+              disabled={inputDisabled || isLoading || inputText.trim() === ""}
+            >
+              <Send size={24} color="#fff" />
+            </button>
           </div>
         </div>
       </div>

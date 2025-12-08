@@ -2,17 +2,17 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .writeContainer {
   position: fixed;
-  top: 30%; /* 화면 중앙으로 이동 */
-  left: 40%;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 6px 4px 11px rgba(0, 0, 0, 0.1);
   border-radius: 22px;
   background-color: #fff;
@@ -22,18 +22,20 @@
   box-sizing: border-box;
   text-align: center;
   font-family: Pretendard;
-
-  z-index: 1001;
+  z-index: 10000;
+  width: 400px;
+  max-width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 /* 내부 컨텐츠 래퍼 */
 .contentWrapper {
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  max-width: 100%;
 }
 
 /* 카테고리 제목 */
@@ -48,6 +50,7 @@
   font-weight: 800;
   letter-spacing: 2.5px;
   text-transform: capitalize;
+  font-size: 18px;
 }
 
 /* 입력 그룹 */
@@ -73,6 +76,7 @@
 .inputLabel {
   font-weight: 500;
   text-transform: capitalize;
+  font-size: 16px;
 }
 
 /* 시간 입력 */
@@ -124,14 +128,12 @@
   flex-shrink: 0;
 }
 
-/* 배변 */
-/* 라디오 버튼 그룹 */
+/* 배변 라디오 버튼 */
 .radioGroup {
   display: flex;
   gap: 16px;
 }
 
-/* 라벨 버튼화 */
 .radioLabel {
   display: flex;
   align-items: center;
@@ -214,4 +216,95 @@
   font-weight: 800;
   color: #fff;
   text-transform: capitalize;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .writeContainer {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .contentWrapper {
+    gap: 20px;
+  }
+
+  .inputGroup {
+    gap: 18px;
+    font-size: 16px;
+  }
+
+  .timeInput,
+  .amountInputWrapper,
+  .sleepInput {
+    height: 42px;
+    font-size: 15px;
+    padding: 0 12px;
+  }
+
+  .radioGroup {
+    gap: 12px;
+  }
+
+  .actionButtonsContainer {
+    gap: 15px;
+  }
+
+  .actionButton {
+    height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .writeContainer {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .contentWrapper {
+    gap: 15px;
+  }
+
+  .categoryTitle {
+    font-size: 16px;
+  }
+
+  .inputGroup {
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .inputLabel {
+    font-size: 14px;
+  }
+
+  .timeInput,
+  .amountInputWrapper,
+  .sleepInput {
+    height: 38px;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .radioGroup {
+    gap: 8px;
+  }
+
+  .radioLabel {
+    font-size: 14px;
+  }
+
+  .actionButtonsContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .actionButton {
+    height: 38px;
+  }
+
+  .buttonText,
+  .buttonTextBold {
+    font-size: 14px;
+  }
 }

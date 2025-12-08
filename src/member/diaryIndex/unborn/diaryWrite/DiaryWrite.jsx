@@ -17,9 +17,6 @@ const DiaryWrite = ({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId })
 
   const navigate = useNavigate();
 
-
-
-
   return (
     <div className={styles.container}>
       {/* 제목 입력 */}

@@ -69,7 +69,7 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
     isMine,
   } = UseBoardList({ handleDeleteBoard, handleEditBoard });
 
-  const isLogin = useAuthStore(state => state.isLogin);
+  const isLogin = useAuthStore((state) => state.isLogin);
 
   const [reportOpen, setReportOpen] = useState(false);
 
@@ -85,8 +85,9 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
             {Object.keys(CATEGORY_MAP).map((cat) => (
               <button
                 key={cat}
-                className={`${styles.categoryItem} ${activeCategory === cat ? styles.active : ""
-                  }`}
+                className={`${styles.categoryItem} ${
+                  activeCategory === cat ? styles.active : ""
+                }`}
                 onClick={() => handleTopBtn(cat)}
               >
                 {cat}
@@ -97,10 +98,11 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
 
         {/* 오른쪽 그룹: 글작성 버튼 + 검색창 */}
         <div className={styles.rightGroup}>
-
-          {isLogin && <button className={styles.writeButton} onClick={toWrite}>
-            글 작성
-          </button>}
+          {isLogin && (
+            <button className={styles.writeButton} onClick={toWrite}>
+              글 작성
+            </button>
+          )}
 
           <div className={styles.searchBar}>
             <input
@@ -156,8 +158,9 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
               >
                 {/* 카드 상단 이미지 영역 */}
                 <div
-                  className={`${styles.cardHeader} ${!thumbsUrlMap[item.board.board_seq] ? styles.noImage : ""
-                    }`}
+                  className={`${styles.cardHeader} ${
+                    !thumbsUrlMap[item.board.board_seq] ? styles.noImage : ""
+                  }`}
                 >
                   {/* 이미지 있을 때만 출력 */}
                   {thumbsUrlMap[item.board.board_seq] && (
@@ -168,16 +171,18 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
                     />
                   )}
 
-                  {isLogin && <button
-                    className={styles.menuBtn}
-                    aria-label="옵션 더보기"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleMenuClick(e, item.board.board_seq);
-                    }}
-                  >
-                    <MoreHorizontal size={24} color="#696b70" />
-                  </button>}
+                  {isLogin && (
+                    <button
+                      className={styles.menuBtn}
+                      aria-label="옵션 더보기"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleMenuClick(e, item.board.board_seq);
+                      }}
+                    >
+                      <MoreHorizontal size={24} color="#696b70" />
+                    </button>
+                  )}
 
                   {openMenuId === item.board.board_seq && (
                     <motion.div
@@ -237,8 +242,9 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
                 <div className={styles.content}>
                   <div className={styles.textGroup}>
                     <span
-                      className={`${styles.categoryTag} ${styles[CATEGORY_MAP_REVERSE[item.board.board_type]]
-                        }`}
+                      className={`${styles.categoryTag} ${
+                        styles[CATEGORY_MAP_REVERSE[item.board.board_type]]
+                      }`}
                     >
                       {CATEGORY_MAP_REVERSE[item.board.board_type]}
                     </span>

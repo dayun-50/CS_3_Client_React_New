@@ -24,6 +24,7 @@ import LoginBox from "notmember/login/loginBox/LoginBox";
 import Login from "notmember/login/Login";
 
 import { useEffect, useRef, useState } from "react";
+import BornDiaryIndex from "member/diaryIndex/born/bornDiaryIndex/BornDiaryIndex";
 
 const MainIndex = ({ alerts, setAlerts }) => {
   const { isLogin } = useAuthStore((state) => state);
@@ -34,24 +35,16 @@ const MainIndex = ({ alerts, setAlerts }) => {
   --------------------------------*/
   const [isLoading, setIsLoading] = useState(true);
 
-  // 헤더 높이 측정
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(98);
 
-  // Information 페이지 여부 (비로그인 + "/")
   const isInfoPage = !isLogin && location.pathname === "/";
 
-  /* -----------------------------
-   *  로딩 처리 useEffect
-  --------------------------------*/
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
-  /* -----------------------------
-   *  경로 변화 감지
-  --------------------------------*/
   useEffect(() => {
     if (!isLogin) return;
     const paths = [
@@ -66,7 +59,6 @@ const MainIndex = ({ alerts, setAlerts }) => {
 
     console.log("현재 path:", currentPath);
 
-    // 정확히 paths 배열에 있는 값만 처리
     if (paths.includes(currentPath)) {
       caxios
         .post("/dashCart", { path: currentPath })
@@ -109,9 +101,6 @@ const MainIndex = ({ alerts, setAlerts }) => {
     ? styles.layoutMainYellow
     : styles.layoutMain;
 
-  /* -----------------------------
-   *  Hook 사용 후 return 허용
-  --------------------------------*/
   if (isLoading) {
     return <Loading message="페이지를 준비하고 있습니다" />;
   }
