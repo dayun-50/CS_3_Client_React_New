@@ -13,22 +13,30 @@
   box-sizing: border-box;
   max-height: 660px;
   overflow-y: auto;
+
+  /* ---- BabyController에서 가져온 스크롤 스타일 ---- */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
 }
 
 .container::-webkit-scrollbar {
-  width: 5px; 
+  width: 6px;
 }
-.container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2); 
-  border-radius: 3px;
-}
+
 .container::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.container > div:last-child {
-  border-bottom: none;
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 4px;
+  border: 2px solid #ffffff;
 }
+
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-hover);
+}
+/* --------------------------------------------- */
 
 /* ==============================
    빈 상태 중앙 정렬
@@ -242,6 +250,8 @@
   color: #b0b0b0;
   font-size: 16px;
 }
+
+
 /* ==============================
    반응형: 모바일 / 태블릿 / PC
    ============================== */

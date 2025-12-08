@@ -49,6 +49,7 @@ const Counseling = ({ onClose }) => {
       ...prev.filter((msg) => msg.type !== "card"),
       {
         sender: "me",
+        type: "text",
         text: inputText,
         senderName: "나",
         time: formatTime,
@@ -94,6 +95,7 @@ const Counseling = ({ onClose }) => {
     }
   }, [messages, isLoading]);
 
+
   const MessageItem = ({ msg }) => {
     if (msg.type === "card") {
       return (
@@ -107,7 +109,7 @@ const Counseling = ({ onClose }) => {
                   <button
                     key={idx}
                     className={styles.cardButton}
-                    onClick={() => selectBtn(btn)}
+                    onClick={(e) => selectBtn(e)}
                   >
                     {btn}
                   </button>
@@ -148,6 +150,7 @@ const Counseling = ({ onClose }) => {
     <div className={styles.container}>
       <div className={styles.left} onClick={onClose}></div>
       <div className={styles.right} onClick={(e) => e.stopPropagation()}>
+
         {/* 상단 헤더 + 안내문 sticky */}
         <div className={styles.stickyTop}>
           <div className={styles.up}>

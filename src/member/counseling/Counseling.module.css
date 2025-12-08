@@ -185,7 +185,7 @@
 /* 내 말풍선 스타일 */
 .myMessage .bubble {
   background-color: var(--color-my-bubble);
-  color: var(--color-white);
+  color: #696b70;
   border-bottom-right-radius: 2px;
 }
 

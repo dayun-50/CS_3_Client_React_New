@@ -122,6 +122,8 @@ const MainIndex = ({ alerts, setAlerts }) => {
         <Routes>
           <Route path="" element={!isLogin ? <Information /> : <BabyIndex />} />
           {/*로그인 안되어 있으면 ? 인포메이션 : 되면 베이비인덱스*/}
+
+
           <Route path="board/*" element={<BoardIndex />} /> {/*커뮤니티*/}
           {/*-----------------------------------------------------------------------여기까지는 비회원도 접근 가능한 부분 아래는 불가하게 막아야함*/}
           <Route

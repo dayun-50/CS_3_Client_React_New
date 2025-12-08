@@ -15,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .right {
@@ -24,96 +25,114 @@
 }
 
 /* ============================= */
-/* 소형 모바일 (<= 375px, 아이폰 SE 등) */
+/* 반응형 */
+/* 소형 모바일 (<= 375px) */
 @media (max-width: 375px) {
   .container {
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 5px;
-    overflow-y: auto;
-  }
-
-  .left, .right {
-    flex: 1 1 100%;
-    padding: 5px 0;
-  }
-}
-
-/* 일반 모바일 (376px ~ 480px, 아이폰 6/7/8, 갤럭시 S) */
-@media (min-width: 376px) and (max-width: 480px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 6px;
-    overflow-y: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    max-height: 500px; /* 전체 높이 유지 */
   }
 
   .left {
-    flex: 0 0 35%;
+    flex: 0 0 40%;       /* 줄임: 기존 50% → 40% */
+    max-height: 200px;   /* left 높이 줄임 */
+    width: 100%;
+    padding: 6px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .right {
-    flex: 0 0 65%;
+    flex: 0 0 60%;       /* right 영역 확보 */
+    max-height: 300px;   /* right 최대 높이 */
+    width: 100%;
+    padding: 6px 0;
+    height: auto;
   }
 }
 
-/* 큰 모바일 / 작은 태블릿 (481px ~ 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
+/* 일반 모바일 (376px ~ 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
   .container {
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 10px;
-    overflow-y: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    max-height: 550px;
   }
 
   .left {
     flex: 0 0 40%;
+    max-height: 220px;
+    width: 100%;
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .right {
     flex: 0 0 60%;
-  }
-}
-
-/* Nest Hub (769px ~ 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 15px 30px;
-    overflow-y: auto;
-  }
-
-  .left, .right {
-    flex: 1 1 100%;
+    max-height: 330px;
     width: 100%;
-    padding: 10px 0;
-    
+    padding: 8px 0;
+    height: auto;
   }
 }
 
-/* Nest Hub Max (1025px ~ 1280px) */
-@media (min-width: 1025px) and (max-width: 1280px) {
+/* 큰 모바일 / 작은 태블릿 (481px ~ 600px) */
+@media (min-width: 481px) and (max-width: 600px) {
   .container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px 50px;
-    overflow-y: auto;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    max-height: 600px;
   }
 
   .left {
-    flex: 0 0 50%;
-    max-width: 500px;
+    flex: 0 0 45%;
+    max-height: 270px;
   }
 
   .right {
-    flex: 0 0 50%;
-    max-width: 500px;
+    flex: 0 0 55%;
+    max-height: 330px;
   }
 }
 
+/* 중간 태블릿 (601px ~ 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+  .left {
+    flex: 0 0 45%;
+    max-height: 300px;
+  }
+
+  .right {
+    flex: 0 0 55%;
+    max-height: 350px;
+  }
+}
+
+/* 작은 데스크탑 (769px ~ 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .left {
+    flex: 0 0 45%;
+    max-height: 350px;
+  }
+
+  .right {
+    flex: 0 0 55%;
+    max-height: 400px;
+  }
+}
