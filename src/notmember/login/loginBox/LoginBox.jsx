@@ -11,7 +11,7 @@ function LoginBox({ setBabySeq, setAlerts }) {
 
   const navigator = useNavigate();
   const handleBack = () => {
-    navigator(-1);
+    navigator("/");
   };
 
   return (

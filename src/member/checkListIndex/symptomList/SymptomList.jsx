@@ -5,11 +5,8 @@ import { FETAL_CHECKLIST, BABY_CHECKLIST } from "./list";
 
 // --- CheckItem ---
 const CheckItem = ({ check, index }) => (
-  <motion.div
+  <div
     className={styles.checkWrapper}
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay: index * 0.05, duration: 0.4, ease: "easeOut" }}
   >
     <div className={styles.checkRow}>
       <div className={styles.checkLeft}>
@@ -17,7 +14,7 @@ const CheckItem = ({ check, index }) => (
         <span className={styles.checkTitle}>{check.title}</span>
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
 // --- WeekSection ---
@@ -25,11 +22,8 @@ const WeekSection = ({ data, index, isInfant }) => {
   const title = isInfant ? data.month : data.week;
 
   return (
-    <motion.div
+    <div
       className={styles.weekSection}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
     >
       <div className={styles.itemActive} />
       <div className={styles.weekContent}>
@@ -42,7 +36,7 @@ const WeekSection = ({ data, index, isInfant }) => {
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

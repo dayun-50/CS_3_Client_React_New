@@ -43,12 +43,7 @@ const WeekSection = ({ data, onToggle, isSpecialWeek }) => {
     : styles.defaultDotLine; // 일반 섹션 라인 도트
 
   return (
-    <motion.div
-      className={styles.section}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9 }}
-    >
+    <div className={styles.section}>
       <div className={styles.sectionInner}>
         <div className={containerClass}>
           {/* 주차 라인의 도트와 연결선 */}
@@ -69,7 +64,7 @@ const WeekSection = ({ data, onToggle, isSpecialWeek }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

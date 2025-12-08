@@ -25,6 +25,7 @@ import Login from "notmember/login/Login";
 
 import { useEffect, useRef, useState } from "react";
 import BornDiaryIndex from "member/diaryIndex/born/bornDiaryIndex/BornDiaryIndex";
+import Counseling from "member/counseling/Counseling";
 
 const MainIndex = ({ alerts, setAlerts }) => {
   const { isLogin } = useAuthStore((state) => state);
@@ -37,6 +38,7 @@ const MainIndex = ({ alerts, setAlerts }) => {
 
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(98);
+  const [isCounselOpen, setIsCounselOpen] = useState(false);
 
   const isInfoPage = !isLogin && location.pathname === "/";
 
@@ -114,7 +116,7 @@ const MainIndex = ({ alerts, setAlerts }) => {
           isInfoPage ? styles.MemberHeaderFixed : styles.MemberHeaderNormal
         }
       >
-        <CommonHeader isLogin={isLogin} alerts={alerts} setAlerts={setAlerts} />
+        <CommonHeader isLogin={isLogin} alerts={alerts} setAlerts={setAlerts} setIsCounselOpen={setIsCounselOpen} />
       </header>
 
       {/* 메인 */}
@@ -173,6 +175,10 @@ const MainIndex = ({ alerts, setAlerts }) => {
           <Route path="*" element={<ToLogin />} />
         </Routes>
       </div>
+      {/* 긴급상담 */}
+      {isCounselOpen && (
+        <Counseling onClose={() => setIsCounselOpen(false)} />
+      )}
     </div>
   );
 };

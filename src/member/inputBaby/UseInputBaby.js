@@ -34,6 +34,15 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
     const yDay = String(yesterdayDate.getDate()).padStart(2, '0');
     const yesterdayString = `${yYear}-${yMonth}-${yDay}`;
 
+    // 24개월 전
+    const before24M = new Date(today);
+    before24M.setMonth(before24M.getMonth() - 24);
+
+    const bYear = before24M.getFullYear();
+    const bMonth = String(before24M.getMonth() + 1).padStart(2, '0');
+    const bDay = String(before24M.getDate()).padStart(2, '0');
+    const before24MString = `${bYear}-${bMonth}-${bDay}`;
+
     // 성별/이미지 변경 시 inputBlocks 업데이트 함수
     const syncGenderAndImage = useCallback(() => {
         setInputBlocks(prevBlocks => {
@@ -122,7 +131,7 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
     }
 
     return {
-        data, auth, inputCount, todayString, yesterdayString,
+        data, auth, inputCount, todayString, yesterdayString, before24MString,
         handleChange, handleComplete,
         syncGenderAndImage, handleLoginKeyUp
     }

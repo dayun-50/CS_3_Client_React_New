@@ -32,7 +32,9 @@ const BabyButton = ({ onEmergencyClick, isVertical = false, isBorn }) => {
       path: "/diary",
       icon: <Book size={20} strokeWidth={3} />,
     },
-    { label: "긴급 상담", icon: <AlertCircle size={20} strokeWidth={3} /> },
+    { label: "긴급 상담",
+      // path : "/counseling",
+      icon: <AlertCircle size={20} strokeWidth={3} /> },
   ];
 
   // 육아용
@@ -42,7 +44,9 @@ const BabyButton = ({ onEmergencyClick, isVertical = false, isBorn }) => {
       path: "/diary",
       icon: <Book size={20} strokeWidth={3} />,
     },
-    { label: "긴급 상담", icon: <AlertCircle size={20} strokeWidth={3} /> },
+    { label: "긴급 상담",
+      // path : "/counseling",
+      icon: <AlertCircle size={20} strokeWidth={3} /> },
   ];
 
   const navItems = [...baseItems, ...(isBorn ? parentingItems : pregnantItems)];

@@ -15,7 +15,7 @@ function useBabyController() {
                 setData(resp.data);
             })
             .catch(err => console.log(err))
-    }, [id])
+    }, [babySeq, id])
 
     // 몇째인지 띄우는...네..
     function getKoreanOrder(num) {
@@ -23,7 +23,7 @@ function useBabyController() {
         const tens = ["", "열", "스물", "서른", "마흔", "쉰"];
 
         if (num <= 10) return units[num] + "째";
-        const ten = Math.floor(num / 10);
+        const ten = Math.floor( num / 10);
         const unit = num % 10;
         return (tens[ten] || "") + (units[unit] || "") + "째";
     }
@@ -33,7 +33,6 @@ function useBabyController() {
         caxios.post("/user/changeBaby", { last_baby: seq })
             .then(resp => {
                 getbabySeq(seq);
-                navigate("/babymypage");
                 setBabyDueDate(date);
             })
             .catch(err => console.log(err));

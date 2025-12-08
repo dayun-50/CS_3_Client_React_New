@@ -80,7 +80,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path='/login/*' element={<Login alerts={alerts} setAlerts={setAlerts} />} />
-      <Route path='/signup/*' element={<PrivateRoute><Signup /></PrivateRoute>} />
+      <Route path='/signup/*' element={<Signup />} />
       <Route path="/chooseType" element={<PrivateRoute><ChooseType /></PrivateRoute>} />
       <Route path='/*' element={<MainIndex isLogin={isLogin} alerts={alerts} setAlerts={setAlerts} />} />
       <Route path="input-baby" element={<PrivateRoute><InputBaby /></PrivateRoute>} />

@@ -146,7 +146,7 @@ const BabyInfo = () => {
         <div className={styles.kg}>
           <p>몸무게</p>
           <div className={styles.kgdb}>
-            {data.family_code ? data.family_code : 0} Kg
+            {data.family_code ? `${data.family_code} Kg` : `아직 성장차트에 기록이 없습니다.`} 
           </div>
         </div>
 

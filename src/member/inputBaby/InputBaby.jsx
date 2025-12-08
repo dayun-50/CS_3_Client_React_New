@@ -53,6 +53,7 @@ const InputBaby = ({ type, onClose, fromChooseType = false }) => {
     inputCount,
     todayString,
     yesterdayString,
+    before24MString,
     handleChange,
     handleComplete,
     handleLoginKeyUp,
@@ -158,7 +159,7 @@ const InputBaby = ({ type, onClose, fromChooseType = false }) => {
                     type="date"
                     id={`bp-${idx}`}
                     placeholder={`${type === "mom" ? "출산예정일" : "생년월일"}`}
-                    min={type === "mom" ? yesterdayString : ""}
+                    min={type === "mom" ? yesterdayString : before24MString}
                     max={type === "mom" ? "" : todayString}
                     name="birth_date"
                     value={baby.birth_date || ""}

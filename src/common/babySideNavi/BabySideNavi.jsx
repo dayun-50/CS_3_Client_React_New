@@ -6,7 +6,7 @@ import useAuthStore from "store/useStore";
 import { useNavigate } from "react-router-dom";
 import { caxios } from "config/config";
 
-const BabySideNavi = ({ onClose }) => {
+const BabySideNavi = ({ onClose, setIsNavOpen, setIsCounselOpen }) => {
   const logout = useAuthStore((state) => state.logout);
   const navi = useNavigate();
   const bornDueDate = sessionStorage.getItem("babyDueDate");
@@ -19,7 +19,8 @@ const BabySideNavi = ({ onClose }) => {
 
   // 이거 추가됨 사이드바 세로형을때는 긴급상담으로 이동이 되지 않아서
   const handleEmergencyClick = () => {
-    navi("/counseling");
+    // navi("/counseling");
+    setIsCounselOpen(true);
     onClose();
   };
 
@@ -33,6 +34,7 @@ const BabySideNavi = ({ onClose }) => {
       caxios.delete("/user/secession").then((resp) => {
         alert("탈퇴가 완료되었습니다.\n그동안 이용해주셔서 감사합니다.");
         navi("/");
+        setIsNavOpen(false);
         logout();
       });
     }

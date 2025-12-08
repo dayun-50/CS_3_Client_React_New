@@ -64,7 +64,7 @@ const FindPw = () => {
 
                 <div className={styles.idmiddlet}>
                   <p>새 비밀번호</p>
-                  <input type="password" placeholder="비밀번호" className={`${styles.newpwt} ${styles.custom} ${!regexAuthPw && inputCount.pw > 0 ? styles.auth : ""}`} 
+                  <input type="password" placeholder="최소 6글자 이상" className={`${styles.newpwt} ${styles.custom} ${!regexAuthPw && inputCount.pw > 0 ? styles.auth : ""}`} 
                   name="pw" id="pw" value={inputpw} onChange={handleChangePw} onKeyUp={handlePwKeyUp}/>
                 </div>
 

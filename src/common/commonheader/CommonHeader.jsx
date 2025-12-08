@@ -7,7 +7,7 @@ import BabySideNavi from "../babySideNavi/BabySideNavi";
 import UseCommonHeader from "./UseCommonHeader";
 import useAuthStore from "store/useStore";
 
-const CommonHeader = ({ isLogin, alerts, setAlerts }) => {
+const CommonHeader = ({ isLogin, alerts, setAlerts, setIsCounselOpen }) => {
   const { id } = useAuthStore((state) => state);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isBellOpen, setIsBellOpen] = useState(false); // 알림 드롭다운 상태 추가
@@ -63,7 +63,7 @@ const CommonHeader = ({ isLogin, alerts, setAlerts }) => {
 
   return (
     <div>
-      {isNavOpen && <BabySideNavi onClose={closeSideNav} />}
+      {isNavOpen && <BabySideNavi onClose={closeSideNav} setIsNavOpen = {setIsNavOpen} setIsCounselOpen={setIsCounselOpen}/>}
 
       <div className={styles.topbar}>
         <div className={styles.headerContentWrapper}>

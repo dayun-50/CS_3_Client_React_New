@@ -39,6 +39,7 @@ function Signup() {
             <h1 className={styles.newusertitle}>회원가입</h1>
           </div>
 
+          {/* 이메일 */}
           <div className={styles.newemail}>
             <label htmlFor="email">이메일</label>
             <div className={styles.inputButtonWrapper}>
@@ -61,6 +62,7 @@ function Signup() {
             </div>
           </div>
 
+          {/* 인증번호 */}
           <div className={styles.emailing}>
             <label htmlFor="emailAuth">인증번호</label>
             <input
@@ -76,17 +78,18 @@ function Signup() {
               }`}
               onChange={hendleChange}
               onPaste={hendleChange}
-            />{" "}
+            />
             <br />
           </div>
 
+          {/* 아이디 */}
           <div className={styles.newid}>
             <label htmlFor="id">아이디</label>
             <div className={styles.inputButtonWrapper}>
               <input
                 id="id"
                 type="text"
-                placeholder="아이디"
+                placeholder="소문자 + 숫자 5글자 이상"
                 name="id"
                 value={data.id}
                 className={`${styles.inputError} ${
@@ -94,23 +97,20 @@ function Signup() {
                 }`}
                 onChange={hendleChange}
               />
-              <button
-                className={styles.idauth}
-                name="idChack"
-                onClick={chackClick}
-              >
+              <button className={styles.idauth} name="idChack" onClick={chackClick}>
                 중복확인
               </button>
             </div>
           </div>
 
+          {/* 닉네임 */}
           <div className={styles.newnic}>
             <label htmlFor="nickname">닉네임</label>
             <div className={styles.inputButtonWrapper}>
               <input
                 id="nickname"
                 type="text"
-                placeholder="닉네임"
+                placeholder="한글 2글자 이상"
                 name="nickname"
                 value={data.nickname}
                 className={`${styles.inputError} ${
@@ -120,32 +120,30 @@ function Signup() {
                 }`}
                 onChange={hendleChange}
               />
-              <button
-                className={styles.nicauth}
-                name="nicknameChack"
-                onClick={chackClick}
-              >
+              <button className={styles.nicauth} name="nicknameChack" onClick={chackClick}>
                 중복확인
               </button>
             </div>
           </div>
 
+          {/* 비밀번호 */}
           <div className={styles.pwing}>
             <label htmlFor="pw">비밀번호</label>
             <input
               id="pw"
               type="password"
-              placeholder="비밀번호"
+              placeholder="최소 6글자 이상"
               name="pw"
               value={data.pw}
               className={`${styles.inputError} ${
                 !regexAuth.pw && inputCount.pw > 0 ? styles.borderRegex : ""
               }`}
               onChange={hendleChange}
-            />{" "}
+            />
             <br />
           </div>
 
+          {/* 연락처 */}
           <div className={styles.phone}>
             <label htmlFor="phone1">연락처</label>
             <div className={styles.phoneWrapper}>
@@ -184,6 +182,7 @@ function Signup() {
             </div>
           </div>
 
+          {/* 생년월일 */}
           <div className={styles.birthing}>
             <label htmlFor="birthDate">생년월일</label>
             <input
@@ -199,9 +198,11 @@ function Signup() {
               }`}
               onChange={hendleChange}
               max={todayString}
-            />{" "}
+            />
             <br />
           </div>
+
+          {/* 가족 코드 + 부모 선택 */}
           <div className={styles.checkAndParent}>
             <div className={styles.familying}>
               <label htmlFor="code">가족코드</label>
@@ -210,7 +211,7 @@ function Signup() {
                 type="text"
                 name="code"
                 value={data.code}
-                placeholder="가족코드"
+                placeholder="존재하지 않을 경우 아래 체크"
                 maxLength={5}
                 className={`${styles.inputError} ${
                   !regexAuth.code && inputCount.code > 0
@@ -232,7 +233,7 @@ function Signup() {
                     value="father"
                     className={styles.papa}
                     onChange={hendleChange}
-                  />{" "}
+                  />
                   아빠
                 </label>
                 <label>
@@ -242,13 +243,14 @@ function Signup() {
                     value="mother"
                     className={styles.papa}
                     onChange={hendleChange}
-                  />{" "}
+                  />
                   엄마
                 </label>
               </div>
             </div>
           </div>
 
+          {/* 체크박스 */}
           <div className={styles.okcheck}>
             <label className={`${styles.checkboxLabel} ${styles.true}`}>
               <input id="checkbox" type="checkbox" onClick={handleCheckbox} />
@@ -256,6 +258,7 @@ function Signup() {
             </label>
           </div>
 
+          {/* 완료/취소 버튼 */}
           <div className={styles.buttonGroup}>
             <button className={styles.backbutton} onClick={() => navigate(-1)}>
               취소
