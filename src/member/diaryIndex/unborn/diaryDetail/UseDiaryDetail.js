@@ -16,9 +16,10 @@ export function UseDiaryDetail({ selectedWeek, setSelectedDiaryId, getTargetWeek
     const babySeq = sessionStorage.getItem("babySeq");
     const id = sessionStorage.getItem("id");
 
+
     //-----------------------------------------상태변수 모음
     const [targetDiaryContent, setTargetDiaryContent] = useState({});
-
+    const [isDeleting, setIsDeleting] = useState(false);
 
 
 
@@ -32,6 +33,8 @@ export function UseDiaryDetail({ selectedWeek, setSelectedDiaryId, getTargetWeek
 
     //---------------------------------------버튼 함수
     const handleDeleteDiary = (journal_seq) => { //삭제
+        if (isDeleting) return;
+        setIsDeleting(true)
         caxios.delete(`/diary/${seq}`).then(
             resp => {
                 alert("삭제가 완료 되었습니다!");
@@ -39,7 +42,9 @@ export function UseDiaryDetail({ selectedWeek, setSelectedDiaryId, getTargetWeek
                 getTargetWeekDiary(selectedWeek, babySeq); //목록 새로고침
                 navigate("/diary?week=" + selectedWeek); //일기 목록으로 이동
             }
-        )
+        ).finally(() => {
+            setIsDeleting(false);
+        })
     }
 
     const handleUpdateDiary = (journal_seq, selectedWeek) => { //수정
@@ -90,6 +95,7 @@ export function UseDiaryDetail({ selectedWeek, setSelectedDiaryId, getTargetWeek
         editor,
         id,
         handleDeleteDiary,
-        handleUpdateDiary
+        handleUpdateDiary,
+        isDeleting
     }
 }

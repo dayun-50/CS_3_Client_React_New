@@ -59,6 +59,8 @@ const EverydayDetail = ({
     setEditMode,
     editData,
     setEditData,
+    handleDelete,
+    load
   } = UseEverydayDetail({ currentDate, setCurrentDate, fetchData });
 
   // 드롭다운 상태 관리
@@ -120,9 +122,8 @@ const EverydayDetail = ({
           {Object.entries(typeMap).map(([key, info]) => (
             <div
               key={key}
-              className={`${styles.filterButton} ${
-                key === "전체" ? styles.fullButton : ""
-              } ${activeType === key ? styles.filterButtonActive : ""}`}
+              className={`${styles.filterButton} ${key === "전체" ? styles.fullButton : ""
+                } ${activeType === key ? styles.filterButtonActive : ""}`}
               onClick={() => handleTypeClick(key)}
             >
               {info.icon && (
@@ -184,8 +185,8 @@ const EverydayDetail = ({
                 baseTypeKey === "toilet"
                   ? "배변"
                   : Object.keys(reverseTypeMap).find(
-                      (k) => reverseTypeMap[k] === baseTypeKey
-                    );
+                    (k) => reverseTypeMap[k] === baseTypeKey
+                  );
 
               const info = typeMap[mappedType];
               const Icon = info.icon;
@@ -223,12 +224,24 @@ const EverydayDetail = ({
                       style={{ backgroundColor: info.color }}
                     />
                     <div className={styles.timeLabel}>
+
                       <div
                         className={styles.timeText}
-                        style={{ color: info.color }}
-                      >
-                        {formatTime(item.created_at)}
+                        style={{ color: info.color }}>
+                        {/* 전날 이어진 경우 → 표시 */}
+                        {item.prevStart ? (
+                          <>
+                            <span className={styles.timeText}>
+                              전일 <br />
+                              {formatTime(item.prevStart)}
+                            </span>
+
+                          </>
+                        ) : (
+                          formatTime(item.created_at)
+                        )}
                       </div>
+
                     </div>
                   </div>
 
@@ -240,45 +253,62 @@ const EverydayDetail = ({
                       />
                     )}
                     <div className={styles.logType}>{displayType}</div>
+
+
                     <div className={styles.logAmount}>
                       {baseTypeKey === "sleep"
-                        ? formatSleep(item.amount_value)
+                        ? <>
+                          {formatSleep(item.amount_value)}
+                          {item.nextTotal > 0 && (
+                            <> <br /> (+ 익일 {formatSleep(item.nextTotal)}) </>
+                          )}
+                          {item.prevTotal > 0 && (
+                            <> <br /> (+ 전일 {formatSleep(item.prevTotal)}) </>
+                          )}
+                        </>
                         : `${item.amount_value}${amountUnitMap[baseTypeKey]}`}
                     </div>
+
+
                   </div>
 
-                  <div
-                    className={styles.actionButtonWrapper}
-                    ref={(el) => (dropdownRefs.current[i] = el)}
-                  >
-                    <MoreVertical
-                      className={styles.actionIcon}
-                      onClick={() => toggleDropdown(i)}
-                    />
+                  {item.user_id == sessionStorage.getItem("id") &&
+                    (<>
 
-                    {openDropdownIndex === i && (
-                      <div className={styles.dropdownMenu}>
-                        <div
-                          className={styles.dropdownItem}
-                          onClick={() => {
-                            handleUpdate(item);
-                            setOpenDropdownIndex(null);
-                          }}
-                        >
-                          수정
-                        </div>
-                        <div
-                          className={styles.dropdownItem}
-                          onClick={() => {
-                            console.log("삭제");
-                            setOpenDropdownIndex(null);
-                          }}
-                        >
-                          삭제
-                        </div>
+                      <div
+                        className={styles.actionButtonWrapper}
+                        ref={(el) => (dropdownRefs.current[i] = el)}
+                      >
+                        <MoreVertical
+                          className={styles.actionIcon}
+                          onClick={() => toggleDropdown(i)}
+                        />
+
+                        {openDropdownIndex === i && (
+                          <div className={styles.dropdownMenu}>
+                            <div
+                              className={styles.dropdownItem}
+                              onClick={() => {
+                                handleUpdate(item);
+                                setOpenDropdownIndex(null);
+                              }}
+                            >
+                              수정
+                            </div>
+                            <div
+                              className={styles.dropdownItem}
+                              onClick={() => {
+                                handleDelete(item)
+                                setOpenDropdownIndex(null);
+                              }}
+                            >
+                              삭제
+                            </div>
+                          </div>
+                        )}
                       </div>
+                    </>
                     )}
-                  </div>
                 </motion.div>
               );
             })}
@@ -289,9 +319,11 @@ const EverydayDetail = ({
               <Inbox className={styles.emptyIcon} />
               <div>
                 현재 {activeType} 기록이 없습니다
-                <p className={styles.emptySubText}>
-                  상단의 '기록 추가' 버튼을 눌러 새로운 기록을 추가해보세요
-                </p>
+                {activeType !== "전체" && (
+                  <p className={styles.emptySubText}>
+                    상단의 '기록 추가' 버튼을 눌러 새로운 기록을 추가해보세요
+                  </p>
+                )}
               </div>
             </div>
           )}
@@ -320,6 +352,7 @@ const EverydayDetail = ({
             setEditMode={setEditMode}
             editData={editData}
             setEditData={setEditData}
+            load={load}
           />
         )}
       </AnimatePresence>

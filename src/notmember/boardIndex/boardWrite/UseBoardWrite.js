@@ -194,6 +194,7 @@ export function UseBoardWrite() {
         if (!editorInstance) return;
         if (titleRef.current?.value.length > 30) {
             alert("제목은 최대 30글자까지 가능합니다.");
+            setIsSubmitting(false);
             return;
         }
 
@@ -207,11 +208,13 @@ export function UseBoardWrite() {
         // 제목이 비었거나, 에디터가 비었거나, 엔터/공백만 있을 때
         if (!title.trim()) {
             alert("제목을 입력하세요");
+            setIsSubmitting(false);
             return;
         }
 
         if (!editorText && imageSysList.length === 0) {
             alert("내용을 입력하거나 이미지를 추가하세요");
+            setIsSubmitting(false);
             return;
         }
 
@@ -219,6 +222,7 @@ export function UseBoardWrite() {
         const MAX_CONTENT_BYTES = 14 * 1024 * 1024; // 14MB
         if (contentBytes > MAX_CONTENT_BYTES) {
             alert(`본문 용량이 너무 큽니다. 현재 ${contentBytes} bytes / 제한 ${MAX_CONTENT_BYTES} bytes`);
+            setIsSubmitting(false);
             return;
         }
 
@@ -228,8 +232,11 @@ export function UseBoardWrite() {
         uploadedFiles.forEach(file => {
             if (!file.isServerFile) {
                 form.append("files", file);
+
             }
         });
+        console.log(uploadedFiles + "파일담을때 한개만 나오는지 확인")
+
 
         // 2) 에디터 JSON 담기
         form.append("content", JSON.stringify(contentJSON));
@@ -341,13 +348,16 @@ export function UseBoardWrite() {
 
                 form.append("deletedFiles", JSON.stringify(deletedFiles));
                 await caxios.put("/board/update", form);
-                setIsSubmitting(false);
                 alert("수정이 완료되었습니다!")
                 navigate(-1);
 
             } catch (error) {
                 alert("게시글 수정에 실패했습니다. 다시 시도하세요");
+            } finally {
+                // 성공/실패 상관없이 항상 실행됨
+                setIsSubmitting(false);
             }
+
         }
 
 
@@ -356,7 +366,6 @@ export function UseBoardWrite() {
                 await caxios.post("/board/write", form)
                     .then(resp => {
                         console.log(resp);
-                        setIsSubmitting(false);
                         alert("작성이 완료되었습니다!")
                         navigate("/board");
                     })
@@ -364,6 +373,9 @@ export function UseBoardWrite() {
 
             } catch (err) {
                 alert("업로드에 실패했습니다. 다시 시도하세요");
+            } finally {
+                // 성공/실패 상관없이 항상 실행됨
+                setIsSubmitting(false);
             }
         }
     };
@@ -446,6 +458,11 @@ export function UseBoardWrite() {
         // updateHeight();
 
     }, [editorInstance, initialContent]);
+    useEffect(() => {
+        if (isEditMode) {
+            setUploadedFiles([]);  // 초기화 추가!
+        }
+    }, [isEditMode]);
 
 
     // useEffect(() => {

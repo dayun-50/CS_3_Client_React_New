@@ -30,6 +30,8 @@ const UnBornDiaryIndex = () => {
     getTargetWeekDiary,
     weekDiaries,
     handleAddDiary,
+    isSubmitting,
+    setIsSubmitting
   } = UseUnBornDiaryIndex();
 
   const location = useLocation();
@@ -67,6 +69,8 @@ const UnBornDiaryIndex = () => {
                     handleAddDiary={handleAddDiary}
                     setSelectedDiaryId={setSelectedDiaryId}
                     getTargetWeekDiary={getTargetWeekDiary}
+                    isSubmitting={isSubmitting}
+                    setIsSubmitting={setIsSubmitting}
                   />
                 </motion.div>
               }
@@ -86,6 +90,8 @@ const UnBornDiaryIndex = () => {
                     getTargetWeekDiary={getTargetWeekDiary}
                     setSelectedDiaryId={setSelectedDiaryId}
                     selectedDiaryId={selectedDiaryId}
+                    isSubmitting={isSubmitting}
+                    setIsSubmitting={setIsSubmitting}
                   />
                 </motion.div>
               }

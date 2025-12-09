@@ -11,7 +11,7 @@ import BoardOver from "../boardOver/BoardOver";
 import useAuthStore from "store/useStore";
 
 // --- 메인 컴포넌트 ---
-const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
+const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
   // --- 댓글 데이터 ---
   const {
     setIsMine,
@@ -116,6 +116,7 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
                             수정
                           </button>
                           <button
+                            disabled={isDeleting}
                             className={styles.menuItem}
                             onClick={(e) =>
                               handlePostMenuItemClick(
@@ -167,21 +168,25 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard }) => {
             {targetBoardFile?.length > 0 && (
               <div className={styles.fileListContainer}>
                 {targetBoardFile.map((file) => (
-                  <a
-                    key={file.file_seq}
-                    href={`${FILE_SERVER}/file/download?sysname=${encodeURIComponent(
-                      file.sysname
-                    )}&file_type=board/file/`}
-                    download
-                    className={styles.fileItem}
-                  >
-                    {file.oriname}
-                  </a>
+                  <>
+                    <a
+                      key={file.file_seq}
+                      href={`${FILE_SERVER}/file/download?sysname=${encodeURIComponent(
+                        file.sysname
+                      )}&file_type=board/file/`}
+                      download
+                      className={styles.fileItem}
+                    >
+                      {file.oriname}
+                    </a>
+                    <br></br>
+                  </>
                 ))}
               </div>
             )}
           </div>
         </div>
+
 
         {/* 댓글 영역 */}
         <div className={styles.commentSection}>

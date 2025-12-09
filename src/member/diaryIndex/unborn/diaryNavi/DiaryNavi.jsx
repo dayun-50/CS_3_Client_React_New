@@ -91,14 +91,13 @@ const DiaryNavi = ({
                       <button
                         key={d.journal_seq}
                         // isSelectedDiary 값에 따라 클래스 동적 적용
-                        className={`${styles.diaryButton} ${
-                          isSelectedDiary ? styles.diaryButtonSelected : ""
-                        }`}
+                        className={`${styles.diaryButton} ${isSelectedDiary ? styles.diaryButtonSelected : ""
+                          }`}
                         onClick={(e) => handleViewDiary(e, d.journal_seq)}
                       >
                         <DiaryItem
                           title={`[${w.week}주차] ${i + 1}번째 일기`}
-                          date={`2025-11-25`}
+                          date={d.record_datetime.split("T")[0]}
                         />
                       </button>
                     );

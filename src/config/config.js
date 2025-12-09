@@ -4,7 +4,7 @@ import axios from "axios";
 export const FILE_SERVER = "http://10.10.55.103";
 
 export const caxios = axios.create({
-  baseURL: `http://10.5.5.5/`
+  baseURL: `http://10.10.55.103/`
 
 });
 

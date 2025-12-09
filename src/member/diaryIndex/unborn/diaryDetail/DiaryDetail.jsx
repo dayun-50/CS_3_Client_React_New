@@ -12,6 +12,8 @@ const DiaryDetail = ({
   setSelectedDiaryId,
   getTargetWeekDiary,
   setSelectedWeek,
+  isSubmitting,
+  setIsSubmitting
 }) => {
   const {
     seq,
@@ -21,6 +23,7 @@ const DiaryDetail = ({
     id,
     handleDeleteDiary,
     handleUpdateDiary,
+    isDeleting
   } = UseDiaryDetail({
     selectedWeek,
     setSelectedDiaryId,
@@ -85,12 +88,14 @@ const DiaryDetail = ({
         {id == targetDiaryContent.user_id && ( //자기가 써야지만 볼 수 있음
           <>
             <button
+              disabled={isDeleting}
               className={styles.deleteButton}
               onClick={() => handleDeleteDiary(targetDiaryContent.journal_seq)}
             >
               삭제
             </button>
             <button
+              disabled={isSubmitting}
               className={styles.editButton}
               onClick={() => {
                 console.log(

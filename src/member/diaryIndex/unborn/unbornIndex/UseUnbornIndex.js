@@ -8,7 +8,7 @@ export function UseUnBornDiaryIndex() {
     const [params] = useSearchParams();
     const initWeek = params.get("week");
     const initSeq = params.get("seq");
-
+    const [isSubmitting, setIsSubmitting] = useState(false);//제출중이면 연타 막기
 
     const [selectedWeek, setSelectedWeek] = useState(initWeek ? Number(initWeek) : null); // 초기값: 아무것도 선택되지 않음
     const [selectedDiaryId, setSelectedDiaryId] = useState(initSeq ? Number(initSeq) : null); // 일기 선택 상태 추가
@@ -54,6 +54,8 @@ export function UseUnBornDiaryIndex() {
         setSelectedDiaryId,
         getTargetWeekDiary,
         weekDiaries,
-        handleAddDiary
+        handleAddDiary,
+        isSubmitting,
+        setIsSubmitting
     }
 }

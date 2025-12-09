@@ -107,9 +107,8 @@ const BoardWrite = () => {
           <div className={styles.radioGroup}>
             <label
               htmlFor="visibility-all"
-              className={`${styles.radioOption} ${
-                selectedVisibility === "all" ? styles.activeRadio : ""
-              }`}
+              className={`${styles.radioOption} ${selectedVisibility === "all" ? styles.activeRadio : ""
+                }`}
             >
               <input
                 type="radio"
@@ -124,9 +123,8 @@ const BoardWrite = () => {
 
             <label
               htmlFor="visibility-member"
-              className={`${styles.radioOption} ${
-                selectedVisibility === "member" ? styles.activeRadio : ""
-              }`}
+              className={`${styles.radioOption} ${selectedVisibility === "member" ? styles.activeRadio : ""
+                }`}
             >
               <input
                 type="radio"
@@ -156,7 +154,7 @@ const BoardWrite = () => {
 
           <label htmlFor="file-upload" className={styles.uploadButton}>
             <UploadCloud size={20} />
-            <span>파일 선택 또는 드래그 앤 드롭 (최대 7개)</span>
+            <span>파일 선택 (최대 7개)</span>
           </label>
 
           {uploadedFiles.length > 0 && (

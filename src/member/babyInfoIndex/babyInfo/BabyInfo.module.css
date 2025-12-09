@@ -278,6 +278,7 @@
 
 /* 소형 모바일 (<= 375px) */
 @media (max-width: 375px) {
+
   .babyinformation {
     width: 100%;
     height: auto;
@@ -305,8 +306,15 @@
     height: 32px;
   }
 
-  .corbt, .corbtd, .corbtc {
+  .corbtd, .corbtc {
     width: 130px;
+    height: 32px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .corbt {
+    width: 100%;
     height: 32px;
     font-size: 12px;
     margin-right: 4px;
@@ -315,13 +323,25 @@
 
 /* 일반 모바일 (376px ~ 480px) */
 @media (min-width: 376px) and (max-width: 480px) {
+  .rightcontainer {
+    align-items: flex-start; /* 세로 중앙이 아닌 위쪽으로 정렬 */
+  }
   .babyinformation { gap: 5px; }
   .bb h1 { font-size: 17px; margin-bottom: 5px; }
   .babyla label, .birthday label, .sextitle, .kg p { font-size: 13px; margin-bottom: 5px; }
   .babyla input, .birthday input { font-size: 13px; height: 34px; padding: 5px 8px; }
   .btns { gap: 10px; }
   .btns button { font-size: 13px; height: 34px; }
-  .corbt, .corbtd, .corbtc { width: 140px; height: 34px; font-size: 13px; }
+  .corbtd, .corbtc { width: 140px; height: 34px; font-size: 13px; }
+  .corbt {
+    width: 100%;
+    height: 32px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+  .correct {
+    align-items: center;
+  }
 }
 
 /* 큰 모바일 / 작은 태블릿 (481px ~ 768px) */
@@ -332,5 +352,58 @@
   .babyla input, .birthday input { font-size: 14px; height: 36px; padding: 6px 10px; }
   .btns { gap: 12px; }
   .btns button { font-size: 14px; height: 36px; }
-  .corbt, .corbtd, .corbtc { width: 150px; height: 36px; font-size: 14px; }
+  .corbtd, .corbtc { width: 150px; height: 36px; font-size: 14px; }
+  .corbt {
+    width: 100%;
+    height: 32px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .correct {
+    align-items: center;
+  }
+}
+
+/* 태블릿 이상 / 데스크탑 (769px ~ ) */
+@media (min-width: 769px) {
+  .rightcontainer {
+    align-items: flex-start; /* 세로 중앙이 아닌 위쪽으로 정렬 */
+    padding-top: 10px;       /* 상단 여백 */
+  }
+
+  .babyinformation {
+    height: auto;            /* 내용물 높이에 맞게 자동 */
+    gap: 12px;
+  }
+
+  .correct {
+    display: flex;
+    justify-content: center; /* 버튼 좌측 정렬 */
+    align-items: flex-start;     /* 위쪽 정렬 */
+    gap: 20px;                   /* 버튼 사이 간격 */
+  }
+  .corbt {
+    width: 100%;
+    height: 48px;
+    font-size: 14px;
+    margin-right: 4px;
+  }
+}
+
+/* 태블릿 / 작은 데스크탑 (769px ~ 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .rightcontainer {
+    align-items: flex-start;
+    padding-top: 10px;
+  }
+  .babyinformation { gap: 12px; }
+  .correct {
+    display: flex;
+    justify-content: flex-start; /* 버튼 왼쪽 정렬 */
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .corbt { width: 100%; height: 48px; font-size: 14px; margin-right: 4px; }
+  .corbtd, .corbtc { width: 150px; height: 48px; font-size: 14px; }
 }

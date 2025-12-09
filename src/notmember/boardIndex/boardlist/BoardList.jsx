@@ -41,7 +41,7 @@ const itemVariants = {
   },
 };
 
-const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
+const BoardList = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
   const {
     CATEGORY_MAP,
     CATEGORY_MAP_REVERSE,
@@ -85,9 +85,8 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
             {Object.keys(CATEGORY_MAP).map((cat) => (
               <button
                 key={cat}
-                className={`${styles.categoryItem} ${
-                  activeCategory === cat ? styles.active : ""
-                }`}
+                className={`${styles.categoryItem} ${activeCategory === cat ? styles.active : ""
+                  }`}
                 onClick={() => handleTopBtn(cat)}
               >
                 {cat}
@@ -158,9 +157,8 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
               >
                 {/* 카드 상단 이미지 영역 */}
                 <div
-                  className={`${styles.cardHeader} ${
-                    !thumbsUrlMap[item.board.board_seq] ? styles.noImage : ""
-                  }`}
+                  className={`${styles.cardHeader} ${!thumbsUrlMap[item.board.board_seq] ? styles.noImage : ""
+                    }`}
                 >
                   {/* 이미지 있을 때만 출력 */}
                   {thumbsUrlMap[item.board.board_seq] && (
@@ -207,6 +205,7 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
                             수정
                           </button>
                           <button
+                            disabled={isDeleting}
                             className={styles.menuItem}
                             onClick={(e) =>
                               handleMenuItemClick(
@@ -242,9 +241,8 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard }) => {
                 <div className={styles.content}>
                   <div className={styles.textGroup}>
                     <span
-                      className={`${styles.categoryTag} ${
-                        styles[CATEGORY_MAP_REVERSE[item.board.board_type]]
-                      }`}
+                      className={`${styles.categoryTag} ${styles[CATEGORY_MAP_REVERSE[item.board.board_type]]
+                        }`}
                     >
                       {CATEGORY_MAP_REVERSE[item.board.board_type]}
                     </span>

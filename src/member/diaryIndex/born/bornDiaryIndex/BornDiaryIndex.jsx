@@ -11,7 +11,7 @@ const BornDiaryIndex = ({ setIsBorn }) => {
 
   // '산모수첩' 버튼 클릭 시
   const handleNavigateBack = () => {
-    setIsBorn(false); 
+    setIsBorn(false); // 부모 컴포넌트의 isBorn 상태를 false로 변경하면 자동으로 산모수첩으로 이동
     navigate('/diary');
   };
 

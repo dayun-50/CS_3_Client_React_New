@@ -4,7 +4,7 @@ import styles from "./DiaryWrite.module.css";
 import { UseDiaryWrite } from "./UseDiaryWrite";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 
-const DiaryWrite = ({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId }) => {
+const DiaryWrite = ({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId, setIsSubmitting }) => {
   const {
     titleRef,
     content,
@@ -12,7 +12,7 @@ const DiaryWrite = ({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId })
     editorRef,
     setEditorInstance
 
-  } = UseDiaryWrite({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId });
+  } = UseDiaryWrite({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId, setIsSubmitting });
 
 
   const navigate = useNavigate();

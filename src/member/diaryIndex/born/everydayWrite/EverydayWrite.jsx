@@ -15,7 +15,7 @@ const containerVariants = {
 };
 
 // 분류
-const EverydayWrite = ({ activeType, closeModal, isOpen, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData }) => {
+const EverydayWrite = ({ activeType, closeModal, isOpen, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData, load }) => {
   const {
     getLogDetails,
     handleAdd,
@@ -32,8 +32,10 @@ const EverydayWrite = ({ activeType, closeModal, isOpen, currentDate, fetchData,
     startMin,
     startMax,
     endMin,
-    endMax
-  } = UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData, activeType });
+    endMax,
+    isSubmitting,
+
+  } = UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData, activeType, load });
 
   // activeType에 따른 UI 정보 가져오기
   const { unit, inputType, label, options } = getLogDetails(activeType);
@@ -154,6 +156,7 @@ const EverydayWrite = ({ activeType, closeModal, isOpen, currentDate, fetchData,
                       <input
                         type={inputType}
                         placeholder={`${label}을 입력하세요`}
+                        step={activeType === "체온" ? "0.1" : "1"}
                         className={styles.amountInput}
                         value={amountValue}
                         onChange={(e) => setAmountValue(e.target.value)}
@@ -181,7 +184,9 @@ const EverydayWrite = ({ activeType, closeModal, isOpen, currentDate, fetchData,
                   </button>
                   <button
                     className={`${styles.actionButton} ${styles.completeButton}`}
-                    onClick={() => handleAdd(activeType)}>
+                    onClick={() => handleAdd(activeType)}
+                    disabled={isSubmitting}
+                  >
                     <div className={styles.buttonTextBold}>완료</div>
                   </button>
                 </div>

@@ -43,7 +43,7 @@ export function calculateSleepChunks(start, end) {
 
 
 
-export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData, activeType }) {
+export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTypeMap, setTargetDayData, fetchAvgData, startDate, endDate, setAvg, targetDayData, editMode, setEditMode, editData, setEditData, activeType, load }) {
     //타입에 따른 ui에 필요한 값 매핑하는 기본값 가져오기
     const getLogDetails = (logType) => {
         switch (logType) {
@@ -69,6 +69,8 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
     const [sleepStart, setSleepStart] = useState(null); //수면 시작 시간
     const [sleepEnd, setSleepEnd] = useState(null); // 수면 종료 시간
 
+
+    const [isSubmitting, setIsSubmitting] = useState(false);//제출중이면 연타 막기
 
     // --- 수면 시작 시간 min/max 세팅 ---
     const startMin = currentDate.toISOString().split("T")[0] + "T00:00";
@@ -177,23 +179,22 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
 
             // 모든 끝 시간 중 가장 늦은 시간
             const end = new Date(Math.max(...times.map(t => t.end.getTime())));
-
             ranges.push({ start, end, group_id: gid });
         }
-
         return ranges;
     }
 
 
     //---------------------------------------------------------입력 완료 버튼
     const handleAdd = async (activeType) => { //기록 완료 ->axios로 백엔드에 저장
-
+        if (isSubmitting) return;  // 이미 실행 중이면 막기
+        setIsSubmitting(true);
 
         if (activeType === "수면") {
-            if (!sleepStart) return alert("수면 시작 시간을 입력하세요.");
+            if (!sleepStart) { setIsSubmitting(false); return alert("수면 시작 시간을 입력하세요.") };
             // 수면은 여기서 끝! 아래 time 검사는 타지 않음
         } else {
-            if (!time) return alert("시간을 입력해주세요.");
+            if (!time) { setIsSubmitting(false); return alert("시간을 입력해주세요.") };
         }
 
         const created_at = buildDateTime(currentDate, time);
@@ -211,27 +212,59 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
             // --------------------------- 분유 / 이유식 ---------------------------
             case "분유":
             case "이유식":
-                if (!amountValue) return alert("용량을 입력하세요.");
+                if (!amountValue) {
+                    setIsSubmitting(false)
+                    return alert("용량을 입력하세요.")
+                };
+                // 1) 정규식: 숫자만 + 0으로 시작 불가
+                if (!/^[1-9][0-9]*$/.test(amountValue)) {
+                    setIsSubmitting(false)
+                    return alert("올바른 용량을 입력하세요. (0으로 시작 불가)");
+                }
+                //2) 범위: 1 ~ 300
+                const milkValue = Number(amountValue);
+                if (milkValue < 1 || milkValue > 300) {
+                    setIsSubmitting(false)
+                    return alert("올바른 용량을 입력하세요");
+                }
                 payloadList.push({
                     created_at,
                     record_type: activeType === "분유" ? "milk" : "baby_food",
-                    amount_value: Number(amountValue)
-                })
+                    amount_value: milkValue
+                });
                 break;
 
             // --------------------------- 체온 ---------------------------
             case "체온":
-                if (!amountValue) return alert("체온을 입력하세요.");
+                if (!amountValue) {
+                    setIsSubmitting(false)
+                    return alert("체온을 입력하세요.")
+                };
+
+                // 1) 정규식: 소수점 1자리까지 허용
+                if (!/^(?:\d{2}|\d{2}\.\d)$/.test(amountValue)) {
+                    setIsSubmitting(false)
+                    return alert("체온은 정수 또는 소수점 한 자리까지 입력해주세요. (예: 36, 36.5)");
+                }
+                const temp = Number(amountValue);
+                // 2) 범위 체크
+                if (temp < 35.0 || temp > 41.0) {
+                    setIsSubmitting(false)
+                    return alert("체온은 35.0°C ~ 41.0°C 범위여야 합니다.");
+                }
                 payloadList.push({
                     created_at,
                     record_type: "temperature",
-                    amount_value: Number(amountValue)
-                })
+                    amount_value: temp
+                });
                 break;
 
             // --------------------------- 배변 ---------------------------
             case "배변":
-                if (!pooType) return alert("종류를 선택하세요.");
+                if (!pooType) {
+                    setIsSubmitting(false)
+                    return alert("종류를 선택하세요.")
+                };
                 payloadList.push({
                     created_at,
                     record_type: pooType === "소변" ? "toilet/pee" : "toilet/poop",
@@ -243,6 +276,7 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
             case "수면":
                 if (!sleepStart) return alert("수면 시작 시간을 입력하세요."); //0. 시작시간이 없다면 반려
                 if (sleepEnd && new Date(sleepEnd) < new Date(sleepStart)) {
+                    setIsSubmitting(false)
                     return alert("수면 종료 시간은 시작 시간보다 빠를 수 없습니다.");
                 }
 
@@ -268,6 +302,7 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
                 // 3. 겹침 검사 실행
                 for (const r of ranges) {
                     if (isOverlapping(start, end, r.start, r.end)) {
+                        setIsSubmitting(false)
                         return alert("이미 기록된 수면 시간과 겹칩니다.");
                     }
                 }
@@ -295,12 +330,14 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
                 break;
 
             default:
+                setIsSubmitting(false)
                 return alert("알 수 없는 타입");
         }
 
         try {
-
             if (!editMode) {// 1) 기록 저장 : 입력
+
+                console.log(payloadList, "입력페이로드");
                 const resp = await caxios.post(`/dailyrecord`, payloadList, {
                     params: {
                         baby_seq: sessionStorage.getItem("babySeq"),
@@ -337,10 +374,12 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
                     });
                 }
                 alert("수정이 완료되었습니다!");
+
             }
+            load();
             closeModal();
             reset();
-            ;
+
 
             // 2) 오른쪽 디테일 카드 리패치
             const result = await fetchData(reverseTypeMap[activeType], currentDate);
@@ -356,6 +395,8 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
         } catch (err) {
             console.error(err);
             alert("저장 중 오류가 발생했습니다.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -431,6 +472,7 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
         startMin,
         startMax,
         endMin,
-        endMax
+        endMax,
+        isSubmitting
     }
 }
