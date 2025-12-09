@@ -1,10 +1,10 @@
 import axios from "axios";
 
 //파일서버 주소 바꾸지.마시오. 진짜. 절대.
-export const FILE_SERVER = "http://10.5.5.4";
+export const FILE_SERVER = "https://cs-689104601634.asia-northeast3.run.app";
 
 export const caxios = axios.create({
-  baseURL: `http://10.5.5.4/`
+  baseURL: `https://cs-689104601634.asia-northeast3.run.app/`
 
 });
 
