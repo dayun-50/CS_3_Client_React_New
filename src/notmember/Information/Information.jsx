@@ -50,7 +50,11 @@ const staggerChildren = {
 };
 const galleryItemScaleUp = {
   hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.1, delay: 0.05 },
+  },
 };
 
 const Information = () => {

@@ -16,7 +16,11 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
     const fetchBabyInfo = async () => {
       try {
         const babyResponse = await caxios.get(`/chart/${babySeq}`);
-        const { status, birth_date, baby_seq: seq } = babyResponse.data;
+        const { status, birth_date, baby_seq } = babyResponse.data;
+        console.log("asdfasfdasdfas : " + babyResponse.data.status);
+        console.log("asdfasfdasdfas : " + babyResponse.data.birth_date);
+        console.log("asdfasfdasdfas : " + babyResponse.data.baby_seq);
+
 
         const todayStr = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
         const week =
@@ -24,7 +28,7 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
             ? calculateFetalWeek(birth_date, todayStr)
             : calculateInfantWeek(birth_date, todayStr);
 
-        setBabyInfo({ babySeq: seq, status, birthDate: birth_date });
+        setBabyInfo({ babySeq: baby_seq, status, birthDate: birth_date });
         setCurrentWeek(week);
         setIsFetalMode(status.toLowerCase() === "fetus");
 

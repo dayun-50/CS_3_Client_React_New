@@ -60,7 +60,7 @@
 }
 
 .idmiddleone label {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
     display: block;
@@ -72,7 +72,7 @@
     width: 70%;
     height: 48px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back);
     padding: 0 10px;
     box-sizing: border-box;
     outline: none;
@@ -86,7 +86,7 @@
 .dlswmd {
     width: 25%;
     height: 48px;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     border-radius: 20px;
     border: none;
     font-size: 16px;
@@ -98,6 +98,7 @@
 .dlswmd:hover {
     background-color: #F0D827;
      transform: scale(0.98);
+     font-weight: bold;
 }
 
 .dlswmd:active {
@@ -110,7 +111,7 @@
 }
 
 .idmiddletwo label {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
     display: block;
@@ -122,7 +123,7 @@
     width: 100%;
     height: 48px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back);
     padding: 0 10px;
     box-sizing: border-box;
     outline: none;
@@ -148,9 +149,8 @@
     border-radius: 30px;
     border: none;
     color: white;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -162,13 +162,13 @@
     background-color: #B9B9B9;
     background-color: #F0D827;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .idd:hover {
      transform: scale(0.98);
     background-color: #b0b0b0;
+    font-weight: bold;
 }
 
 .idd:active {
@@ -178,6 +178,7 @@
 .idok:hover,.idok:active {
     background-color: #e0c817;;
      transform: scale(0.98);
+     font-weight: bold;
 }
 /*---------------------------------------------------------------------*/
 /* 완료 누르면 나오는 비밀번호 재설정 창 */
@@ -230,7 +231,7 @@
 
 
 .idmiddlet p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
     margin-left: 10px;
@@ -241,7 +242,7 @@
     width: 100%;
     height: 50px;
     border-radius: 30px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding-left: 10px;
     color: #8C8C8C;
     outline: none;
@@ -267,9 +268,8 @@
     border-radius: 30px;
     border: none;
     color: white;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -282,7 +282,6 @@
     background-color: #B9B9B9;
     background-color: #F0D827;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -297,11 +296,13 @@
 .iddt:hover {
     transform: scale(0.98);
     background-color: #b0b0b0;
+    font-weight: bold;
 }
 
 .idokt:hover {
     transform: scale(0.98);
-    background-color: #e0c817;;
+    background-color: #e0c817;
+    font-weight: bold;
 }
 /* ------------------ 반응형 ------------------ */
 @media screen and (max-width: 768px) {
