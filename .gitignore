@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# CSS & JSON 파일은 Git에서 제외
+*.css
+*.json
+
