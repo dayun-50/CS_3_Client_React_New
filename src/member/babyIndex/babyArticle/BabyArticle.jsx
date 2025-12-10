@@ -68,7 +68,6 @@ const MOCK_CATEGORIES = [
   },
 ];
 
-
 const ArticleCard = ({ category, articles }) => {
   const filteredArticles = articles
     .filter((a) => a.categoryId === category.id)
@@ -95,7 +94,7 @@ const ArticleCard = ({ category, articles }) => {
             {category.sourceName && (
               <div className={styles.imageSource}>
                 출처: {category.sourceName}
-              </div>
+              </div> 
             )}
           </div>
 

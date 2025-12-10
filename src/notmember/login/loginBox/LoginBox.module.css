@@ -32,8 +32,7 @@
   width: 80%;
   height: auto;
 }
-/* -------------------------------------------------- */
-/* 로그인 제목 */
+
 .logintop {
   display: flex;
   justify-content: center;
@@ -44,8 +43,7 @@
   font-weight: bold;
   color: #696b70;
 }
-/* -------------------------------------------------- */
-/* 아이디 비밀번호 입력칸 */
+
 .loginmiddle {
   margin-top: 40px;
 }
@@ -76,8 +74,6 @@
 .middletwo {
   margin-top: 24px;
 }
-/* -------------------------------------------------- */
-/*로그인 버튼 부분*/
 
 .loginbottom {
   margin-top: 48px;
@@ -122,8 +118,6 @@
 .logbut:active {
   transform: scale(0.98);
 }
-/* -------------------------------------------------- */
-/*버튼 아래 나머지*/
 
 .signup {
   margin-top: 24px;
@@ -147,14 +141,14 @@
   margin-left: 10px;
   text-decoration: none;
   color: #8c8c8c;
-  display: inline-block; /* 또는 block */
+  display: inline-block; 
   font-size: px;
 }
 
 .changepw {
   text-decoration: none;
   color: #8c8c8c;
-  display: inline-block; /* 또는 block */
+  display: inline-block;
 }
 .changelog + .changepw::before {
   content: "|";
@@ -163,10 +157,22 @@
 }
 
 .alert input {
-  border: solid 1px #499ef8 !important;
+  border: 1px solid #ff7a7a !important;
+  background-color: #fff;
+  padding: 8px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.2s ease;
 }
 
-/* ------------------ 반응형 ------------------ */
+.alert input:focus,
+.alert input:focus-within {
+  outline: none;
+
+  border-color: #ff7a7a;
+  box-shadow: 0 0 0 4px rgba(255, 122, 122, 0.35);
+}
+
 @media screen and (max-width: 768px) {
   .loginbox {
     width: 90%;
@@ -187,7 +193,6 @@
     font-size: 14px;
   }
 
-  /* 로그인 / 뒤로가기 버튼 높이 동일하게 */
   .logbut,
   .back {
     height: 44px;
@@ -219,7 +224,6 @@
     font-size: 14px;
   }
 
-  /* 로그인 / 뒤로가기 버튼 높이 동일하게 */
   .logbut,
   .back {
     height: 40px;

@@ -1,9 +1,9 @@
 .container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .idcheckbox {
@@ -24,8 +24,6 @@
     flex-direction: column;
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 제목 부분*/
 .idtop {
     width: 100%;
     display: flex;
@@ -36,19 +34,16 @@
 }
 
 .title {
-    font-weight: bold;
-    font-size: 32px;
-    color: #696B70;
+  font-weight: bold;
+  font-size: 32px;
+  color: #696b70;
 }
 
 .nn {
-    font-size: 18px;
-    font-weight: bold;
-    color: #8C8C8C;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8c8c8c;
 }
-
-/*-----------------------------------------------------------------*/
-/*이메일*/
 
 .idmiddleone {
     margin-bottom: 16px;
@@ -74,8 +69,8 @@
 }
 
 .idmiddleone input::placeholder {
-    color: #8C8C8C;
-    font-size: 16px;
+  color: #8c8c8c;
+  font-size: 16px;
 }
 
 .dlswmd {
@@ -97,7 +92,7 @@
 }
 
 .dlswmd:active {
-     transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .idmiddletwo {
@@ -124,17 +119,14 @@
 }
 
 .idmiddletwo input::placeholder {
-    color: #8C8C8C;
-    font-size: 16px;
+  color: #8c8c8c;
+  font-size: 16px;
 }
 
-/*-----------------------------------------------------------------*/
-/*취소랑 완료 버튼*/
-
 .idbottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .idd {
@@ -166,7 +158,7 @@
 }
 
 .idd:active {
-     transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .idok:hover,.idok:active {
@@ -174,8 +166,6 @@
      transform: scale(0.98);
      font-weight: bold;
 }
-/*---------------------------------------------------------------------*/
-/* 완료 누르면 나오는 비밀번호 재설정 창 */
 
 .idcheckboxint {
     width: 100%;
@@ -185,32 +175,25 @@
     gap: 30px;
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 제목 부분*/
 .idtopt {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    /* border:1px solid black; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .titlet {
-    font-weight: bold;
-    font-size: 32px;
-    color: #696B70;
+  font-weight: bold;
+  font-size: 32px;
+  color: #696b70;
 }
 
 .nnt {
-    font-size: 18px;
-    font-weight: bold;
-    color: #8C8C8C;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8c8c8c;
 }
-
-/*-----------------------------------------------------------------*/
-/*아이디 값 나오는 부분*/
-
 
 .idmiddlet p {
     font-size: 16px;
@@ -231,17 +214,14 @@
 }
 
 .newpwt::placeholder {
-    color: #8C8C8C;
-    font-size: 16px;
+  color: #8c8c8c;
+  font-size: 16px;
 }
 
-/*-----------------------------------------------------------------*/
-/*취소랑 완료 버튼*/
-
 .idbottomt {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .iddt {
@@ -268,11 +248,24 @@
 }
 
 .auth {
-    border: solid 1px #499ef8 !important;
+  border: 1px solid #ff7a7a !important;
+  background-color: #fff;
+  padding: 8px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.2s ease;
+}
+
+.auth:focus,
+.auth:focus-within {
+  outline: none;
+
+  border-color: #ff7a7a;
+  box-shadow: 0 0 0 4px rgba(255, 122, 122, 0.35);
 }
 
 .custom:focus {
-    outline: none;
+  outline: none;
 }
 
 .iddt:hover {
@@ -286,74 +279,83 @@
     background-color: #e0c817;
     font-weight: bold;
 }
-/* ------------------ 반응형 ------------------ */
+
 @media screen and (max-width: 768px) {
-    .idcheckbox {
-        width: 90%;
-        height: auto;
-        padding: 30px 20px;
-    }
+  .idcheckbox {
+    width: 90%;
+    height: auto;
+    padding: 30px 20px;
+  }
 
-    .title, .titlet {
-        font-size: 28px;
-    }
+  .title,
+  .titlet {
+    font-size: 28px;
+  }
 
-    .nn, .nnt {
-        font-size: 16px;
-    }
+  .nn,
+  .nnt {
+    font-size: 16px;
+  }
 
-    .idmiddleone label,
-    .idmiddletwo label {
-        font-size: 16px;
-    }
+  .idmiddleone label,
+  .idmiddletwo label {
+    font-size: 16px;
+  }
 
-    .idmiddleone input,
-    .idmiddletwo input,
-    .dlswmd {
-        height: 44px;
-        font-size: 14px;
-    }
+  .idmiddleone input,
+  .idmiddletwo input,
+  .dlswmd {
+    height: 44px;
+    font-size: 14px;
+  }
 
-    .idd, .idok, .iddt, .idokt {
-        height: 44px;
-        font-size: 16px;
-    }
+  .idd,
+  .idok,
+  .iddt,
+  .idokt {
+    height: 44px;
+    font-size: 16px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .idcheckbox {
-        width: 95%;
-        height: auto;
-        padding: 20px 15px;
-    }
+  .idcheckbox {
+    width: 95%;
+    height: auto;
+    padding: 20px 15px;
+  }
 
-    .title, .titlet {
-        font-size: 24px;
-    }
+  .title,
+  .titlet {
+    font-size: 24px;
+  }
 
-    .nn, .nnt {
-        font-size: 14px;
-    }
+  .nn,
+  .nnt {
+    font-size: 14px;
+  }
 
-    .idmiddleone label,
-    .idmiddletwo label {
-        font-size: 14px;
-    }
+  .idmiddleone label,
+  .idmiddletwo label {
+    font-size: 14px;
+  }
 
-    .idmiddleone input,
-    .idmiddletwo input,
-    .dlswmd {
-        height: 40px;
-        font-size: 14px;
-    }
+  .idmiddleone input,
+  .idmiddletwo input,
+  .dlswmd {
+    height: 40px;
+    font-size: 14px;
+  }
 
-    .idd, .idok, .iddt, .idokt {
-        height: 40px;
-        font-size: 14px;
-    }
+  .idd,
+  .idok,
+  .iddt,
+  .idokt {
+    height: 40px;
+    font-size: 14px;
+  }
 }
 
-/* iPhone SE / Galaxy S8+ 대응 */
 @media screen and (max-width: 375px) {
     .idmiddleone {
         display: flex;

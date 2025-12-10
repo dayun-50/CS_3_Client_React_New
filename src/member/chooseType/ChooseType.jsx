@@ -12,7 +12,6 @@ import useChooseType from "./UseChooseType";
 import InputBaby from "../../member/inputBaby/InputBaby";
 
 const ChooseType = () => {
-
   const [showInputBaby, setShowInputBaby] = useState(false);
   const [babyType, setBabyType] = useState("");
   const [hover, setHover] = useState(false);
@@ -42,7 +41,7 @@ const ChooseType = () => {
         <>
           <div className={`${styles.babymomcheckbox} ${hover ? styles.hoverBorder : ""}`}>
             <div className={styles.cute}>
-              <h1 className={hover ? styles.hoverTitle : ""}>임산모</h1>
+              <h1 className={hover ? styles.hoverTitle : ""}>임산부</h1>
               <p>아직 뱃속에 있어요</p>
               <img src={babyImg} alt="baby" className={styles.babyImage} />
               <button
@@ -63,7 +62,11 @@ const ChooseType = () => {
             <div className={styles.cutetwo}>
               <h1 className={hoverTwo ? styles.hoverTitleTwo : ""}>육아</h1>
               <p>태어났어요</p>
-              <img src={childrenImg} alt="children" className={styles.childrenImage} />
+              <img
+                src={childrenImg}
+                alt="children"
+                className={styles.childrenImage}
+              />
               <button
                 className={styles.bokk}
                 onMouseEnter={() => setHoverTwo(true)}
@@ -90,6 +93,5 @@ const ChooseType = () => {
     </div>
   );
 };
-
 
 export default ChooseType;

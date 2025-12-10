@@ -233,7 +233,20 @@
 }
 
 .auth {
-  border: solid 1px #adb9e3 !important;
+  border: 1px solid #ff7a7a !important;
+  background-color: #fff;
+  padding: 8px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.2s ease;
+}
+
+.auth:focus,
+.auth:focus-within {
+  outline: none;
+
+  border-color: #ff7a7a;
+  box-shadow: 0 0 0 4px rgba(255, 122, 122, 0.35);
 }
 
 @media (max-width: 375px) {

@@ -111,13 +111,13 @@
   flex-direction: column;
   gap: 2px;
   width: 100%;
+  padding: 16px;
 }
 
 .senderName {
   font-size: 13px;
   color: #808080;
   font-weight: bold;
-  margin-left: 10px;
 }
 
 .bubbleRow {
@@ -197,7 +197,7 @@
 .cardRow {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 10px;
 }
 
 .cardContainer {
@@ -207,8 +207,8 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-width: 80%;
+  gap: 10px;
+  max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 

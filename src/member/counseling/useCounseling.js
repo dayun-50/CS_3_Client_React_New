@@ -20,7 +20,7 @@ function useCounseling(setInputText, setMessages, setInputDisabled) {
             "또한, 미관련 질문일 경우 답변이 어려운점 양해 부탁드립니다.";
             setMessages(prev => [
                 ...prev,
-                { text: aiText, sender: "other", time: formatTime, senderName: "챗봇" }
+                { text: aiText, sender: "other", time: formatTime, senderName: "코코벨" }
             ]);
             return;
         }
@@ -32,7 +32,7 @@ function useCounseling(setInputText, setMessages, setInputDisabled) {
                 console.log(resp.data);
                 setMessages(prev => [
                     ...prev,
-                    { text: resp.data.response_text, sender: "other", time: formatTime, senderName: "챗봇" }
+                    { text: resp.data.response_text, sender: "other", time: formatTime, senderName: "코코벨" }
                 ]);
             })
     }

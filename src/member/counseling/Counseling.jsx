@@ -28,7 +28,7 @@ const Counseling = ({ onClose }) => {
       {
         sender: "other",
         type: "card",
-        senderName: "CS",
+        senderName: "코코벨",
         text: "지금 아기가 어떤 상황인가요?\n상세한 정보를 제공해 주시면 맞춤형 긴급 상담을 시작할 수 있습니다.",
         buttons: [
           "입덧이 심해요.",

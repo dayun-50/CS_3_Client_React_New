@@ -31,9 +31,6 @@ const MainIndex = ({ alerts, setAlerts }) => {
   const { isLogin } = useAuthStore((state) => state);
   const location = useLocation();
 
-  /* -----------------------------
-   *  모든 Hook은 조건문 밖 최상단
-  --------------------------------*/
   const [isLoading, setIsLoading] = useState(true);
 
   const headerRef = useRef(null);
@@ -68,9 +65,6 @@ const MainIndex = ({ alerts, setAlerts }) => {
     }
   }, [location, isLogin]);
 
-  /* -----------------------------
-   *  헤더 높이 자동 측정
-  --------------------------------*/
   useEffect(() => {
     if (!headerRef.current) return;
 
@@ -86,9 +80,6 @@ const MainIndex = ({ alerts, setAlerts }) => {
     return () => observer.disconnect();
   }, []);
 
-  /* -----------------------------
-   * 노란 배경을 써야 하는 경로
-  --------------------------------*/
   const yellowBackgroundPaths = ["/", "/babyIndex", "/babymypage"];
 
   const isYellowBackground =
@@ -109,24 +100,24 @@ const MainIndex = ({ alerts, setAlerts }) => {
 
   return (
     <div className={styles.container}>
-      {/* 헤더 (Information 페이지에서만 고정) */}
       <header
         ref={headerRef}
         className={
           isInfoPage ? styles.MemberHeaderFixed : styles.MemberHeaderNormal
         }
       >
-        <CommonHeader isLogin={isLogin} alerts={alerts} setAlerts={setAlerts} setIsCounselOpen={setIsCounselOpen} />
+        <CommonHeader
+          isLogin={isLogin}
+          alerts={alerts}
+          setAlerts={setAlerts}
+          setIsCounselOpen={setIsCounselOpen}
+        />
       </header>
 
-      {/* 메인 */}
       <div className={mainLayoutClassName}>
         <Routes>
           <Route path="" element={!isLogin ? <Information /> : <BabyIndex />} />
-          {/*로그인 안되어 있으면 ? 인포메이션 : 되면 베이비인덱스*/}
-
           <Route path="board/*" element={<BoardIndex />} /> {/*커뮤니티*/}
-          {/*-----------------------------------------------------------------------여기까지는 비회원도 접근 가능한 부분 아래는 불가하게 막아야함*/}
           <Route
             path="mypage"
             element={
@@ -160,7 +151,7 @@ const MainIndex = ({ alerts, setAlerts }) => {
                 <ChartIndex />
               </PrivateRoute>
             }
-          />{" "}
+          />
           {/*차트*/}
           <Route
             path="diary/*"
@@ -169,15 +160,13 @@ const MainIndex = ({ alerts, setAlerts }) => {
                 <DiaryIndex />
               </PrivateRoute>
             }
-          />{" "}
+          />
           {/*산모수첩*/}
           <Route path="*" element={<ToLogin />} />
         </Routes>
       </div>
-      {/* 긴급상담 */}
-      {isCounselOpen && (
-        <Counseling onClose={() => setIsCounselOpen(false)} />
-      )}
+
+      {isCounselOpen && <Counseling onClose={() => setIsCounselOpen(false)} />}
     </div>
   );
 };
