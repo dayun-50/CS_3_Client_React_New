@@ -3,25 +3,23 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styles from "./Information.module.css";
 
-// 이미지
-import section1 from "./imgs/index1.svg"; // 육아 홈페이지
-import section2 from "./imgs/CheckDetail.svg"; // 건강기록
+
+import section1 from "./imgs/index1.svg";
+import section2 from "./imgs/CheckDetail.svg";
 import section3 from "./imgs/index1.svg";
-import section3_1 from "./imgs/BornDiary.svg"; // 하루일기 반응형
-import section3_2 from "./imgs/Board.svg"; // 커뮤니티 반응형
+import section3_1 from "./imgs/BornDiary.svg";
+import section3_2 from "./imgs/Board.svg";
 
-//section4
-import img1 from "./imgs/BoardIndex.svg"; // 커뮤니티
-import img2 from "./imgs/Counseling.svg"; // 긴급상담
-import img3 from "./imgs/index1.svg"; // 육아 홈페이지
-import img4 from "./imgs/UnBornDiaryIndex.svg"; // 차트
-import img5 from "./imgs/ParentInfoIndex.svg"; // 아기 추가
-import img6 from "./imgs/Diary.svg"; // 산모수첩
-import img7 from "./imgs/CheckDetail.svg"; // 건강기록
-import img8 from "./imgs/BornDiaryIndex.svg"; // 하루 일기
-import img9 from "./imgs/BoardDetail.svg"; // 커무니티 디테일
+import img1 from "./imgs/BoardIndex.svg";
+import img2 from "./imgs/Counseling.svg";
+import img3 from "./imgs/index1.svg";
+import img4 from "./imgs/UnBornDiaryIndex.svg";
+import img5 from "./imgs/ParentInfoIndex.svg";
+import img6 from "./imgs/Diary.svg";
+import img7 from "./imgs/CheckDetail.svg";
+import img8 from "./imgs/BornDiaryIndex.svg";
+import img9 from "./imgs/BoardDetail.svg";
 
-// ---------------- 모션 Variants ----------------
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -112,20 +110,18 @@ const Information = () => {
     return () => observer.disconnect();
   }, []);
 
-  // 이미지 배열
   const galleryImgs = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
-  // 각 이미지별 이름 배열 (hover 텍스트)
   const galleryTitles = [
-    "커뮤니티", // img1
-    "긴급 상담", // img2
-    "홈", // img3
-    "성장 차트", // img4
-    "마이페이지", // img5
-    "산모 수첩", // img6
-    "건강 기록", // img7
-    "하루 일기", // img8
-    "커뮤니티 댓글", // img9
+    "커뮤니티",
+    "긴급 상담",
+    "홈",
+    "성장 차트",
+    "마이페이지",
+    "산모 수첩",
+    "건강 기록",
+    "하루 일기",
+    "커뮤니티 댓글",
   ];
 
   const navigate = useNavigate();
@@ -136,7 +132,6 @@ const Information = () => {
 
   return (
     <div className={styles.container}>
-      {/* HERO */}
       <section
         className={styles.hero}
         ref={(el) => (sectionsRef.current[0] = el)}
@@ -166,7 +161,6 @@ const Information = () => {
         </motion.div>
       </section>
 
-      {/* SECTION 1 – rotateInLeft */}
       <section
         className={styles.section}
         ref={(el) => (sectionsRef.current[1] = el)}
@@ -193,7 +187,6 @@ const Information = () => {
         </motion.div>
       </section>
 
-      {/* SECTION 2 – rotateInRight */}
       <section
         className={styles.section}
         ref={(el) => (sectionsRef.current[2] = el)}
@@ -227,7 +220,6 @@ const Information = () => {
         </motion.div>
       </section>
 
-      {/* SECTION 3 – 여러 기기 */}
       <section
         className={styles.section}
         ref={(el) => (sectionsRef.current[3] = el)}
@@ -279,7 +271,6 @@ const Information = () => {
         </motion.div>
       </section>
 
-      {/* SECTION 4 – 갤러리 */}
       <section
         className={styles.gallerySection}
         ref={(el) => (sectionsRef.current[4] = el)}
@@ -338,14 +329,12 @@ const Information = () => {
         </motion.div>
       </section>
 
-      {/* DOT NAV */}
       <div className={styles.dotNavWrap}>
         {Array.from({ length: totalSections }, (_, i) => (
           <div
             key={i}
-            className={`${styles.dot} ${
-              activeIndex === i ? styles.activeDot : ""
-            }`}
+            className={`${styles.dot} ${activeIndex === i ? styles.activeDot : ""
+              }`}
             onClick={() => scrollTo(i)}
           />
         ))}

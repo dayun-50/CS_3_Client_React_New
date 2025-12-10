@@ -6,28 +6,22 @@ import { PiPassword } from "react-icons/pi";
 
 function useFindPw(setIsCompleted) {
     const navigate = useNavigate();
-    // data 상태는 사용자 입력값만 관리
     const [data, setData] = useState({
         email: "", code: ""
     });
 
-    // 서버에서 받은 코드는 별도 상태로 관리
     const [serverAuthCode, setServerAuthCode] = useState('');
 
-    // 정규식 및 일치 조건 상태변수
     const [regexAuth, setRegexAuth] = useState({
         email: false, code: false
     });
 
-    // css 카운트... 흑흑
     const [inputCount, setInputCount] = useState({
-        email: 0, code: 0, pw : 0
+        email: 0, code: 0, pw: 0
     });
 
-    // 정규식
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-    // input 핸들러 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInputCount(prev => ({ ...prev, [name]: 1 }));
@@ -44,14 +38,12 @@ function useFindPw(setIsCompleted) {
         });
     }
 
-    // 엔터 클릭시
     const handleLoginKeyUp = (e) => {
         if (e.key === 'Enter') {
             handleComplete();
         }
     }
 
-    // 인증 번호 발송 버튼
     const emailAuthClick = () => {
         if (!data.email || !regexAuth.email) {
             alert("알맞은 이메일을 입력해주세요.");
@@ -64,22 +56,18 @@ function useFindPw(setIsCompleted) {
         caxios.post("/emailCheck", { email: data.email })
             .then(resp => {
                 alert("이메일 인증번호 발송 완료");
-                console.log(resp.data);
-                setServerAuthCode(resp.data); // 서버 코드 저장
+                setServerAuthCode(resp.data);
             })
             .catch(err => {
                 alert("인증번호 발송에 실패했습니다. 잠시 후 다시 시도해주세요.");
-                console.error(err);
             });
     }
 
-    // 완료 버튼
     const handleComplete = () => {
         if (!data.email || !data.code) {
             alert("이메일과 인증 코드를 모두 입력해주세요.");
             return;
         }
-        console.log("aaa", regexAuth);
         const isAllValid = Object.values(regexAuth).every(value => value === true);
 
         if (!isAllValid) {
@@ -96,17 +84,11 @@ function useFindPw(setIsCompleted) {
                     return;
                 }
             })
-            .catch(err => {
-                console.error(err);
-            });
     }
 
-    /* --------------비밀번호 재설정------------------------------------------------------ */
-
-    // input 받을 상태변수
     const [inputpw, setInputpw] = useState("");
     const [regexAuthPw, setRegexAuthPw] = useState(false);
-    const pwRegex = /^[a-zA-Z0-9!@#$%^&*()]{6,}$/ // 대소문자,숫자,특수문자 최소 6글자 이상
+    const pwRegex = /^[a-zA-Z0-9!@#$%^&*()]{6,}$/
 
     const alertAsync = (msg) =>
         new Promise((resolve) => {
@@ -137,10 +119,8 @@ function useFindPw(setIsCompleted) {
                     navigate("/findpw");
                 }
             })
-            .catch(err => console.log(err));
     }
 
-    // 엔터 클릭시
     const handlePwKeyUp = (e) => {
         if (e.key === 'Enter') {
             handleCompletePw();

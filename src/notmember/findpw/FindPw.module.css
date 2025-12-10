@@ -24,8 +24,6 @@
     flex-direction: column;
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 제목 부분*/
 .idtop {
     width: 100%;
     display: flex;
@@ -47,8 +45,6 @@
     color: #8C8C8C;
 }
 
-/*-----------------------------------------------------------------*/
-/*이메일*/
 
 .idmiddleone {
     margin-bottom: 16px;
@@ -92,12 +88,12 @@
 
 .dlswmd:hover {
     background-color: #F0D827;
-     transform: scale(0.98);
-     font-weight: bold;
+    transform: scale(0.98);
+    font-weight: bold;
 }
 
 .dlswmd:active {
-     transform: scale(0.98);
+    transform: scale(0.98);
 }
 
 .idmiddletwo {
@@ -128,9 +124,6 @@
     font-size: 16px;
 }
 
-/*-----------------------------------------------------------------*/
-/*취소랑 완료 버튼*/
-
 .idbottom {
     width: 100%;
     display: flex;
@@ -151,7 +144,8 @@
 .idok {
     width: 187px;
     height: 48px;
-    border-radius: 30px;border: none;
+    border-radius: 30px;
+    border: none;
     color: white;
     background-color: #B9B9B9;
     background-color: #F0D827;
@@ -160,22 +154,22 @@
 }
 
 .idd:hover {
-     transform: scale(0.98);
+    transform: scale(0.98);
     background-color: #b0b0b0;
     font-weight: bold;
 }
 
 .idd:active {
-     transform: scale(0.98);
+    transform: scale(0.98);
 }
 
-.idok:hover,.idok:active {
-    background-color: #e0c817;;
-     transform: scale(0.98);
-     font-weight: bold;
+.idok:hover,
+.idok:active {
+    background-color: #e0c817;
+    ;
+    transform: scale(0.98);
+    font-weight: bold;
 }
-/*---------------------------------------------------------------------*/
-/* 완료 누르면 나오는 비밀번호 재설정 창 */
 
 .idcheckboxint {
     width: 100%;
@@ -185,15 +179,12 @@
     gap: 30px;
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 제목 부분*/
 .idtopt {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    /* border:1px solid black; */
 }
 
 .titlet {
@@ -208,10 +199,6 @@
     color: #8C8C8C;
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 값 나오는 부분*/
-
-
 .idmiddlet p {
     font-size: 16px;
     font-weight: bold;
@@ -224,7 +211,7 @@
     width: 100%;
     height: 50px;
     border-radius: 30px;
-    border: 1px solid var(--color-font-back); 
+    border: 1px solid var(--color-font-back);
     padding-left: 10px;
     color: #8C8C8C;
     outline: none;
@@ -234,9 +221,6 @@
     color: #8C8C8C;
     font-size: 16px;
 }
-
-/*-----------------------------------------------------------------*/
-/*취소랑 완료 버튼*/
 
 .idbottomt {
     width: 100%;
@@ -286,7 +270,7 @@
     background-color: #e0c817;
     font-weight: bold;
 }
-/* ------------------ 반응형 ------------------ */
+
 @media screen and (max-width: 768px) {
     .idcheckbox {
         width: 90%;
@@ -294,11 +278,13 @@
         padding: 30px 20px;
     }
 
-    .title, .titlet {
+    .title,
+    .titlet {
         font-size: 28px;
     }
 
-    .nn, .nnt {
+    .nn,
+    .nnt {
         font-size: 16px;
     }
 
@@ -314,7 +300,10 @@
         font-size: 14px;
     }
 
-    .idd, .idok, .iddt, .idokt {
+    .idd,
+    .idok,
+    .iddt,
+    .idokt {
         height: 44px;
         font-size: 16px;
     }
@@ -327,11 +316,13 @@
         padding: 20px 15px;
     }
 
-    .title, .titlet {
+    .title,
+    .titlet {
         font-size: 24px;
     }
 
-    .nn, .nnt {
+    .nn,
+    .nnt {
         font-size: 14px;
     }
 
@@ -347,23 +338,25 @@
         font-size: 14px;
     }
 
-    .idd, .idok, .iddt, .idokt {
+    .idd,
+    .idok,
+    .iddt,
+    .idokt {
         height: 40px;
         font-size: 14px;
     }
 }
 
-/* iPhone SE / Galaxy S8+ 대응 */
 @media screen and (max-width: 375px) {
     .idmiddleone {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
     }
 
-    .idmiddleone > input,
-    .idmiddleone > .dlswmd {
-        width: 100%;      
-        margin: 5px 0;    
+    .idmiddleone>input,
+    .idmiddleone>.dlswmd {
+        width: 100%;
+        margin: 5px 0;
         box-sizing: border-box;
     }
 }

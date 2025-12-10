@@ -330,7 +330,6 @@
     }
 }
 
-/* iPhone SE / Galaxy S8+ 대응 */
 @media screen and (max-width: 375px) {
     .idmiddleone {
         display: flex;

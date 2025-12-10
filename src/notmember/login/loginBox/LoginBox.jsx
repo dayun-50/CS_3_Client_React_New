@@ -6,9 +6,9 @@ import FindPw from "../../findpw/FindPw";
 import useLoginBox from "./UseLoginBox";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-function LoginBox({ setBabySeq, setAlerts }) {
+function LoginBox() {
   const { data, authAlert, handleChange, handleComplete, handleLoginKeyUp } =
-    useLoginBox(setBabySeq, setAlerts);
+    useLoginBox();
 
   const navigator = useNavigate();
   const handleBack = () => {
@@ -78,7 +78,7 @@ function LoginBox({ setBabySeq, setAlerts }) {
                   justifyContent: "center",
                   height: "100%",
                   fontSize: "20px",
-                  color: "#b0b0b0"  // ← 여기에 색상 적용
+                  color: "#b0b0b0"  
                 }}
               >
                 {showPw ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}

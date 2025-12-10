@@ -5,7 +5,7 @@ import useFindPw from "./UseFindPw";
 
 const FindPw = () => {
   const navigate = useNavigate();
-  const [isCompleted, setIsCompleted] = useState(false); // 완료 여부
+  const [isCompleted, setIsCompleted] = useState(false); 
   const {
     data, regexAuth, inputCount, handleChange, handleLoginKeyUp, emailAuthClick, handleComplete,
     inputpw, regexAuthPw, handleChangePw, handleCompletePw, handlePwKeyUp
@@ -26,7 +26,6 @@ const FindPw = () => {
       <div className={styles.idcheckbox}>
         <div className={styles.idcheckboxin}>
           {!isCompleted ? (
-            // 완료 전 화면
             <>
               <div className={styles.idtop}>
                 <h1 className={styles.title}>비밀번호 찾기</h1>
@@ -52,7 +51,6 @@ const FindPw = () => {
               </div>
             </>
           ) : (
-            // 완료 후 화면
             <div className={styles.idcheckboxt}>
 
               <div className={styles.idcheckboxint}>

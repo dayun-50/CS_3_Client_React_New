@@ -254,7 +254,6 @@
       padding: 5px;
     }
 
-    /* 기존 70px → 80px */
     .pastBadge,
     .futureBadge {
       width: 65px;

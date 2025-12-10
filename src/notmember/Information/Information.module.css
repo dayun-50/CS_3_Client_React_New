@@ -1,11 +1,9 @@
-/* ---------------- 메인 컨테이너 ---------------- */
 .container {
   width: 100%;
   position: relative;
   font-family: var(--font-family);
 }
 
-/* ---------------- HERO ---------------- */
 .hero {
   width: 100%;
   height: 680px;
@@ -55,7 +53,6 @@
   transform: scale(0.98);
 }
 
-/* ---------------- SECTIONS ---------------- */
 .section {
   padding: 200px 0;
   background: var(--color-white);
@@ -97,12 +94,10 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 텍스트 왼쪽 정렬 */
 .sectionTextGroupLeft {
   text-align: left;
 }
 
-/* ---------------- 섹션 3: 여러 기기 이미지 ---------------- */
 .multiDeviceWrap {
   position: relative;
   height: 500px;
@@ -112,7 +107,6 @@
   flex: 1;
 }
 
-/* deviceLarge: PC (가장 뒤) */
 .deviceLarge {
   width: 760px;
   height: auto;
@@ -156,7 +150,6 @@
   object-fit: contain;
 }
 
-/* ---------------- GALLERY ---------------- */
 .gallerySection {
   width: 100%;
   padding: 140px 0 0;
@@ -218,11 +211,11 @@
   opacity: 1;
 }
 
-/* ---------------- Infinite Loop Animation ---------------- */
 @keyframes slideRightToLeft {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -232,6 +225,7 @@
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -249,7 +243,6 @@
   animation-play-state: paused;
 }
 
-/* ---------------- DOT NAV ---------------- */
 .dotNavWrap {
   position: fixed;
   right: 40px;
@@ -288,10 +281,8 @@
   transform: scale(1.4);
 }
 
-/* ---------------- 반응형 ---------------- */
 
 @media (max-width: 1024px) {
-  /* 모든 섹션 텍스트 조금 축소 */
   .sectionTitle {
     font-size: 32px;
   }
@@ -301,20 +292,17 @@
     line-height: 1.45;
   }
 
-  /* 섹션 공통 이미지 축소 */
   .sectionImg {
     width: 80%;
     max-width: 600px;
   }
 
-  /* 섹션 3 기기 이미지 전체 축소 */
   .multiDeviceWrap {
     transform: scale(0.9);
     transform-origin: center top;
     height: 420px;
   }
 
-  /* deviceLarge: PC (가장 뒤) */
   .deviceLarge {
     transform: translateX(-60%);
   }
@@ -345,7 +333,6 @@
     font-size: 15px;
   }
 
-  /* ===== 섹션 3 - 세로 정렬 버전 ===== */
   .sectionInnerRow {
     flex-direction: column;
     text-align: center;
@@ -366,7 +353,6 @@
     max-height: 500px;
   }
 
-  /* deviceLarge: PC (가장 뒤) */
   .deviceLarge {
     top: 0;
     transform: translateX(-40%);
@@ -398,6 +384,7 @@
     font-size: 30px;
     line-height: 1.3;
   }
+
   .heroText {
     font-size: 14px;
     line-height: 1.4;

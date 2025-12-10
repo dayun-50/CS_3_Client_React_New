@@ -17,25 +17,18 @@ function AppRoutes() {
   const location = useLocation(); // 현재 경로 감지
   const { login, isLogin, getbabySeq, setBabyDueDate, newAlerts, setNewAlerts } = useAuthStore((state) => state);
   const [alerts, setAlerts] = useState([]);
-  // const [newAlerts, setNewAlerts] = useState(false);
 
-  // 경로 변화 감지
   useEffect(() => {
     if (!isLogin) return;
 
     const paths = ["/board", "/mypage", "/babymypage", "/checklist", "/chart", "/diary"];
     const currentPath = location.pathname;
-
-    console.log("현재 path:", currentPath);
-
-    // 정확히 paths 배열에 있는 값만 처리
     if (paths.includes(currentPath)) {
       caxios.post("/dashCart", { path: currentPath })
         .catch(err => console.log(err));
     }
   }, [location, isLogin]);
 
-  // WebSocket & 토큰 처리
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     const id = sessionStorage.getItem("id");

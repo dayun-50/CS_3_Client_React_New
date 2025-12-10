@@ -269,7 +269,6 @@ export function UseEverydayWrite({ closeModal, currentDate, fetchData, reverseTy
                 });
                 alert("입력이 완료되었습니다!");
             } else {
-                // 수정
                 console.log(payloadList);
                 if (activeType === "수면") {
                     await caxios.delete("/dailyrecord/sleep-group", {
