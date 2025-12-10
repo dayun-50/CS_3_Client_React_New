@@ -19,19 +19,16 @@ import PageNaviBar from "../../../common/pageNavi/PageNavi";
 import BoardOver from "../boardOver/BoardOver";
 import useAuthStore from "store/useStore";
 
-// 모션
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.05, // 항목당 0.05초 간격
+      staggerChildren: 0.05,
     },
   },
 };
 
-// --- Card Item variants ---
-// 개별 카드의 등장 애니메이션 설정
 const itemVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -77,9 +74,7 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
 
   return (
     <div className={styles.container}>
-      {/* 카테고리 */}
       <div className={styles.header}>
-        {/* 왼쪽 그룹: 카테고리 */}
         <div className={styles.leftGroup}>
           <div className={styles.categoryList}>
             {Object.keys(CATEGORY_MAP).map((cat) => (
@@ -95,7 +90,6 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
           </div>
         </div>
 
-        {/* 오른쪽 그룹: 글작성 버튼 + 검색창 */}
         <div className={styles.rightGroup}>
           {isLogin && (
             <button className={styles.writeButton} onClick={toWrite}>
@@ -113,25 +107,22 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
               disabled={isSearching}
             />
             {isSearching ? (
-              // X 아이콘
               <X
                 className={styles.searchIcon}
                 size={24}
-                onClick={clearSearch} // 검색 리셋 함수
+                onClick={clearSearch}
               />
             ) : (
-              // 돋보기 아이콘
               <Search
                 className={styles.searchIcon}
                 size={24}
-                onClick={handleSendFindTarget} // 검색 실행
+                onClick={handleSendFindTarget}
               />
             )}
           </div>
         </div>
       </div>
 
-      {/* 리스트 */}
       <div className={styles.cardGrid}>
         {mergedList.length === 0 ? (
           <div className={styles.emptyMessage}>
@@ -140,27 +131,25 @@ const BoardList = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
             <p className={styles.emptySubText}>첫 게시글을 작성해보세요</p>
           </div>
         ) : (
-          <motion.ul // 2. 그리드 컨테이너에 motion 적용
+          <motion.ul
             className={styles.gridContainer}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {mergedList.map((item) => (
-              <motion.li // 개별 카드에 motion.li 적용
+              <motion.li
                 key={item.board.board_seq}
                 className={styles.card}
                 onClick={() => handleCardClick(item.board.board_seq)}
                 variants={itemVariants}
-                whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }} // 호버 시 살짝 떠오름
+                whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
                 transition={{ duration: 0.3 }}
               >
-                {/* 카드 상단 이미지 영역 */}
                 <div
                   className={`${styles.cardHeader} ${!thumbsUrlMap[item.board.board_seq] ? styles.noImage : ""
                     }`}
                 >
-                  {/* 이미지 있을 때만 출력 */}
                   {thumbsUrlMap[item.board.board_seq] && (
                     <img
                       src={thumbsUrlMap[item.board.board_seq]}

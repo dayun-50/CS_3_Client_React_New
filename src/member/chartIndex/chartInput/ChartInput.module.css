@@ -23,7 +23,6 @@
   color: var(--color-font-color1);
 }
 
-/* 입력 그룹 */
 .inputGroup {
   display: flex;
   flex-direction: column;
@@ -46,7 +45,6 @@
   color: var(--color-font-color1);
 }
 
-/* 숫자 input의 스피너 제거 */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -54,7 +52,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
 }
 
 .inputWithUnit {
@@ -70,7 +68,6 @@ input[type="number"] {
   color: var(--color-font-color1);
 }
 
-/* 버튼 영역 */
 .buttonRow {
   display: flex;
   gap: 20px;
@@ -88,7 +85,6 @@ input[type="number"] {
   cursor: pointer;
 }
 
-/* 취소 버튼 */
 .cancelBtn {
   background-color: var(--color-font-back);
   color: var(--color-white);
@@ -100,7 +96,6 @@ input[type="number"] {
   transform: scale(0.98);
 }
 
-/* 완료 버튼 */
 .submitBtn {
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -112,7 +107,6 @@ input[type="number"] {
   transform: scale(0.98);
 }
 
-/* 반응형 */
 @media (max-width: 1200px) {
   .sidePanel {
     flex: 1 1 100%;
@@ -126,7 +120,6 @@ input[type="number"] {
   }
 }
 
-/* 768px 이하 */
 @media (max-width: 768px) {
   .sidePanel {
     padding: 16px;

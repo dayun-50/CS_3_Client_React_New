@@ -14,13 +14,11 @@ const summaryData = {
   temperature: { title: "체온", icon: Thermometer, color: "#ff7a7a" },
 };
 
-// 전체 리스트 stagger
 const listContainer = {
   hidden: { opacity: 1 },
   show: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
 
-// 카드 애니메이션
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   show: {
@@ -42,7 +40,6 @@ const EverydayNavi = ({
 
   return (
     <div className={styles.container}>
-      {/* 날짜 선택 */}
       <div className={styles.dateBox}>
         <input
           type="date"
@@ -69,7 +66,6 @@ const EverydayNavi = ({
         </button>
       </div>
 
-      {/* 요약 카드 */}
       <motion.div
         className={styles.summaryContainer}
         variants={listContainer}

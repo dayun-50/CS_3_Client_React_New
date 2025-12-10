@@ -66,7 +66,7 @@
     width: 300px;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -88,16 +88,16 @@
     height: 40px;
     border-radius: 20px;
     border: none;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     color: white;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .emailauth:hover {
     transform: scale(0.98);
     background-color: #F0D827;
+    font-weight: bold;
 }
 
 .emailauth:active {
@@ -118,7 +118,7 @@
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -143,7 +143,7 @@
     width: 300px;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -159,16 +159,16 @@
     height: 40px;
     border-radius: 20px;
     border: none;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     color: white;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .idauth:hover {
     transform: scale(0.98);
     background-color: #F0D827;
+    font-weight: bold;
 }
 
 .idauth:active {
@@ -189,7 +189,7 @@
     width: 300px;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -205,15 +205,15 @@
     height: 40px;
     border-radius: 20px;
     border: none;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     color: white;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .nicauth:hover {
     transform: scale(0.98);
+    font-weight: bold;
     background-color: #F0D827;
 }
 
@@ -235,7 +235,7 @@
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -284,7 +284,7 @@
     min-width: 0;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -309,7 +309,7 @@
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -334,7 +334,7 @@
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back); 
     padding: 0 12px;
     box-sizing: border-box;
     outline: none;
@@ -359,22 +359,39 @@
     cursor: pointer;
 }
 
+/* 기본 체크박스 */
 .checkboxLabel input[type="checkbox"] {
     width: 20px;
     height: 20px;
     border: 1px solid #8C8C8C;
-    border-radius: 15px;
+    border-radius: 15px;     /* 원형 체크박스 */
     appearance: none;
     -webkit-appearance: none;
     cursor: pointer;
     margin: 0;
     position: relative;
+    background-color: white;
 }
 
+/* 체크됐을 때 노란색 배경 */
 .checkboxLabel input[type="checkbox"]:checked {
-    background-color: #499ef8;
-    border-color: #499ef8;
+    background-color: #f0d827;   /* 노란색 */
+    border:none;
 }
+
+/* 안쪽 표시를 "o"로, 중앙 배치 */
+.checkboxLabel input[type="checkbox"]:checked::after {
+    content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);  
+}
+
 
 /* 가족코드 + 부모 선택 */
 .checkAndParent {
@@ -403,9 +420,34 @@
 }
 
 .papa {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+  appearance: none;        /* 기본 라디오 숨기기 */
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--color-font-back);
+  position: relative;
+  cursor: pointer;
+}
+
+/* 선택됐을 때 */
+.papa:checked {
+  border:none;
+  background-color: #f0d827;   /* 배경 노란색 */
+}
+
+/* 라디오 내부 흰 점 */
+.papa:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);  
 }
 
 .familying {
@@ -435,10 +477,9 @@
     padding: 0 24px;
     border-radius: 20px;
     font-size: 18px;
-    font-weight: 700;
     border: none;
     color: white;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     cursor: pointer;
 }
 
@@ -448,7 +489,6 @@
     padding: 0 24px;
     border-radius: 20px;
     font-size: 18px;
-    font-weight: 700;
     border: none;
     background-color: #F0D827;
     color: white;
@@ -458,11 +498,13 @@
 .signinbutton:hover, .signinbutton:active {
     transform: scale(0.98);
     background-color: #e0c817;
+    font-weight: bold;
 }
 
 .backbutton:hover {
     transform: scale(0.98);
-    background-color: #b0b0b0;;
+    background-color: #b0b0b0;
+    font-weight: bold;
 }
 
 .backbutton:active {
@@ -478,10 +520,8 @@
 }
 
 /*-----------------------------------------------------------*/
-/* ============================= */
-/* 📱 모바일 - 480px 이하 */
-/* ============================= */
-/* 모바일 */
+
+/* 모바일 - 480px 이하 */
 @media (max-width: 480px) {
     .phoneWrapper {
         flex-direction: row; /* 가로 유지 */
@@ -508,10 +548,9 @@
 
 
 
-/* ============================= */
-/* 📲 태블릿 - 481px~768px */
-/* ============================= */
-/* 모바일 - 화면보다 길면 상단 정렬 */
+
+/* 태블릿 - 481px~768px */
+
 @media (max-width: 768px) {
     .membershipbox {
         width: 90%;
@@ -528,23 +567,20 @@
         padding: 20px 15px;
     }
 }
+/* (약 1024px 이하) */
 
-/* ============================= */
-/* Nest Hub (약 1024px 이하) */
-/* ============================= */
 @media (max-width: 1024px) and (min-width: 769px) {
     .membershipbox {
-        width: 80%;           /* 화면 비율에 맞춤 */
-        max-height: 80vh;     /* 화면 대비 최대 높이 */
+        width: 80%;          
+        max-height: 80vh;     
         padding: 15px;
         align-items: flex-start;
     }
 
     .mbsinbox {
-        gap: 12px;            /* 조금 좁게 */
+        gap: 12px;         
     }
 
-    /* 버튼, input 비율 맞추기 */
     .emailauth,
     .idauth,
     .nicauth,
@@ -573,9 +609,9 @@
     .membershipbox {
         width: 500px;
         max-height: 85vh;
-        height: auto;             /* 내용에 맞게 */
+        height: auto;            
         padding: 20px;
-        align-items: flex-start;  /* 상단 정렬 */
-        overflow-y: auto;         /* 내용 넘치면 스크롤 */
+        align-items: flex-start;  
+        overflow-y: auto;       
     }
 }

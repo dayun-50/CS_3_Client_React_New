@@ -5,13 +5,13 @@ import useAuthStore from "store/useStore";
 
 function UseCommonHeader() {
     const navi = useNavigate();
-    const {newAlerts ,setNewAlerts} = useAuthStore(state=>state);
+    const { newAlerts, setNewAlerts } = useAuthStore(state => state);
 
     const clickAlarm = (alert, setAlerts) => {
-        const { type, alarm_seq, board_seq, comment_seq } = alert;
+        const { type, board_seq, comment_seq } = alert;
         caxios.post("/alarm/deleteAlarm", { board_seq: board_seq, comment_seq: comment_seq })
             .then(resp => {
-                setAlerts(prev => prev.filter(a => a.board_seq !== board_seq ));
+                setAlerts(prev => prev.filter(a => a.board_seq !== board_seq));
                 if (type === "C") {
                     navi(`/board/detail?seq=${board_seq}`);
                 }
@@ -19,7 +19,6 @@ function UseCommonHeader() {
             })
             .catch(err => console.log(err));
     }
-
 
     return {
         clickAlarm, newAlerts, setNewAlerts

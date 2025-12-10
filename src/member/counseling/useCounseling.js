@@ -3,7 +3,6 @@ import { caxios } from "../../config/config";
 
 function useCounseling(setInputText, setMessages, setInputDisabled) {
 
-    // 버튼 클릭시 서버에서 답변 끌고오기
     const selectBtn = (e) => {
         const text = e.target.innerText;
         const now = new Date();
@@ -36,7 +35,6 @@ function useCounseling(setInputText, setMessages, setInputDisabled) {
                     { text: resp.data.response_text, sender: "other", time: formatTime, senderName: "챗봇" }
                 ]);
             })
-            .catch(err => console.log(err));
     }
 
     return {

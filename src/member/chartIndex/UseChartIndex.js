@@ -17,10 +17,6 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
       try {
         const babyResponse = await caxios.get(`/chart/${babySeq}`);
         const { status, birth_date, baby_seq } = babyResponse.data;
-        console.log("asdfasfdasdfas : " + babyResponse.data.status);
-        console.log("asdfasfdasdfas : " + babyResponse.data.birth_date);
-        console.log("asdfasfdasdfas : " + babyResponse.data.baby_seq);
-
 
         const todayStr = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
         const week =
@@ -33,9 +29,6 @@ export const useChartIndex = (currentWeek, setCurrentWeek) => {
         setIsFetalMode(status.toLowerCase() === "fetus");
 
       } catch (error) {
-        console.error("Baby 정보 조회 실패:", error);
-        setCurrentWeek(28);
-        setBabyInfo({ babySeq, status: "FETUS", birthDate: "2026-01-01" });
         setIsFetalMode(true);
       }
     };

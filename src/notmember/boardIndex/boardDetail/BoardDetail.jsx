@@ -10,9 +10,7 @@ import { FILE_SERVER } from "config/config";
 import BoardOver from "../boardOver/BoardOver";
 import useAuthStore from "store/useStore";
 
-// --- 메인 컴포넌트 ---
 const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
-  // --- 댓글 데이터 ---
   const {
     setIsMine,
     comments,
@@ -48,12 +46,11 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
   const [reportTargetSeq, setReportTargetSeq] = useState(null);
   const isLogin = useAuthStore(state => state.isLogin);
 
-  // 상태에 따라 동적 클래스 생성 - css를 위해 추가한 사항 확인
   const commentAreaClasses = [
     styles.commentInputArea,
     isEdit ? styles.editMode : "",
     isReply ? styles.replyMode : "",
-  ].join(" "); // 클래스 문자열 결합
+  ].join(" ");
 
   return (
     <motion.div
@@ -63,7 +60,6 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
     >
-      {/* 상단 뒤로가기 버튼 영역 */}
       <div className={styles.topBar}>
         <div className={styles.backButtonWrapper}>
           <button
@@ -76,13 +72,10 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
       </div>
 
       <div className={styles.mainContentWrapper}>
-        {/* 게시글 내용 영역 */}
         <div className={styles.postContentArea}>
-          {/* 게시글 제목 및 작성자 정보 */}
           <div className={styles.postHeader}>
             <div className={styles.postTitleWrapper}>
               <b className={styles.postTitle}>{targetBoard.title}</b>
-              {/* 게시글 옵션 아이콘 및 드롭다운 메뉴 */}
               <div className={styles.menuContainer}>
                 <MoreHorizontal
                   size={24}
@@ -101,7 +94,6 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
                       transition={{ duration: 0.15 }}
                     >
                       {isMine ? (
-                        // 내가 작성한 글
                         <>
                           <button
                             className={styles.menuItem}
@@ -130,7 +122,6 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
                           </button>
                         </>
                       ) : (
-                        // 남이 작성한 글
                         <button
                           className={styles.menuItem}
                           onClick={(e) => {
@@ -157,14 +148,11 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
             </div>
           </div>
 
-          {/* 게시글 본문 */}
           <div className={styles.postBodyContainer}>
-            {/* 1. 게시글 본문 텍스트 */}
             <div className={styles.postBodyText}>
               {editor && <EditorContent editor={editor} />}
             </div>
 
-            {/* 2. 첨부 파일 목록 (새로운 섹션) */}
             {targetBoardFile?.length > 0 && (
               <div className={styles.fileListContainer}>
                 {targetBoardFile.map((file) => (
@@ -188,12 +176,9 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
         </div>
 
 
-        {/* 댓글 영역 */}
         <div className={styles.commentSection}>
-          {/* 댓글 목록 */}
           <div className={styles.commentListWrapper}>
             <div className={styles.commentList}>
-              {/* 배열 데이터를 맵핑하여 댓글 렌더링 */}
               {comments && comments.length > 0 ? (
                 <AnimatePresence>
                   {comments.map((comment, index) => (
@@ -236,13 +221,6 @@ const BoardDetail = ({ handleDeleteBoard, handleEditBoard, isDeleting }) => {
             </div>
           </div>
 
-          {/* 페이지네이션 영역 
-          <div className={styles.paginationWrapper}>
-            <PageNavi page={page} setPage={setPage} count={count} totalCount ={totalCount} typeBtn={type}/>
-          </div>
-            */}
-
-          {/* 댓글 입력창 */}
           <div className={commentAreaClasses}>
             <div className={styles.commentInputBox}>
               <div className={styles.inputField}>

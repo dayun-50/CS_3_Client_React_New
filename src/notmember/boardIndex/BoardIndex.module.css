@@ -27,7 +27,6 @@
   }
 }
 
-/* 모바일에서는 오른쪽 패널 숨기기 */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;

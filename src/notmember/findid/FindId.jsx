@@ -5,8 +5,6 @@ import useFindId from "./UseFindId";
 
 const FindId = () => {
   const navigate = useNavigate();
-
-  // 완료 버튼 클릭 여부 상태
   const [isCompleted, setIsCompleted] = useState("");
 
   const {
@@ -28,7 +26,6 @@ const FindId = () => {
       <div className={styles.idcheckbox}>
         <div className={styles.idcheckboxin}>
           {!isCompleted ? (
-            // 완료 전 화면
             <>
               <div className={styles.idtop}>
                 <h1 className={styles.title}>아이디 찾기</h1>
@@ -54,7 +51,6 @@ const FindId = () => {
               </div>
             </>
           ) : (
-            // 완료 후 화면
             <div className={styles.idcheckboxt}>
                 <div className={styles.idcheckboxintwo}>
                     

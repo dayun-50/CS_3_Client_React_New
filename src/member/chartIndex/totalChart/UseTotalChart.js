@@ -4,8 +4,6 @@ export const UseTotalChart = (currentWeek, standardData, actualData, inputs, isF
         return {};
     }
 
-
-
     const keyMap = isFetalMode ? {
         EFW: "몸무게",
         OFD: "머리직경",
@@ -14,7 +12,6 @@ export const UseTotalChart = (currentWeek, standardData, actualData, inputs, isF
         FL: "허벅지 길이"
     } : { BW: "몸무게", HT: "신장", HC: "머리둘레" };
     const safeInputs = inputs && typeof inputs === "object" ? inputs : {};
-
 
     const indicators = Object.keys(standardData).map(key => ({
 
@@ -33,8 +30,6 @@ export const UseTotalChart = (currentWeek, standardData, actualData, inputs, isF
             return key === "EFW" ? Number(safeInputs["몸무게"] ?? 0) * 1000 : Number(safeInputs[keyMap[key]] ?? 0);
         }
     });
-
-
 
     return {
         title: {

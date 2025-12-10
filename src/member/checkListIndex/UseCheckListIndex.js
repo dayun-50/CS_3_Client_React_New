@@ -12,7 +12,6 @@ function UseCheckListIndex() {
             .then(resp => {
                 setBabyData(resp.data);
             })
-            .catch(err => console.log(err));
     }, [babySeq])
 
     return {

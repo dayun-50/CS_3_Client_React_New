@@ -6,7 +6,6 @@ import { UseComment } from "./UseComment";
 import { useState } from "react";
 import BoardOver from "../../boardOver/BoardOver";
 
-// --- 댓글 아이템 컴포넌트 ---
 const CommentItem =
     ({ comment, commentMenuOpenId, setCommentMenuOpenId, menuRef, closePostMenu, setPostMenuOpen, setIsReply, setParentCommentId, reloadComments, commentContent, setCommentContent, setIsEdit, setEditCommentId }) => {
 
@@ -27,14 +26,11 @@ const CommentItem =
 
         return (
             <div className={wrapperClass} >
-                {/* 댓글 박스 */}
                 <div className={commentClass}>
-                    {/* 댓글 작성자 헤더 */}
                     <div className={styles.commentUserHeader}>
                         <div className={styles.userNicknameBold}>
                             {comment.is_deleted == 1 ? "알 수 없음" : comment.nickname}
                         </div>
-                        {/* 댓글 옵션 아이콘 및 드롭다운 메뉴 */}
                         {!comment.is_deleted && id && id !== "anonymousUser" && (
                             <div className={styles.menuContainer}>
                                 <MoreHorizontal
@@ -46,7 +42,6 @@ const CommentItem =
                                 {isMenuOpen && (
                                     <div className={styles.dropdownMenu} ref={menuRef}>
                                         {id == comment.user_id ? (
-                                            // 내가 작성한 댓글
                                             <>
                                                 <button className={styles.menuItem} onClick={(e) => handleCommentMenuItemClick(e, "수정", comment.comment_seq, comment.comment_content)}>
                                                     수정
@@ -56,7 +51,6 @@ const CommentItem =
                                                 </button>
                                             </>
                                         ) : (
-                                            // 남이 작성한 댓글
                                             <button
                                                 className={styles.menuItem}
                                                 onClick={(e) => {
@@ -76,14 +70,12 @@ const CommentItem =
 
                     </div>
 
-                    {/* 댓글 본문 */}
                     <div className={styles.commentTextWrapper}>
                         <div className={styles.commentText}>
                             {comment.is_deleted == 1 ? "삭제 된 내용입니다" : comment.comment_content}
                         </div>
                     </div>
 
-                    {/* 댓글 푸터 - 날짜와 답글 버튼 */}
                     <div className={styles.commentFooter}>
                         <div className={styles.commentDate}>{formatDate(comment.created_at)}</div>
 
@@ -102,7 +94,6 @@ const CommentItem =
                     </div>
                 </div>
 
-                {/* 답글이 있으면 재귀적으로 렌더링 */}
                 {comment.replies &&
                     comment.replies.map((reply) => (
                         <CommentItem

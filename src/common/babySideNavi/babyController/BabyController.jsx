@@ -37,9 +37,7 @@ const BabyController = ({ isSidebar }) => {
     >
       <div className={styles.full}>
         <div className={styles.one}>
-          {/* 아기추가 + 아기리스트 → 두 영역으로 분리 */}
           <div className={styles.babyclick}>
-            {/* 왼쪽 고정 아기추가 버튼 */}
             {!isSidebar && (
               <div className={styles.babyAdd}>
                 <button
@@ -52,7 +50,6 @@ const BabyController = ({ isSidebar }) => {
               </div>
             )}
 
-            {/* 오른쪽 아기 리스트 (스크롤 영역) */}
             <div
               className={styles.babyList}
               onWheel={(e) => {
@@ -87,7 +84,6 @@ const BabyController = ({ isSidebar }) => {
         </div>
       </div>
 
-      {/* 아기 추가 모달 */}
       <AnimatePresence>
         {showModal && (
           <div className={styles.modal}>

@@ -11,7 +11,6 @@
   font-family: var(--font-family);
 }
 
-/* --- 주차 블록 스타일 --- */
 .weekBlockInactive {
   height: 167px;
   border-radius: var(--border-radius-main);
@@ -22,13 +21,10 @@
   align-items: flex-start;
   padding: 20px;
   box-sizing: border-box;
-
-  /* 블록 전체 애니메이션 */
   transition: all 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
 }
 
-/* Inactive 블록 호버/액티브 효과 */
 .weekBlockInactive:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transform: scale(0.98);
@@ -39,7 +35,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* 선택된 블록 (Selected 상태) */
 .weekBlockSelected {
   width: 100%;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25);
@@ -51,12 +46,10 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-
   transition: all 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
 }
 
-/* Selected 블록 호버/액티브 효과 */
 .weekBlockSelected:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -65,7 +58,6 @@
   transform: scale(0.98);
 }
 
-/* 주차 제목 + 플러스 버튼 영역 (전체 클릭을 위한 컨테이너) */
 .weekToggleHeader {
   width: 100%;
   display: flex;
@@ -73,7 +65,6 @@
   align-items: center;
 }
 
-/* 주차 태그 (예: 13주차) 스타일 */
 .weekTag {
   height: 30px;
   border-radius: 30px;
@@ -90,27 +81,21 @@
   position: relative;
 }
 
-/* 플러스 아이콘 버튼 스타일 */
 .addButton {
   background-color: var(--color-main);
   border: none;
   cursor: pointer;
   padding: 0;
-
   width: 30px;
   height: 30px;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-
-  /* 애니메이션 기본 설정 */
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* 플러스 버튼 호버/액티브 효과 */
 .addButton:hover {
   background-color: var(--color-main-hover);
   transform: scale(0.98);
@@ -121,17 +106,13 @@
   transform: scale(0.98);
 }
 
-/* --- 일기 목록 래퍼 (애니메이션 적용 대상) --- */
 .diaryListWrapper {
   overflow: hidden;
   width: 100%;
-
-  /* 부드러운 애니메이션 효과 */
   transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     opacity 0.4s ease-in-out, padding-top 0.5s ease-in-out;
 }
 
-/* --- 일기 목록 및 항목 스타일 --- */
 .diaryList {
   width: 100%;
   display: flex;
@@ -139,27 +120,23 @@
   align-items: flex-start;
   color: #696b70;
   font-family: Pretendard;
-
   max-height: 250px;
   overflow-y: auto;
-
-  /* 스크롤바 숨기기 */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
 .diaryList::-webkit-scrollbar {
   width: 0;
   height: 0;
   background: transparent;
 }
 
-/* 일기 항목 버튼 스타일 */
 .diaryButton {
   background: none;
   border: none;
   margin: 0;
   padding: 0;
-
   width: 100%;
   height: 61px;
   display: flex;
@@ -168,29 +145,26 @@
   box-sizing: border-box;
   text-align: left;
   cursor: pointer;
-
   transition: background-color 0.2s ease;
 }
 
-/* 클릭 후 선택 상태가 유지되는 스타일 */
 .diaryButtonSelected {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 22px;
   border: none;
 }
 
-/* 기존 액티브 스타일은 누르는 순간의 피드백으로 그대로 유지 */
 .diaryButton:hover {
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 22px;
 }
+
 .diaryButton:active {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 22px;
   border: none;
 }
 
-/* 일기 항목 내부 컨텐츠 스타일 */
 .diaryItemContent {
   width: 100%;
   height: 61px;
@@ -220,7 +194,6 @@
   flex-shrink: 0;
 }
 
-/* ----- 작성한 일기가 없을 시 ----- */
 .emptyDiary {
   width: 100%;
   height: 100%;
@@ -229,7 +202,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 12px;
   text-align: center;
   border: 1px dashed var(--color-font-back);
@@ -258,7 +230,6 @@
   padding-top: 10px;
 }
 
-/* ==================== 반응형 ==================== */
 @media (max-width: 1024px) and (min-width: 768px) {
   .naviContainer {
     gap: 12px;
@@ -271,7 +242,6 @@
     height: auto;
   }
 
-  /* 주차 태그 */
   .weekTag {
     height: 26px;
     padding: 6px 8px;
@@ -281,18 +251,15 @@
     font-size: 14px;
   }
 
-  /* 플러스 버튼 크기 축소 */
   .addButton {
     width: 26px;
     height: 26px;
   }
 
-  /* 리스트 래퍼 애니메이션 */
   .diaryListWrapper {
     max-height: 300px;
   }
 
-  /* 일기 버튼 */
   .diaryButton {
     height: 54px;
   }
@@ -310,7 +277,6 @@
     font-size: 12px;
   }
 
-  /* 작성 일기 없음 박스 */
   .emptyDiary {
     padding: 12px;
   }
@@ -336,7 +302,6 @@
     height: auto;
   }
 
-  /* 주차 태그 */
   .weekTag {
     height: 26px;
     padding: 6px 8px;
@@ -346,18 +311,15 @@
     font-size: 14px;
   }
 
-  /* 플러스 버튼 크기 축소 */
   .addButton {
     width: 26px;
     height: 26px;
   }
 
-  /* 리스트 래퍼 애니메이션 */
   .diaryListWrapper {
     max-height: 300px;
   }
 
-  /* 일기 버튼 */
   .diaryButton {
     height: 54px;
   }
@@ -375,7 +337,6 @@
     font-size: 12px;
   }
 
-  /* 작성 일기 없음 박스 */
   .emptyDiary {
     min-height: 200px;
     padding: 12px;

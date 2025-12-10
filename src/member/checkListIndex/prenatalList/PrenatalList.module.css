@@ -9,30 +9,24 @@
   color: var(--color-font-color1);
   font-family: var(--font-family);
   overflow-y: auto;
-
-  /* 스크롤바 */
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary) transparent;
 }
 
-/* 스크롤바 css 적용 */
 .container::-webkit-scrollbar {
   width: 8px;
 }
 
-/* 3. 스크롤바 트랙(배경) */
 .container::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* 4. 스크롤바 핸들(움직이는 막대) */
 .container::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
   border-radius: 4px;
   border: 2px solid var(--color-white);
 }
 
-/* 5. 핸들에 마우스를 올렸을 때 색상 변경 */
 .container::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-hover);
 }
@@ -172,7 +166,6 @@
   gap: 10px;
 }
 
-/* 예약 버튼 */
 .checkPending,
 .checkDone {
   border-radius: 50%;
@@ -186,6 +179,7 @@
   background-color: var(--color-white);
   border: 1px solid var(--color-font-color2);
 }
+
 .checkPending:hover {
   background-color: var(--color-main);
   border: none;
@@ -213,9 +207,6 @@
   color: var(--color-font-color2);
 }
 
-/* ========================= */
-/* 모달 공통 스타일 */
-/* ========================= */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -355,21 +346,21 @@
   font-weight: bold;
 }
 
-/* ========================= */
-/* 반응형 */
-/* ========================= */
 @media (max-width: 1024px) {
   .innerWrapper {
     width: 50%;
     padding: 24px;
   }
+
   .weekHeader {
     padding: 6px 8px;
     height: 28px;
   }
+
   .checkTitle {
     font-size: 15px;
   }
+
   .checkDate {
     font-size: 13px;
   }
@@ -380,18 +371,22 @@
     width: 70%;
     padding: 20px;
   }
+
   .checkPending,
   .checkDone {
     min-width: 28px;
     min-height: 28px;
   }
+
   .weekHeader {
     height: 26px;
     padding: 5px 6px;
   }
+
   .checkTitle {
     font-size: 14px;
   }
+
   .checkDate {
     font-size: 12px;
   }

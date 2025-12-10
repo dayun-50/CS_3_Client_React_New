@@ -4,9 +4,7 @@ import styles from "./PrenatalList.module.css";
 import { FETAL_CHECKLIST, BABY_CHECKLIST } from "./checklistData";
 import UsePrenatalList from "./UsePrenatalList";
 
-// --- CheckItem ---
 const CheckItem = ({ check, onToggle }) => {
-  // 완료 상태에 따라 다른 CSS 클래스 적용
   const checkCircleClass = check.isDone
     ? styles.checkDone
     : styles.checkPending;
@@ -32,24 +30,20 @@ const CheckItem = ({ check, onToggle }) => {
   );
 };
 
-// --- WeekSection ---
 const WeekSection = ({ data, onToggle, isSpecialWeek }) => {
-  // isSpecialWeek (가장 최근/현재 주차) 여부에 따라 스타일 클래스 결정
   const containerClass = isSpecialWeek
-    ? styles.activeSection // 활성 섹션: 노란색 배경 및 테두리로 강조
-    : styles.defaultSection; // 일반 섹션
+    ? styles.activeSection
+    : styles.defaultSection;
   const lineDotClass = isSpecialWeek
-    ? styles.activeDotLine // 활성 섹션 라인 도트
-    : styles.defaultDotLine; // 일반 섹션 라인 도트
+    ? styles.activeDotLine
+    : styles.defaultDotLine;
 
   return (
     <div className={styles.section}>
       <div className={styles.sectionInner}>
         <div className={containerClass}>
-          {/* 주차 라인의 도트와 연결선 */}
           <div className={`${styles.leftLine} ${lineDotClass}`} />
           <div className={styles.sectionContent}>
-            {/* 주차/월령 타이틀 (노란색 배경) */}
             <div className={styles.weekHeader}>
               <div className={styles.weekWrapper}>
                 <b className={styles.weekTitle}>{data.week}</b>
@@ -68,7 +62,6 @@ const WeekSection = ({ data, onToggle, isSpecialWeek }) => {
   );
 };
 
-// --- PrenatalList ---
 const PrenatalList = ({ babyData }) => {
   const isInfant = babyData?.status === "infant";
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,7 +100,6 @@ const PrenatalList = ({ babyData }) => {
       selectList();
     }
   }, [checklist.length]);
-  // 모달 닫기
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setCheckClicked(false);
@@ -120,7 +112,6 @@ const PrenatalList = ({ babyData }) => {
     }));
   };
 
-  // 완료 버튼
   const handleComplete = () => {
     dataInsert(selectedCheck.id, () => {
       setChecklist((prev) =>
@@ -135,7 +126,6 @@ const PrenatalList = ({ babyData }) => {
     });
   };
 
-  // 체크 버튼 클릭
   const handleToggleCheck = (check) => {
     if (!check.isDone) {
       setSelectedCheck(check);

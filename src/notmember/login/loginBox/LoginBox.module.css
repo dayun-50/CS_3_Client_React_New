@@ -29,7 +29,6 @@
 }
 
 .logininbox {
-  /* border: 1px solid black; */
   width: 80%;
   height: auto;
 }
@@ -38,7 +37,6 @@
 .logintop {
   display: flex;
   justify-content: center;
-  /* border:1px solid black; */
 }
 
 .toptitle {
@@ -50,7 +48,6 @@
 /* 아이디 비밀번호 입력칸 */
 .loginmiddle {
   margin-top: 40px;
-  /* border:1px solid black; */
 }
 
 .loginmiddle label {
@@ -86,8 +83,6 @@
   margin-top: 48px;
   display: flex;
   gap: 16px;
-
-  /* border:1px solid black; */
 }
 
 .back {
@@ -96,7 +91,6 @@
   border-radius: 20px;
   border: none;
   font-size: 18px;
-  font-weight: bold;
   color: #ffffff;
   background-color: #d9d9d9;
   cursor: pointer;
@@ -105,6 +99,7 @@
 .back:hover {
   transform: scale(0.98);
   background-color: #b0b0b0;
+  font-weight: bold;
 }
 
 .logbut {
@@ -115,13 +110,13 @@
   background-color: #f0d827;
   color: #ffffff;
   font-size: 18px;
-  font-weight: bold;
   cursor: pointer;
 }
 
 .logbut:hover {
   transform: scale(0.98);
   background-color: #e0c817;
+  font-weight: bold;
 }
 
 .logbut:active {
@@ -171,8 +166,6 @@
   border: solid 1px #499ef8 !important;
 }
 
-/*반응형*/
-
 /* ------------------ 반응형 ------------------ */
 @media screen and (max-width: 768px) {
   .loginbox {
@@ -194,7 +187,9 @@
     font-size: 14px;
   }
 
-  .logbut {
+  /* 로그인 / 뒤로가기 버튼 높이 동일하게 */
+  .logbut,
+  .back {
     height: 44px;
     font-size: 16px;
   }
@@ -224,7 +219,9 @@
     font-size: 14px;
   }
 
-  .logbut {
+  /* 로그인 / 뒤로가기 버튼 높이 동일하게 */
+  .logbut,
+  .back {
     height: 40px;
     font-size: 14px;
   }

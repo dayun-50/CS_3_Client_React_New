@@ -5,10 +5,9 @@ import { motion } from "framer-motion";
 
 const BabyInfo = () => {
   const [selectedGender, setSelectedGender] = useState("");
-  const [isEditing, setIsEditing] = useState(false); // 수정 상태
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
-    // 수정 버튼 감지
     setIsEditing(true);
   };
 
@@ -26,18 +25,16 @@ const BabyInfo = () => {
   return (
     <motion.div
       className={styles.rightcontainer}
-      initial={{ opacity: 0, x: 20 }} // 시작 상태: 살짝 아래, 투명
-      animate={{ opacity: 1, x: 0 }} // 최종 상태: 원래 위치, 완전 불투명
-      exit={{ opacity: 0, x: 20 }} // 언마운트 시: 다시 아래로, 투명
-      transition={{ duration: 0.9 }} // 지속시간
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+      transition={{ duration: 0.9 }}
     >
       <div className={styles.babyinformation}>
-        {/* 제목 */}
         <div className={styles.bb}>
           <h1>아기 정보</h1>
         </div>
 
-        {/* 이름 */}
         <div className={styles.babyla}>
           <label htmlFor="babyname">{`${data.status === "infant" ? "이름" : "태명"}`}</label>
           <input
@@ -50,14 +47,13 @@ const BabyInfo = () => {
               }`}
             readOnly={!isEditing}
             style={{
-              border: isEditing ? "1px solid #696B70" : "none",
+              border: isEditing ? "1px solid var(--color-font-back)" : "none",
               backgroundColor: isEditing ? "white" : "#FFF4D6",
               cursor: isEditing ? "text" : "default",
             }}
           />
         </div>
 
-        {/* 출산예정일 */}
         <div className={styles.birthday}>
           <label htmlFor="birthday">{`${data.status === "infant" ? "생년월일" : "출산예정일"}`} </label>
           <input
@@ -70,13 +66,12 @@ const BabyInfo = () => {
             onChange={handleChange}
             readOnly={!isEditing}
             {
-            // 영유아
             ...(data.status == "infant"
               ? { min: birthMinus7String }
               : { min: todayString })
             }
             style={{
-              border: isEditing ? "1px solid #696B70" : "none",
+              border: isEditing ? "1px solid var(--color-font-back)" : "none",
               backgroundColor: isEditing ? "white" : "#FFF4D6",
               cursor: isEditing ? "text" : "default",
               appearance: "none",
@@ -86,7 +81,6 @@ const BabyInfo = () => {
           />
         </div>
 
-        {/* 성별 */}
         <div className={styles.sex}>
           <h1 className={styles.sextitle}>성별</h1>
           <div className={styles.btns}>
@@ -94,7 +88,7 @@ const BabyInfo = () => {
               ["미정", "남자", "여자"]
                 .filter(
                   (gender) => !(data.status === "infant" && gender === "미정")
-                ) // ← infant면 미정 버튼 제외
+                )
                 .map((gender) => (
                   <button
                     key={gender}
@@ -104,11 +98,11 @@ const BabyInfo = () => {
                         : gender === "남자"
                           ? "manb"
                           : "girlb"
-                      ]
+                    ]
                       } ${selectedGender === gender ? styles.active : ""}`}
                     onClick={() => {
-                      setSelectedGender(gender); // 버튼 선택 상태
-                      setData((prev) => ({ ...prev, gender })); // data.gender 동기화
+                      setSelectedGender(gender);
+                      setData((prev) => ({ ...prev, gender }));
                     }}
                     style={{
                       backgroundColor:
@@ -116,7 +110,7 @@ const BabyInfo = () => {
                       border:
                         selectedGender === gender
                           ? "none"
-                          : "1px solid #8C8C8C",
+                          : "1px solid var(--color-font-back)",
                       cursor: "pointer",
                     }}
                   >
@@ -131,8 +125,8 @@ const BabyInfo = () => {
                   height: "48px",
                   lineHeight: "48px",
                   textAlign: "start",
-                  marginLeft:"10px",
-                  fontSize:"16px",
+                  marginLeft: "10px",
+                  fontSize: "16px",
                   color: "#696B70",
                 }}
               >
@@ -142,15 +136,13 @@ const BabyInfo = () => {
           </div>
         </div>
 
-        {/* 몸무게 */}
         <div className={styles.kg}>
           <p>몸무게</p>
           <div className={styles.kgdb}>
-            {data.family_code ? `${data.family_code} Kg` : `아직 성장차트에 기록이 없습니다.`} 
+            {data.family_code ? `${data.family_code} Kg` : `아직 성장차트에 기록이 없습니다.`}
           </div>
         </div>
 
-        {/* 수정/완료/취소 버튼 */}
         <div className={styles.correct} style={{ gap: "20px" }}>
           {!isEditing ? (
             <button className={styles.corbt} onClick={handleEdit}>

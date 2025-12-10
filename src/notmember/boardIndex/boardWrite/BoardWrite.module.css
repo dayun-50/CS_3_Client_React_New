@@ -1,4 +1,4 @@
-/* 에디터 전체 컨테이너 */
+
 .editorContainer {
   width: 100%;
   min-height: 100%;
@@ -16,13 +16,11 @@
   overflow: hidden;
 }
 
-/* --- Form Row --- */
 .formGroup {
   display: flex;
   align-items: center;
 }
 
-/* 레이블 */
 .formLabel {
   font-size: 18px;
   font-weight: bold;
@@ -32,7 +30,6 @@
   text-align: left;
 }
 
-/* 텍스트 입력 필드 */
 .inputField {
   flex-grow: 1;
   border-radius: var(--border-radius-body);
@@ -64,14 +61,12 @@
   color: var(--color-font-color2);
 }
 
-/* 필터/선택 그룹 */
 .selectionGroup {
   display: flex;
   flex-wrap: wrap;
   gap: 30px 40px;
 }
 
-/* 드롭다운/셀렉트 필드 */
 .selectField {
   display: flex;
   align-items: center;
@@ -101,7 +96,6 @@
   color: var(--color-font-color1);
 }
 
-/* 드롭다운 옵션 */
 .dropdownOptions {
   position: absolute;
   top: 100%;
@@ -115,7 +109,6 @@
   z-index: 1000;
 }
 
-/* 각 옵션 */
 .dropdownOption {
   padding: 10px 16px;
   cursor: pointer;
@@ -130,7 +123,6 @@
   transform: scale(0.98);
 }
 
-/* 라디오 버튼 그룹 */
 .radioGroup {
   display: flex;
   gap: 12px;
@@ -151,12 +143,10 @@
   transition: all 0.2s;
 }
 
-/* hover */
 .radioOption:hover {
   border-color: var(--color-primary);
 }
 
-/* 라디오 버튼 (보이게 유지) */
 .radioOption input[type="radio"] {
   appearance: none;
   width: 18px;
@@ -186,20 +176,17 @@
   transform: translate(-50%, -50%);
 }
 
-/* active 상태 */
 .radioOption.activeRadio {
   border-color: var(--color-primary);
   background-color: var(--color-white);
   box-shadow: 0 0 8px rgba(240, 216, 39, 0.4);
 }
 
-/* active 때 텍스트 */
 .radioOption.activeRadio span {
   color: var(--color-primary);
   font-weight: bold;
 }
 
-/* 에디터 영역 */
 .editorArea {
   flex-grow: 1;
   height: 0;
@@ -248,7 +235,6 @@
   color: var(--color-font-color1);
 }
 
-/* 파일 업로드 영역 */
 .fileUploadArea {
   display: flex;
   gap: 20px;
@@ -355,7 +341,6 @@
   color: #ff7a7a;
 }
 
-/* 액션 버튼 (Footer) */
 .actionFooter {
   display: flex;
   justify-content: flex-end;
@@ -389,7 +374,6 @@
   transform: scale(0.98);
 }
 
-/*------- 완료버튼 -------*/
 .completeButton {
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -399,8 +383,6 @@
 .actionFooter {
   position: relative;
 }
-
-/*-----------------------------*/
 
 .completeButton:hover {
   background-color: var(--color-hover);
@@ -412,7 +394,6 @@
   margin-right: -4px;
 }
 
-/* 반응형 */
 @media (max-width: 1024px) {
   .editorContainer {
     max-height: none;
@@ -495,7 +476,6 @@
     font-size: 15px;
   }
 
-  /* 선택 그룹 */
   .selectionGroup {
     flex-direction: column;
     gap: 20px;
@@ -516,7 +496,6 @@
     max-width: none;
   }
 
-  /* 공개 설정 radio */
   .radioGroup {
     flex-direction: row;
     width: 100%;
@@ -531,7 +510,6 @@
     padding: 0 10px;
   }
 
-  /* 파일 업로드 */
   .fileUploadArea {
     flex-direction: column;
     gap: 12px;
@@ -547,12 +525,10 @@
     padding: 6px 8px;
   }
 
-  /* 에디터 */
   .editorArea {
     min-height: 140px;
   }
 
-  /* 액션 버튼 */
   .actionFooter {
     flex-direction: column;
     gap: 10px;

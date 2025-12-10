@@ -1,4 +1,4 @@
-// 태아
+
 export const FETAL_CHECKLIST = [
   {
     week: "4-6 주",
@@ -100,7 +100,6 @@ export const FETAL_CHECKLIST = [
   },
 ];
 
-// 영유아
 export const BABY_CHECKLIST = [
   {
     week: "0-3 개월",

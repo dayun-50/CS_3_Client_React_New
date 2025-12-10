@@ -4,6 +4,7 @@ import styles from "./LoginBox.module.css";
 import FindId from "../../findid/FindId";
 import FindPw from "../../findpw/FindPw";
 import useLoginBox from "./UseLoginBox";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 function LoginBox({ setBabySeq, setAlerts }) {
   const { data, authAlert, handleChange, handleComplete, handleLoginKeyUp } =
@@ -13,6 +14,8 @@ function LoginBox({ setBabySeq, setAlerts }) {
   const handleBack = () => {
     navigator("/");
   };
+
+  const [showPw, setShowPw] = useState(false);
 
   return (
     <div
@@ -34,9 +37,8 @@ function LoginBox({ setBabySeq, setAlerts }) {
 
           <div className={styles.loginmiddle}>
             <div
-              className={`${styles.middleone} ${
-                !authAlert ? "" : styles.alert
-              }`}
+              className={`${styles.middleone} ${!authAlert ? "" : styles.alert
+                }`}
             >
               <label htmlFor="id">아이디</label>
               <input
@@ -49,21 +51,40 @@ function LoginBox({ setBabySeq, setAlerts }) {
               />
             </div>
             <div
-              className={`${styles.middletwo} ${
-                !authAlert ? "" : styles.alert
-              }`}
+              className={`${styles.middletwo} ${!authAlert ? "" : styles.alert}`}
+              style={{ position: "relative", display: "flex", alignItems: "center" }}
             >
-              <label htmlFor="pw">비밀번호</label>
               <input
-                type="password"
+                type={showPw ? "text" : "password"}
                 id="pw"
                 name="pw"
                 placeholder="비밀번호"
                 value={data.pw}
                 onChange={handleChange}
                 onKeyUp={handleLoginKeyUp}
+                style={{ flex: 1, paddingRight: "40px", borderRadius: "20px", border: "1px solid #ccc" }}
               />
+              <button
+                type="button"
+                onClick={() => setShowPw(!showPw)}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  fontSize: "20px",
+                  color: "#b0b0b0"  // ← 여기에 색상 적용
+                }}
+              >
+                {showPw ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+              </button>
             </div>
+
           </div>
 
           <div className={styles.loginbottom}>

@@ -1,7 +1,5 @@
 
 export const FETAL_STANDARDS = {
-  // EFW, HC, OFD, AC, FL
-  // (단위: EFW=g, 나머지=mm)
   
   14: {
     EFW: { min: 80, avg: 100, max: 125, unit: 'g', name: '추정 체중 (EFW)' },

@@ -14,12 +14,10 @@ const DiaryWrite = ({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId, s
 
   } = UseDiaryWrite({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId, setIsSubmitting });
 
-
   const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
-      {/* 제목 입력 */}
       <div className={styles.formGroup}>
         <label className={styles.formLabel}>제목</label>
         <div className={styles.inputField}>
@@ -32,13 +30,11 @@ const DiaryWrite = ({ getTargetWeekDiary, setSelectedDiaryId, selectedDiaryId, s
         </div>
       </div>
 
-      {/* 글 작성 */}
       <label className={styles.formLabel}>글 작성</label>
       <div className={styles.editorArea} ref={editorRef} >
         <SimpleEditor setEditorInstance={setEditorInstance} uploadType="diary" />
       </div>
 
-      {/* 버튼 */}
       <div className={styles.actionFooter}>
         <button className={styles.backButton} onClick={() => navigate(-1)}>
           뒤로가기

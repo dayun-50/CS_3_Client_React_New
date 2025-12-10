@@ -28,7 +28,6 @@ const TotalChart = ({
     return () => clearTimeout(timer);
   }, [actualData]);
 
-  // 반응형 적용 css
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);

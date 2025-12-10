@@ -13,19 +13,16 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
         name: 0, birth_date: 0
     });
 
-    // 유효성
-    const nameRegex = /^[가-힣0-9]{2,6}$/ // 닉네임 한글 2~6글자
+    const nameRegex = /^[가-힣0-9]{2,6}$/;
 
-    // 오늘 날짜 기준 -7일
     const today = new Date();
-    today.setDate(today.getDate() - 7); // 오늘 기준 -7일
+    today.setDate(today.getDate() - 7);
     const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-    // 태어난 날짜 기준 -7일
     let birthMinus7String = '';
     if (data.birth_date) {
-        const birth_date = new Date(data.birth_date); // "YYYY-MM-DD"
-        birth_date.setDate(birth_date.getDate() - 7); // -7일
+        const birth_date = new Date(data.birth_date);
+        birth_date.setDate(birth_date.getDate() - 7);
         birthMinus7String = `${birth_date.getFullYear()}-${String(birth_date.getMonth() + 1).padStart(2, '0')}-${String(birth_date.getDate()).padStart(2, '0')}`;
     }
 
@@ -34,9 +31,6 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
             params: { baby_seq: babySeq }
         })
             .then(resp => {
-                console.log(resp.data);
-
-                // 몸무게 계산
                 const processedData = {
                     ...resp.data,
                     family_code: resp.data.family_code / 1000
@@ -45,12 +39,8 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
                 setData(processedData);
                 setSelectedGender(processedData.gender);
             })
-            .catch(err => {
-                console.log(err);
-            })
     }, [id, isEditing, babySeq]);
 
-    // 핸들러
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(prev => ({ ...prev, [name]: value }));
@@ -62,7 +52,6 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
         }
     }
 
-    // 수정 완료버튼
     const handleSave = () => {
         if (!isEditing) return;
 
@@ -82,10 +71,8 @@ function useBabyInfo(isEditing, selectedGender, setSelectedGender, setIsEditing)
                 sessionStorage.setItem("babyDueDate", data.birth_date);
                 setBabyDueDate(data.birth_date);
             })
-            .catch(err => console.log(err));
     }
-
-
+    
     return {
         data, todayString, birthMinus7String, regex, inputCount,
         handleChange, handleSave, setData

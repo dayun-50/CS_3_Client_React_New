@@ -1,5 +1,3 @@
-/* ---------------------------------- */
-/* 기본 데스크탑 */
 .container {
   width: 100%;
   height: 100%;
@@ -19,12 +17,11 @@
   height: 100%;
 }
 
-.right > * {
+.right>* {
   flex: 1;
   min-height: 0;
 }
 
-/* ------------------------ */
 
 @media (max-width: 374px) {
   .container {
@@ -44,11 +41,11 @@
 
   .left,
   .right {
-    flex: unset; /* 화면 전체 사용 */
+    flex: unset;
   }
 
   .right {
-    gap: 10px;
+    gap: 20px;
   }
 }
 
@@ -62,7 +59,7 @@
 
   .left,
   .right {
-    flex: unset; /* 화면 전체 사용 */
+    flex: unset;
   }
 
   .right {
@@ -70,7 +67,6 @@
   }
 }
 
-/* 일반 모바일 (376~480px) */
 @media (min-width: 376px) and (max-width: 480px) {
   .container {
     flex-direction: column;
@@ -89,7 +85,6 @@
   }
 }
 
-/* 큰 모바일 / 작은 태블릿 (481~767px) */
 @media (min-width: 481px) and (max-width: 767px) {
   .container {
     flex-direction: column;
@@ -108,7 +103,6 @@
   }
 }
 
-/* 태블릿 세로 (768~1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   .container {
     flex-direction: row;
@@ -118,7 +112,7 @@
 
   .left {
     flex: 1;
-    min-width: 180px; /* 패드에서도 오른쪽 안짤리게 */
+    min-width: 180px;
   }
 
   .right {
@@ -128,7 +122,6 @@
   }
 }
 
-/* 태블릿 가로 / 작은 PC (1024~1200px) */
 @media (min-width: 1024px) and (max-width: 1200px) {
   .container {
     flex-direction: row;
@@ -148,7 +141,6 @@
   }
 }
 
-/* 일반 PC (1201px 이상) */
 @media (min-width: 1201px) {
   .container {
     flex-direction: row;
@@ -158,6 +150,7 @@
   .left {
     flex: 1;
   }
+
   .right {
     flex: 2;
     gap: 24px;

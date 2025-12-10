@@ -55,8 +55,6 @@ const ChartIndex = () => {
 
   }, [currentWeek, isFetalMode]);
 
-
-
   const { babySeq, babyInfo, menuList } = useChartIndex(
     currentWeek,
     setCurrentWeek
@@ -65,7 +63,6 @@ const ChartIndex = () => {
   const fetchActualData = async () => {
 
     setActualData(null);
-
 
     try {
       const { babySeq, status, birthDate } = babyInfo;
@@ -84,9 +81,7 @@ const ChartIndex = () => {
 
       setActualData(response.data || {});
 
-
     } catch (error) {
-      console.error("Actual Data 조회 실패:", error);
       setActualData({});
     }
   };
@@ -170,9 +165,7 @@ const ChartIndex = () => {
             )
           }
 
-
         </div>
-
 
         {actualData && (
           <ChartInput

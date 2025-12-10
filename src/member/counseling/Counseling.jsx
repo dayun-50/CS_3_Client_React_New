@@ -23,7 +23,6 @@ const Counseling = ({ onClose }) => {
     minute: "2-digit",
   });
 
-  // 초기 카드 메시지
   useEffect(() => {
     setMessages([
       {
@@ -88,7 +87,6 @@ const Counseling = ({ onClose }) => {
     setInputText("");
   };
 
-  // 스크롤 자동
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollTop = messageEndRef.current.scrollHeight;
@@ -128,10 +126,10 @@ const Counseling = ({ onClose }) => {
     return (
       <div
         className={`${styles.messageContainer} ${isMe
-            ? styles.myMessage
-            : isSystem
-              ? styles.systemMessage
-              : styles.otherMessage
+          ? styles.myMessage
+          : isSystem
+            ? styles.systemMessage
+            : styles.otherMessage
           }`}
       >
         {!isMe && !isSystem && (
@@ -150,7 +148,6 @@ const Counseling = ({ onClose }) => {
       <div className={styles.left} onClick={onClose}></div>
       <div className={styles.right} onClick={(e) => e.stopPropagation()}>
 
-        {/* 상단 헤더 + 안내문 sticky */}
         <div className={styles.stickyTop}>
           <div className={styles.up}>
             <div className={styles.oneonenine}>긴급 상담</div>
@@ -165,7 +162,6 @@ const Counseling = ({ onClose }) => {
           </div>
         </div>
 
-        {/* 메시지 영역 */}
         <div className={styles.down}>
           <div className={styles.chatbody} ref={messageEndRef}>
             {messages.map((msg, idx) => (
@@ -188,7 +184,6 @@ const Counseling = ({ onClose }) => {
             )}
           </div>
 
-          {/* 입력 영역 */}
           <div className={styles.commentInputBox}>
             <div className={styles.inputField}>
               <input

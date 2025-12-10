@@ -1,4 +1,3 @@
-/* 전체 컨테이너 */
 .container {
   width: 100%;
   height: 100%;
@@ -10,7 +9,6 @@
   box-sizing: border-box;
 }
 
-/* --- 상단 헤더 (카테고리 + 글작성 + 검색창) --- */
 .header {
   display: flex;
   align-items: center;
@@ -25,7 +23,6 @@
   gap: 16px;
 }
 
-/* 카테고리 버튼 */
 .categoryList {
   display: flex;
   gap: 16px;
@@ -64,7 +61,6 @@
   gap: 16px;
 }
 
-/* 글 작성 버튼 */
 .writeButton {
   height: 48px;
   padding: 0 20px;
@@ -85,7 +81,6 @@
   font-weight: bold;
 }
 
-/* 검색창 */
 .searchBar {
   display: flex;
   align-items: center;
@@ -116,13 +111,11 @@
   margin-left: 12px;
 }
 
-/* --- 게시물 그리드 --- */
 .cardGrid {
   gap: 20px;
   flex: 1;
 }
 
-/* 반응형 컬럼 */
 .gridContainer {
   width: 100%;
   display: grid;
@@ -131,7 +124,6 @@
   padding: 0;
 }
 
-/* 카드 스타일 */
 .card {
   flex: 1;
   display: flex;
@@ -150,7 +142,6 @@
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* 이미지 영역 */
 .cardHeader {
   width: 100%;
   height: 170px;
@@ -178,7 +169,6 @@
   transform: scale(1.05);
 }
 
-/* 메뉴 버튼 */
 .menuBtn {
   position: absolute;
   top: 12px;
@@ -200,7 +190,6 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* 게시글이 없을 때 메시지 스타일 */
 .emptyMessage {
   width: 100%;
   text-align: center;
@@ -210,7 +199,6 @@
   min-height: 250px;
 }
 
-/* 드롭다운 메뉴 */
 .dropdownMenu {
   position: absolute;
   top: 40px;
@@ -240,7 +228,6 @@
   background-color: #f0f0f0;
 }
 
-/* 텍스트 내용 */
 .content {
   padding: 16px;
   display: flex;
@@ -266,9 +253,11 @@
 .후기 {
   background-color: #5bb27d;
 }
+
 .질문 {
   background-color: #ff9900;
 }
+
 .무료나눔 {
   background-color: #e56565;
 }
@@ -294,7 +283,6 @@
   overflow: hidden;
 }
 
-/* 조회수, 댓글 영역 */
 .stats {
   display: flex;
   gap: 12px;
@@ -304,7 +292,6 @@
   border-top: 1px solid var(--color-font-back);
 }
 
-/* 개별 아이콘+숫자 */
 .statItem {
   display: flex;
   align-items: center;
@@ -313,29 +300,23 @@
   color: var(--color-font-color2);
 }
 
-/* ----- 게시글 없을 때 감성 UI ----- */
 .emptyMessage {
   width: 100%;
   height: 100%;
   min-height: 320px;
   padding: 60px 20px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   color: var(--color-font-color2);
   font-size: 16px;
-
   border-radius: 16px;
   background: var(--color-white);
-
   gap: 14px;
   text-align: center;
 }
 
-/* 아이콘 크게 보이도록 */
 .emptyMessage svg {
   width: 52px;
   height: 52px;
@@ -343,14 +324,12 @@
   color: var(--color-font-color2);
 }
 
-/* 서브 텍스트 */
 .emptySubText {
   font-size: 14px;
   color: var(--color-font-color2);
   opacity: 0.7;
 }
 
-/* --- 페이지네이션 --- */
 .pagination {
   display: flex;
   justify-content: center;
@@ -364,7 +343,6 @@
   background-color: var(--color-white);
 }
 
-/* --- 반응형 --- */
 @media (max-width: 1440px) {
   .container {
     height: 100vh;
@@ -388,24 +366,20 @@
     scrollbar-color: var(--color-primary) transparent;
   }
 
-  /* 스크롤바 css 적용 */
   .cardGrid::-webkit-scrollbar {
     width: 8px;
   }
 
-  /* 3. 스크롤바 트랙(배경) */
   .cardGrid::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  /* 4. 스크롤바 핸들(움직이는 막대) */
   .cardGrid::-webkit-scrollbar-thumb {
     background-color: var(--color-primary);
     border-radius: 4px;
     border: 2px solid var(--color-white);
   }
 
-  /* 5. 핸들에 마우스를 올렸을 때 색상 변경 */
   .cardGrid::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-hover);
   }
@@ -418,7 +392,6 @@
   }
 }
 
-/* 1024px 이하: 3컬럼 */
 @media (max-width: 1024px) {
   .gridContainer {
     grid-template-columns: repeat(3, 1fr);
@@ -465,7 +438,6 @@
   }
 }
 
-/* 768px 이하: 2컬럼 */
 @media (max-width: 768px) {
   .gridContainer {
     grid-template-columns: repeat(2, 1fr);
@@ -475,7 +447,6 @@
     width: 100%;
   }
 
-  /* 카테고리 버튼 */
   .categoryList {
     width: 100%;
     flex-direction: row;
@@ -490,7 +461,6 @@
     text-align: center;
   }
 
-  /* 글작성 버튼 + 검색창 */
   .header {
     display: flex;
     align-items: center;
@@ -514,7 +484,6 @@
   }
 }
 
-/* 480px 이하: 1컬럼 */
 @media (max-width: 480px) {
   .gridContainer {
     grid-template-columns: repeat(1, 1fr);
@@ -537,7 +506,6 @@
     gap: 12px;
   }
 
-  /* 게시글이 없을 경우 */
   .emptyMessage {
     min-height: 240px;
     padding: 40px 16px;
@@ -550,7 +518,6 @@
   }
 }
 
-/* 360px 이하: 더 작게 */
 @media (max-width: 380px) {
   .gridContainer {
     grid-template-columns: repeat(1, 1fr);

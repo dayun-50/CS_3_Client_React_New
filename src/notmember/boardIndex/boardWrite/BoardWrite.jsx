@@ -55,7 +55,6 @@ const BoardWrite = () => {
       initial="hidden"
       animate="visible"
     >
-      {/* 제목 입력 영역 */}
       <motion.div className={styles.formGroup} variants={itemVariants}>
         <label className={styles.formLabel}>제목</label>
         <div className={styles.inputField}>
@@ -68,9 +67,7 @@ const BoardWrite = () => {
         </div>
       </motion.div>
 
-      {/* 필터 + 공개 설정 */}
       <motion.div className={styles.selectionGroup} variants={itemVariants}>
-        {/* 필터 선택 */}
         <div className={styles.formGroup} style={{ position: "relative" }}>
           <label className={styles.formLabel}>필터 선택</label>
           <div
@@ -101,7 +98,6 @@ const BoardWrite = () => {
           )}
         </div>
 
-        {/* 공개 설정 */}
         <div className={styles.formGroup}>
           <label className={styles.formLabel}>공개 설정</label>
           <div className={styles.radioGroup}>
@@ -140,7 +136,6 @@ const BoardWrite = () => {
         </div>
       </motion.div>
 
-      {/* 파일 업로드 */}
       <motion.div className={styles.fileUploadArea} variants={itemVariants}>
         <label className={styles.formLabel}>파일 첨부</label>
         <div className={styles.uploadContainer}>
@@ -185,7 +180,6 @@ const BoardWrite = () => {
         </div>
       </motion.div>
 
-      {/* 에디터 */}
       <motion.div className={styles.editorArea} variants={itemVariants}>
         <SimpleEditor
           ref={editorRef}
@@ -195,7 +189,6 @@ const BoardWrite = () => {
         />
       </motion.div>
 
-      {/* 버튼 */}
       <motion.div
         className={styles.actionFooter}
         variants={itemVariants}

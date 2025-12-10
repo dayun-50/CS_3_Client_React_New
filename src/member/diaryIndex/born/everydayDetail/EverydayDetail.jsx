@@ -11,7 +11,6 @@ import {
 import EverydayWrite from "../everydayWrite/EverydayWrite";
 import { UseEverydayDetail } from "./UseEverydayDetail";
 
-// 로그 리스트 컨테이너 애니메이션 Variants
 const listContainerVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: {
@@ -26,7 +25,6 @@ const listContainerVariants = {
   exit: { opacity: 0, y: 10, transition: { duration: 0.2 } },
 };
 
-// 개별 로그 항목 애니메이션 Variants
 const logItemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
@@ -50,7 +48,6 @@ const EverydayDetail = ({
     openModalForNewLog,
     closeModal,
     showModal,
-    //typeToAdd,
     targetDayData,
     reverseTypeMap,
     setTargetDayData,
@@ -63,17 +60,14 @@ const EverydayDetail = ({
     load
   } = UseEverydayDetail({ currentDate, setCurrentDate, fetchData });
 
-  // 드롭다운 상태 관리
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
   const toggleDropdown = (index) => {
     setOpenDropdownIndex((prev) => (prev === index ? null : index));
   };
 
-  // 여러 드롭다운을 관리할 refs 배열
   const dropdownRefs = useRef([]);
 
-  // 바깥 클릭 감지
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (openDropdownIndex !== null) {
@@ -103,7 +97,6 @@ const EverydayDetail = ({
 
   return (
     <div className={styles.detailContainer}>
-      {/* Header & 날짜 */}
       <div className={styles.headerSection}>
         <div className={styles.dateNavigation}>
           <ChevronLeft
@@ -117,7 +110,6 @@ const EverydayDetail = ({
           />
         </div>
 
-        {/* 타입 필터 버튼 */}
         <div className={styles.categoryFilters}>
           {Object.entries(typeMap).map(([key, info]) => (
             <div
@@ -143,7 +135,6 @@ const EverydayDetail = ({
         </div>
       </div>
 
-      {/* 기록 추가 버튼 (전체 선택 시 숨김) */}
       {activeType !== "전체" && (
         <div className={styles.addButtonWrapper}>
           <button
@@ -156,10 +147,9 @@ const EverydayDetail = ({
         </div>
       )}
 
-      {/* 로그 리스트 */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={activeType} // activeType 변경 시 애니메이션 발생
+          key={activeType}
           className={styles.logListWrapper}
           variants={listContainerVariants}
           initial="hidden"
@@ -177,10 +167,7 @@ const EverydayDetail = ({
               return reverseTypeMap[activeType] === item.record_type;
             })
             .map((item, i) => {
-              // 1) 타입 찾기 (toilet / milk / sleep ...)
               const baseTypeKey = item.record_type.split("/")[0];
-
-              // 2) toilet → "배변"
               const mappedType =
                 baseTypeKey === "toilet"
                   ? "배변"
@@ -190,12 +177,9 @@ const EverydayDetail = ({
 
               const info = typeMap[mappedType];
               const Icon = info.icon;
-
-              // 3) 최종 표시 이름 (소변/대변 or label)
               const displayType =
                 recordLabelMap[item.record_type] || info.label;
 
-              // 4) 날짜 변환
               const formatTime = (iso) => {
                 const d = new Date(iso);
                 return d.toLocaleString("ko-KR", {
@@ -204,7 +188,6 @@ const EverydayDetail = ({
                 });
               };
 
-              //5)수면시간 포맷
               const formatSleep = (minutes) => {
                 const h = Math.floor(minutes / 60);
                 const m = minutes % 60;
@@ -228,7 +211,6 @@ const EverydayDetail = ({
                       <div
                         className={styles.timeText}
                         style={{ color: info.color }}>
-                        {/* 전날 이어진 경우 → 표시 */}
                         {item.prevStart ? (
                           <>
                             <span className={styles.timeText}>
@@ -313,7 +295,6 @@ const EverydayDetail = ({
               );
             })}
 
-          {/* 로그 없을 경우 */}
           {targetDayData.length === 0 && (
             <div className={styles.emptyMessage}>
               <Inbox className={styles.emptyIcon} />
@@ -330,7 +311,6 @@ const EverydayDetail = ({
         </motion.div>
       </AnimatePresence>
 
-      {/* 모달 */}
       <AnimatePresence>
         {showModal && (
           <EverydayWrite

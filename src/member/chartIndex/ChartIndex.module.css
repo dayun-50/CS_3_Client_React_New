@@ -34,7 +34,6 @@
   transition: all 0.2s ease;
 }
 
-/* 활성/비활성 hover 효과 적용 */
 .menuButton:hover,
 .menuActive:hover {
   background-color: var(--color-main-hover);
@@ -43,21 +42,18 @@
   transform: scale(0.98);
 }
 
-/* 활성/비활성 스타일 */
 .menuActive {
   background-color: var(--color-main);
   color: var(--color-white);
   font-weight: bold;
 }
 
-/* 비활성 */
 .menuButton {
   background-color: transparent;
   border: 1px solid var(--color-main);
   color: var(--color-font-color1);
 }
 
-/* 메인 컨텐츠 영역 (차트+폼) */
 .contentWrapper {
   display: flex;
   gap: 26px;
@@ -65,7 +61,6 @@
   align-items: stretch;
 }
 
-/* 차트/폼 기본 */
 .chartRouteArea {
   flex: 2;
   height: 100%;
@@ -76,13 +71,11 @@
 .ChartInputArea {
   flex: 1;
 }
+
 .chartInputArea {
   flex: 1;
 }
 
-/* ===========================
-   1440px 이상: 좌우 배치 유지
-=========================== */
 @media (min-width: 1441px) {
   .menuSection {
     flex-wrap: nowrap;
@@ -118,6 +111,7 @@
   .chartRouteArea {
     flex: 1 1 65%;
   }
+
   .chartInputArea {
     flex: 1 1 35%;
   }
@@ -163,14 +157,11 @@
   .chartRouteArea,
   .chartInputArea {
     width: 100%;
-    height: auto; 
-    min-height: 500px; 
+    height: auto;
+    min-height: 500px;
   }
 }
 
-/* ===========================
-   768px ~ 480px: 버튼 2~3열, 세로 배치
-=========================== */
 @media (max-width: 768px) {
   .menuSection {
     grid-template-columns: repeat(3, 1fr);
@@ -192,12 +183,11 @@
   .chartRouteArea,
   .chartInputArea {
     width: 100%;
-    height: auto; 
-    min-height: 500px; 
+    height: auto;
+    min-height: 500px;
   }
 }
 
-/* 480px 이하: 버튼 2열, 글자 작게 */
 @media (max-width: 480px) {
   .menuSection {
     grid-template-columns: repeat(2, 1fr);
@@ -209,10 +199,10 @@
     font-size: 12px;
   }
 
-    .chartRouteArea,
+  .chartRouteArea,
   .chartInputArea {
     width: 100%;
-    height: auto; 
-    min-height: 500px; 
+    height: auto;
+    min-height: 500px;
   }
 }

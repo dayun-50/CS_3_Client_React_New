@@ -32,20 +32,20 @@ const ChartInput = ({
 
   const map = isFetalMode
     ? {
-        EFW: "몸무게",
-        OFD: "머리직경",
-        HC: "머리둘레",
-        AC: "복부둘레",
-        FL: "허벅지 길이",
-      }
+      EFW: "몸무게",
+      OFD: "머리직경",
+      HC: "머리둘레",
+      AC: "복부둘레",
+      FL: "허벅지 길이",
+    }
     : {
-        BW: "몸무게",
-        HC: "머리둘레",
-        HT: "신장",
-      };
+      BW: "몸무게",
+      HC: "머리둘레",
+      HT: "신장",
+    };
 
   const handleChange = (key, value) => {
-    const type = Object.keys(map).find((t) => map[t] === key); // EFW, HC 등
+    const type = Object.keys(map).find((t) => map[t] === key);
     const standard = isFetalMode
       ? FETAL_STANDARDS[currentWeek]?.[type]
       : INFANT_STANDARDS[Math.ceil(currentWeek / 4)]?.[type];
@@ -81,7 +81,6 @@ const ChartInput = ({
   };
 
   const handleSubmit = async () => {
-    //날짜 검사
     if (!date || date.trim() === "") {
       alert("날짜를 입력해주세요.");
       return;
@@ -106,8 +105,8 @@ const ChartInput = ({
     if (invalidInput) {
       alert(
         "모든 필수 항목(" +
-          REQUIRED_KEYS.join(", ") +
-          ")을 올바르게 입력해주세요."
+        REQUIRED_KEYS.join(", ") +
+        ")을 올바르게 입력해주세요."
       );
       return;
     }

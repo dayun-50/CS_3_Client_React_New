@@ -15,7 +15,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border:1px solid black; */
 }
 
 .idcheckboxin {
@@ -23,12 +22,8 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    /* gap: 30px; */
-    /* border:1px solid black; */
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 제목 부분*/
 .idtop {
     width: 100%;
     display: flex;
@@ -36,7 +31,6 @@
     align-items: center;
     gap: 16px;
     margin-bottom: 30px;
-    /* border:1px solid black; */
 }
 
 .title {
@@ -51,16 +45,13 @@
     color: #8C8C8C;
 }
 
-/*-----------------------------------------------------------------*/
-/*이메일*/
 
 .idmiddleone {
     margin-bottom: 16px;
-    /* border:1px solid black; */
 }
 
 .idmiddleone label {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
     display: block;
@@ -72,7 +63,7 @@
     width: 70%;
     height: 48px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back);
     padding: 0 10px;
     box-sizing: border-box;
     outline: none;
@@ -86,7 +77,7 @@
 .dlswmd {
     width: 25%;
     height: 48px;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     border-radius: 20px;
     border: none;
     font-size: 16px;
@@ -98,6 +89,7 @@
 .dlswmd:hover {
     background-color: #F0D827;
     transform: scale(0.98);
+    font-weight: bold;
 }
 
 .dlswmd:active {
@@ -106,11 +98,10 @@
 
 .idmiddletwo {
     margin-bottom: 30px;
-    /* border:1px solid black; */
 }
 
 .idmiddletwo label {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
     display: block;
@@ -122,7 +113,7 @@
     width: 100%;
     height: 48px;
     border-radius: 20px;
-    border: 1px solid #8C8C8C;
+    border: 1px solid var(--color-font-back);
     padding: 0 10px;
     box-sizing: border-box;
     outline: none;
@@ -133,8 +124,6 @@
     font-size: 16px;
 }
 
-/*-----------------------------------------------------------------*/
-/*취소랑 완료 버튼*/
 
 .idbottom {
     width: 100%;
@@ -148,13 +137,15 @@
     border-radius: 30px;
     border: none;
     color: white;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     font-size: 18px;
     cursor: pointer;
 }
 
 .idd:hover,.idd:active {
+    font-weight: bold;
     transform: scale(0.98);
+    background-color: #b0b0b0;
 }
 
 
@@ -173,28 +164,12 @@
 .idok:hover,.idok:active {
     transform: scale(0.98);
     background-color: #e0c817;;
+    font-weight: bold;
 }
 
 .idd:hover {
     background-color: #b0b0b0;
 }
-
-/*---------------------------------------------------------------------*/
-
-/*완료버튼 눌렀을때 바뀌는 창*/
-
-/* .idcheckboxt {
-    background-color: white;
-    width:460px;
-    height:430px;
-    border-radius: 20px;
-    box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border:1px solid black;
-} */
-
 
 .idcheckboxintwo {
     width: 100%;
@@ -204,18 +179,14 @@
     justify-content: center;
     gap: 30px;
     margin: auto;
-    /* border:1px solid black; */
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 제목 부분*/
 .idtoptwo {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    /* border:1px solid black; */
 }
 
 .titletwo {
@@ -230,12 +201,10 @@
     color: #8C8C8C;
 }
 
-/*-----------------------------------------------------------------*/
-/*아이디 값 나오는 부분*/
 
 
 .idmiddlet p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #8C8C8C;
     margin-left: 10px;
@@ -245,13 +214,10 @@
 .idvaluet {
     width: 95%;
     height: 50px;
-    /* border:1px solid black; */
     margin-left: 10px;
     color: #8C8C8C;
 }
 
-/*-----------------------------------------------------------------*/
-/*취소랑 완료 버튼*/
 
 .idbottomt {
     width: 100%;
@@ -265,9 +231,8 @@
     border-radius: 30px;
     border: none;
     color: white;
-    background-color: #B9B9B9;
+    background-color: #d9d9d9;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -280,25 +245,25 @@
     background-color: #B9B9B9;
     background-color: #F0D827;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .iddt:hover {
     transform: scale(0.98);
     background-color: #b0b0b0;
+    font-weight: bold;
 }
 
 .idokt:hover {
     transform: scale(0.98);
     background-color: #e0c817;
+    font-weight: bold;
 }
 
 .auth {
     border: solid 1px #499ef8 !important;
 }
 
-/* ------------------ 반응형 ------------------ */
 @media screen and (max-width: 768px) {
     .idcheckbox {
         width: 90%;
@@ -369,13 +334,13 @@
 @media screen and (max-width: 375px) {
     .idmiddleone {
         display: flex;
-        flex-direction: column; /* label은 위에, input+버튼는 밑으로 */
+        flex-direction: column; 
     }
 
     .idmiddleone > input,
     .idmiddleone > .dlswmd {
-        width: 100%;          /* 좁은 화면에 맞춤 */
-        margin: 5px 0;        /* input과 버튼 사이 간격 */
+        width: 100%;          
+        margin: 5px 0;     
         box-sizing: border-box;
     }
 }

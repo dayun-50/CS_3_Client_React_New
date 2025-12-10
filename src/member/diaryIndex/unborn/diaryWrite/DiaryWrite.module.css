@@ -8,7 +8,6 @@
   color: var(--color-font-color1);
 }
 
-/* 제목 입력 */
 .formGroup {
   display: flex;
   align-items: center;
@@ -33,6 +32,7 @@
   padding: 0 18px;
   transition: 0.2s;
 }
+
 .inputField:focus-within {
   border-color: var(--color-primary);
   box-shadow: 0 0 5px rgba(240, 216, 39, 0.4);
@@ -46,7 +46,6 @@
   font-size: 17px;
 }
 
-/* 에디터 영역 */
 .editorArea {
   flex-grow: 1;
   background-color: var(--color-white);
@@ -58,7 +57,6 @@
   overflow: hidden;
 }
 
-/* 버튼 영역 */
 .actionFooter {
   display: flex;
   justify-content: flex-end;
@@ -96,9 +94,6 @@
   transform: scale(0.98);
 }
 
-/* ======================================= */
-/*          768px 이하 (태블릿)            */
-/* ======================================= */
 @media (max-width: 768px) {
   .detailContainer {
     padding: 12px;
@@ -128,9 +123,6 @@
   }
 }
 
-/* ======================================= */
-/*             480px 이하 (모바일)         */
-/* ======================================= */
 @media (max-width: 480px) {
   .detailContainer {
     padding: 10px;

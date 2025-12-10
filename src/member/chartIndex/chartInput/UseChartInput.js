@@ -19,9 +19,8 @@ export const submitChartData = async ({ date, babySeq, id, measureTypes, actualD
     const res = await caxios.post("/chart/insert", payload);
     alert("저장 완료!");
 
-    return res.data; // 
+    return res.data;
   } catch (err) {
-    console.error(err);
     alert("저장 실패");
     return null;
   }
@@ -44,8 +43,6 @@ export const updateChartData = async ({ date, babySeq, id, measureTypes, actualD
     return null;
   }
 
-  console.log("UPDATE payload:", payload);
-
   try {
     const res = await caxios.put(`/chart/update`, payload
 
@@ -54,7 +51,6 @@ export const updateChartData = async ({ date, babySeq, id, measureTypes, actualD
 
     return res.data;
   } catch (e) {
-    console.error(e);
     alert("수정 실패");
     return null;
   }

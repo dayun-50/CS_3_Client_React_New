@@ -5,28 +5,22 @@ import { caxios } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 
 function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby) {
-
-    // 애기 시퀀스 바꿀 준비
     const getbabySeq = useAuthStore((state) => state.getbabySeq);
     const navigate = useNavigate();
-
-    // 데이터 보낼 준비 
     const data = { name: "", gender: "", image_name: "", birth_date: "" };
     const [auth, setAuth] = useState([{ name: false, birth_date: false }]);
     const [inputCount, setInputCount] = useState([{ name: 0, birth_date: 0 }]);
-    // 유효성
-    const nickNameRegex = /^[가-힣0-9]{2,6}$/ // 닉네임 한글 2~6글자
 
-    // 날짜 선택 기점 잡아주기
+    const nickNameRegex = /^[가-힣0-9]{2,6}$/
+
     const today = new Date();
-    // 오늘 날짜
+
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const todayString = `${year}-${month}-${day}`;
 
-    // 어제 날짜
-    const yesterdayDate = new Date(today); // 오늘 날짜 복사
+    const yesterdayDate = new Date(today);
     yesterdayDate.setDate(today.getDate() + 1);
 
     const yYear = yesterdayDate.getFullYear();
@@ -34,7 +28,6 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
     const yDay = String(yesterdayDate.getDate()).padStart(2, '0');
     const yesterdayString = `${yYear}-${yMonth}-${yDay}`;
 
-    // 24개월 전
     const before24M = new Date(today);
     before24M.setMonth(before24M.getMonth() - 24);
 
@@ -43,7 +36,6 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
     const bDay = String(before24M.getDate()).padStart(2, '0');
     const before24MString = `${bYear}-${bMonth}-${bDay}`;
 
-    // 성별/이미지 변경 시 inputBlocks 업데이트 함수
     const syncGenderAndImage = useCallback(() => {
         setInputBlocks(prevBlocks => {
             return prevBlocks.map(block => ({
@@ -55,7 +47,6 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
     }, [selectedGender, selectedBaby, setInputBlocks]);
 
 
-    // 핸들러 준비
     const handleChange = (index, e) => {
         const { name, value } = e.target;
         setInputBlocks(prev => {
@@ -96,12 +87,9 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
                 };
                 return newBlocks;
             });
-
         }
-
     }
 
-    // 완료 버튼 클릭시
     const handleComplete = () => {
         const allValid = auth.every(block => block.name && block.birth_date);
 
@@ -113,17 +101,14 @@ function useInputBaby(inputBlocks, setInputBlocks, selectedGender, selectedBaby)
             alert("모든 항목을 입력해주세요.");
             return;
         }
-        console.log(inputBlocks);
 
         caxios.post("/baby/insert", inputBlocks)
             .then(resp => {
                 getbabySeq(resp.data);
                 navigate("/");
             })
-            .catch(err => console.log(err));
     }
 
-    // 엔터
     const handleLoginKeyUp = (e) => {
         if (e.key === 'Enter') {
             handleComplete();

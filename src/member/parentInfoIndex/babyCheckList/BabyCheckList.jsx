@@ -79,10 +79,9 @@ const BabyCheckList = () => {
         ))
       ) : (
         <div className={styles.emptyMessage}>
-          <Inbox /> {/* 아이콘 */}
-          <div>일정이 존재하지 않습니다</div> {/* 텍스트 */}
-          <p className={styles.emptySubText}>건강기록을 작성해보세요</p>{" "}
-          {/* 서브 텍스트 */}
+          <Inbox /> 
+          <div>일정이 존재하지 않습니다</div>
+          <p className={styles.emptySubText}>건강기록을 작성해보세요</p>
         </div>
       )}
     </div>

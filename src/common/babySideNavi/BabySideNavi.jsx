@@ -14,12 +14,9 @@ const BabySideNavi = ({ onClose, setIsNavOpen, setIsCounselOpen }) => {
     timeZone: "Asia/Seoul",
   });
 
-  // 태어났는지 여부 계산
   const isBorn = bornDueDate <= today;
 
-  // 이거 추가됨 사이드바 세로형을때는 긴급상담으로 이동이 되지 않아서
   const handleEmergencyClick = () => {
-    // navi("/counseling");
     setIsCounselOpen(true);
     onClose();
   };
@@ -48,9 +45,7 @@ const BabySideNavi = ({ onClose, setIsNavOpen, setIsCounselOpen }) => {
           <X className={styles.helpIcon} onClick={onClose} />
         </div>
 
-        {/* 카테고리 (세로 모드) */}
         <div className={styles.sidnavi}>
-          {/* isVertical={true} - 세로 형태의 디자인 적용 */}
           <BabyButton
             isVertical={true}
             isBorn={isBorn}
@@ -59,7 +54,6 @@ const BabySideNavi = ({ onClose, setIsNavOpen, setIsCounselOpen }) => {
         </div>
 
         <div className={styles.sidController}>
-          {/* isSidebar={true} - 가로 바 형태의 디자인 적용 */}
           <BabyController isSidebar={true} />
         </div>
 

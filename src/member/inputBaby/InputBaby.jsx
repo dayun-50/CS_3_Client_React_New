@@ -59,7 +59,6 @@ const InputBaby = ({ type, onClose, fromChooseType = false }) => {
     handleLoginKeyUp,
   } = useInputBaby(inputBlocks, setInputBlocks);
 
-  // 각 블록별 성별 선택
   const handleGenderClick = (index, gender) => {
     setInputBlocks((prev) => {
       const newBlocks = [...prev];
@@ -68,7 +67,6 @@ const InputBaby = ({ type, onClose, fromChooseType = false }) => {
     });
   };
 
-  // 각 블록별 사진 선택
   const handleImageClick = (index, image_name) => {
     setInputBlocks((prev) => {
       const newBlocks = [...prev];

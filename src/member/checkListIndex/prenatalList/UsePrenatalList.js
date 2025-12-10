@@ -31,7 +31,7 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
                     selectedDate.setHours(0, 0, 0, 0);
 
                     if (selectedDate < today) {
-                        newData.created_at = ""; // 과거이면 초기화
+                        newData.created_at = "";
                     }
                 } else {
                     setCheckClicked(false);
@@ -43,10 +43,7 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
     };
 
     const dataInsert = (checkId, onSuccess) => {
-        console.log(babySeq);
         const newData = { ...data, baby_seq: babySeq, test_code: checkId };
-        console.log(newData);
-
         const hasEmpty = Object.values(newData).some((value) => value === "");
         if (hasEmpty) {
             alert("모든 값을 입력해주세요.");
@@ -56,7 +53,6 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
         caxios
             .post("/checkList/insert", newData)
             .then(() => {
-                // 서버 insert 성공 후 UI 업데이트
                 setChecklist(prev =>
                     prev.map(section => ({
                         ...section,
@@ -76,7 +72,6 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
                 setCheckClicked(false);
                 if (onSuccess) onSuccess();
             })
-            .catch((err) => console.error(err));
     };
 
     const dataDelect = (checkId) => {
@@ -89,7 +84,6 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
         caxios.post("/checkList/delete", deleteData)
             .then(resp => {
                 alert("삭제 완료");
-                // 서버 삭제 성공 후 클라이언트 상태 갱신
                 setChecklist(prev =>
                     prev.map(section => ({
                         ...section,
@@ -108,7 +102,6 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
                     created_at: ""
                 }));
             })
-            .catch((err) => console.error(err));
     };
 
     const selectList = () => {
@@ -123,15 +116,13 @@ function UsePrenatalList(setChecklist, setIsModalOpen, setCheckClicked, selected
                             return {
                                 ...check,
                                 date: found ? found.created_at : "",
-                                isDone: !!found, // !!는 truthy/falsy 값을 boolean으로 변환하는 방법
-                                // condition이 true면 { key: value }가 스프레드되어 객체에 들어가고, false면 아무것도 안 들어감.
+                                isDone: !!found,
                                 ...(found?.is_checked === "Y" && { is_checked: "Y" })
                             };
                         })
                     }))
                 );
             })
-            .catch((err) => console.log(err));
     };
 
     return { data, setData, handelChange, dataInsert, dataDelect, selectList };

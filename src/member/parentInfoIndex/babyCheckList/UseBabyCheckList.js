@@ -8,12 +8,11 @@ function UseBabyCheckList() {
     const [rendering, setRendering] = useState(false);
     const babySeq = useAuthStore(state => state.babySeq);
 
-    // test_code -> title 매핑 함수
     const findTitleByTestCode = (test_code) => {
         const allChecks = [...BABY_CHECKLIST, ...FETAL_CHECKLIST]
-            .flatMap(group => group.checks); // 모든 체크 항목 펼치기
+            .flatMap(group => group.checks);
         const matched = allChecks.find(item => item.id === test_code);
-        return matched ? matched.title : test_code; // 없으면 test_code 그대로
+        return matched ? matched.title : test_code;
     };
 
     useEffect(() => {
@@ -40,15 +39,14 @@ function UseBabyCheckList() {
                         ...item,
                         type: createdDate <= todayDate ? "past" : "future",
                         buttonText: createdDate <= todayDate ? "완료" : "예약취소",
-                        text: findTitleByTestCode(item.test_code), // test_code에 맞는 title
+                        text: findTitleByTestCode(item.test_code),
                         date: item.created_at,
-                        badge // 여기만 수정
+                        badge
                     };
                 });
 
                 setData(processed);
             })
-            .catch(err => console.error(err));
     }, [babySeq, rendering]);
 
     const handleClick = (id) => {
@@ -56,7 +54,6 @@ function UseBabyCheckList() {
         if (!confirm("예약 일정을 취소하시겠습니까?")) return;
         caxios.post("/user/eventDelete", { baby_seq: babySeq, test_code: id })
             .then(resp => setRendering(prev => !prev))
-            .catch(err => console.log(err));
     }
 
     return { data, handleClick };

@@ -22,12 +22,10 @@ const BoardOver = ({ isOpen, onClose, boardSeq, commentSeq }) => {
       return;
     }
     if (boardSeq) {
-      console.log("게시글 신고:", boardSeq);
       keyname = "board_seq";
       pathName = "boardSeq";
       value = boardSeq;
     } else if (commentSeq) {
-      console.log("댓글 신고:", commentSeq);
       keyname = "comment_seq";
       pathName = "commentSeq";
       value = commentSeq;
@@ -38,18 +36,15 @@ const BoardOver = ({ isOpen, onClose, boardSeq, commentSeq }) => {
       .then((resp) => {
         alert("신고 완료되었습니다.");
       })
-      .catch((err) => console.log(err));
 
     onClose();
   };
 
-  // 신고 완료 버튼 활성화 여부
   const isSubmitActive = !!data;
 
   return (
     <div className={styles.reportOverlay} onClick={onClose}>
       <div className={styles.reportBox} onClick={(e) => e.stopPropagation()}>
-        {/* 제목 및 닫기 버튼 */}
         <div className={styles.reportHeader}>
           <h2 className={styles.reportTitle}>
             {boardSeq ? "게시글" : "댓글"} 신고
@@ -65,9 +60,7 @@ const BoardOver = ({ isOpen, onClose, boardSeq, commentSeq }) => {
 
         <p className={styles.reportInstruction}>신고 사유를 선택해 주세요.</p>
 
-        {/* 신고 옵션 */}
         <div className={styles.reportOptions}>
-          {/* Radio 버튼을 label로 감싸서 전체 영역 클릭 가능하도록 유지 */}
           <label className={styles.reportLabel}>
             <input
               type="radio"
@@ -112,9 +105,8 @@ const BoardOver = ({ isOpen, onClose, boardSeq, commentSeq }) => {
 
         <div className={styles.reportBtnArea}>
           <button
-            className={`${styles.reportSubmitBtn} ${
-              !isSubmitActive ? styles.disabledBtn : ""
-            }`}
+            className={`${styles.reportSubmitBtn} ${!isSubmitActive ? styles.disabledBtn : ""
+              }`}
             onClick={isSubmitActive ? handleSubmitReport : undefined}
             disabled={!isSubmitActive}
           >

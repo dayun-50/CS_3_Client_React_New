@@ -7,7 +7,6 @@ import DiaryWrite from "../diaryWrite/DiaryWrite";
 import styles from "./UnbornIndex.module.css";
 import { UseUnBornDiaryIndex } from "./UseUnbornIndex";
 
-// 모션
 const pageVariants = {
   initial: { opacity: 0, x: 50 },
   in: { opacity: 1, x: 0 },
@@ -20,7 +19,6 @@ const pageTransition = {
   duration: 0.4,
 };
 
-//산모수첩 인덱스 "/diary/" 여기까지 라우팅
 const UnBornDiaryIndex = () => {
   const {
     selectedWeek,

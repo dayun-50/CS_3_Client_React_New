@@ -6,14 +6,10 @@ import useAuthStore from "../../../store/useStore";
 
 const DetailChart = ({ menuList, activeMenu, currentWeek, actualData, standardData, isFetalMode }) => {
 
-
   const [option, setOption] = useState({});
   const babySeq = useAuthStore(state => state.babySeq);
   const babyDueDate = useAuthStore(state => state.babyDueDate);
-
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth); // css
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -22,12 +18,10 @@ const DetailChart = ({ menuList, activeMenu, currentWeek, actualData, standardDa
   }, []);
 
   useEffect(() => {
-
     if (!babySeq || !babyDueDate) {
 
       return <div className={styles.loading}>차트를 로딩 중입니다...</div>;
     }
-
 
     UseDetailChart(
       activeMenu,
@@ -42,7 +36,6 @@ const DetailChart = ({ menuList, activeMenu, currentWeek, actualData, standardDa
         setOption(resOption);
       })
       .catch((error) => {
-        console.error("Detail Chart 로딩 중 오류 발생:", error);
         setOption({});
       });
 

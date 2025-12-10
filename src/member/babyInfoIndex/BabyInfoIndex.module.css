@@ -17,7 +17,6 @@
   align-items: center;
 }
 
-/* ============================= */
 @media (min-width: 768px) {
   .container {
     flex-direction: row;
@@ -35,15 +34,14 @@
   }
 }
 
-/* 데스크탑 (>= 1024px) */
 @media (min-width: 1024px) {
+
   .left,
   .right {
     max-width: 600px;
   }
 }
 
-/* 큰 데스크탑 (>= 1400px) */
 @media (min-width: 1400px) {
   .container {
     padding: 20px 0;

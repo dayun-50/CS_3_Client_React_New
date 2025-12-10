@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import styles from "./SymptomList.module.css";
 import { FETAL_CHECKLIST, BABY_CHECKLIST } from "./list";
 
-// --- CheckItem ---
 const CheckItem = ({ check, index }) => (
   <div
     className={styles.checkWrapper}
@@ -17,7 +16,6 @@ const CheckItem = ({ check, index }) => (
   </div>
 );
 
-// --- WeekSection ---
 const WeekSection = ({ data, index, isInfant }) => {
   const title = isInfant ? data.month : data.week;
 
@@ -40,7 +38,6 @@ const WeekSection = ({ data, index, isInfant }) => {
   );
 };
 
-// --- SymptomList 메인 ---
 const SymptomList = ({ babyData }) => {
   if (!babyData) return null;
 

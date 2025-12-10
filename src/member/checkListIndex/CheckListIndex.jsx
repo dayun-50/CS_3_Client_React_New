@@ -5,7 +5,6 @@ import UseCheckListIndex from "./UseCheckListIndex";
 import Loading from "common/loading/Loading";
 import { motion } from "framer-motion";
 
-// 주차별 체크리스트
 const CheckListIndex = () => {
   const { babyData } = UseCheckListIndex();
 
@@ -19,7 +18,6 @@ const CheckListIndex = () => {
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.4, ease: "easeOut" }}>
-      {/* Left 영역 (검진 리스트) */}
       <div className={styles.left}>
         <h2 className={styles.title}>주차별 산전 검진</h2>
         <div className={styles.listWrapper}>
@@ -27,7 +25,6 @@ const CheckListIndex = () => {
         </div>
       </div>
 
-      {/* Right 영역 (증상 리스트) */}
       <div className={styles.rigth}>
         <h2 className={styles.title}>증상 및 주의사항</h2>
         <div className={styles.listWrapper}>

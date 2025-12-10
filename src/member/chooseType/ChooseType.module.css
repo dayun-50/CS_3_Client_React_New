@@ -1,47 +1,42 @@
 .container {
-    display: flex;
-    gap: 30px;
+  display: flex;
+  gap: 30px;
 }
-/*------------------------------------------------------*/
-/*임산모 박스*/
 
 .babymomcheckbox {
-    width:590px;
-    height:670px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid transparent; /* 기본 border 공간 확보 */
-    /* transition: border 0.2s; */
+  width: 590px;
+  height: 670px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
 }
 
-/* 버튼 hover 시 적용될 border 클래스 */
 .hoverBorder {
   border: 2px solid #F0D827;
 }
 
 .bok:hover {
-    background-color: #F0D827;
+  background-color: #F0D827;
 }
 
 .cute {
-    width:90%;
-    height:auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    /* border:1px solid black; */
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .cute h1 {
-    font-size: 32px;
-    font-weight: bold;
-    color:#696B70;
+  font-size: 32px;
+  font-weight: bold;
+  color: #696B70;
 }
 
 .cute h1.hoverTitle {
@@ -49,70 +44,62 @@
 }
 
 .cute p {
-    font-size: 18px;
-    font-weight: bold;
-    color:#8C8C8C;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8C8C8C;
 }
-/*------------------------------------------------------*/
-/* 애기사진 >< */
 
 .babyImage {
   width: 200px;
   height: auto;
   margin-top: 50px;
 }
-/*------------------------------------------------------*/
-/* 완료 버튼*/
 
 .bok {
-    margin-top: 50px;
-    width:90%;
-    height:48px;
-    background-color: #8C8C8C;
-    font-size: 18px;
-    color:white;
-    font-weight: bold;
-    border-radius: 20px;
-    border: none;
+  margin-top: 50px;
+  width: 90%;
+  height: 48px;
+  background-color: #8C8C8C;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
 }
 
-/*------------------------------------------------------*/
-/*육아 박스*/
 .babycheckbox {
-    width:590px;
-    height:670px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 590px;
+  height: 670px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cutetwo {
-    width:90%;
-    height:auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    /* border:1px solid black; */
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .cutetwo h1 {
-    font-size: 32px;
-    font-weight: bold;
-    color:#696B70;
+  font-size: 32px;
+  font-weight: bold;
+  color: #696B70;
 }
 
 .cutetwo p {
-    font-size: 18px;
-    font-weight: bold;
-    color:#8C8C8C;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8C8C8C;
 }
 
-/* 육아 제목 hover */
 .cutetwo h1.hoverTitleTwo {
   color: #F0D827;
 }
@@ -124,15 +111,15 @@
 }
 
 .bokk {
-    margin-top: 50px;
-    width:90%;
-    height:48px;
-    background-color: #8C8C8C;
-    font-size: 18px;
-    color:white;
-    font-weight: bold;
-    border-radius: 20px;
-    border: none;
+  margin-top: 50px;
+  width: 90%;
+  height: 48px;
+  background-color: #8C8C8C;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
 }
 
 .bokk:hover {

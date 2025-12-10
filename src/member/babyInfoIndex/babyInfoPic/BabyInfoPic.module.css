@@ -8,7 +8,6 @@
   overflow: hidden;
 }
 
-/* 공통: 배경 이미지 */
 .backImage {
   position: absolute;
   width: 80%;
@@ -20,7 +19,6 @@
   transform: translate(-50%, -50%);
 }
 
-/* ================= Mom ================= */
 .jionewbabyImage {
   width: 76%;
   max-width: 550px;
@@ -29,7 +27,6 @@
   animation: momFloat 4s ease-in-out infinite;
 }
 
-/* ================= Child ================= */
 .childrenImage {
   width: 50%;
   max-width: 420px;
@@ -38,26 +35,28 @@
   animation: childFloat 3s ease-in-out infinite;
 }
 
-/* mom 전용 애니메이션 */
 @keyframes momFloat {
   0% {
     transform: translateY(0px) rotate(0deg);
   }
+
   25% {
     transform: translateY(-10px) rotate(-1deg);
   }
+
   50% {
     transform: translateY(0px) rotate(1deg);
   }
+
   75% {
     transform: translateY(10px) rotate(-1deg);
   }
+
   100% {
     transform: translateY(0px) rotate(0deg);
   }
 }
 
-/* ========== 아이(Child) 이미지 스타일 ========== */
 .childrenImage {
   width: 50%;
   height: auto;
@@ -66,20 +65,20 @@
   animation: childFloat 3s ease-in-out infinite;
 }
 
-/* child 전용 애니메이션 */
 @keyframes childFloat {
   0% {
     transform: translateY(0px) scale(1);
   }
+
   50% {
     transform: translateY(-8px) scale(1.02);
   }
+
   100% {
     transform: translateY(0px) scale(1);
   }
 }
 
-/* 반응형 */
 @media (max-width: 768px) {
   .backImage {
     width: 80%;
@@ -93,6 +92,7 @@
     width: 60%;
   }
 }
+
 @media (max-width: 480px) {
   .backImage {
     width: 80%;

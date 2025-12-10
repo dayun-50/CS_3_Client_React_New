@@ -1,4 +1,4 @@
-/* 전체 컨테이너 */
+
 .parent {
   width: 100%;
   height: 100%;
@@ -8,7 +8,6 @@
   box-sizing: border-box;
 }
 
-/* 상단 뒤로가기 바 */
 .topBar {
   padding-bottom: 20px;
 }
@@ -43,7 +42,6 @@
   background-color: var(--color-font-back);
 }
 
-/* 메인 컨텐츠 (게시글 + 댓글 영역) */
 .mainContentWrapper {
   display: flex;
   flex: 1;
@@ -51,7 +49,6 @@
   overflow: hidden;
 }
 
-/* 게시글 내용 영역 */
 .postContentArea {
   flex: 1;
   min-width: 600px;
@@ -65,7 +62,6 @@
   overflow-y: auto;
 }
 
-/* 게시글 헤더 */
 .postHeader {
   display: flex;
   flex-direction: column;
@@ -102,7 +98,6 @@
   font-size: 16px;
 }
 
-/* --- 드롭다운 메뉴 관련 스타일 --- */
 .menuContainer {
   position: relative;
   cursor: pointer;
@@ -111,7 +106,6 @@
 .dropdownMenu {
   position: absolute;
   top: 30px;
-  /* 아이콘 아래로 살짝 내림 */
   right: 0;
   background-color: var(--color-white);
   border: 1px solid #e0e0e0;
@@ -139,9 +133,6 @@
   transform: scale(0.98);
 }
 
-/* --- 드롭다운 메뉴 관련 스타일 끝 --- */
-
-/* --- 댓글 영역 --- */
 .commentSection {
   height: 100%;
   width: 548px;
@@ -162,37 +153,30 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* 상위 댓글/답글 그룹 간의 간격 */
 }
 
-/* 댓글 아이템 컨테이너 */
 .parentCommentWrapper {
   margin-bottom: 16px;
-  /* 상위 댓글 그룹 하단 간격 */
 }
 
-/* 상위 댓글 */
 .parentComment {
   background: var(--color-white);
   padding: 15px;
   border-radius: 10px;
 }
 
-/* 답글 컨테이너 */
 .replyCommentWrapper {
   width: 100%;
   padding-left: 40px;
   margin-top: 10px;
 }
 
-/* 답글 본체 */
 .replyComment {
   background: var(--color-white);
   padding: 15px;
   border-radius: 10px;
 }
 
-/* 댓글 작성자 헤더 */
 .commentUserHeader {
   display: flex;
 
@@ -200,12 +184,10 @@
   align-items: center;
 }
 
-/* 댓글 옵션 아이콘에도 커서 포인터 추가 */
 .commentOptionIcon {
   cursor: pointer;
 }
 
-/* 닉네임 & 댓글 & 날짜, 댓글달기 */
 .userNicknameBold {
   font-weight: bold;
   font-size: var(--font-size-base);
@@ -235,7 +217,6 @@
   font-weight: bold;
 }
 
-/* 댓글 없음 박스 */
 .emptyComment {
   width: 100%;
   min-height: 500px;
@@ -244,9 +225,7 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
-
   margin-top: 20px;
-
   color: var(--color-font-color2);
   font-size: 14px;
   opacity: 0.85;
@@ -258,62 +237,17 @@
   opacity: 0.6;
 }
 
-/* 서브 텍스트 */
 .emptySubText {
   font-size: 14px;
   color: var(--color-font-color2);
   opacity: 0.7;
 }
 
-/* 페이지네이션 */
 .paginationWrapper {
   background: var(--color-sud-color1);
   padding: 10px 0;
 }
 
-/* .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-.pageControl {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0px;
-}
-
-.pageControl:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-.pageNumbers {
-  display: flex;
-  gap: 8px;
-}
-
-.pageBtn {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.activePage {
-  background-color: var(--color-mai);
-  color: var(--color-white);
-  border: none;
-} */
-
-/* --- 댓글 입력창 --- */
 .commentInputArea {
   padding: 20px;
   background: var(--color-sud-color1);
@@ -334,7 +268,6 @@
   flex: 1;
 }
 
-/* 실제 Input 태그 스타일 */
 .inputElement {
   width: 100%;
   height: 100%;
@@ -350,7 +283,6 @@
   color: var(--color-font-color1);
 }
 
-/* 전송 버튼 */
 .submitButton {
   height: 40px;
   width: 66px;
@@ -361,7 +293,6 @@
   justify-content: center;
   cursor: pointer;
   transition: transform 0.1s ease, background-color 0.1s ease;
-  /* 전환 효과 */
 }
 
 .submitButton:hover {
@@ -373,7 +304,6 @@
   background-color: var(--color-primary);
 }
 
-/* isEdit 상태일 때 */
 .editMode .commentInputBox {
   border-color: var(--color-primary);
 }
@@ -391,8 +321,6 @@
   background-color: var(--color-primary);
 }
 
-/* ---------------------------------------------------- */
-/* isReply 상태일 때 */
 .replyMode .commentInputBox {
   border-color: var(--color-main);
 }
@@ -410,11 +338,6 @@
   background-color: var(--color-main);
 }
 
-/* --------------------------------
-          반응형
--------------------------------- */
-
-/* --- 1024px 이하: 모바일 레이아웃 기초 --- */
 @media (max-width: 1024px) {
   .mainContentWrapper {
     flex-direction: column;
@@ -443,7 +366,6 @@
   }
 }
 
-/* --- 768px 이하: 레이아웃 전체 모바일화 --- */
 @media (max-width: 768px) {
   .topBar {
     padding-bottom: 10px;
@@ -459,7 +381,6 @@
     gap: 12px;
   }
 
-  /* 게시글 */
   .postContentArea {
     padding: 12px;
     border-radius: 12px;
@@ -478,7 +399,6 @@
     line-height: 1.45;
   }
 
-  /* 댓글 리스트 영역 */
   .commentSection {
     background: #fafafa;
   }
@@ -487,10 +407,8 @@
     padding: 10px 12px 90px;
     overflow-y: auto;
     max-height: calc(100vh - 220px);
-    /* 실제 SNS 앱처럼 스크롤 되는 영역 */
   }
 
-  /* 댓글 입력창을 하단 고정 */
   .commentInputArea {
     position: fixed;
     bottom: 0;
@@ -513,7 +431,6 @@
     border-radius: 16px;
   }
 
-  /* 댓글 없을 경우 */
   .emptyComment {
     height: 160px;
     font-size: 13px;
@@ -526,7 +443,6 @@
   }
 }
 
-/* --- 480px 이하: 완전 모바일 최적화 --- */
 @media (max-width: 480px) {
   .postTitleWrapper {
     flex-direction: column;
@@ -550,7 +466,6 @@
     font-size: 13px;
   }
 
-  /* 댓글 없을 경우 */
   .emptyComment {
     height: 140px;
     font-size: 12px;

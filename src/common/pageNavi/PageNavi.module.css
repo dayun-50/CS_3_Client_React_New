@@ -3,7 +3,6 @@
   height: 100%;
 }
 
-/* 페이징네비바 */
 .paginationParent {
   display: flex;
   justify-content: center;
@@ -54,7 +53,6 @@
 
 .pageNumber {
   pointer-events: none;
-  /* 내부 숫자 클릭 시 이벤트 막기 */
 }
 
 img {
@@ -69,10 +67,6 @@ img {
   pointer-events: none;
 }
 
-/* ----------------------------------------------------------- */
-
-/* 페이징네비바 반응형 */
-/* 데스크탑 */
 @media (min-width: 768px) {
   .paginationParent {
     gap: 12px;
@@ -96,7 +90,6 @@ img {
   }
 }
 
-/* 테블릿 */
 @media (min-width: 481px) and (max-width: 767px) {
   .paginationParent {
     gap: 10px;
@@ -120,7 +113,6 @@ img {
   }
 }
 
-/* 모바일 */
 @media (max-width: 480px) {
   .paginationParent {
     gap: 8px;

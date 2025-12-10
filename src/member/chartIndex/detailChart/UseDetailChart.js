@@ -5,11 +5,8 @@ import { calculateFetalWeek, calculateInfantWeek } from '../../utils/pregnancyUt
 
 export const UseDetailChart = (activeMenu, currentWeek, menuList, standardData, babySeq, babyDueDate, isFetalMode) => {
 
-
-
     return caxios.get(`/chart/detail?babySeq=${babySeq}`)
         .then(res => {
-
             const selectedMetricName = menuList[activeMenu];
             const metricKeyMap = isFetalMode
                 ? { "몸무게": "EFW", "머리둘레": "HC", "머리직경": "OFD", "복부둘레": "AC", "허벅지 길이": "FL" }
@@ -19,7 +16,6 @@ export const UseDetailChart = (activeMenu, currentWeek, menuList, standardData, 
             const records = res.data;
             const actual = {};
             const metricKeys = Object.values(metricKeyMap);
-
 
             records.forEach(r => {
                 let idx;
@@ -87,7 +83,6 @@ export const UseDetailChart = (activeMenu, currentWeek, menuList, standardData, 
             };
         })
         .catch(err => {
-            console.error("UseDetailChart 로딩 실패:", err);
             return {};
         });
 };

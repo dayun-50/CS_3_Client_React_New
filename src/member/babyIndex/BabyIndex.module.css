@@ -31,7 +31,6 @@
   align-items: flex-start;
 }
 
-/* 전체 화면 덮는 긴급 상담 레이어 */
 .counselingOverlay {
   position: fixed;
   top: 0;
@@ -45,16 +44,12 @@
   align-items: center;
 }
 
-/* ---------------------------------------------------------
-  반응형 미디어 쿼리
---------------------------------------------------------- */
 @media (max-width: 1440px) {
   .container {
     padding: 20px 0;
   }
 }
 
-/* ===== 1200px 이하 (태블릿 + 작은 데스크탑) ===== */
 @media (max-width: 1200px) {
   .container {
     flex-direction: column;
@@ -87,7 +82,6 @@
   }
 }
 
-/* ===== 768px 이하 (모바일) ===== */
 @media (max-width: 768px) {
   .container {
     gap: 16px;
@@ -107,7 +101,6 @@
   }
 }
 
-/* ===== 480px 이하 (모바일) ===== */
 @media (max-width: 480px) {
   .container {
     gap: 16px;

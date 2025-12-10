@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Mypage.module.css";
-import useMypage from "./UseMypage"; // 첫 글자 대문자로
+import useMypage from "./UseMypage";
 import { motion } from "framer-motion";
 
 const Mypage = () => {
@@ -26,11 +26,9 @@ const Mypage = () => {
         <div className={styles.info}>
           <h1 className={styles.title}>회원정보</h1>
           <div className={styles.main}>
-            {/* 아이디 */}
             <p className={styles.id}>아이디</p>
             <div className={styles.dbid}>{data.user_id}</div>
 
-            {/* 닉네임 */}
             <div className={styles.nick}>
               <label htmlFor="nic">닉네임</label>
               {isEditing ? (
@@ -42,14 +40,13 @@ const Mypage = () => {
                     value={data.nickname}
                     onChange={hendleChange}
                     className={`${styles.editableInputHalf}
-                     ${
-                       !regexAuth.nickname ||
-                       (!regexAuth.nickNameChack &&
-                         !regexAuth.nickNameChack &&
-                         inputCount.nickname > 0)
-                         ? styles.auth
-                         : ""
-                     }`}
+                     ${!regexAuth.nickname ||
+                        (!regexAuth.nickNameChack &&
+                          !regexAuth.nickNameChack &&
+                          inputCount.nickname > 0)
+                        ? styles.auth
+                        : ""
+                      }`}
                   />
                   <button className={styles.checkButton} onClick={chackClick}>
                     중복확인
@@ -60,7 +57,6 @@ const Mypage = () => {
               )}
             </div>
 
-            {/* 이메일 */}
             <div className={styles.email}>
               <label htmlFor="email">이메일</label>
               {isEditing ? (
@@ -73,11 +69,10 @@ const Mypage = () => {
                       onChange={hendleChange}
                       value={data.email}
                       className={`${styles.editableInputHalf}
-                     ${
-                       !regexAuth.email && inputCount.email > 0
-                         ? styles.auth
-                         : ""
-                     }`}
+                     ${!regexAuth.email && inputCount.email > 0
+                          ? styles.auth
+                          : ""
+                        }`}
                     />
                     <button
                       className={styles.duplicationButton}
@@ -92,11 +87,10 @@ const Mypage = () => {
                     name="emailAuth"
                     onChange={hendleChange}
                     className={`${styles.verificationInput}
-                     ${
-                       !regexAuth.emailAuth && inputCount.emailAuth > 0
-                         ? styles.auth
-                         : ""
-                     }`}
+                     ${!regexAuth.emailAuth && inputCount.emailAuth > 0
+                        ? styles.auth
+                        : ""
+                      }`}
                   />
                 </>
               ) : (
@@ -104,11 +98,9 @@ const Mypage = () => {
               )}
             </div>
 
-            {/* 생일 */}
             <p className={styles.birthday}>생일</p>
             <div className={styles.dbbirth}>{data.birth_date}</div>
 
-            {/* 전화번호 */}
             <div className={styles.phone}>
               <label htmlFor="phone">연락처</label>
               <div className={styles.phoneWrapper}>
@@ -128,11 +120,10 @@ const Mypage = () => {
                       onChange={hendleChange}
                       maxLength={4}
                       className={`${styles.phone123}
-                     ${
-                       !regexAuth.phone1 && inputCount.phone1 > 0
-                         ? styles.auth
-                         : ""
-                     }`}
+                     ${!regexAuth.phone1 && inputCount.phone1 > 0
+                          ? styles.auth
+                          : ""
+                        }`}
                     />
                     <span className={styles.dash}>-</span>
                     <input
@@ -143,11 +134,10 @@ const Mypage = () => {
                       maxLength={4}
                       value={data.phone2}
                       className={`${styles.phone456}
-                     ${
-                       !regexAuth.phone2 && inputCount.phone2 > 0
-                         ? styles.auth
-                         : ""
-                     }`}
+                     ${!regexAuth.phone2 && inputCount.phone2 > 0
+                          ? styles.auth
+                          : ""
+                        }`}
                     />
                   </>
                 ) : (
@@ -159,8 +149,6 @@ const Mypage = () => {
                 )}
               </div>
             </div>
-
-            {/* 가족 코드 */}
             <div className={styles.fabt}>
               <p className={styles.familycode}>가족코드</p>
               <div className={styles.familywhy}>{data.family_code}</div>
@@ -168,7 +156,6 @@ const Mypage = () => {
           </div>
         </div>
 
-        {/* 수정/취소/완료 버튼만 따로 아래 */}
         <div className={styles.btwo}>
           {isEditing ? (
             <>

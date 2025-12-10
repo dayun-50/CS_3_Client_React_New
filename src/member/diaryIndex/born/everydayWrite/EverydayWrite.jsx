@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./EverydayWrite.module.css";
 import { UseEverydayWrite } from "./UseEverydayWrite";
 
-// 모션
 const modalVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.2 } },
@@ -91,14 +90,12 @@ const EverydayWrite = ({
             exit="exit"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* 모달창 시작 */}
             <div className={styles.contentWrapper}>
               <div className={styles.categoryTitleWrapper}>
                 <div className={styles.categoryTitle}>{activeType} 기록</div>
               </div>
 
               <div className={styles.inputGroup}>
-                {/* 1번째 입력창 */}
                 <div className={styles.inputBox}>
                   {activeType === "수면" ? (
                     <>
@@ -125,7 +122,6 @@ const EverydayWrite = ({
                   )}
                 </div>
 
-                {/* 배변 그룹 */}
                 {inputType === "group" && (
                   <div className={styles.inputBox}>
                     <div className={styles.inputLabel}>종류</div>
@@ -146,7 +142,6 @@ const EverydayWrite = ({
                   </div>
                 )}
 
-                {/* 수면 종료시간 */}
                 {activeType === "수면" && (
                   <div className={styles.inputBox}>
                     <div className={styles.inputLabel}>시간</div>
@@ -161,7 +156,6 @@ const EverydayWrite = ({
                   </div>
                 )}
 
-                {/* 일반 입력 */}
                 {["number", "text"].includes(inputType) && (
                   <div className={styles.inputBox}>
                     <div className={styles.inputLabel}>{label}</div>
@@ -185,7 +179,6 @@ const EverydayWrite = ({
                 )}
               </div>
 
-              {/* 버튼 */}
               <div className={styles.actionButtonsWrapper}>
                 <div className={styles.actionButtonsContainer}>
                   <button

@@ -10,21 +10,17 @@ const BabyInfoPic = () => {
   const babyDueDate = useAuthStore((state) => state.babyDueDate);
   const type = today >= babyDueDate ? "child" : "mom";
 
-  /* 타입별 이미지 묶음 세트 */
   const backgroundImage = type === "mom" ? backImg : backImg2;
   const frontImage = type === "mom" ? jionebabyImg : childrenImg;
 
   const imageClasses = `
   ${styles.jionewbabyImage}
   ${type === "child" ? styles.childrenImage : ""}
-`;
+  `;
 
   return (
     <div className={styles.leftcontainer}>
-      {/* 배경 이미지 */}
       <img src={backgroundImage} alt="bg" className={styles.backImage} />
-
-      {/* 앞 이미지 */}
       <img src={frontImage} alt="baby" className={imageClasses} />
     </div>
   );
