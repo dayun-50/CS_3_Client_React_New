@@ -41,6 +41,7 @@ const InputBaby = ({ type, onClose, fromChooseType = false }) => {
     borderRadius: "20px",
     border: fromChooseType ? "none" : "1px solid black",
     boxShadow: fromChooseType ? "4px 4px 8px -2px rgba(0,0,0,0.25)" : "none",
+    // 첫 추가만 스타일 추가. 네비바에서 애기 추가 클릭시엔 안쓰는 스타일이라 빼뒀다함
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
