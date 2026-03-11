@@ -36,6 +36,7 @@ const Mypage = () => {
                   <input
                     type="text"
                     id="nic"
+                    {/* id가 nic인 이유가뭘까 */}
                     name="nickname"
                     value={data.nickname}
                     onChange={hendleChange}
