@@ -54,6 +54,7 @@ function UseBabyCheckList() {
         if (!confirm("예약 일정을 취소하시겠습니까?")) return;
         caxios.post("/user/eventDelete", { baby_seq: babySeq, test_code: id })
             .then(resp => setRendering(prev => !prev))
+        // 확인 후 취소되었다는 안내띄우는게 좋을듯?
     }
 
     return { data, handleClick };
