@@ -13,6 +13,7 @@ const BabyCheckList = () => {
       }`}
     >
       {data.length > 0 ? (
+      // index 안씀
         data.map((item, index) => (
           <div
             key={item.record_seq}
