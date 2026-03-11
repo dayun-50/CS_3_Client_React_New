@@ -40,6 +40,7 @@ function AppRoutes() {
       getbabySeq(babySeq);
       setBabyDueDate(babyDueDate);
 
+      // 이부분 websocket.js쪽으로 뺄수있으면 빼보자 중복되서 ㅇㅇ..
       connectWebSocket(token, id, (alert) => {
         let message = "";
         if (alert.type === "C") {
